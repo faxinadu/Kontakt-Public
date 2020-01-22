@@ -1,0 +1,81 @@
+{
+    "formatVersion": 0,
+    "type": {
+        "name": "UI",
+        "version": 0
+    },
+    "value": {
+        "performanceView": {
+            "background": {
+                "color": 15790052,
+                "image": ""
+            },
+            "controls": [
+                {
+                    "index": 0,
+                    "value": {
+                        "common": {
+                            "id": "panel",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 0,
+                                "y": 0
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "controls": [
+                            {
+                                "index": 3,
+                                "value": {
+                                    "automation": {
+                                        "disableUserAssign": false,
+                                        "hostAutomation": {
+                                            "id": 0,
+                                            "on": false
+                                        },
+                                        "name": ""
+                                    },
+                                    "common": {
+                                        "id": "knob",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 100,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 0,
+                                            "width": 0
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "name": "",
+                                    "ratio": 1,
+                                    "unit": 0,
+                                    "value": {
+                                        "default": 1,
+                                        "max": 100,
+                                        "min": 0
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            ],
+            "icon": {
+                "image": "",
+                "show": false
+            },
+            "size": {
+                "height": 50,
+                "width": 633
+            }
+        }
+    }
+}

@@ -1,0 +1,4 @@
+on init
+	load_performance_view("instrument")
+	message("hello world")
+end on

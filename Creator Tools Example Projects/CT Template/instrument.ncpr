@@ -1,0 +1,38 @@
+{
+    "formatVersion": 0,
+    "type": {
+        "name": "project",
+        "version": 0
+    },
+    "value": {
+        "locations": [
+            {
+                "index": 0,
+                "value": {
+                    "pathDescriptor": {
+                        "path": "/instrument.nki",
+                        "relative": true
+                    }
+                }
+            },
+            {
+                "index": 0,
+                "value": {
+                    "pathDescriptor": {
+                        "path": "/Resources/scripts/instrument.txt",
+                        "relative": true
+                    }
+                }
+            },
+            {
+                "index": 0,
+                "value": {
+                    "pathDescriptor": {
+                        "path": "/Resources/performance_view/instrument.nckp",
+                        "relative": true
+                    }
+                }
+            }
+        ]
+    }
+}
