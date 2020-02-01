@@ -1,0 +1,847 @@
+{***********************************************
+Thereminimal
+Author: Native Instruments
+Written by: Yaron Eshkar, Irene Dahlmann
+Modified: October 26, 2019
+*************************************************}
+
+
+on init
+	load_performance_view("thereminimal")
+
+  set_snapshot_type(1)
+
+{---------- Variable Declarations ----------}
+
+declare $i
+
+{Delay Sync Variables}
+declare const $NUM_FX_SYNC_TIMES := 20
+declare const $DLY_DIV := 1000000 / ($NUM_FX_SYNC_TIMES-1)
+declare %dly_sync_unit[$NUM_FX_SYNC_TIMES] := ($NI_SYNC_UNIT_64TH_TRIPLET, $NI_SYNC_UNIT_64TH, $NI_SYNC_UNIT_32ND_TRIPLET, $NI_SYNC_UNIT_256TH, $NI_SYNC_UNIT_32ND, $NI_SYNC_UNIT_16TH_TRIPLET, $NI_SYNC_UNIT_64TH, $NI_SYNC_UNIT_16TH, $NI_SYNC_UNIT_8TH_TRIPLET, $NI_SYNC_UNIT_32ND, $NI_SYNC_UNIT_8TH, $NI_SYNC_UNIT_QUARTER_TRIPLET, $NI_SYNC_UNIT_16TH, $NI_SYNC_UNIT_QUARTER, $NI_SYNC_UNIT_HALF_TRIPLET, $NI_SYNC_UNIT_8TH, $NI_SYNC_UNIT_HALF, $NI_SYNC_UNIT_WHOLE_TRIPLET, $NI_SYNC_UNIT_QUARTER, $NI_SYNC_UNIT_WHOLE)
+declare !dly_sync_string[$NUM_FX_SYNC_TIMES]
+   !dly_sync_string[0] := "1/64 T"
+   !dly_sync_string[01] := "1/64"
+   !dly_sync_string[02] := "1/32 T"
+   !dly_sync_string[03] := "1/64 D"
+   !dly_sync_string[04] := "1/32"
+   !dly_sync_string[05] := "1/16 T"
+   !dly_sync_string[06] := "1/32 D"
+   !dly_sync_string[07] := "1/16"
+   !dly_sync_string[08] := "1/8 T"
+   !dly_sync_string[09] := "1/16 D"
+   !dly_sync_string[10] := "1/8"
+   !dly_sync_string[11] := "1/4 T"
+   !dly_sync_string[12] := "1/8 D"
+   !dly_sync_string[13] := "1/4"
+   !dly_sync_string[14] := "1/2 T"
+   !dly_sync_string[15] := "1/4 D"
+   !dly_sync_string[16] := "1/2"
+   !dly_sync_string[17] := "1/1 T"
+   !dly_sync_string[18] := "1/2 D"
+   !dly_sync_string[19] := "1/1"
+declare %dly_sync_value[$NUM_FX_SYNC_TIMES] := (0, 0, 0, 454545, 0, 0, 181818, 0, 0, 181818, 0, 0, 181818, 0, 0, 181818, 0, 0, 181818, 0)   
+
+{LFO Sync Variables}
+  declare const $NUM_MOD_SYNC_TIMES := 34
+  declare const $LFO_DIV := 1000000 / ($NUM_MOD_SYNC_TIMES-1)
+  declare %mod_sync_unit[$NUM_MOD_SYNC_TIMES] := ($NI_SYNC_UNIT_WHOLE, $NI_SYNC_UNIT_WHOLE, $NI_SYNC_UNIT_WHOLE, $NI_SYNC_UNIT_WHOLE, $NI_SYNC_UNIT_WHOLE, $NI_SYNC_UNIT_WHOLE, $NI_SYNC_UNIT_WHOLE, $NI_SYNC_UNIT_WHOLE, $NI_SYNC_UNIT_WHOLE, $NI_SYNC_UNIT_WHOLE, $NI_SYNC_UNIT_WHOLE, $NI_SYNC_UNIT_WHOLE, $NI_SYNC_UNIT_QUARTER, $NI_SYNC_UNIT_WHOLE_TRIPLET, $NI_SYNC_UNIT_HALF, $NI_SYNC_UNIT_8TH, $NI_SYNC_UNIT_HALF_TRIPLET, $NI_SYNC_UNIT_QUARTER, $NI_SYNC_UNIT_16TH, $NI_SYNC_UNIT_QUARTER_TRIPLET, $NI_SYNC_UNIT_8TH, $NI_SYNC_UNIT_32ND, $NI_SYNC_UNIT_8TH_TRIPLET, $NI_SYNC_UNIT_16TH, $NI_SYNC_UNIT_64TH, $NI_SYNC_UNIT_16TH_TRIPLET, $NI_SYNC_UNIT_32ND, $NI_SYNC_UNIT_256TH, $NI_SYNC_UNIT_32ND_TRIPLET, $NI_SYNC_UNIT_64TH, $NI_SYNC_UNIT_256TH, $NI_SYNC_UNIT_64TH, $NI_SYNC_UNIT_256TH, $NI_SYNC_UNIT_256TH)
+  declare !mod_sync_string[$NUM_MOD_SYNC_TIMES]
+      !mod_sync_string[0] := "12/1"
+      !mod_sync_string[1] := "11/1"
+      !mod_sync_string[2] := "10/1"
+      !mod_sync_string[3] := "9/1"
+      !mod_sync_string[4] := "8/1"
+      !mod_sync_string[5] := "7/1"
+      !mod_sync_string[6] := "6/1"
+      !mod_sync_string[7] := "5/1"
+      !mod_sync_string[8] := "4/1"
+      !mod_sync_string[9] := "3/1"
+      !mod_sync_string[10] := "2/1"
+      !mod_sync_string[11] := "1/1"
+      !mod_sync_string[12] := "1/2D"
+      !mod_sync_string[13] := "1/1T"
+      !mod_sync_string[14] := "1/2"
+      !mod_sync_string[15] := "1/4D"
+      !mod_sync_string[16] := "1/2T"
+      !mod_sync_string[17] := "1/4"
+      !mod_sync_string[18] := "1/8D"
+      !mod_sync_string[19] := "1/4T"
+      !mod_sync_string[20] := "1/8"
+      !mod_sync_string[21] := "1/16D"
+      !mod_sync_string[22] := "1/8T"
+      !mod_sync_string[23] := "1/16"
+      !mod_sync_string[24] := "1/32D"
+      !mod_sync_string[25] := "1/16T"
+      !mod_sync_string[26] := "1/32"
+      !mod_sync_string[27] := "1/64D"
+      !mod_sync_string[28] := "1/32T"
+      !mod_sync_string[29] := "1/64"
+      !mod_sync_string[30] := "1/128D"
+      !mod_sync_string[31] := "1/64T"
+      !mod_sync_string[32] := "1/128"
+      !mod_sync_string[33] := "1/256"
+  declare %mod_sync_value[$NUM_MOD_SYNC_TIMES] := (0, 90909, 181818, 272727, 363636, 454545, 545454, 636363, 727272, 818181, 909090, 999999, 818181, 999999, 999999, 818181, 999999, 999999, 818181, 999999, 999999, 818181, 999999, 999999, 818181, 999999, 999999, 545454, 999999, 999999, 818181, 999999, 909090, 999999)          
+
+{Wait Timer}
+declare $timer := 1000000
+  
+{Note Variable}
+declare $new_note 
+
+{User Wave Path}
+declare @wt_path_user
+
+{WT Variables}
+declare $wt_select
+declare $wt_form_depth
+
+{User Zones}
+set_num_user_zones(1)
+set_zone_par(%NI_USER_ZONE_IDS[0], $ZONE_PAR_GROUP, 1)
+
+{Persistent Variables}
+make_persistent($wt_select)
+make_persistent($wt_form_depth)
+make_persistent($main_panel_wt_panel_wt_form_type)
+make_persistent($main_panel_wt_panel_wt_source)
+make_persistent($main_panel_stomp_panel_skream_on)
+make_persistent($main_panel_stomp_panel_lofi_on)
+make_persistent($main_panel_reverb_panel_decay)
+make_persistent($main_panel_reverb_panel_stereo)
+make_persistent($main_panel_reverb_panel_wet)
+make_persistent($main_panel_delay_panel_time)
+make_persistent($main_panel_delay_panel_feedback)
+make_persistent($main_panel_delay_panel_wet)
+make_persistent($main_panel_mod_panel_mod_select)
+make_persistent($main_panel_mod_panel_choral_panel_mode)
+make_persistent($main_panel_mod_panel_choral_panel_scatter)
+make_persistent($main_panel_mod_panel_choral_panel_invert_phase)
+make_persistent($main_panel_mod_panel_choral_panel_amount)
+make_persistent($main_panel_mod_panel_choral_panel_rate)
+make_persistent($main_panel_mod_panel_choral_panel_delay)
+make_persistent($main_panel_mod_panel_choral_panel_feedback)
+make_persistent($main_panel_mod_panel_choral_panel_voices)
+make_persistent($main_panel_mod_panel_choral_panel_width)
+make_persistent($main_panel_mod_panel_choral_panel_mix)
+make_persistent($main_panel_mod_panel_phasis_panel_ultra)
+make_persistent($main_panel_mod_panel_phasis_panel_invert_mod_mix)
+make_persistent($main_panel_mod_panel_phasis_panel_invert_phase)
+make_persistent($main_panel_mod_panel_phasis_panel_amount)
+make_persistent($main_panel_mod_panel_phasis_panel_rate)
+make_persistent($main_panel_mod_panel_phasis_panel_stereo)
+make_persistent($main_panel_mod_panel_phasis_panel_feedback)
+make_persistent($main_panel_mod_panel_phasis_panel_notches)
+make_persistent($main_panel_mod_panel_phasis_panel_center)
+make_persistent($main_panel_mod_panel_phasis_panel_spread)
+make_persistent($main_panel_mod_panel_phasis_panel_mod_mix)
+make_persistent($main_panel_mod_panel_phasis_panel_mix)
+make_persistent($main_panel_mod_panel_flair_panel_scan)
+make_persistent($main_panel_mod_panel_flair_panel_invert_phase)
+make_persistent($main_panel_mod_panel_flair_panel_mode)
+make_persistent($main_panel_mod_panel_flair_panel_chord)
+make_persistent($main_panel_mod_panel_flair_panel_amount)
+make_persistent($main_panel_mod_panel_flair_panel_rate)
+make_persistent($main_panel_mod_panel_flair_panel_pitch)
+make_persistent($main_panel_mod_panel_flair_panel_voices)
+make_persistent($main_panel_mod_panel_flair_panel_feedback)
+make_persistent($main_panel_mod_panel_flair_panel_width)
+make_persistent($main_panel_mod_panel_flair_panel_damping)
+make_persistent($main_panel_mod_panel_flair_panel_detune)
+make_persistent($main_panel_mod_panel_flair_panel_offset)
+make_persistent($main_panel_mod_panel_flair_panel_mix)
+make_persistent($main_panel_pitch_lfo_panel_depth)
+make_persistent($main_panel_pitch_lfo_panel_rate)
+make_persistent($main_panel_fm_panel_depth)
+make_persistent($main_panel_fm_panel_rate)
+make_persistent(@wt_path_user)
+
+{Set Controls}
+?main_panel_xy_panel_xypad[0] := 0.5 {1st cursor, X axis}
+?main_panel_xy_panel_xypad[1] := 0.5 {1st cursor, Y axis}
+set_control_par(get_ui_id($main_panel_wt_panel_wt_view),$CONTROL_PAR_WT_ZONE,1)
+set_control_par(get_ui_id(?main_panel_wt_panel_xypad),$CONTROL_PAR_HIDE,$HIDE_PART_BG)
+set_control_par(get_ui_id(?main_panel_xy_panel_xypad),$CONTROL_PAR_HIDE,$HIDE_PART_BG)
+set_control_par_str_arr(get_ui_id(?main_panel_wt_panel_xypad), $CONTROL_PAR_CURSOR_PICTURE,"cur", 0)
+
+end on
+
+{--------------- Functions ---------------}
+
+function sourceSelect
+  if($main_panel_wt_panel_wt_source = 0)
+    set_text($main_panel_wt_panel_wt_source,"Factory")
+    set_control_par(get_ui_id($main_panel_wt_panel_wt_view),$CONTROL_PAR_WT_ZONE,1)
+  else
+    set_text($main_panel_wt_panel_wt_source,"User")
+    set_control_par(get_ui_id($main_panel_wt_panel_wt_view),$CONTROL_PAR_WT_ZONE,%NI_USER_ZONE_IDS[0])
+  end if
+end function
+
+function modSelect
+  select ($main_panel_mod_panel_mod_select)
+    case 0 {Choral}
+        set_control_par(get_ui_id($main_panel_mod_panel_choral_panel),$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+        set_control_par(get_ui_id($main_panel_mod_panel_phasis_panel),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+        set_control_par(get_ui_id($main_panel_mod_panel_flair_panel),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+
+        set_engine_par($ENGINE_PAR_EFFECT_BYPASS,0,-1,3,1)
+        set_engine_par($ENGINE_PAR_EFFECT_BYPASS,1,-1,4,1)
+        set_engine_par($ENGINE_PAR_EFFECT_BYPASS,1,-1,5,1)
+    case 1 {Phasis}
+        set_control_par(get_ui_id($main_panel_mod_panel_choral_panel),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+        set_control_par(get_ui_id($main_panel_mod_panel_phasis_panel),$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+        set_control_par(get_ui_id($main_panel_mod_panel_flair_panel),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+
+        set_engine_par($ENGINE_PAR_EFFECT_BYPASS,1,-1,3,1)
+        set_engine_par($ENGINE_PAR_EFFECT_BYPASS,0,-1,4,1)
+        set_engine_par($ENGINE_PAR_EFFECT_BYPASS,1,-1,5,1)
+    case 2 {flair}      
+        set_control_par(get_ui_id($main_panel_mod_panel_choral_panel),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)        
+        set_control_par(get_ui_id($main_panel_mod_panel_phasis_panel),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+        set_control_par(get_ui_id($main_panel_mod_panel_flair_panel),$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+
+        set_engine_par($ENGINE_PAR_EFFECT_BYPASS,1,-1,3,1)
+        set_engine_par($ENGINE_PAR_EFFECT_BYPASS,1,-1,4,1)
+        set_engine_par($ENGINE_PAR_EFFECT_BYPASS,0,-1,5,1)
+  end select
+end function
+
+{--------------- Persistence Callback ---------------}
+
+on persistence_changed
+  {Control Readable Parameters for Maschine / Komplete Kontrol}
+
+  set_control_par_str(get_ui_id($main_panel_pitch_lfo_panel_rate),$CONTROL_PAR_LABEL, !mod_sync_string[$main_panel_pitch_lfo_panel_rate / $LFO_DIV])
+  set_control_par_str(get_ui_id($main_panel_delay_panel_time),$CONTROL_PAR_LABEL,!dly_sync_string[$main_panel_delay_panel_time / $DLY_DIV])  
+  set_control_par_str(get_ui_id($main_panel_delay_panel_feedback),$CONTROL_PAR_LABEL,$main_panel_delay_panel_feedback/10000 & "%")
+  set_control_par_str(get_ui_id($main_panel_delay_panel_wet),$CONTROL_PAR_LABEL,$main_panel_delay_panel_wet/10000 & "%")
+  set_control_par_str(get_ui_id($main_panel_delay_panel_feedback),$CONTROL_PAR_LABEL,$main_panel_delay_panel_feedback/10000 & "%")
+  set_control_par_str(get_ui_id($main_panel_reverb_panel_stereo),$CONTROL_PAR_LABEL,$main_panel_reverb_panel_stereo/10000 & "%")
+  set_control_par_str(get_ui_id($main_panel_reverb_panel_wet),$CONTROL_PAR_LABEL,$main_panel_reverb_panel_wet/10000 & "%")
+
+  set_control_par_str(get_ui_id($main_panel_mod_panel_choral_panel_amount),$CONTROL_PAR_LABEL,$main_panel_mod_panel_choral_panel_amount/10000 & " %")
+  set_control_par_str(get_ui_id($main_panel_mod_panel_choral_panel_rate),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_CHORAL_RATE,-1,3,1) & " Hz")
+  set_control_par_str(get_ui_id($main_panel_mod_panel_choral_panel_delay),$CONTROL_PAR_LABEL,"x " & get_engine_par_disp($ENGINE_PAR_CHORAL_DELAY,-1,3,1))
+  set_control_par_str(get_ui_id($main_panel_mod_panel_choral_panel_feedback),$CONTROL_PAR_LABEL,$main_panel_mod_panel_choral_panel_feedback/10000 & " %")
+  set_control_par_str(get_ui_id($main_panel_mod_panel_choral_panel_voices),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_CHORAL_VOICES,-1,3,1))
+  set_control_par_str(get_ui_id($main_panel_mod_panel_choral_panel_width),$CONTROL_PAR_LABEL,$main_panel_mod_panel_choral_panel_width/10000 & " %")
+  set_control_par_str(get_ui_id($main_panel_mod_panel_choral_panel_mix),$CONTROL_PAR_LABEL,$main_panel_mod_panel_choral_panel_mix/10000 & " %")
+
+  set_control_par_str(get_ui_id($main_panel_mod_panel_phasis_panel_amount_label),$CONTROL_PAR_LABEL,$main_panel_mod_panel_phasis_panel_amount_label/10000 & " %")
+  set_control_par_str(get_ui_id($main_panel_mod_panel_phasis_panel_rate),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_PHASIS_RATE,-1,4,1) & " Hz")
+  set_control_par_str(get_ui_id($main_panel_mod_panel_phasis_panel_feedback),$CONTROL_PAR_LABEL,$main_panel_mod_panel_phasis_panel_feedback/10000 & " %")
+  set_control_par_str(get_ui_id($main_panel_mod_panel_phasis_panel_notches),$CONTROL_PAR_LABEL,$main_panel_mod_panel_phasis_panel_notches)
+  set_control_par_str(get_ui_id($main_panel_mod_panel_phasis_panel_center),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_PHASIS_CENTER,-1,4,1) & " Hz")
+  set_control_par_str(get_ui_id($main_panel_mod_panel_phasis_panel_spread),$CONTROL_PAR_LABEL,$main_panel_mod_panel_phasis_panel_spread/10000 & " %")
+  set_control_par_str(get_ui_id($main_panel_mod_panel_phasis_panel_mod_mix),$CONTROL_PAR_LABEL,$main_panel_mod_panel_phasis_panel_mod_mix/10000 & " %")
+  set_control_par_str(get_ui_id($main_panel_mod_panel_phasis_panel_mix),$CONTROL_PAR_LABEL,$main_panel_mod_panel_phasis_panel_mix/10000 & " %")
+
+  set_control_par_str(get_ui_id($main_panel_mod_panel_flair_panel_amount),$CONTROL_PAR_LABEL,$main_panel_mod_panel_flair_panel_amount/10000 & " %")
+  set_control_par_str(get_ui_id($main_panel_mod_panel_flair_panel_rate_label),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_PHASIS_RATE,-1,5,1) & " Hz")
+  set_control_par_str(get_ui_id($main_panel_mod_panel_flair_panel_pitch),$CONTROL_PAR_LABEL,$main_panel_mod_panel_flair_panel_pitch/10000)
+  set_control_par_str(get_ui_id($main_panel_mod_panel_flair_panel_voices),$CONTROL_PAR_LABEL,$main_panel_mod_panel_flair_panel_voices/10000)
+  set_control_par_str(get_ui_id($main_panel_mod_panel_flair_panel_feedback),$CONTROL_PAR_LABEL,$main_panel_mod_panel_flair_panel_feedback/10000 & " %") 
+  set_control_par_str(get_ui_id($main_panel_mod_panel_flair_panel_width),$CONTROL_PAR_LABEL,$main_panel_mod_panel_flair_panel_width/10000 & " %")
+  set_control_par_str(get_ui_id($main_panel_mod_panel_flair_panel_damping),$CONTROL_PAR_LABEL,$main_panel_mod_panel_flair_panel_damping/10000 & " %")
+  set_control_par_str(get_ui_id($main_panel_mod_panel_flair_panel_detune),$CONTROL_PAR_LABEL,$main_panel_mod_panel_flair_panel_detune/10000 & " %")
+  set_control_par_str(get_ui_id($main_panel_mod_panel_flair_panel_offset),$CONTROL_PAR_LABEL,$main_panel_mod_panel_flair_panel_offset/10000 & " %")
+  set_control_par_str(get_ui_id($main_panel_mod_panel_flair_panel_mix),$CONTROL_PAR_LABEL,$main_panel_mod_panel_flair_panel_mix/10000 & " %")
+
+  set_sample(%NI_USER_ZONE_IDS[0], @wt_path_user)
+  call sourceSelect
+  call modSelect
+end on
+
+on ui_control ($main_panel_wt_panel_wt_source)
+  call sourceSelect
+end on
+
+{----- GROUP CONTROLS START -----}
+{----- GROUP CONTROLS START -----}
+{----- GROUP CONTROLS START -----}
+
+{Form Type}
+  on ui_control($main_panel_wt_panel_wt_form_type)
+    $i := 0
+    while ($i<2)
+      select ($main_panel_wt_panel_wt_form_type)
+        case 0    
+        set_engine_par($ENGINE_PAR_WT_FORM_MODE,$NI_WT_FORM_LINEAR,$i,-1,-1)
+        case 1
+        set_engine_par($ENGINE_PAR_WT_FORM_MODE,$NI_WT_FORM_SYNC1,$i,-1,-1)
+        case 2
+        set_engine_par($ENGINE_PAR_WT_FORM_MODE,$NI_WT_FORM_SYNC2,$i,-1,-1)
+        case 3
+        set_engine_par($ENGINE_PAR_WT_FORM_MODE,$NI_WT_FORM_SYNC3,$i,-1,-1)
+        case 4
+        set_engine_par($ENGINE_PAR_WT_FORM_MODE,$NI_WT_FORM_BENDP,$i,-1,-1)
+        case 5
+        set_engine_par($ENGINE_PAR_WT_FORM_MODE,$NI_WT_FORM_BENDM,$i,-1,-1)
+        case 6
+        set_engine_par($ENGINE_PAR_WT_FORM_MODE,$NI_WT_FORM_BENDMP,$i,-1,-1)
+        case 7
+        set_engine_par($ENGINE_PAR_WT_FORM_MODE,$NI_WT_FORM_PWM,$i,-1,-1)
+        case 8
+        set_engine_par($ENGINE_PAR_WT_FORM_MODE,$NI_WT_FORM_ASYMP,$i,-1,-1)
+        case 9
+        set_engine_par($ENGINE_PAR_WT_FORM_MODE,$NI_WT_FORM_ASYMM,$i,-1,-1)
+        case 10
+        set_engine_par($ENGINE_PAR_WT_FORM_MODE,$NI_WT_FORM_ASYMMP,$i,-1,-1)
+        case 11
+        set_engine_par($ENGINE_PAR_WT_FORM_MODE,$NI_WT_FORM_FLIP,$i,-1,-1)
+        case 12
+        set_engine_par($ENGINE_PAR_WT_FORM_MODE,$NI_WT_FORM_MIRROR,$i,-1,-1)
+        case 13
+        set_engine_par($ENGINE_PAR_WT_FORM_MODE,$NI_WT_FORM_QUANTIZE,$i,-1,-1)
+      end select
+    inc($i)
+    end while
+  end on
+
+on ui_control ($main_panel_pitch_lfo_panel_rate)
+  $i := 0
+  while ($i<2)
+    set_engine_par($ENGINE_PAR_INTMOD_FREQUENCY_UNIT ,%mod_sync_unit[$main_panel_pitch_lfo_panel_rate / $LFO_DIV],$i,1,-1)
+    set_engine_par($ENGINE_PAR_INTMOD_FREQUENCY ,%mod_sync_value[$main_panel_pitch_lfo_panel_rate / $LFO_DIV],$i,1,-1)
+    inc($i)
+  end while    
+  set_text($main_panel_pitch_lfo_panel_rate_label, !mod_sync_string[$main_panel_pitch_lfo_panel_rate / $LFO_DIV])
+  set_control_par_str(get_ui_id($main_panel_pitch_lfo_panel_rate),$CONTROL_PAR_LABEL, !mod_sync_string[$main_panel_pitch_lfo_panel_rate / $LFO_DIV])
+  wait($timer)
+  set_text($main_panel_pitch_lfo_panel_rate_label,"Rate")
+end on
+
+on ui_control ($main_panel_pitch_lfo_panel_depth)
+  $i := 0
+  while ($i<2)
+    set_engine_par($ENGINE_PAR_MOD_TARGET_INTENSITY,$main_panel_pitch_lfo_panel_depth,$i,1,-1)
+    inc($i)
+  end while
+  set_control_par_str(get_ui_id($main_panel_pitch_lfo_panel_depth),$CONTROL_PAR_LABEL,$main_panel_pitch_lfo_panel_depth/10000 & "%")
+  set_text($main_panel_pitch_lfo_panel_depth_label,$main_panel_pitch_lfo_panel_depth/10000 & "%")
+  wait($timer)
+  set_text($main_panel_pitch_lfo_panel_depth_label,"Depth")
+end on
+
+on ui_control ($main_panel_fm_panel_rate)
+  $i := 0
+  while ($i<2)
+    set_engine_par($ENGINE_PAR_INTMOD_FREQUENCY_UNIT ,$NI_SYNC_UNIT_ABS,$i,2,-1)
+    set_engine_par($ENGINE_PAR_INTMOD_FREQUENCY,$main_panel_fm_panel_rate,$i,2,-1)
+    inc($i)
+  end while
+  set_text($main_panel_fm_panel_rate_label,get_engine_par_disp($ENGINE_PAR_INTMOD_FREQUENCY,0,2,-1) & " hz")
+  set_control_par_str(get_ui_id($main_panel_fm_panel_rate),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_INTMOD_FREQUENCY,0,2,-1) & " hz")
+  wait($timer)
+  set_text($main_panel_fm_panel_rate_label,"Freq")
+end on
+
+on ui_control ($main_panel_fm_panel_depth)
+  $i := 0
+  while ($i<2)
+    set_engine_par($ENGINE_PAR_MOD_TARGET_INTENSITY,$main_panel_fm_panel_depth,$i,2,-1)
+    inc($i)
+  end while
+  set_control_par_str(get_ui_id($main_panel_fm_panel_depth),$CONTROL_PAR_LABEL,$main_panel_fm_panel_depth/10000 & "%")
+  set_text($main_panel_fm_panel_depth_label,$main_panel_fm_panel_depth/10000 & "%")
+  wait($timer)
+  set_text($main_panel_fm_panel_depth_label,"Depth")
+end on
+
+{----- GROUP CONTROLS END -----}
+{----- GROUP CONTROLS END -----}
+{----- GROUP CONTROLS END -----}
+
+{-----INSTRUMENT CONTROLS START -----}
+{-----INSTRUMENT CONTROLS START -----}
+{-----INSTRUMENT CONTROLS START -----}
+
+on ui_control($main_panel_stomp_panel_skream_on)
+    set_engine_par($ENGINE_PAR_EFFECT_BYPASS, 1-$main_panel_stomp_panel_skream_on,-1,0,1)
+end on
+
+on ui_control($main_panel_stomp_panel_lofi_on)
+    set_engine_par($ENGINE_PAR_EFFECT_BYPASS, 1-$main_panel_stomp_panel_lofi_on,-1,1,1)
+end on
+
+on ui_control($main_panel_reverb_panel_decay)
+    set_engine_par($ENGINE_PAR_PR_DECAY , $main_panel_reverb_panel_decay,-1,6,1)
+    set_control_par_str(get_ui_id($main_panel_reverb_panel_decay),$CONTROL_PAR_LABEL,$main_panel_reverb_panel_decay/10000 & "%")
+    set_text($main_panel_reverb_panel_decay_label,$main_panel_reverb_panel_decay/10000 & "%")
+    wait($timer)
+    set_text($main_panel_reverb_panel_decay_label,"Decay")
+end on
+ 
+on ui_control($main_panel_reverb_panel_stereo)
+    set_engine_par($ENGINE_PAR_PR_STEREO , $main_panel_reverb_panel_stereo,-1,6,1)
+    set_control_par_str(get_ui_id($main_panel_reverb_panel_stereo),$CONTROL_PAR_LABEL,$main_panel_reverb_panel_stereo/10000 & "%")
+    set_text($main_panel_reverb_panel_stereo_label,$main_panel_reverb_panel_stereo/10000 & "%")
+    wait($timer)
+    set_text($main_panel_reverb_panel_stereo_label,"Stereo")
+end on
+ 
+on ui_control($main_panel_reverb_panel_wet)
+    set_engine_par($ENGINE_PAR_SEND_EFFECT_OUTPUT_GAIN,$main_panel_reverb_panel_wet,-1,6,1)
+    set_control_par_str(get_ui_id($main_panel_reverb_panel_wet),$CONTROL_PAR_LABEL,$main_panel_reverb_panel_wet/4000 & "%")
+    set_text($main_panel_reverb_panel_wet_label,$main_panel_reverb_panel_wet/4000 & "%")
+    wait($timer)
+    set_text($main_panel_reverb_panel_wet_label,"Wet")
+end on
+
+on ui_control($main_panel_delay_panel_time)
+    set_engine_par($ENGINE_PAR_RDL_TIME_UNIT ,%dly_sync_unit[$main_panel_delay_panel_time / $DLY_DIV],-1,2,1)
+    set_engine_par($ENGINE_PAR_RDL_TIME ,%dly_sync_unit[$main_panel_delay_panel_time / $DLY_DIV],-1,2,1)
+    set_text($main_panel_delay_panel_time_label, !dly_sync_string[$main_panel_delay_panel_time / $DLY_DIV])
+    set_control_par_str(get_ui_id($main_panel_delay_panel_time),$CONTROL_PAR_LABEL, !dly_sync_string[$main_panel_delay_panel_time / $DLY_DIV])
+    wait($timer)
+    set_text($main_panel_delay_panel_time_label,"Time")
+end on
+
+on ui_control($main_panel_delay_panel_feedback)
+    set_engine_par($ENGINE_PAR_RDL_FEEDBACK ,$main_panel_delay_panel_feedback,-1,2,1)
+    set_control_par_str(get_ui_id($main_panel_delay_panel_feedback),$CONTROL_PAR_LABEL,$main_panel_delay_panel_feedback/10000 & "%")
+    set_text($main_panel_delay_panel_feedback_label,$main_panel_delay_panel_feedback/10000 & "%")
+    wait($timer)
+    set_text($main_panel_delay_panel_feedback_label,"Feedback")
+end on
+
+on ui_control($main_panel_delay_panel_wet)
+    set_engine_par($ENGINE_PAR_SEND_EFFECT_OUTPUT_GAIN,$main_panel_delay_panel_wet,-1,2,1)
+    set_control_par_str(get_ui_id($main_panel_delay_panel_wet),$CONTROL_PAR_LABEL,$main_panel_delay_panel_wet/4000 & "%")
+    set_text($main_panel_delay_panel_wet_label,$main_panel_delay_panel_wet/4000 & "%")
+    wait($timer)
+    set_text($main_panel_delay_panel_wet_label,"Wet")
+end on
+
+on ui_control ($main_panel_mod_panel_mod_select)
+  call modSelect
+end on
+
+{Choral}  
+
+{Mode}
+on ui_control($main_panel_mod_panel_choral_panel_mode)
+  select ($main_panel_mod_panel_choral_panel_mode) 
+        case 0
+          set_engine_par($ENGINE_PAR_CHORAL_MODE,$NI_CHORAL_MODE_SYNTH,-1,3,1)
+        case 1
+          set_engine_par($ENGINE_PAR_CHORAL_MODE,$NI_CHORAL_MODE_ENSEMBLE,-1,3,1)
+        case 2
+          set_engine_par($ENGINE_PAR_CHORAL_MODE,$NI_CHORAL_MODE_DIMENSION,-1,3,1)
+        case 3
+          set_engine_par($ENGINE_PAR_CHORAL_MODE,$NI_CHORAL_MODE_UNIVERSAL,-1,3,1)
+  end select
+end on
+
+{Invert Phase}
+on ui_control($main_panel_mod_panel_choral_panel_invert_phase)
+  set_engine_par($ENGINE_PAR_CHORAL_INVERT_PHASE,$main_panel_mod_panel_choral_panel_invert_phase,-1,3,1)
+end on
+
+{Scatter}
+on ui_control($main_panel_mod_panel_choral_panel_scatter)
+  set_engine_par($ENGINE_PAR_CHORAL_SCATTER,$main_panel_mod_panel_choral_panel_scatter,-1,3,1)
+end on
+
+{Depth}
+on ui_control($main_panel_mod_panel_choral_panel_amount)
+  set_engine_par($ENGINE_PAR_CHORAL_AMOUNT,$main_panel_mod_panel_choral_panel_amount,-1,3,1)
+  set_control_par_str(get_ui_id($main_panel_mod_panel_choral_panel_amount),$CONTROL_PAR_LABEL,$main_panel_mod_panel_choral_panel_amount/10000 & " %")
+  set_text($main_panel_mod_panel_choral_panel_amount_label,$main_panel_mod_panel_choral_panel_amount/10000 & "%")
+  wait($timer)
+  set_text($main_panel_mod_panel_choral_panel_amount_label,"Depth")
+end on
+
+{Rate}
+on ui_control($main_panel_mod_panel_choral_panel_rate)
+  set_engine_par($ENGINE_PAR_CHORAL_RATE,$main_panel_mod_panel_choral_panel_rate,-1,3,1)
+  set_text($main_panel_mod_panel_choral_panel_rate_label,get_engine_par_disp($ENGINE_PAR_CHORAL_RATE,-1,3,1) & " Hz")
+  set_control_par_str(get_ui_id($main_panel_mod_panel_choral_panel_rate),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_CHORAL_RATE,-1,3,1) & " Hz")
+  wait($timer)
+  set_text($main_panel_mod_panel_choral_panel_rate_label,"Rate")
+end on
+
+{Delay}
+on ui_control($main_panel_mod_panel_choral_panel_delay)
+  set_engine_par($ENGINE_PAR_CHORAL_DELAY,$main_panel_mod_panel_choral_panel_delay,-1,3,1)
+  set_control_par_str(get_ui_id($main_panel_mod_panel_choral_panel_delay),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_CHORAL_DELAY,-1,3,1))
+  set_text($main_panel_mod_panel_choral_panel_delay_label,get_engine_par_disp($ENGINE_PAR_CHORAL_DELAY,-1,3,1))
+  wait($timer)
+  set_text($main_panel_mod_panel_choral_panel_delay_label,"Delay")
+end on
+
+{Feedback}
+on ui_control($main_panel_mod_panel_choral_panel_feedback)
+  set_engine_par($ENGINE_PAR_CHORAL_FEEDBACK,$main_panel_mod_panel_choral_panel_feedback,-1,3,1)
+  set_control_par_str(get_ui_id($main_panel_mod_panel_choral_panel_feedback),$CONTROL_PAR_LABEL,$main_panel_mod_panel_choral_panel_feedback/10000 & " %")
+  set_text($main_panel_mod_panel_choral_panel_feedback_label,$main_panel_mod_panel_choral_panel_feedback/10000 & "%")
+  wait($timer)
+  set_text($main_panel_mod_panel_choral_panel_feedback_label,"Feedback")
+end on
+
+{Voices}
+on ui_control($main_panel_mod_panel_choral_panel_voices)
+  set_engine_par($ENGINE_PAR_CHORAL_VOICES,$main_panel_mod_panel_choral_panel_voices,-1,3,1)
+  set_control_par_str(get_ui_id($main_panel_mod_panel_choral_panel_voices),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_CHORAL_VOICES,-1,3,1))
+  set_text($main_panel_mod_panel_choral_panel_voices_label,get_engine_par_disp($ENGINE_PAR_CHORAL_VOICES,-1,3,1) & " Voi")
+  wait($timer)
+  set_text($main_panel_mod_panel_choral_panel_voices_label,"Voices")
+end on  
+
+{Width}
+on ui_control($main_panel_mod_panel_choral_panel_width)
+  set_engine_par($ENGINE_PAR_CHORAL_WIDTH,$main_panel_mod_panel_choral_panel_width,-1,3,1)
+  set_control_par_str(get_ui_id($main_panel_mod_panel_choral_panel_width),$CONTROL_PAR_LABEL,$main_panel_mod_panel_choral_panel_width/10000 & " %")
+  set_text($main_panel_mod_panel_choral_panel_width_label,$main_panel_mod_panel_choral_panel_width/10000 & "%")
+  wait($timer)
+  set_text($main_panel_mod_panel_choral_panel_width_label,"Width")
+end on
+
+{Wet}
+on ui_control($main_panel_mod_panel_choral_panel_mix)
+  set_engine_par($ENGINE_PAR_CHORAL_MIX,$main_panel_mod_panel_choral_panel_mix,-1,3,1)
+  set_control_par_str(get_ui_id($main_panel_mod_panel_choral_panel_mix),$CONTROL_PAR_LABEL,$main_panel_mod_panel_choral_panel_mix/10000 & " %")
+  set_text($main_panel_mod_panel_choral_panel_mix_label,$main_panel_mod_panel_choral_panel_mix/10000 & "%")
+  wait($timer)
+  set_text($main_panel_mod_panel_choral_panel_mix_label,"Mix")
+end on
+
+{Phasis}  
+
+{Ultra}
+on ui_control($main_panel_mod_panel_phasis_panel_ultra)
+  set_engine_par($ENGINE_PAR_PHASIS_ULTRA, $main_panel_mod_panel_phasis_panel_ultra, -1, 4, 1)
+end on
+
+{Invert Phase}
+on ui_control($main_panel_mod_panel_phasis_panel_invert_phase)
+  set_engine_par($ENGINE_PAR_PHASIS_INVERT_PHASE,$main_panel_mod_panel_phasis_panel_invert_phase,-1,4,1)
+end on
+
+{Invert Mod Mix}
+on ui_control($main_panel_mod_panel_phasis_panel_invert_mod_mix)
+  set_engine_par($ENGINE_PAR_PHASIS_INVERT_MOD_MIX,$main_panel_mod_panel_phasis_panel_invert_mod_mix,-1,4,1)
+end on
+
+{Depth}
+on ui_control($main_panel_mod_panel_phasis_panel_amount)
+  set_engine_par($ENGINE_PAR_PHASIS_AMOUNT,$main_panel_mod_panel_phasis_panel_amount,-1,4,1)
+  set_control_par_str(get_ui_id($main_panel_mod_panel_phasis_panel_amount),$CONTROL_PAR_LABEL,$main_panel_mod_panel_phasis_panel_amount_label/10000 & " %")
+  set_text($main_panel_mod_panel_phasis_panel_amount_label,$main_panel_mod_panel_phasis_panel_amount/10000 & "%")
+  wait($timer)
+  set_text($main_panel_mod_panel_phasis_panel_amount_label,"Depth")
+end on
+
+{Rate}
+on ui_control($main_panel_mod_panel_phasis_panel_rate)
+  set_engine_par($ENGINE_PAR_PHASIS_RATE,$main_panel_mod_panel_phasis_panel_rate,-1,4,1)
+  set_text($main_panel_mod_panel_phasis_panel_rate_label,get_engine_par_disp($ENGINE_PAR_PHASIS_RATE,-1,4,1) & " Hz")
+  set_control_par_str(get_ui_id($main_panel_mod_panel_phasis_panel_rate),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_PHASIS_RATE,-1,4,1) & " Hz")
+  wait($timer)
+  set_text($main_panel_mod_panel_phasis_panel_rate_label,"Rate")
+end on
+
+{Stereo}
+on ui_control($main_panel_mod_panel_phasis_panel_stereo)
+  set_engine_par($ENGINE_PAR_PHASIS_STEREO,$main_panel_mod_panel_phasis_panel_stereo,-1,4,1)
+  set_control_par_str(get_ui_id($main_panel_mod_panel_phasis_panel_stereo),$CONTROL_PAR_LABEL,$main_panel_mod_panel_phasis_panel_stereo/10000 & " %")
+  set_text($main_panel_mod_panel_phasis_panel_stereo_label,$main_panel_mod_panel_phasis_panel_stereo/10000 & "%")
+  wait($timer)
+  set_text($main_panel_mod_panel_phasis_panel_stereo_label,"Stereo")
+end on
+
+{Feedback}
+on ui_control($main_panel_mod_panel_phasis_panel_feedback)
+  set_engine_par($ENGINE_PAR_PHASIS_FEEDBACK,$main_panel_mod_panel_phasis_panel_feedback,-1,4,1)
+  set_control_par_str(get_ui_id($main_panel_mod_panel_phasis_panel_feedback),$CONTROL_PAR_LABEL,$main_panel_mod_panel_phasis_panel_feedback/10000 & " %")
+  set_text($main_panel_mod_panel_phasis_panel_feedback_label,$main_panel_mod_panel_phasis_panel_feedback/10000 & "%")
+  wait($timer)
+  set_text($main_panel_mod_panel_phasis_panel_feedback_label,"Feedback")
+end on
+
+{Notches}
+on ui_control($main_panel_mod_panel_phasis_panel_notches)
+  set_engine_par($ENGINE_PAR_PHASIS_NOTCHES,$main_panel_mod_panel_phasis_panel_notches,-1,4,1)
+  set_control_par_str(get_ui_id($main_panel_mod_panel_phasis_panel_notches),$CONTROL_PAR_LABEL,$main_panel_mod_panel_phasis_panel_notches)
+  set_text($main_panel_mod_panel_phasis_panel_notches_label,$main_panel_mod_panel_phasis_panel_notches)
+  wait($timer)
+  set_text($main_panel_mod_panel_phasis_panel_notches_label,"Notches")
+end on
+
+{Center}
+on ui_control($main_panel_mod_panel_phasis_panel_center)
+  set_engine_par($ENGINE_PAR_PHASIS_CENTER,$main_panel_mod_panel_phasis_panel_center,-1,4,1)
+  set_control_par_str(get_ui_id($main_panel_mod_panel_phasis_panel_center),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_PHASIS_CENTER,-1,4,1) & " Hz")
+  set_text($main_panel_mod_panel_phasis_panel_center_label,get_engine_par_disp($ENGINE_PAR_PHASIS_CENTER,-1,4,1) & " Hz")
+  wait($timer)
+  set_text($main_panel_mod_panel_phasis_panel_center_label,"Center")
+end on
+
+{Spread}
+on ui_control($main_panel_mod_panel_phasis_panel_spread)
+  set_engine_par($ENGINE_PAR_PHASIS_SPREAD,$main_panel_mod_panel_phasis_panel_spread,-1,4,1)
+  set_control_par_str(get_ui_id($main_panel_mod_panel_phasis_panel_spread),$CONTROL_PAR_LABEL,$main_panel_mod_panel_phasis_panel_spread/10000 & " %")
+  set_text($main_panel_mod_panel_phasis_panel_spread_label,$main_panel_mod_panel_phasis_panel_spread/10000 & "%")
+  wait($timer)
+  set_text($main_panel_mod_panel_phasis_panel_spread_label,"Spread")
+end on
+
+{Mod Mox}
+on ui_control($main_panel_mod_panel_phasis_panel_mod_mix)
+  set_engine_par($ENGINE_PAR_PHASIS_MOD_MIX,$main_panel_mod_panel_phasis_panel_mod_mix,-1,4,1)
+  set_control_par_str(get_ui_id($main_panel_mod_panel_phasis_panel_mod_mix),$CONTROL_PAR_LABEL,$main_panel_mod_panel_phasis_panel_mod_mix/10000 & " %")
+  set_text($main_panel_mod_panel_phasis_panel_mod_mix_label,$main_panel_mod_panel_phasis_panel_mod_mix/10000 & "%")
+  wait($timer)
+  set_text($main_panel_mod_panel_phasis_panel_mod_mix_label,"Mod Mix")
+end on
+
+{Wet}
+on ui_control($main_panel_mod_panel_phasis_panel_mix)
+  set_engine_par($ENGINE_PAR_PHASIS_MIX,$main_panel_mod_panel_phasis_panel_mix,-1,4,1)
+  set_control_par_str(get_ui_id($main_panel_mod_panel_phasis_panel_mix),$CONTROL_PAR_LABEL,$main_panel_mod_panel_phasis_panel_mix/10000 & " %")
+  set_text($main_panel_mod_panel_phasis_panel_mix_label,$main_panel_mod_panel_phasis_panel_mix/10000 & "%")
+  wait($timer)
+  set_text($main_panel_mod_panel_phasis_panel_mix_label,"Wet")
+end on
+
+{Flair}
+
+{Mode}
+on ui_control($main_panel_mod_panel_flair_panel_mode)
+  select ($main_panel_mod_panel_flair_panel_mode)
+    case 0
+      set_control_par(get_ui_id($main_panel_mod_panel_flair_panel_offset),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+      set_control_par(get_ui_id($main_panel_mod_panel_flair_panel_offset_label),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+      set_control_par(get_ui_id($main_panel_mod_panel_flair_panel_scan),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+
+      set_engine_par($ENGINE_PAR_FLAIR_MODE,$NI_FLAIR_MODE_STANDARD,-1,5,1)
+    case 1
+      set_control_par(get_ui_id($main_panel_mod_panel_flair_panel_scan),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+      set_control_par(get_ui_id($main_panel_mod_panel_flair_panel_offset),$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+      set_control_par(get_ui_id($main_panel_mod_panel_flair_panel_offset_label),$CONTROL_PAR_HIDE,$HIDE_PART_BG)
+
+      set_engine_par($ENGINE_PAR_FLAIR_MODE,$NI_FLAIR_MODE_THRU_ZERO,-1,5,1)
+    case 2
+      set_control_par(get_ui_id($main_panel_mod_panel_flair_panel_scan),$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+      set_control_par(get_ui_id($main_panel_mod_panel_flair_panel_offset),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+      set_control_par(get_ui_id($main_panel_mod_panel_flair_panel_offset_label),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+
+      set_engine_par($ENGINE_PAR_FLAIR_MODE,$NI_FLAIR_MODE_SCAN,-1,5,1)
+  end select
+end on
+
+{Scan Mode}
+on ui_control($main_panel_mod_panel_flair_panel_scan)
+  select ($main_panel_mod_panel_flair_panel_scan) 
+        case 0
+          set_engine_par($ENGINE_PAR_FLAIR_SCANMODE,$NI_FLAIR_SCANMODE_TRIANGLE,-1,5,1)
+        case 1
+          set_engine_par($ENGINE_PAR_FLAIR_SCANMODE,$NI_FLAIR_SCANMODE_SAW_UP,-1,5,1)
+        case 2
+          set_engine_par($ENGINE_PAR_FLAIR_SCANMODE,$NI_FLAIR_SCANMODE_SAW_DOWN,-1,5,1)
+    end select
+end on
+
+{Chord}
+on ui_control($main_panel_mod_panel_flair_panel_chord)
+  select ($main_panel_mod_panel_flair_panel_chord) 
+        case 0
+          set_engine_par($ENGINE_PAR_FLAIR_CHORD,0,-1,5,1)
+        case 1
+          set_engine_par($ENGINE_PAR_FLAIR_CHORD,1,-1,5,1)
+        case 2
+          set_engine_par($ENGINE_PAR_FLAIR_CHORD,2,-1,5,1)
+        case 3
+          set_engine_par($ENGINE_PAR_FLAIR_CHORD,3,-1,5,1)
+        case 4
+          set_engine_par($ENGINE_PAR_FLAIR_CHORD,4,-1,5,1)
+        case 5
+          set_engine_par($ENGINE_PAR_FLAIR_CHORD,5,-1,5,1)
+        case 6
+          set_engine_par($ENGINE_PAR_FLAIR_CHORD,6,-1,5,1)
+        case 7
+          set_engine_par($ENGINE_PAR_FLAIR_CHORD,7,-1,5,1)
+        case 8
+          set_engine_par($ENGINE_PAR_FLAIR_CHORD,8,-1,5,1)
+        case 9
+          set_engine_par($ENGINE_PAR_FLAIR_CHORD,9,-1,5,1)
+        case 10
+          set_engine_par($ENGINE_PAR_FLAIR_CHORD,10,-1,5,1)
+        case 11
+          set_engine_par($ENGINE_PAR_FLAIR_CHORD,11,-1,5,1)
+        case 12
+          set_engine_par($ENGINE_PAR_FLAIR_CHORD,12,-1,5,1)
+        case 13
+          set_engine_par($ENGINE_PAR_FLAIR_CHORD,13,-1,5,1)
+        case 14
+          set_engine_par($ENGINE_PAR_FLAIR_CHORD,14,-1,5,1)
+        case 15
+          set_engine_par($ENGINE_PAR_FLAIR_CHORD,15,-1,5,1)
+        case 16
+          set_engine_par($ENGINE_PAR_FLAIR_CHORD,16,-1,5,1)
+        case 17
+          set_engine_par($ENGINE_PAR_FLAIR_CHORD,17,-1,5,1)
+        case 18
+          set_engine_par($ENGINE_PAR_FLAIR_CHORD,18,-1,5,1)
+        case 19
+          set_engine_par($ENGINE_PAR_FLAIR_CHORD,19,-1,5,1)
+        case 20
+          set_engine_par($ENGINE_PAR_FLAIR_CHORD,20,-1,5,1)
+        case 21
+          set_engine_par($ENGINE_PAR_FLAIR_CHORD,21,-1,5,1)
+        case 22
+          set_engine_par($ENGINE_PAR_FLAIR_CHORD,22,-1,5,1)
+        case 23
+          set_engine_par($ENGINE_PAR_FLAIR_CHORD,23,-1,5,1)
+  end select    
+end on
+
+{Invert Phase}
+on ui_control($main_panel_mod_panel_flair_panel_invert_phase)
+  set_engine_par($ENGINE_PAR_FLAIR_INVERT_PHASE, $main_panel_mod_panel_flair_panel_invert_phase, -1, 5, 1)
+end on
+
+{Depth}
+on ui_control($main_panel_mod_panel_flair_panel_amount)
+  set_engine_par($ENGINE_PAR_FLAIR_AMOUNT,$main_panel_mod_panel_flair_panel_amount,-1,5,1)
+  set_control_par_str(get_ui_id($main_panel_mod_panel_flair_panel_amount),$CONTROL_PAR_LABEL,$main_panel_mod_panel_flair_panel_amount/10000 & " %")
+  set_text($main_panel_mod_panel_flair_panel_amount_label,$main_panel_mod_panel_flair_panel_amount/10000 & "%")
+  wait($timer)
+  set_text($main_panel_mod_panel_flair_panel_amount_label,"Depth")
+end on
+
+{Rate}
+on ui_control($main_panel_mod_panel_flair_panel_rate)
+  set_engine_par($ENGINE_PAR_FLAIR_RATE,$main_panel_mod_panel_flair_panel_rate,-1,5,1)    
+  set_text($main_panel_mod_panel_flair_panel_rate_label,get_engine_par_disp($ENGINE_PAR_FLAIR_RATE,-1,5,1) & " Hz")
+  set_control_par_str(get_ui_id($main_panel_mod_panel_flair_panel_rate),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_FLAIR_RATE,-1,5,1) & " Hz")
+  wait($timer)
+  set_text($main_panel_mod_panel_flair_panel_rate_label,"Rate")
+end on
+
+{Pitch}
+on ui_control($main_panel_mod_panel_flair_panel_pitch)
+  set_engine_par($ENGINE_PAR_FLAIR_PITCH,$main_panel_mod_panel_flair_panel_pitch,-1,5,1)    
+  set_control_par_str(get_ui_id($main_panel_mod_panel_flair_panel_pitch),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_FLAIR_PITCH,-1,5,1))
+  set_text($main_panel_mod_panel_flair_panel_pitch_label,get_engine_par_disp($ENGINE_PAR_FLAIR_PITCH,-1,5,1))
+  wait($timer)
+  set_text($main_panel_mod_panel_flair_panel_pitch_label,"Pitch")
+end on
+
+{Voices}
+on ui_control($main_panel_mod_panel_flair_panel_voices)
+  set_engine_par($ENGINE_PAR_FLAIR_VOICES,$main_panel_mod_panel_flair_panel_voices,-1,5,1)  
+  set_control_par_str(get_ui_id($main_panel_mod_panel_flair_panel_voices),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_FLAIR_VOICES,-1,5,1))
+  set_text($main_panel_mod_panel_flair_panel_voices_label,get_engine_par_disp($ENGINE_PAR_FLAIR_VOICES,-1,5,1) & " Voi")
+  wait($timer)
+  set_text($main_panel_mod_panel_flair_panel_voices_label,"Voices")
+end on
+
+{Feedback}
+on ui_control($main_panel_mod_panel_flair_panel_feedback)
+  set_engine_par($ENGINE_PAR_FLAIR_FEEDBACK,$main_panel_mod_panel_flair_panel_feedback,-1,5,1)  
+  set_control_par_str(get_ui_id($main_panel_mod_panel_flair_panel_feedback),$CONTROL_PAR_LABEL,$main_panel_mod_panel_flair_panel_feedback/10000 & " %") 
+  set_text($main_panel_mod_panel_flair_panel_feedback_label,$main_panel_mod_panel_flair_panel_feedback/10000 & "%")
+  wait($timer)
+  set_text($main_panel_mod_panel_flair_panel_feedback_label,"Feedback")
+end on
+
+{Width}
+on ui_control($main_panel_mod_panel_flair_panel_width)
+  set_engine_par($ENGINE_PAR_FLAIR_WIDTH,$main_panel_mod_panel_flair_panel_width,-1,5,1)    
+  set_control_par_str(get_ui_id($main_panel_mod_panel_flair_panel_width),$CONTROL_PAR_LABEL,$main_panel_mod_panel_flair_panel_width/10000 & " %")
+  set_text($main_panel_mod_panel_flair_panel_width_label,$main_panel_mod_panel_flair_panel_width/10000 & "%")
+  wait($timer)
+  set_text($main_panel_mod_panel_flair_panel_width_label,"Width")
+end on
+
+{Damping}
+on ui_control($main_panel_mod_panel_flair_panel_damping)
+  set_engine_par($ENGINE_PAR_FLAIR_DAMPING,$main_panel_mod_panel_flair_panel_damping,-1,5,1)    
+  set_control_par_str(get_ui_id($main_panel_mod_panel_flair_panel_damping),$CONTROL_PAR_LABEL,$main_panel_mod_panel_flair_panel_damping/10000 & " %")
+  set_text($main_panel_mod_panel_flair_panel_damping_label,$main_panel_mod_panel_flair_panel_damping/10000 & "%")
+  wait($timer)
+  set_text($main_panel_mod_panel_flair_panel_damping_label,"Damp")
+end on
+
+{Detune}
+on ui_control($main_panel_mod_panel_flair_panel_detune)
+  set_engine_par($ENGINE_PAR_FLAIR_DETUNE,$main_panel_mod_panel_flair_panel_detune,-1,5,1)  
+  set_control_par_str(get_ui_id($main_panel_mod_panel_flair_panel_detune),$CONTROL_PAR_LABEL,$main_panel_mod_panel_flair_panel_detune/10000 & " %")
+  set_text($main_panel_mod_panel_flair_panel_detune_label,$main_panel_mod_panel_flair_panel_detune/10000 & "%")
+  wait($timer)
+  set_text($main_panel_mod_panel_flair_panel_detune_label,"Detune")
+end on
+
+{Offset}
+on ui_control($main_panel_mod_panel_flair_panel_offset)
+  set_engine_par($ENGINE_PAR_FLAIR_OFFSET,$main_panel_mod_panel_flair_panel_offset,-1,5,1)
+  set_control_par_str(get_ui_id($main_panel_mod_panel_flair_panel_offset),$CONTROL_PAR_LABEL,$main_panel_mod_panel_flair_panel_offset/10000 & " %")
+  set_text($main_panel_mod_panel_flair_panel_offset_label,$main_panel_mod_panel_flair_panel_offset/10000 & "%")
+  wait($timer)
+  set_text($main_panel_mod_panel_flair_panel_offset_label,"Offset")
+end on
+
+{Wet}
+on ui_control($main_panel_mod_panel_flair_panel_mix)
+  set_engine_par($ENGINE_PAR_FLAIR_MIX,$main_panel_mod_panel_flair_panel_mix,-1,5,1)    
+  set_control_par_str(get_ui_id($main_panel_mod_panel_flair_panel_mix),$CONTROL_PAR_LABEL,$main_panel_mod_panel_flair_panel_mix/10000 & " %")
+  set_text($main_panel_mod_panel_flair_panel_mix_label,$main_panel_mod_panel_flair_panel_mix/10000 & "%")
+  wait($timer)
+  set_text($main_panel_mod_panel_flair_panel_mix_label,"Wet")
+end on
+
+{-----INSTRUMENT CONTROLS END -----}
+{-----INSTRUMENT CONTROLS END -----}
+{-----INSTRUMENT CONTROLS END -----}
+
+on ui_control ($main_panel_wt_panel_mousearea)
+  if ($NI_MOUSE_EVENT_TYPE = $NI_MOUSE_EVENT_TYPE_DROP)
+    if (num_elements(!NI_DND_ITEMS_AUDIO) = 1)
+        wait_async(set_sample(%NI_USER_ZONE_IDS[0], !NI_DND_ITEMS_AUDIO[0]))
+        wait_async(set_zone_par(%NI_USER_ZONE_IDS[0], $ZONE_PAR_LOW_KEY, 0))
+        wait_async(set_zone_par(%NI_USER_ZONE_IDS[0], $ZONE_PAR_HIGH_KEY, 127))
+        wait_async(set_zone_par(%NI_USER_ZONE_IDS[0], $ZONE_PAR_HIGH_VELO, 127))
+        wait_async(set_zone_par(%NI_USER_ZONE_IDS[0], $ZONE_PAR_ROOT_KEY, 0))
+        @wt_path_user := get_sample(%NI_USER_ZONE_IDS[0])
+        $main_panel_wt_panel_wt_source := 1
+        call sourceSelect
+    end if
+  end if
+end on
+
+on ui_control(?main_panel_xy_panel_xypad)
+  set_engine_par($ENGINE_PAR_TUNE,real_to_int(?main_panel_xy_panel_xypad[1]*1000000.0), $main_panel_wt_panel_wt_source,0,1)
+  set_engine_par($ENGINE_PAR_VOLUME,real_to_int(?main_panel_xy_panel_xypad[0]*1000000.0), $main_panel_wt_panel_wt_source,0,-1)
+ { set_control_par_str_arr(?main_panel_xy_panel_xypad[0], $CONTROL_PAR_LABEL,real_to_int(?main_panel_xy_panel_xypad[1]*100.0) & "%", 1)}
+ {set_control_par_str_arr(?main_panel_xy_panel_xypad[1], $CONTROL_PAR_LABEL,real_to_int(?main_panel_xy_panel_xypad[0]*100.0) & "%", 0)}
+  if($NI_MOUSE_EVENT_TYPE = $NI_MOUSE_EVENT_TYPE_LEFT_BUTTON_DOWN)
+    $new_note := play_note(36,127,0,-1)
+    set_event_par_arr($ALL_EVENTS,$EVENT_PAR_ALLOW_GROUP,0,$ALL_GROUPS)
+    set_event_par_arr($ALL_EVENTS,$EVENT_PAR_ALLOW_GROUP,1,$main_panel_wt_panel_wt_source)
+  end if
+  if($NI_MOUSE_EVENT_TYPE = $NI_MOUSE_EVENT_TYPE_LEFT_BUTTON_UP)
+     note_off($new_note)
+  end if
+end on
+
+on ui_control (?main_panel_wt_panel_xypad)
+ $i := 0
+  while ($i<2)
+    $wt_select := real_to_int(?main_panel_wt_panel_xypad[0]*1000000.0)
+    set_engine_par($ENGINE_PAR_WT_POSITION,$wt_select,$i,-1,-1)
+    $wt_form_depth := real_to_int(?main_panel_wt_panel_xypad[1]*1000000.0)
+    set_engine_par($ENGINE_PAR_WT_FORM,$wt_form_depth,$i,-1,-1)
+    inc($i)
+  end while
+end on  
+
+on note 
+  disallow_group($ALL_GROUPS)
+  allow_group($main_panel_wt_panel_wt_source)
+end on
+
+{----- SCRIPT END -----}
+{----- SCRIPT END -----}
+{----- SCRIPT END -----}
