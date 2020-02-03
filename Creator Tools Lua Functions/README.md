@@ -1,6 +1,6 @@
-# Creator-Tools-Utilities
+# Creator Tools LUA Utilities
 
-These file includes useful functions for usage in Creator Tools Lua scripts.
+These files include useful functions for usage in Native Instruments Creator Tools Lua scripts.
 
 This is an experimental work in progress and community input is more than welcome. Feel free to contribute code or ask for changes, fixes and new functions.
 
@@ -20,7 +20,9 @@ In that case remove the ctZones part from the function name, and then simply cal
 testFunction
 
 
-# Listed below are all the available functions for easy reference any copy pasting with the arguments into scripts.
+# Functions List
+
+Listed below are all the available functions for easy reference any copy pasting with the arguments into scripts.
 
 ```lua
 
