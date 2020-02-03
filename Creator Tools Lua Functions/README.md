@@ -18,7 +18,9 @@ testFunction
 
 Listed below are all the available functions for easy reference any copy pasting with the arguments into scripts.
 
--- GROUPS --
+```lua
+
+-- GROUPS
 
  -- Test function
  ctGroups.testFunction()
@@ -54,7 +56,7 @@ ctGroups.groupNames()
 -- Set all group parameters
 ctGroups.groupParams(group,volume,tune,pan,name)
 
--- MIR --
+-- MIR
 
 -- Test function
 ctMir.testFunction()
@@ -71,7 +73,7 @@ ctMir.type_tags(v,mode)
 -- Function for implementing MIR type tags to strings
 ctMir.type_to_tag(var,mode,mirPathSingle)
 
--- UTIL --
+-- UTIL
 
 -- Test function
 ctUtil.testFunction()
@@ -97,7 +99,7 @@ ctUtil.stringSplit(inputString,sep)
 -- Returns a table size
 ctUtil.tableSize(t)
 
--- ZONES --
+-- ZONES
 
 -- Test function
 ctZones.testFunction()
@@ -122,3 +124,4 @@ ctZones.zoneRoot(startRoot,startZone,untilZone,startGroup,untilGroup,increment,c
 
 --Find and count the number of all zones that have the same rootKey within a group or all groups
 ctZones.zonesWithSameKey(rootKey,group)
+```
