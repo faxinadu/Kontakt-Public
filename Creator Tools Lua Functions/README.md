@@ -21,7 +21,7 @@ Listed below are all the available functions for easy reference any copy pasting
 -- GROUPS --
 
  -- Test function
-ctGroups.testFunction()
+ ctGroups.testFunction()
 
 -- Check and print the total group count of the instrument
 ctGroups.groupCount()
@@ -56,7 +56,7 @@ ctGroups.groupParams(group,volume,tune,pan,name)
 
 -- MIR --
 
- -- Test function
+-- Test function
 ctMir.testFunction()
 
 -- Perform any of the MIR operations. 
@@ -73,7 +73,7 @@ ctMir.type_to_tag(var,mode,mirPathSingle)
 
 -- UTIL --
 
- -- Test function
+-- Test function
 ctUtil.testFunction()
 
 -- Check if a Kontakt instruments is connected and print instruments information
@@ -99,7 +99,7 @@ ctUtil.tableSize(t)
 
 -- ZONES --
 
- -- Test function
+-- Test function
 ctZones.testFunction()
 
 -- Confine a zone so that root key, low key and high key are all the same
