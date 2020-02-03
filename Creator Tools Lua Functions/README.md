@@ -22,7 +22,7 @@ testFunction
 
 # Functions List
 
-Listed below are all the available functions for easy reference any copy pasting with the arguments into scripts.
+Listed below are all the available functions for easy reference and copy pasting with the arguments into scripts.
 
 ```lua
 
