@@ -6,17 +6,21 @@ This is an experimental work in progress and community input is more than welcom
 
 Simply include this line in any script (if running a script from another location that users this file,
 make sure to point to the correct path):
+```lua
 local ctZones = require("CtZones")
+```
 
 Then you can simply call any function like:
+```lua
 ctZones.testFunction()
+```
 
 It is also possible of course to copy entire specific functions from this list directly into your script. 
 In that case remove the ctZones part from the function name, and then simply call it normally like:
 testFunction
 
 
-Listed below are all the available functions for easy reference any copy pasting with the arguments into scripts.
+# Listed below are all the available functions for easy reference any copy pasting with the arguments into scripts.
 
 ```lua
 
