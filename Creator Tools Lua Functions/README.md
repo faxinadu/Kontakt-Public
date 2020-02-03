@@ -18,7 +18,7 @@ testFunction
 
 Listed below are all the available functions for easy reference any copy pasting with the arguments into scripts.
 
-GROUPS
+-- GROUPS --
 
  -- Test function
 ctGroups.testFunction()
@@ -54,7 +54,7 @@ ctGroups.groupNames()
 -- Set all group parameters
 ctGroups.groupParams(group,volume,tune,pan,name)
 
-MIR
+-- MIR --
 
  -- Test function
 ctMir.testFunction()
@@ -71,7 +71,7 @@ ctMir.type_tags(v,mode)
 -- Function for implementing MIR type tags to strings
 ctMir.type_to_tag(var,mode,mirPathSingle)
 
-UTIL
+-- UTIL --
 
  -- Test function
 ctUtil.testFunction()
@@ -97,7 +97,7 @@ ctUtil.stringSplit(inputString,sep)
 -- Returns a table size
 ctUtil.tableSize(t)
 
-ZONES
+-- ZONES --
 
  -- Test function
 ctZones.testFunction()
