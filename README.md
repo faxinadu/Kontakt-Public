@@ -1,4 +1,4 @@
-#Resources for Native Instruments Kontakt builders
+# Resources for Native Instruments Kontakt builders
 
 Kontakt:
 https://www.native-instruments.com/en/products/komplete/samplers/kontakt-6/
