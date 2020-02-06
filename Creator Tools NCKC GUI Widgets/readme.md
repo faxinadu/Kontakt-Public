@@ -7,3 +7,7 @@ Included here are a number of NCKC files, useful as examples or for quick protot
 To import an NCKC file simply chose the import option from the widget selection menu in the Creator Tools GUI Designer. 
 
 If the NCKC files are pointing to graphical assets such as png animation strips for sliders, fonts, and backgrounds as is the case with the files included here place the included assets in the /Resources/Pictures of your project. It is also easy to reuse the structure of a NCKC file with different assets (without needing to rearrange everything), by just replacing the asset with a different one of the same size.
+
+# Contribution Guideline
+
+Make a folder with the next available type number in the repository. Create the subfolders and place any assets in /Resources/Pictures . Remember that any assets used such as fonts and pictures must be open source and re-distributable.
