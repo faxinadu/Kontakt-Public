@@ -1,0 +1,324 @@
+{
+    "formatVersion": 0,
+    "type": {
+        "name": "Control",
+        "version": 0
+    },
+    "value": {
+        "index": 0,
+        "value": {
+            "common": {
+                "id": "wt_panel",
+                "infoPaneText": "",
+                "position": {
+                    "x": 27,
+                    "y": 80
+                },
+                "show": true,
+                "size": {
+                    "height": 0,
+                    "width": 0
+                },
+                "zLayer": 1
+            },
+            "controls": [
+                {
+                    "index": 14,
+                    "value": {
+                        "common": {
+                            "id": "xypad",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 10,
+                                "y": 10
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 180,
+                                "width": 180
+                            },
+                            "zLayer": 1
+                        },
+                        "cursors": [
+                            {
+                                "image": "",
+                                "x": {
+                                    "automation": {
+                                        "disableUserAssign": false,
+                                        "hostAutomation": {
+                                            "id": 0,
+                                            "on": true
+                                        },
+                                        "name": "Wave Sel"
+                                    },
+                                    "value": 0.0
+                                },
+                                "y": {
+                                    "automation": {
+                                        "disableUserAssign": false,
+                                        "hostAutomation": {
+                                            "id": 1,
+                                            "on": true
+                                        },
+                                        "name": "Form Dpt"
+                                    },
+                                    "value": 0.0
+                                }
+                            }
+                        ],
+                        "mouse": {
+                            "mode": 2,
+                            "scaleX": 1000,
+                            "scaleY": 1000
+                        }
+                    }
+                },
+                {
+                    "index": 15,
+                    "value": {
+                        "common": {
+                            "id": "mousearea",
+                            "infoPaneText": "Click and drag over the pad to control the wave. The X axis selects the wave cycle from the wavetable while the Y axis adjusts the amount of applied  wave shaping. Drag and drop wavetable files on this view in order to load wavetables to the user slot.",
+                            "position": {
+                                "x": 10,
+                                "y": 10
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 180,
+                                "width": 180
+                            },
+                            "zLayer": 1
+                        },
+                        "dragAndDropAccept": {
+                            "array": 0,
+                            "audio": 1,
+                            "midi": 0
+                        },
+                        "receiveDragEvents": false
+                    }
+                },
+                {
+                    "index": 13,
+                    "value": {
+                        "colors": {
+                            "background": 2490368,
+                            "backgroundAlpha": 0,
+                            "cursor": 16493843,
+                            "cursorAlpha": 255,
+                            "gradient": {
+                                "cursorEnd": 16777215,
+                                "cursorEndAlpha": 255,
+                                "waveTableEnd": 16777215,
+                                "waveTableEndAlpha": 80
+                            },
+                            "waveTableAlpha": 0,
+                            "wavetable": 0
+                        },
+                        "common": {
+                            "id": "wt_view",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 10,
+                                "y": 10
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 180,
+                                "width": 180
+                            },
+                            "zLayer": 1
+                        },
+                        "mode": 0,
+                        "parallaxX": 0,
+                        "parallaxY": 0
+                    }
+                },
+                {
+                    "index": 8,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 2,
+                                "on": true
+                            },
+                            "name": "Source"
+                        },
+                        "common": {
+                            "id": "wt_source",
+                            "infoPaneText": "Selects between the factory and user wavetables as the sound source.",
+                            "position": {
+                                "x": 9,
+                                "y": 284
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 26,
+                                "width": 91
+                            },
+                            "zLayer": 2
+                        },
+                        "image": "90xbutton",
+                        "text": {
+                            "fonts": {
+                                "hoverOff": {
+                                    "custom": "custom_font",
+                                    "type": 0
+                                },
+                                "hoverOn": {
+                                    "custom": "custom_font",
+                                    "type": 0
+                                },
+                                "off": {
+                                    "custom": "custom_font",
+                                    "type": 0
+                                },
+                                "on": {
+                                    "custom": "custom_font",
+                                    "type": 0
+                                },
+                                "pressedOff": {
+                                    "custom": "custom_font",
+                                    "type": 0
+                                },
+                                "pressedOn": {
+                                    "custom": "custom_font",
+                                    "type": 0
+                                }
+                            },
+                            "horizontalAlignment": 1,
+                            "positionY": 5,
+                            "shiftOnPress": false,
+                            "string": "Factory"
+                        }
+                    }
+                },
+                {
+                    "index": 6,
+                    "value": {
+                        "common": {
+                            "id": "wt_form_type",
+                            "infoPaneText": "A choice between algorithm types for the wave shaping.",
+                            "position": {
+                                "x": 106,
+                                "y": 284
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 26,
+                                "width": 91
+                            },
+                            "zLayer": 1
+                        },
+                        "entries": [
+                            {
+                                "show": true,
+                                "string": " Linear",
+                                "value": 0
+                            },
+                            {
+                                "show": true,
+                                "string": " Sync1",
+                                "value": 1
+                            },
+                            {
+                                "show": true,
+                                "string": " Sync2",
+                                "value": 2
+                            },
+                            {
+                                "show": true,
+                                "string": " Sync3",
+                                "value": 3
+                            },
+                            {
+                                "show": true,
+                                "string": " Bend+",
+                                "value": 4
+                            },
+                            {
+                                "show": true,
+                                "string": " Bend-",
+                                "value": 5
+                            },
+                            {
+                                "show": true,
+                                "string": " Bend-+",
+                                "value": 6
+                            },
+                            {
+                                "show": true,
+                                "string": " PWM",
+                                "value": 7
+                            },
+                            {
+                                "show": true,
+                                "string": " Asym+",
+                                "value": 8
+                            },
+                            {
+                                "show": true,
+                                "string": " Asym-",
+                                "value": 9
+                            },
+                            {
+                                "show": true,
+                                "string": " Asym-+",
+                                "value": 10
+                            },
+                            {
+                                "show": true,
+                                "string": " Flip",
+                                "value": 11
+                            },
+                            {
+                                "show": true,
+                                "string": " Mirror",
+                                "value": 12
+                            },
+                            {
+                                "show": true,
+                                "string": " Quantize",
+                                "value": 13
+                            }
+                        ],
+                        "image": "90xDDbutton",
+                        "text": {
+                            "fonts": {
+                                "hoverOff": {
+                                    "custom": "custom_font",
+                                    "type": 0
+                                },
+                                "hoverOn": {
+                                    "custom": "custom_font",
+                                    "type": 0
+                                },
+                                "off": {
+                                    "custom": "custom_font",
+                                    "type": 0
+                                },
+                                "on": {
+                                    "custom": "custom_font",
+                                    "type": 0
+                                },
+                                "pressedOff": {
+                                    "custom": "custom_font",
+                                    "type": 0
+                                },
+                                "pressedOn": {
+                                    "custom": "custom_font",
+                                    "type": 0
+                                }
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 5,
+                            "shiftOnPress": false,
+                            "string": ""
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

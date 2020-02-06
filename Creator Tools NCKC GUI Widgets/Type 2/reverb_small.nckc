@@ -1,0 +1,241 @@
+{
+    "formatVersion": 0,
+    "type": {
+        "name": "Control",
+        "version": 0
+    },
+    "value": {
+        "index": 0,
+        "value": {
+            "common": {
+                "id": "reverb_panel",
+                "infoPaneText": "",
+                "position": {
+                    "x": 525,
+                    "y": 450
+                },
+                "show": true,
+                "size": {
+                    "height": 0,
+                    "width": 0
+                },
+                "zLayer": 1
+            },
+            "controls": [
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 14,
+                                "on": true
+                            },
+                            "name": "Verb Dec"
+                        },
+                        "common": {
+                            "id": "decay",
+                            "infoPaneText": "Adjusts the length of the reverb signal",
+                            "position": {
+                                "x": 12,
+                                "y": 12
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "knob _w shadow",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "decay_label",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 0,
+                                "y": 75
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 0
+                            },
+                            "horizontalAlignment": 1,
+                            "positionY": 0,
+                            "string": "Decay"
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 15,
+                                "on": true
+                            },
+                            "name": "Verb St"
+                        },
+                        "common": {
+                            "id": "stereo",
+                            "infoPaneText": "Widens the stereo image of the reverb signal.",
+                            "position": {
+                                "x": 77,
+                                "y": 12
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "knob _w shadow",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "stereo_label",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 66,
+                                "y": 75
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 0
+                            },
+                            "horizontalAlignment": 1,
+                            "positionY": 0,
+                            "string": "Stereo"
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 16,
+                                "on": true
+                            },
+                            "name": "Verb Wet"
+                        },
+                        "common": {
+                            "id": "wet",
+                            "infoPaneText": "Blends between the input signal and the effect signal.",
+                            "position": {
+                                "x": 142,
+                                "y": 12
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "knob _w shadow",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 400000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "wet_label",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 130,
+                                "y": 75
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 0
+                            },
+                            "horizontalAlignment": 1,
+                            "positionY": 0,
+                            "string": "Wet"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

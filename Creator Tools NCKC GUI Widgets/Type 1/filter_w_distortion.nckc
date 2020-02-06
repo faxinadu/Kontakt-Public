@@ -1,0 +1,739 @@
+{
+    "formatVersion": 0,
+    "type": {
+        "name": "Control",
+        "version": 0
+    },
+    "value": {
+        "index": 0,
+        "value": {
+            "common": {
+                "id": "filter",
+                "infoPaneText": "",
+                "position": {
+                    "x": 400,
+                    "y": 420
+                },
+                "show": true,
+                "size": {
+                    "height": 0,
+                    "width": 0
+                },
+                "zLayer": 1
+            },
+            "controls": [
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "label",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 0,
+                                "y": 0
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "",
+                                "type": 1
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "string": "Filter"
+                        }
+                    }
+                },
+                {
+                    "index": 6,
+                    "value": {
+                        "common": {
+                            "id": "type",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 50,
+                                "y": 0
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "entries": [
+                            {
+                                "show": true,
+                                "string": "Moog LP2",
+                                "value": 0
+                            },
+                            {
+                                "show": true,
+                                "string": "SVF LP2",
+                                "value": 1
+                            },
+                            {
+                                "show": true,
+                                "string": "Moog LP3",
+                                "value": 2
+                            },
+                            {
+                                "show": true,
+                                "string": "Moog LP4",
+                                "value": 3
+                            },
+                            {
+                                "show": true,
+                                "string": "SVF LP4",
+                                "value": 4
+                            },
+                            {
+                                "show": true,
+                                "string": "Pro 52",
+                                "value": 5
+                            },
+                            {
+                                "show": true,
+                                "string": "Moog LP6",
+                                "value": 6
+                            },
+                            {
+                                "show": true,
+                                "string": "Moog HP2",
+                                "value": 7
+                            },
+                            {
+                                "show": true,
+                                "string": "SVF HP2",
+                                "value": 8
+                            },
+                            {
+                                "show": true,
+                                "string": "Moog HP4",
+                                "value": 9
+                            },
+                            {
+                                "show": true,
+                                "string": "SVF HP4",
+                                "value": 10
+                            },
+                            {
+                                "show": true,
+                                "string": "Moog BP2",
+                                "value": 11
+                            },
+                            {
+                                "show": true,
+                                "string": "SVF BP2",
+                                "value": 12
+                            },
+                            {
+                                "show": true,
+                                "string": "Moog BP4",
+                                "value": 13
+                            },
+                            {
+                                "show": true,
+                                "string": "SVF BP4",
+                                "value": 14
+                            },
+                            {
+                                "show": true,
+                                "string": "Notch",
+                                "value": 15
+                            },
+                            {
+                                "show": true,
+                                "string": "Phaser",
+                                "value": 16
+                            },
+                            {
+                                "show": true,
+                                "string": "Vowel A",
+                                "value": 17
+                            },
+                            {
+                                "show": true,
+                                "string": "Vowel B",
+                                "value": 18
+                            }
+                        ],
+                        "image": "",
+                        "text": {
+                            "fonts": {
+                                "hoverOff": {
+                                    "custom": "",
+                                    "type": 1
+                                },
+                                "hoverOn": {
+                                    "custom": "",
+                                    "type": 10
+                                },
+                                "off": {
+                                    "custom": "",
+                                    "type": 1
+                                },
+                                "on": {
+                                    "custom": "",
+                                    "type": 10
+                                },
+                                "pressedOff": {
+                                    "custom": "",
+                                    "type": 1
+                                },
+                                "pressedOn": {
+                                    "custom": "",
+                                    "type": 10
+                                }
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "shiftOnPress": true,
+                            "string": ""
+                        }
+                    }
+                },
+                {
+                    "index": 8,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 0,
+                                "on": false
+                            },
+                            "name": ""
+                        },
+                        "common": {
+                            "id": "distort",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 200,
+                                "y": 0
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 35
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "",
+                        "text": {
+                            "fonts": {
+                                "hoverOff": {
+                                    "custom": "",
+                                    "type": 1
+                                },
+                                "hoverOn": {
+                                    "custom": "",
+                                    "type": 10
+                                },
+                                "off": {
+                                    "custom": "",
+                                    "type": 1
+                                },
+                                "on": {
+                                    "custom": "",
+                                    "type": 10
+                                },
+                                "pressedOff": {
+                                    "custom": "",
+                                    "type": 1
+                                },
+                                "pressedOn": {
+                                    "custom": "",
+                                    "type": 10
+                                }
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "shiftOnPress": true,
+                            "string": "Tube"
+                        }
+                    }
+                },
+                {
+                    "index": 0,
+                    "value": {
+                        "common": {
+                            "id": "labels",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 0,
+                                "y": 60
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "controls": [
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "cut",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 0,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "",
+                                            "type": 1
+                                        },
+                                        "horizontalAlignment": 0,
+                                        "positionY": 0,
+                                        "string": "Cut"
+                                    }
+                                }
+                            },
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "res",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 40,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "",
+                                            "type": 1
+                                        },
+                                        "horizontalAlignment": 0,
+                                        "positionY": 0,
+                                        "string": "Res"
+                                    }
+                                }
+                            },
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "kbt",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 80,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "",
+                                            "type": 1
+                                        },
+                                        "horizontalAlignment": 0,
+                                        "positionY": 0,
+                                        "string": "KBT"
+                                    }
+                                }
+                            },
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "env",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 120,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "",
+                                            "type": 1
+                                        },
+                                        "horizontalAlignment": 0,
+                                        "positionY": 0,
+                                        "string": "Env"
+                                    }
+                                }
+                            },
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "mod",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 160,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "",
+                                            "type": 1
+                                        },
+                                        "horizontalAlignment": 0,
+                                        "positionY": 0,
+                                        "string": "Mod"
+                                    }
+                                }
+                            },
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "depth",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 200,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "",
+                                            "type": 1
+                                        },
+                                        "horizontalAlignment": 0,
+                                        "positionY": 0,
+                                        "string": "Depth"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "index": 0,
+                    "value": {
+                        "common": {
+                            "id": "controls",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 0,
+                                "y": 20
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "controls": [
+                            {
+                                "index": 7,
+                                "value": {
+                                    "automation": {
+                                        "disableUserAssign": false,
+                                        "hostAutomation": {
+                                            "id": 0,
+                                            "on": false
+                                        },
+                                        "name": ""
+                                    },
+                                    "common": {
+                                        "id": "cut",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 0,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 0,
+                                            "width": 0
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "image": "40x",
+                                    "mouse": {
+                                        "orientation": 0,
+                                        "scale": 1500
+                                    },
+                                    "value": {
+                                        "default": 0,
+                                        "max": 1000000,
+                                        "min": 0
+                                    }
+                                }
+                            },
+                            {
+                                "index": 7,
+                                "value": {
+                                    "automation": {
+                                        "disableUserAssign": false,
+                                        "hostAutomation": {
+                                            "id": 0,
+                                            "on": false
+                                        },
+                                        "name": ""
+                                    },
+                                    "common": {
+                                        "id": "res",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 40,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 0,
+                                            "width": 0
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "image": "40x",
+                                    "mouse": {
+                                        "orientation": 0,
+                                        "scale": 1500
+                                    },
+                                    "value": {
+                                        "default": 0,
+                                        "max": 1000000,
+                                        "min": 0
+                                    }
+                                }
+                            },
+                            {
+                                "index": 7,
+                                "value": {
+                                    "automation": {
+                                        "disableUserAssign": false,
+                                        "hostAutomation": {
+                                            "id": 0,
+                                            "on": false
+                                        },
+                                        "name": ""
+                                    },
+                                    "common": {
+                                        "id": "kbt",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 80,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 0,
+                                            "width": 0
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "image": "40x",
+                                    "mouse": {
+                                        "orientation": 0,
+                                        "scale": 1500
+                                    },
+                                    "value": {
+                                        "default": 0,
+                                        "max": 1000000,
+                                        "min": 0
+                                    }
+                                }
+                            },
+                            {
+                                "index": 7,
+                                "value": {
+                                    "automation": {
+                                        "disableUserAssign": false,
+                                        "hostAutomation": {
+                                            "id": 0,
+                                            "on": false
+                                        },
+                                        "name": ""
+                                    },
+                                    "common": {
+                                        "id": "env",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 120,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 0,
+                                            "width": 0
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "image": "40x",
+                                    "mouse": {
+                                        "orientation": 0,
+                                        "scale": 1500
+                                    },
+                                    "value": {
+                                        "default": 0,
+                                        "max": 1000000,
+                                        "min": 0
+                                    }
+                                }
+                            },
+                            {
+                                "index": 7,
+                                "value": {
+                                    "automation": {
+                                        "disableUserAssign": false,
+                                        "hostAutomation": {
+                                            "id": 0,
+                                            "on": false
+                                        },
+                                        "name": ""
+                                    },
+                                    "common": {
+                                        "id": "mod",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 160,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 0,
+                                            "width": 0
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "image": "40x",
+                                    "mouse": {
+                                        "orientation": 0,
+                                        "scale": 1500
+                                    },
+                                    "value": {
+                                        "default": 0,
+                                        "max": 1000000,
+                                        "min": 0
+                                    }
+                                }
+                            },
+                            {
+                                "index": 7,
+                                "value": {
+                                    "automation": {
+                                        "disableUserAssign": false,
+                                        "hostAutomation": {
+                                            "id": 0,
+                                            "on": false
+                                        },
+                                        "name": ""
+                                    },
+                                    "common": {
+                                        "id": "depth",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 200,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 0,
+                                            "width": 0
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "image": "40x",
+                                    "mouse": {
+                                        "orientation": 0,
+                                        "scale": 1500
+                                    },
+                                    "value": {
+                                        "default": 0,
+                                        "max": 1000000,
+                                        "min": 0
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+}

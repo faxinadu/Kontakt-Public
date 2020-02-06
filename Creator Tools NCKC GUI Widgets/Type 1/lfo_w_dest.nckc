@@ -1,0 +1,534 @@
+{
+    "formatVersion": 0,
+    "type": {
+        "name": "Control",
+        "version": 0
+    },
+    "value": {
+        "index": 0,
+        "value": {
+            "common": {
+                "id": "lfo",
+                "infoPaneText": "",
+                "position": {
+                    "x": 200,
+                    "y": 420
+                },
+                "show": true,
+                "size": {
+                    "height": 0,
+                    "width": 0
+                },
+                "zLayer": 1
+            },
+            "controls": [
+                {
+                    "index": 1,
+                    "value": {
+                        "common": {
+                            "id": "destination",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 0,
+                                "y": 0
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 50
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "",
+                        "text": {
+                            "fonts": {
+                                "hoverOff": {
+                                    "custom": "",
+                                    "type": 1
+                                },
+                                "hoverOn": {
+                                    "custom": "",
+                                    "type": 10
+                                },
+                                "off": {
+                                    "custom": "",
+                                    "type": 1
+                                },
+                                "on": {
+                                    "custom": "",
+                                    "type": 10
+                                },
+                                "pressedOff": {
+                                    "custom": "",
+                                    "type": 1
+                                },
+                                "pressedOn": {
+                                    "custom": "",
+                                    "type": 10
+                                }
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "shiftOnPress": true,
+                            "string": "Amp"
+                        }
+                    }
+                },
+                {
+                    "index": 6,
+                    "value": {
+                        "common": {
+                            "id": "type",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 75,
+                                "y": 0
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 50
+                            },
+                            "zLayer": 1
+                        },
+                        "entries": [
+                            {
+                                "show": true,
+                                "string": "Sine",
+                                "value": 0
+                            },
+                            {
+                                "show": true,
+                                "string": "Tri",
+                                "value": 1
+                            },
+                            {
+                                "show": true,
+                                "string": "Saw",
+                                "value": 2
+                            },
+                            {
+                                "show": true,
+                                "string": "Square",
+                                "value": 3
+                            },
+                            {
+                                "show": true,
+                                "string": "Rand",
+                                "value": 4
+                            }
+                        ],
+                        "image": "",
+                        "text": {
+                            "fonts": {
+                                "hoverOff": {
+                                    "custom": "",
+                                    "type": 1
+                                },
+                                "hoverOn": {
+                                    "custom": "",
+                                    "type": 10
+                                },
+                                "off": {
+                                    "custom": "",
+                                    "type": 1
+                                },
+                                "on": {
+                                    "custom": "",
+                                    "type": 10
+                                },
+                                "pressedOff": {
+                                    "custom": "",
+                                    "type": 1
+                                },
+                                "pressedOn": {
+                                    "custom": "",
+                                    "type": 10
+                                }
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "shiftOnPress": true,
+                            "string": ""
+                        }
+                    }
+                },
+                {
+                    "index": 0,
+                    "value": {
+                        "common": {
+                            "id": "labels",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 0,
+                                "y": 60
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "controls": [
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "rate",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 0,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "",
+                                            "type": 1
+                                        },
+                                        "horizontalAlignment": 0,
+                                        "positionY": 0,
+                                        "string": "Rate"
+                                    }
+                                }
+                            },
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "fade",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 40,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "",
+                                            "type": 1
+                                        },
+                                        "horizontalAlignment": 0,
+                                        "positionY": 0,
+                                        "string": "Fade"
+                                    }
+                                }
+                            },
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "kbt",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 80,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "",
+                                            "type": 1
+                                        },
+                                        "horizontalAlignment": 0,
+                                        "positionY": 0,
+                                        "string": "KBT"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "index": 0,
+                    "value": {
+                        "common": {
+                            "id": "controls",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 0,
+                                "y": 20
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "controls": [
+                            {
+                                "index": 8,
+                                "value": {
+                                    "automation": {
+                                        "disableUserAssign": false,
+                                        "hostAutomation": {
+                                            "id": 0,
+                                            "on": false
+                                        },
+                                        "name": ""
+                                    },
+                                    "common": {
+                                        "id": "sync",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 120,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 50
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "image": "",
+                                    "text": {
+                                        "fonts": {
+                                            "hoverOff": {
+                                                "custom": "",
+                                                "type": 1
+                                            },
+                                            "hoverOn": {
+                                                "custom": "",
+                                                "type": 10
+                                            },
+                                            "off": {
+                                                "custom": "",
+                                                "type": 1
+                                            },
+                                            "on": {
+                                                "custom": "",
+                                                "type": 10
+                                            },
+                                            "pressedOff": {
+                                                "custom": "",
+                                                "type": 1
+                                            },
+                                            "pressedOn": {
+                                                "custom": "",
+                                                "type": 10
+                                            }
+                                        },
+                                        "horizontalAlignment": 0,
+                                        "positionY": 0,
+                                        "shiftOnPress": true,
+                                        "string": "Sync"
+                                    }
+                                }
+                            },
+                            {
+                                "index": 8,
+                                "value": {
+                                    "automation": {
+                                        "disableUserAssign": false,
+                                        "hostAutomation": {
+                                            "id": 0,
+                                            "on": false
+                                        },
+                                        "name": ""
+                                    },
+                                    "common": {
+                                        "id": "retrig",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 120,
+                                            "y": 20
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 50
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "image": "",
+                                    "text": {
+                                        "fonts": {
+                                            "hoverOff": {
+                                                "custom": "",
+                                                "type": 1
+                                            },
+                                            "hoverOn": {
+                                                "custom": "",
+                                                "type": 10
+                                            },
+                                            "off": {
+                                                "custom": "",
+                                                "type": 1
+                                            },
+                                            "on": {
+                                                "custom": "",
+                                                "type": 10
+                                            },
+                                            "pressedOff": {
+                                                "custom": "",
+                                                "type": 1
+                                            },
+                                            "pressedOn": {
+                                                "custom": "",
+                                                "type": 10
+                                            }
+                                        },
+                                        "horizontalAlignment": 0,
+                                        "positionY": 0,
+                                        "shiftOnPress": true,
+                                        "string": "Retrig"
+                                    }
+                                }
+                            },
+                            {
+                                "index": 7,
+                                "value": {
+                                    "automation": {
+                                        "disableUserAssign": false,
+                                        "hostAutomation": {
+                                            "id": 0,
+                                            "on": false
+                                        },
+                                        "name": ""
+                                    },
+                                    "common": {
+                                        "id": "rate",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 0,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 0,
+                                            "width": 0
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "image": "40x",
+                                    "mouse": {
+                                        "orientation": 0,
+                                        "scale": 1500
+                                    },
+                                    "value": {
+                                        "default": 0,
+                                        "max": 1000000,
+                                        "min": 0
+                                    }
+                                }
+                            },
+                            {
+                                "index": 7,
+                                "value": {
+                                    "automation": {
+                                        "disableUserAssign": false,
+                                        "hostAutomation": {
+                                            "id": 0,
+                                            "on": false
+                                        },
+                                        "name": ""
+                                    },
+                                    "common": {
+                                        "id": "fade",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 40,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 0,
+                                            "width": 0
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "image": "40x",
+                                    "mouse": {
+                                        "orientation": 0,
+                                        "scale": 1500
+                                    },
+                                    "value": {
+                                        "default": 0,
+                                        "max": 1000000,
+                                        "min": 0
+                                    }
+                                }
+                            },
+                            {
+                                "index": 7,
+                                "value": {
+                                    "automation": {
+                                        "disableUserAssign": false,
+                                        "hostAutomation": {
+                                            "id": 0,
+                                            "on": false
+                                        },
+                                        "name": ""
+                                    },
+                                    "common": {
+                                        "id": "kbt",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 80,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 0,
+                                            "width": 0
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "image": "40x",
+                                    "mouse": {
+                                        "orientation": 0,
+                                        "scale": 1500
+                                    },
+                                    "value": {
+                                        "default": 0,
+                                        "max": 1000000,
+                                        "min": 0
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+}

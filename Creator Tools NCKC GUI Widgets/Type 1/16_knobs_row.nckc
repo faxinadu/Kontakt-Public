@@ -1,0 +1,620 @@
+{
+    "formatVersion": 0,
+    "type": {
+        "name": "Control",
+        "version": 0
+    },
+    "value": {
+        "index": 0,
+        "value": {
+            "common": {
+                "id": "sliders",
+                "infoPaneText": "",
+                "position": {
+                    "x": 0,
+                    "y": 270
+                },
+                "show": true,
+                "size": {
+                    "height": 0,
+                    "width": 0
+                },
+                "zLayer": 1
+            },
+            "controls": [
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 0,
+                                "on": false
+                            },
+                            "name": ""
+                        },
+                        "common": {
+                            "id": "slider16",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 600,
+                                "y": 0
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 500000,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 0,
+                                "on": false
+                            },
+                            "name": ""
+                        },
+                        "common": {
+                            "id": "slider15",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 560,
+                                "y": 0
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 500000,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 0,
+                                "on": false
+                            },
+                            "name": ""
+                        },
+                        "common": {
+                            "id": "slider14",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 520,
+                                "y": 0
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 500000,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 0,
+                                "on": false
+                            },
+                            "name": ""
+                        },
+                        "common": {
+                            "id": "slider13",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 480,
+                                "y": 0
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 500000,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 0,
+                                "on": false
+                            },
+                            "name": ""
+                        },
+                        "common": {
+                            "id": "slider12",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 440,
+                                "y": 0
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 500000,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 0,
+                                "on": false
+                            },
+                            "name": ""
+                        },
+                        "common": {
+                            "id": "slider11",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 400,
+                                "y": 0
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 500000,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 0,
+                                "on": false
+                            },
+                            "name": ""
+                        },
+                        "common": {
+                            "id": "slider10",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 360,
+                                "y": 0
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 500000,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 0,
+                                "on": false
+                            },
+                            "name": ""
+                        },
+                        "common": {
+                            "id": "slider9",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 320,
+                                "y": 0
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 500000,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 0,
+                                "on": false
+                            },
+                            "name": ""
+                        },
+                        "common": {
+                            "id": "slider8",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 280,
+                                "y": 0
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 500000,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 0,
+                                "on": false
+                            },
+                            "name": ""
+                        },
+                        "common": {
+                            "id": "slider7",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 240,
+                                "y": 0
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 500000,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 0,
+                                "on": false
+                            },
+                            "name": ""
+                        },
+                        "common": {
+                            "id": "slider6",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 200,
+                                "y": 0
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 500000,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 0,
+                                "on": false
+                            },
+                            "name": ""
+                        },
+                        "common": {
+                            "id": "slider5",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 160,
+                                "y": 0
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 500000,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 0,
+                                "on": false
+                            },
+                            "name": ""
+                        },
+                        "common": {
+                            "id": "slider4",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 120,
+                                "y": 0
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 500000,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 0,
+                                "on": false
+                            },
+                            "name": ""
+                        },
+                        "common": {
+                            "id": "slider3",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 80,
+                                "y": 0
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 500000,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 0,
+                                "on": false
+                            },
+                            "name": ""
+                        },
+                        "common": {
+                            "id": "slider2",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 40,
+                                "y": 0
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 500000,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 0,
+                                "on": false
+                            },
+                            "name": ""
+                        },
+                        "common": {
+                            "id": "slider1",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 0,
+                                "y": 0
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 500000,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,170 @@
+{
+    "formatVersion": 0,
+    "type": {
+        "name": "Control",
+        "version": 0
+    },
+    "value": {
+        "index": 0,
+        "value": {
+            "common": {
+                "id": "pitch_lfo_panel",
+                "infoPaneText": "",
+                "position": {
+                    "x": 0,
+                    "y": 450
+                },
+                "show": true,
+                "size": {
+                    "height": 0,
+                    "width": 0
+                },
+                "zLayer": 1
+            },
+            "controls": [
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 5,
+                                "on": true
+                            },
+                            "name": "Ptch Dpt"
+                        },
+                        "common": {
+                            "id": "depth",
+                            "infoPaneText": "Adjusts the amount of pitch modulation applied to the pitch of the wave.",
+                            "position": {
+                                "x": 22,
+                                "y": 12
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "knob _w shadow",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "depth_label",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 10,
+                                "y": 75
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 0
+                            },
+                            "horizontalAlignment": 1,
+                            "positionY": 0,
+                            "string": "Depth"
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 6,
+                                "on": true
+                            },
+                            "name": "Ptch Rat"
+                        },
+                        "common": {
+                            "id": "rate",
+                            "infoPaneText": "Sets the speed of the pitch modulation based on tempo divisions.",
+                            "position": {
+                                "x": 87,
+                                "y": 12
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "knob _w shadow",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "rate_label",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 76,
+                                "y": 75
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 0
+                            },
+                            "horizontalAlignment": 1,
+                            "positionY": 0,
+                            "string": "Rate"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

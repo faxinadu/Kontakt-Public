@@ -1,0 +1,140 @@
+{
+    "formatVersion": 0,
+    "type": {
+        "name": "Control",
+        "version": 0
+    },
+    "value": {
+        "index": 0,
+        "value": {
+            "common": {
+                "id": "table",
+                "infoPaneText": "",
+                "position": {
+                    "x": 0,
+                    "y": 25
+                },
+                "show": true,
+                "size": {
+                    "height": 0,
+                    "width": 0
+                },
+                "zLayer": 1
+            },
+            "controls": [
+                {
+                    "index": 14,
+                    "value": {
+                        "common": {
+                            "id": "xypad",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 0,
+                                "y": 0
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 50,
+                                "width": 550
+                            },
+                            "zLayer": 1
+                        },
+                        "cursors": [
+                            {
+                                "image": "",
+                                "x": {
+                                    "automation": {
+                                        "disableUserAssign": false,
+                                        "hostAutomation": {
+                                            "id": 0,
+                                            "on": true
+                                        },
+                                        "name": "Wave Sel"
+                                    },
+                                    "value": 0.0
+                                },
+                                "y": {
+                                    "automation": {
+                                        "disableUserAssign": false,
+                                        "hostAutomation": {
+                                            "id": 1,
+                                            "on": true
+                                        },
+                                        "name": "Form Dpt"
+                                    },
+                                    "value": 0.0
+                                }
+                            }
+                        ],
+                        "mouse": {
+                            "mode": 2,
+                            "scaleX": 1000,
+                            "scaleY": 1000
+                        }
+                    }
+                },
+                {
+                    "index": 15,
+                    "value": {
+                        "common": {
+                            "id": "mousearea",
+                            "infoPaneText": "Click and drag over the pad to control the wave. The X axis selects the wave cycle from the wavetable while the Y axis adjusts the amount of applied  wave shaping. Drag and drop wavetable files on this view in order to load wavetables to the user slot.",
+                            "position": {
+                                "x": 0,
+                                "y": 0
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 50,
+                                "width": 550
+                            },
+                            "zLayer": 1
+                        },
+                        "dragAndDropAccept": {
+                            "array": 0,
+                            "audio": 1,
+                            "midi": 0
+                        },
+                        "receiveDragEvents": false
+                    }
+                },
+                {
+                    "index": 13,
+                    "value": {
+                        "colors": {
+                            "background": 2490368,
+                            "backgroundAlpha": 0,
+                            "cursor": 16493843,
+                            "cursorAlpha": 255,
+                            "gradient": {
+                                "cursorEnd": 16777215,
+                                "cursorEndAlpha": 255,
+                                "waveTableEnd": 16777215,
+                                "waveTableEndAlpha": 80
+                            },
+                            "waveTableAlpha": 0,
+                            "wavetable": 0
+                        },
+                        "common": {
+                            "id": "wavetable",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 0,
+                                "y": 0
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 50,
+                                "width": 550
+                            },
+                            "zLayer": 1
+                        },
+                        "mode": 0,
+                        "parallaxX": 0,
+                        "parallaxY": 0
+                    }
+                }
+            ]
+        }
+    }
+}

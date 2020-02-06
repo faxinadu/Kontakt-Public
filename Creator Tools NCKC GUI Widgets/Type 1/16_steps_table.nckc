@@ -1,0 +1,622 @@
+{
+    "formatVersion": 0,
+    "type": {
+        "name": "Control",
+        "version": 0
+    },
+    "value": {
+        "index": 0,
+        "value": {
+            "common": {
+                "id": "table",
+                "infoPaneText": "",
+                "position": {
+                    "x": 0,
+                    "y": 0
+                },
+                "show": true,
+                "size": {
+                    "height": 0,
+                    "width": 0
+                },
+                "zLayer": 1
+            },
+            "controls": [
+                {
+                    "index": 0,
+                    "value": {
+                        "common": {
+                            "id": "labels",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 0,
+                                "y": 250
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "controls": [
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "label16",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 610,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "",
+                                            "type": 1
+                                        },
+                                        "horizontalAlignment": 0,
+                                        "positionY": 0,
+                                        "string": "16"
+                                    }
+                                }
+                            },
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "label15",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 570,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "",
+                                            "type": 1
+                                        },
+                                        "horizontalAlignment": 0,
+                                        "positionY": 0,
+                                        "string": "15"
+                                    }
+                                }
+                            },
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "label14",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 530,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "",
+                                            "type": 1
+                                        },
+                                        "horizontalAlignment": 0,
+                                        "positionY": 0,
+                                        "string": "14"
+                                    }
+                                }
+                            },
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "label13",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 490,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "",
+                                            "type": 1
+                                        },
+                                        "horizontalAlignment": 0,
+                                        "positionY": 0,
+                                        "string": "13"
+                                    }
+                                }
+                            },
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "label12",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 450,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "",
+                                            "type": 1
+                                        },
+                                        "horizontalAlignment": 0,
+                                        "positionY": 0,
+                                        "string": "12"
+                                    }
+                                }
+                            },
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "label11",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 410,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "",
+                                            "type": 1
+                                        },
+                                        "horizontalAlignment": 0,
+                                        "positionY": 0,
+                                        "string": "11"
+                                    }
+                                }
+                            },
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "label10",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 370,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "",
+                                            "type": 1
+                                        },
+                                        "horizontalAlignment": 0,
+                                        "positionY": 0,
+                                        "string": "10"
+                                    }
+                                }
+                            },
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "label9",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 330,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "",
+                                            "type": 1
+                                        },
+                                        "horizontalAlignment": 0,
+                                        "positionY": 0,
+                                        "string": "9"
+                                    }
+                                }
+                            },
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "label8",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 290,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "",
+                                            "type": 1
+                                        },
+                                        "horizontalAlignment": 0,
+                                        "positionY": 0,
+                                        "string": "8"
+                                    }
+                                }
+                            },
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "label7",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 250,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "",
+                                            "type": 1
+                                        },
+                                        "horizontalAlignment": 0,
+                                        "positionY": 0,
+                                        "string": "7"
+                                    }
+                                }
+                            },
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "label6",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 210,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "",
+                                            "type": 1
+                                        },
+                                        "horizontalAlignment": 0,
+                                        "positionY": 0,
+                                        "string": "6"
+                                    }
+                                }
+                            },
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "label5",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 170,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "",
+                                            "type": 1
+                                        },
+                                        "horizontalAlignment": 0,
+                                        "positionY": 0,
+                                        "string": "5"
+                                    }
+                                }
+                            },
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "label4",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 130,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "",
+                                            "type": 1
+                                        },
+                                        "horizontalAlignment": 0,
+                                        "positionY": 0,
+                                        "string": "4"
+                                    }
+                                }
+                            },
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "label3",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 90,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "",
+                                            "type": 1
+                                        },
+                                        "horizontalAlignment": 0,
+                                        "positionY": 0,
+                                        "string": "3"
+                                    }
+                                }
+                            },
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "label2",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 50,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "",
+                                            "type": 1
+                                        },
+                                        "horizontalAlignment": 0,
+                                        "positionY": 0,
+                                        "string": "2"
+                                    }
+                                }
+                            },
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "label1",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 10,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "",
+                                            "type": 1
+                                        },
+                                        "horizontalAlignment": 0,
+                                        "positionY": 0,
+                                        "string": "1"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "index": 9,
+                    "value": {
+                        "bipolar": false,
+                        "colors": {
+                            "bars": 193631,
+                            "zeroLine": 0
+                        },
+                        "common": {
+                            "id": "table",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 0,
+                                "y": 0
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 250,
+                                "width": 640
+                            },
+                            "zLayer": 1
+                        },
+                        "maxValue": 62500,
+                        "steps": {
+                            "total": 16,
+                            "visible": 16
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

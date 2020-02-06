@@ -1,0 +1,170 @@
+{
+    "formatVersion": 0,
+    "type": {
+        "name": "Control",
+        "version": 0
+    },
+    "value": {
+        "index": 0,
+        "value": {
+            "common": {
+                "id": "fm_panel",
+                "infoPaneText": "",
+                "position": {
+                    "x": 250,
+                    "y": 450
+                },
+                "show": true,
+                "size": {
+                    "height": 0,
+                    "width": 0
+                },
+                "zLayer": 1
+            },
+            "controls": [
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 7,
+                                "on": true
+                            },
+                            "name": "Fm Dpt"
+                        },
+                        "common": {
+                            "id": "depth",
+                            "infoPaneText": "Adjusts the amount of frequency modulation applied to the pitch of the wave.",
+                            "position": {
+                                "x": 26,
+                                "y": 12
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "knob _w shadow",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "depth_label",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 14,
+                                "y": 75
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 0
+                            },
+                            "horizontalAlignment": 1,
+                            "positionY": 0,
+                            "string": "Depth"
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 8,
+                                "on": true
+                            },
+                            "name": "Fm Rat"
+                        },
+                        "common": {
+                            "id": "rate",
+                            "infoPaneText": "Sets the frequency of the modulation. When set to low values the modulation behaves like an LFO. When set to audio rate values the modulation behaves like FM.",
+                            "position": {
+                                "x": 90,
+                                "y": 12
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "knob _w shadow",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "rate_label",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 78,
+                                "y": 75
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 0
+                            },
+                            "horizontalAlignment": 1,
+                            "positionY": 0,
+                            "string": "Freq"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

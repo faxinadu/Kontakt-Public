@@ -1,0 +1,1171 @@
+{
+    "formatVersion": 0,
+    "type": {
+        "name": "Control",
+        "version": 0
+    },
+    "value": {
+        "index": 0,
+        "value": {
+            "common": {
+                "id": "envelopes",
+                "infoPaneText": "",
+                "position": {
+                    "x": 0,
+                    "y": 170
+                },
+                "show": true,
+                "size": {
+                    "height": 0,
+                    "width": 0
+                },
+                "zLayer": 1
+            },
+            "controls": [
+                {
+                    "index": 0,
+                    "value": {
+                        "common": {
+                            "id": "amp",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 0,
+                                "y": 0
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "controls": [
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "label",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 0,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "",
+                                            "type": 1
+                                        },
+                                        "horizontalAlignment": 0,
+                                        "positionY": 0,
+                                        "string": "Amp Env"
+                                    }
+                                }
+                            },
+                            {
+                                "index": 0,
+                                "value": {
+                                    "common": {
+                                        "id": "labels",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 0,
+                                            "y": 60
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 0,
+                                            "width": 0
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "controls": [
+                                        {
+                                            "index": 4,
+                                            "value": {
+                                                "background": {
+                                                    "frameIndex": 0,
+                                                    "image": "",
+                                                    "show": false
+                                                },
+                                                "common": {
+                                                    "id": "attack",
+                                                    "infoPaneText": "",
+                                                    "position": {
+                                                        "x": 0,
+                                                        "y": 0
+                                                    },
+                                                    "show": true,
+                                                    "size": {
+                                                        "height": 18,
+                                                        "width": 87
+                                                    },
+                                                    "zLayer": 1
+                                                },
+                                                "enableDragAndDrop": false,
+                                                "text": {
+                                                    "font": {
+                                                        "custom": "",
+                                                        "type": 1
+                                                    },
+                                                    "horizontalAlignment": 0,
+                                                    "positionY": 0,
+                                                    "string": "A"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "index": 4,
+                                            "value": {
+                                                "background": {
+                                                    "frameIndex": 0,
+                                                    "image": "",
+                                                    "show": false
+                                                },
+                                                "common": {
+                                                    "id": "decay",
+                                                    "infoPaneText": "",
+                                                    "position": {
+                                                        "x": 40,
+                                                        "y": 0
+                                                    },
+                                                    "show": true,
+                                                    "size": {
+                                                        "height": 18,
+                                                        "width": 87
+                                                    },
+                                                    "zLayer": 1
+                                                },
+                                                "enableDragAndDrop": false,
+                                                "text": {
+                                                    "font": {
+                                                        "custom": "",
+                                                        "type": 1
+                                                    },
+                                                    "horizontalAlignment": 0,
+                                                    "positionY": 0,
+                                                    "string": "D"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "index": 4,
+                                            "value": {
+                                                "background": {
+                                                    "frameIndex": 0,
+                                                    "image": "",
+                                                    "show": false
+                                                },
+                                                "common": {
+                                                    "id": "sustain",
+                                                    "infoPaneText": "",
+                                                    "position": {
+                                                        "x": 80,
+                                                        "y": 0
+                                                    },
+                                                    "show": true,
+                                                    "size": {
+                                                        "height": 18,
+                                                        "width": 87
+                                                    },
+                                                    "zLayer": 1
+                                                },
+                                                "enableDragAndDrop": false,
+                                                "text": {
+                                                    "font": {
+                                                        "custom": "",
+                                                        "type": 1
+                                                    },
+                                                    "horizontalAlignment": 0,
+                                                    "positionY": 0,
+                                                    "string": "S"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "index": 4,
+                                            "value": {
+                                                "background": {
+                                                    "frameIndex": 0,
+                                                    "image": "",
+                                                    "show": false
+                                                },
+                                                "common": {
+                                                    "id": "release",
+                                                    "infoPaneText": "",
+                                                    "position": {
+                                                        "x": 120,
+                                                        "y": 0
+                                                    },
+                                                    "show": true,
+                                                    "size": {
+                                                        "height": 18,
+                                                        "width": 87
+                                                    },
+                                                    "zLayer": 1
+                                                },
+                                                "enableDragAndDrop": false,
+                                                "text": {
+                                                    "font": {
+                                                        "custom": "",
+                                                        "type": 1
+                                                    },
+                                                    "horizontalAlignment": 0,
+                                                    "positionY": 0,
+                                                    "string": "R"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "index": 0,
+                                "value": {
+                                    "common": {
+                                        "id": "controls",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 0,
+                                            "y": 20
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 0,
+                                            "width": 0
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "controls": [
+                                        {
+                                            "index": 7,
+                                            "value": {
+                                                "automation": {
+                                                    "disableUserAssign": false,
+                                                    "hostAutomation": {
+                                                        "id": 0,
+                                                        "on": false
+                                                    },
+                                                    "name": ""
+                                                },
+                                                "common": {
+                                                    "id": "attack",
+                                                    "infoPaneText": "",
+                                                    "position": {
+                                                        "x": 0,
+                                                        "y": 0
+                                                    },
+                                                    "show": true,
+                                                    "size": {
+                                                        "height": 0,
+                                                        "width": 0
+                                                    },
+                                                    "zLayer": 1
+                                                },
+                                                "image": "40x",
+                                                "mouse": {
+                                                    "orientation": 0,
+                                                    "scale": 1500
+                                                },
+                                                "value": {
+                                                    "default": 0,
+                                                    "max": 1000000,
+                                                    "min": 0
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "index": 7,
+                                            "value": {
+                                                "automation": {
+                                                    "disableUserAssign": false,
+                                                    "hostAutomation": {
+                                                        "id": 0,
+                                                        "on": false
+                                                    },
+                                                    "name": ""
+                                                },
+                                                "common": {
+                                                    "id": "decay",
+                                                    "infoPaneText": "",
+                                                    "position": {
+                                                        "x": 40,
+                                                        "y": 0
+                                                    },
+                                                    "show": true,
+                                                    "size": {
+                                                        "height": 0,
+                                                        "width": 0
+                                                    },
+                                                    "zLayer": 1
+                                                },
+                                                "image": "40x",
+                                                "mouse": {
+                                                    "orientation": 0,
+                                                    "scale": 1500
+                                                },
+                                                "value": {
+                                                    "default": 0,
+                                                    "max": 1000000,
+                                                    "min": 0
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "index": 7,
+                                            "value": {
+                                                "automation": {
+                                                    "disableUserAssign": false,
+                                                    "hostAutomation": {
+                                                        "id": 0,
+                                                        "on": false
+                                                    },
+                                                    "name": ""
+                                                },
+                                                "common": {
+                                                    "id": "sustain",
+                                                    "infoPaneText": "",
+                                                    "position": {
+                                                        "x": 80,
+                                                        "y": 0
+                                                    },
+                                                    "show": true,
+                                                    "size": {
+                                                        "height": 0,
+                                                        "width": 0
+                                                    },
+                                                    "zLayer": 1
+                                                },
+                                                "image": "40x",
+                                                "mouse": {
+                                                    "orientation": 0,
+                                                    "scale": 1500
+                                                },
+                                                "value": {
+                                                    "default": 0,
+                                                    "max": 1000000,
+                                                    "min": 0
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "index": 7,
+                                            "value": {
+                                                "automation": {
+                                                    "disableUserAssign": false,
+                                                    "hostAutomation": {
+                                                        "id": 0,
+                                                        "on": false
+                                                    },
+                                                    "name": ""
+                                                },
+                                                "common": {
+                                                    "id": "release",
+                                                    "infoPaneText": "",
+                                                    "position": {
+                                                        "x": 120,
+                                                        "y": 0
+                                                    },
+                                                    "show": true,
+                                                    "size": {
+                                                        "height": 0,
+                                                        "width": 0
+                                                    },
+                                                    "zLayer": 1
+                                                },
+                                                "image": "40x",
+                                                "mouse": {
+                                                    "orientation": 0,
+                                                    "scale": 1500
+                                                },
+                                                "value": {
+                                                    "default": 0,
+                                                    "max": 1000000,
+                                                    "min": 0
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "index": 0,
+                    "value": {
+                        "common": {
+                            "id": "filter",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 200,
+                                "y": 0
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "controls": [
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "label",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 0,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "",
+                                            "type": 1
+                                        },
+                                        "horizontalAlignment": 0,
+                                        "positionY": 0,
+                                        "string": "Filter Env"
+                                    }
+                                }
+                            },
+                            {
+                                "index": 0,
+                                "value": {
+                                    "common": {
+                                        "id": "labels",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 0,
+                                            "y": 60
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 0,
+                                            "width": 0
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "controls": [
+                                        {
+                                            "index": 4,
+                                            "value": {
+                                                "background": {
+                                                    "frameIndex": 0,
+                                                    "image": "",
+                                                    "show": false
+                                                },
+                                                "common": {
+                                                    "id": "attack",
+                                                    "infoPaneText": "",
+                                                    "position": {
+                                                        "x": 0,
+                                                        "y": 0
+                                                    },
+                                                    "show": true,
+                                                    "size": {
+                                                        "height": 18,
+                                                        "width": 87
+                                                    },
+                                                    "zLayer": 1
+                                                },
+                                                "enableDragAndDrop": false,
+                                                "text": {
+                                                    "font": {
+                                                        "custom": "",
+                                                        "type": 1
+                                                    },
+                                                    "horizontalAlignment": 0,
+                                                    "positionY": 0,
+                                                    "string": "A"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "index": 4,
+                                            "value": {
+                                                "background": {
+                                                    "frameIndex": 0,
+                                                    "image": "",
+                                                    "show": false
+                                                },
+                                                "common": {
+                                                    "id": "decay",
+                                                    "infoPaneText": "",
+                                                    "position": {
+                                                        "x": 40,
+                                                        "y": 0
+                                                    },
+                                                    "show": true,
+                                                    "size": {
+                                                        "height": 18,
+                                                        "width": 87
+                                                    },
+                                                    "zLayer": 1
+                                                },
+                                                "enableDragAndDrop": false,
+                                                "text": {
+                                                    "font": {
+                                                        "custom": "",
+                                                        "type": 1
+                                                    },
+                                                    "horizontalAlignment": 0,
+                                                    "positionY": 0,
+                                                    "string": "D"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "index": 4,
+                                            "value": {
+                                                "background": {
+                                                    "frameIndex": 0,
+                                                    "image": "",
+                                                    "show": false
+                                                },
+                                                "common": {
+                                                    "id": "sustain",
+                                                    "infoPaneText": "",
+                                                    "position": {
+                                                        "x": 80,
+                                                        "y": 0
+                                                    },
+                                                    "show": true,
+                                                    "size": {
+                                                        "height": 18,
+                                                        "width": 87
+                                                    },
+                                                    "zLayer": 1
+                                                },
+                                                "enableDragAndDrop": false,
+                                                "text": {
+                                                    "font": {
+                                                        "custom": "",
+                                                        "type": 1
+                                                    },
+                                                    "horizontalAlignment": 0,
+                                                    "positionY": 0,
+                                                    "string": "S"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "index": 4,
+                                            "value": {
+                                                "background": {
+                                                    "frameIndex": 0,
+                                                    "image": "",
+                                                    "show": false
+                                                },
+                                                "common": {
+                                                    "id": "release",
+                                                    "infoPaneText": "",
+                                                    "position": {
+                                                        "x": 120,
+                                                        "y": 0
+                                                    },
+                                                    "show": true,
+                                                    "size": {
+                                                        "height": 18,
+                                                        "width": 87
+                                                    },
+                                                    "zLayer": 1
+                                                },
+                                                "enableDragAndDrop": false,
+                                                "text": {
+                                                    "font": {
+                                                        "custom": "",
+                                                        "type": 1
+                                                    },
+                                                    "horizontalAlignment": 0,
+                                                    "positionY": 0,
+                                                    "string": "R"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "index": 0,
+                                "value": {
+                                    "common": {
+                                        "id": "controls",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 0,
+                                            "y": 20
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 0,
+                                            "width": 0
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "controls": [
+                                        {
+                                            "index": 7,
+                                            "value": {
+                                                "automation": {
+                                                    "disableUserAssign": false,
+                                                    "hostAutomation": {
+                                                        "id": 0,
+                                                        "on": false
+                                                    },
+                                                    "name": ""
+                                                },
+                                                "common": {
+                                                    "id": "attack",
+                                                    "infoPaneText": "",
+                                                    "position": {
+                                                        "x": 0,
+                                                        "y": 0
+                                                    },
+                                                    "show": true,
+                                                    "size": {
+                                                        "height": 0,
+                                                        "width": 0
+                                                    },
+                                                    "zLayer": 1
+                                                },
+                                                "image": "40x",
+                                                "mouse": {
+                                                    "orientation": 0,
+                                                    "scale": 1500
+                                                },
+                                                "value": {
+                                                    "default": 0,
+                                                    "max": 1000000,
+                                                    "min": 0
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "index": 7,
+                                            "value": {
+                                                "automation": {
+                                                    "disableUserAssign": false,
+                                                    "hostAutomation": {
+                                                        "id": 0,
+                                                        "on": false
+                                                    },
+                                                    "name": ""
+                                                },
+                                                "common": {
+                                                    "id": "decay",
+                                                    "infoPaneText": "",
+                                                    "position": {
+                                                        "x": 40,
+                                                        "y": 0
+                                                    },
+                                                    "show": true,
+                                                    "size": {
+                                                        "height": 0,
+                                                        "width": 0
+                                                    },
+                                                    "zLayer": 1
+                                                },
+                                                "image": "40x",
+                                                "mouse": {
+                                                    "orientation": 0,
+                                                    "scale": 1500
+                                                },
+                                                "value": {
+                                                    "default": 0,
+                                                    "max": 1000000,
+                                                    "min": 0
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "index": 7,
+                                            "value": {
+                                                "automation": {
+                                                    "disableUserAssign": false,
+                                                    "hostAutomation": {
+                                                        "id": 0,
+                                                        "on": false
+                                                    },
+                                                    "name": ""
+                                                },
+                                                "common": {
+                                                    "id": "sustain",
+                                                    "infoPaneText": "",
+                                                    "position": {
+                                                        "x": 80,
+                                                        "y": 0
+                                                    },
+                                                    "show": true,
+                                                    "size": {
+                                                        "height": 0,
+                                                        "width": 0
+                                                    },
+                                                    "zLayer": 1
+                                                },
+                                                "image": "40x",
+                                                "mouse": {
+                                                    "orientation": 0,
+                                                    "scale": 1500
+                                                },
+                                                "value": {
+                                                    "default": 0,
+                                                    "max": 1000000,
+                                                    "min": 0
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "index": 7,
+                                            "value": {
+                                                "automation": {
+                                                    "disableUserAssign": false,
+                                                    "hostAutomation": {
+                                                        "id": 0,
+                                                        "on": false
+                                                    },
+                                                    "name": ""
+                                                },
+                                                "common": {
+                                                    "id": "release",
+                                                    "infoPaneText": "",
+                                                    "position": {
+                                                        "x": 120,
+                                                        "y": 0
+                                                    },
+                                                    "show": true,
+                                                    "size": {
+                                                        "height": 0,
+                                                        "width": 0
+                                                    },
+                                                    "zLayer": 1
+                                                },
+                                                "image": "40x",
+                                                "mouse": {
+                                                    "orientation": 0,
+                                                    "scale": 1500
+                                                },
+                                                "value": {
+                                                    "default": 0,
+                                                    "max": 1000000,
+                                                    "min": 0
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "index": 0,
+                    "value": {
+                        "common": {
+                            "id": "pitch",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 400,
+                                "y": 0
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "controls": [
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "label",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 0,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "",
+                                            "type": 1
+                                        },
+                                        "horizontalAlignment": 0,
+                                        "positionY": 0,
+                                        "string": "Pitch Env"
+                                    }
+                                }
+                            },
+                            {
+                                "index": 0,
+                                "value": {
+                                    "common": {
+                                        "id": "labels",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 0,
+                                            "y": 60
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 0,
+                                            "width": 0
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "controls": [
+                                        {
+                                            "index": 4,
+                                            "value": {
+                                                "background": {
+                                                    "frameIndex": 0,
+                                                    "image": "",
+                                                    "show": false
+                                                },
+                                                "common": {
+                                                    "id": "attack",
+                                                    "infoPaneText": "",
+                                                    "position": {
+                                                        "x": 0,
+                                                        "y": 0
+                                                    },
+                                                    "show": true,
+                                                    "size": {
+                                                        "height": 18,
+                                                        "width": 87
+                                                    },
+                                                    "zLayer": 1
+                                                },
+                                                "enableDragAndDrop": false,
+                                                "text": {
+                                                    "font": {
+                                                        "custom": "",
+                                                        "type": 1
+                                                    },
+                                                    "horizontalAlignment": 0,
+                                                    "positionY": 0,
+                                                    "string": "A"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "index": 4,
+                                            "value": {
+                                                "background": {
+                                                    "frameIndex": 0,
+                                                    "image": "",
+                                                    "show": false
+                                                },
+                                                "common": {
+                                                    "id": "decay",
+                                                    "infoPaneText": "",
+                                                    "position": {
+                                                        "x": 40,
+                                                        "y": 0
+                                                    },
+                                                    "show": true,
+                                                    "size": {
+                                                        "height": 18,
+                                                        "width": 87
+                                                    },
+                                                    "zLayer": 1
+                                                },
+                                                "enableDragAndDrop": false,
+                                                "text": {
+                                                    "font": {
+                                                        "custom": "",
+                                                        "type": 1
+                                                    },
+                                                    "horizontalAlignment": 0,
+                                                    "positionY": 0,
+                                                    "string": "D"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "index": 4,
+                                            "value": {
+                                                "background": {
+                                                    "frameIndex": 0,
+                                                    "image": "",
+                                                    "show": false
+                                                },
+                                                "common": {
+                                                    "id": "sustain",
+                                                    "infoPaneText": "",
+                                                    "position": {
+                                                        "x": 80,
+                                                        "y": 0
+                                                    },
+                                                    "show": true,
+                                                    "size": {
+                                                        "height": 18,
+                                                        "width": 87
+                                                    },
+                                                    "zLayer": 1
+                                                },
+                                                "enableDragAndDrop": false,
+                                                "text": {
+                                                    "font": {
+                                                        "custom": "",
+                                                        "type": 1
+                                                    },
+                                                    "horizontalAlignment": 0,
+                                                    "positionY": 0,
+                                                    "string": "S"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "index": 4,
+                                            "value": {
+                                                "background": {
+                                                    "frameIndex": 0,
+                                                    "image": "",
+                                                    "show": false
+                                                },
+                                                "common": {
+                                                    "id": "release",
+                                                    "infoPaneText": "",
+                                                    "position": {
+                                                        "x": 120,
+                                                        "y": 0
+                                                    },
+                                                    "show": true,
+                                                    "size": {
+                                                        "height": 18,
+                                                        "width": 87
+                                                    },
+                                                    "zLayer": 1
+                                                },
+                                                "enableDragAndDrop": false,
+                                                "text": {
+                                                    "font": {
+                                                        "custom": "",
+                                                        "type": 1
+                                                    },
+                                                    "horizontalAlignment": 0,
+                                                    "positionY": 0,
+                                                    "string": "R"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "index": 0,
+                                "value": {
+                                    "common": {
+                                        "id": "controls",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 0,
+                                            "y": 20
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 0,
+                                            "width": 0
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "controls": [
+                                        {
+                                            "index": 7,
+                                            "value": {
+                                                "automation": {
+                                                    "disableUserAssign": false,
+                                                    "hostAutomation": {
+                                                        "id": 0,
+                                                        "on": false
+                                                    },
+                                                    "name": ""
+                                                },
+                                                "common": {
+                                                    "id": "attack",
+                                                    "infoPaneText": "",
+                                                    "position": {
+                                                        "x": 0,
+                                                        "y": 0
+                                                    },
+                                                    "show": true,
+                                                    "size": {
+                                                        "height": 0,
+                                                        "width": 0
+                                                    },
+                                                    "zLayer": 1
+                                                },
+                                                "image": "40x",
+                                                "mouse": {
+                                                    "orientation": 0,
+                                                    "scale": 1500
+                                                },
+                                                "value": {
+                                                    "default": 0,
+                                                    "max": 1000000,
+                                                    "min": 0
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "index": 7,
+                                            "value": {
+                                                "automation": {
+                                                    "disableUserAssign": false,
+                                                    "hostAutomation": {
+                                                        "id": 0,
+                                                        "on": false
+                                                    },
+                                                    "name": ""
+                                                },
+                                                "common": {
+                                                    "id": "decay",
+                                                    "infoPaneText": "",
+                                                    "position": {
+                                                        "x": 40,
+                                                        "y": 0
+                                                    },
+                                                    "show": true,
+                                                    "size": {
+                                                        "height": 0,
+                                                        "width": 0
+                                                    },
+                                                    "zLayer": 1
+                                                },
+                                                "image": "40x",
+                                                "mouse": {
+                                                    "orientation": 0,
+                                                    "scale": 1500
+                                                },
+                                                "value": {
+                                                    "default": 0,
+                                                    "max": 1000000,
+                                                    "min": 0
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "index": 7,
+                                            "value": {
+                                                "automation": {
+                                                    "disableUserAssign": false,
+                                                    "hostAutomation": {
+                                                        "id": 0,
+                                                        "on": false
+                                                    },
+                                                    "name": ""
+                                                },
+                                                "common": {
+                                                    "id": "sustain",
+                                                    "infoPaneText": "",
+                                                    "position": {
+                                                        "x": 80,
+                                                        "y": 0
+                                                    },
+                                                    "show": true,
+                                                    "size": {
+                                                        "height": 0,
+                                                        "width": 0
+                                                    },
+                                                    "zLayer": 1
+                                                },
+                                                "image": "40x",
+                                                "mouse": {
+                                                    "orientation": 0,
+                                                    "scale": 1500
+                                                },
+                                                "value": {
+                                                    "default": 0,
+                                                    "max": 1000000,
+                                                    "min": 0
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "index": 7,
+                                            "value": {
+                                                "automation": {
+                                                    "disableUserAssign": false,
+                                                    "hostAutomation": {
+                                                        "id": 0,
+                                                        "on": false
+                                                    },
+                                                    "name": ""
+                                                },
+                                                "common": {
+                                                    "id": "release",
+                                                    "infoPaneText": "",
+                                                    "position": {
+                                                        "x": 120,
+                                                        "y": 0
+                                                    },
+                                                    "show": true,
+                                                    "size": {
+                                                        "height": 0,
+                                                        "width": 0
+                                                    },
+                                                    "zLayer": 1
+                                                },
+                                                "image": "40x",
+                                                "mouse": {
+                                                    "orientation": 0,
+                                                    "scale": 1500
+                                                },
+                                                "value": {
+                                                    "default": 0,
+                                                    "max": 1000000,
+                                                    "min": 0
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+}

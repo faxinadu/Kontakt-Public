@@ -1,0 +1,241 @@
+{
+    "formatVersion": 0,
+    "type": {
+        "name": "Control",
+        "version": 0
+    },
+    "value": {
+        "index": 0,
+        "value": {
+            "common": {
+                "id": "delay_panel",
+                "infoPaneText": "",
+                "position": {
+                    "x": 525,
+                    "y": 330
+                },
+                "show": true,
+                "size": {
+                    "height": 0,
+                    "width": 0
+                },
+                "zLayer": 1
+            },
+            "controls": [
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 11,
+                                "on": true
+                            },
+                            "name": "Del Time"
+                        },
+                        "common": {
+                            "id": "time",
+                            "infoPaneText": "Sets the tempo baaed time division of the delay line.",
+                            "position": {
+                                "x": 12,
+                                "y": 20
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "knob _w shadow",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "time_label",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 0,
+                                "y": 84
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 0
+                            },
+                            "horizontalAlignment": 1,
+                            "positionY": 0,
+                            "string": "Time"
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 12,
+                                "on": true
+                            },
+                            "name": "Del Fb"
+                        },
+                        "common": {
+                            "id": "feedback",
+                            "infoPaneText": "Adjusts the amount of singal fed back from the output into the input of the delay line.",
+                            "position": {
+                                "x": 77,
+                                "y": 20
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "knob _w shadow",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "feedback_label",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 66,
+                                "y": 84
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 0
+                            },
+                            "horizontalAlignment": 1,
+                            "positionY": 0,
+                            "string": "Feedback"
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 13,
+                                "on": true
+                            },
+                            "name": "Del Wet"
+                        },
+                        "common": {
+                            "id": "wet",
+                            "infoPaneText": "Blends between the input signal and the effect signal.",
+                            "position": {
+                                "x": 142,
+                                "y": 20
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "knob _w shadow",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 400000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "wet_label",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 130,
+                                "y": 84
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 0
+                            },
+                            "horizontalAlignment": 1,
+                            "positionY": 0,
+                            "string": "Wet"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

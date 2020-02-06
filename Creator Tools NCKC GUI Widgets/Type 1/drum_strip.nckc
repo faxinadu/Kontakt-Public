@@ -1,0 +1,758 @@
+{
+    "formatVersion": 0,
+    "type": {
+        "name": "Control",
+        "version": 0
+    },
+    "value": {
+        "index": 0,
+        "value": {
+            "common": {
+                "id": "drumStrip",
+                "infoPaneText": "",
+                "position": {
+                    "x": 10,
+                    "y": 0
+                },
+                "show": true,
+                "size": {
+                    "height": 0,
+                    "width": 0
+                },
+                "zLayer": 1
+            },
+            "controls": [
+                {
+                    "index": 8,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 0,
+                                "on": false
+                            },
+                            "name": ""
+                        },
+                        "common": {
+                            "id": "pageSwitch",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 15,
+                                "y": 240
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 20,
+                                "width": 60
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "",
+                        "text": {
+                            "fonts": {
+                                "hoverOff": {
+                                    "custom": "",
+                                    "type": 1
+                                },
+                                "hoverOn": {
+                                    "custom": "",
+                                    "type": 10
+                                },
+                                "off": {
+                                    "custom": "",
+                                    "type": 1
+                                },
+                                "on": {
+                                    "custom": "",
+                                    "type": 10
+                                },
+                                "pressedOff": {
+                                    "custom": "",
+                                    "type": 1
+                                },
+                                "pressedOn": {
+                                    "custom": "",
+                                    "type": 10
+                                }
+                            },
+                            "horizontalAlignment": 1,
+                            "positionY": 0,
+                            "shiftOnPress": true,
+                            "string": "Body"
+                        }
+                    }
+                },
+                {
+                    "index": 0,
+                    "value": {
+                        "common": {
+                            "id": "extra",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 0,
+                                "y": 0
+                            },
+                            "show": false,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "controls": [
+                            {
+                                "index": 8,
+                                "value": {
+                                    "automation": {
+                                        "disableUserAssign": false,
+                                        "hostAutomation": {
+                                            "id": 0,
+                                            "on": false
+                                        },
+                                        "name": ""
+                                    },
+                                    "common": {
+                                        "id": "filterType",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 15,
+                                            "y": 40
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 15,
+                                            "width": 15
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "image": "",
+                                    "text": {
+                                        "fonts": {
+                                            "hoverOff": {
+                                                "custom": "",
+                                                "type": 1
+                                            },
+                                            "hoverOn": {
+                                                "custom": "",
+                                                "type": 10
+                                            },
+                                            "off": {
+                                                "custom": "",
+                                                "type": 1
+                                            },
+                                            "on": {
+                                                "custom": "",
+                                                "type": 10
+                                            },
+                                            "pressedOff": {
+                                                "custom": "",
+                                                "type": 1
+                                            },
+                                            "pressedOn": {
+                                                "custom": "",
+                                                "type": 10
+                                            }
+                                        },
+                                        "horizontalAlignment": 1,
+                                        "positionY": 0,
+                                        "shiftOnPress": true,
+                                        "string": ""
+                                    }
+                                }
+                            },
+                            {
+                                "index": 7,
+                                "value": {
+                                    "automation": {
+                                        "disableUserAssign": false,
+                                        "hostAutomation": {
+                                            "id": 7,
+                                            "on": true
+                                        },
+                                        "name": "Fm Dpt"
+                                    },
+                                    "common": {
+                                        "id": "cut",
+                                        "infoPaneText": "Adjusts the amount of frequency modulation applied to the pitch of the wave.",
+                                        "position": {
+                                            "x": 20,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 0,
+                                            "width": 0
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "image": "40x",
+                                    "mouse": {
+                                        "orientation": 0,
+                                        "scale": 1500
+                                    },
+                                    "value": {
+                                        "default": 0,
+                                        "max": 1000000,
+                                        "min": 0
+                                    }
+                                }
+                            },
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "cutLabel",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 0,
+                                            "y": 40
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "custom_font",
+                                            "type": 0
+                                        },
+                                        "horizontalAlignment": 1,
+                                        "positionY": 0,
+                                        "string": "Cut"
+                                    }
+                                }
+                            },
+                            {
+                                "index": 7,
+                                "value": {
+                                    "automation": {
+                                        "disableUserAssign": false,
+                                        "hostAutomation": {
+                                            "id": 7,
+                                            "on": true
+                                        },
+                                        "name": "Fm Dpt"
+                                    },
+                                    "common": {
+                                        "id": "res",
+                                        "infoPaneText": "Adjusts the amount of frequency modulation applied to the pitch of the wave.",
+                                        "position": {
+                                            "x": 20,
+                                            "y": 60
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 0,
+                                            "width": 0
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "image": "40x",
+                                    "mouse": {
+                                        "orientation": 0,
+                                        "scale": 1500
+                                    },
+                                    "value": {
+                                        "default": 0,
+                                        "max": 1000000,
+                                        "min": 0
+                                    }
+                                }
+                            },
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "resLabel",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 0,
+                                            "y": 100
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "custom_font",
+                                            "type": 0
+                                        },
+                                        "horizontalAlignment": 1,
+                                        "positionY": 0,
+                                        "string": "Res"
+                                    }
+                                }
+                            },
+                            {
+                                "index": 7,
+                                "value": {
+                                    "automation": {
+                                        "disableUserAssign": false,
+                                        "hostAutomation": {
+                                            "id": 7,
+                                            "on": true
+                                        },
+                                        "name": "Fm Dpt"
+                                    },
+                                    "common": {
+                                        "id": "effectA",
+                                        "infoPaneText": "Adjusts the amount of frequency modulation applied to the pitch of the wave.",
+                                        "position": {
+                                            "x": 20,
+                                            "y": 120
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 0,
+                                            "width": 0
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "image": "40x",
+                                    "mouse": {
+                                        "orientation": 0,
+                                        "scale": 1500
+                                    },
+                                    "value": {
+                                        "default": 0,
+                                        "max": 1000000,
+                                        "min": 0
+                                    }
+                                }
+                            },
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "effectALabel",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 0,
+                                            "y": 160
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "custom_font",
+                                            "type": 0
+                                        },
+                                        "horizontalAlignment": 1,
+                                        "positionY": 0,
+                                        "string": "FX 1"
+                                    }
+                                }
+                            },
+                            {
+                                "index": 7,
+                                "value": {
+                                    "automation": {
+                                        "disableUserAssign": false,
+                                        "hostAutomation": {
+                                            "id": 7,
+                                            "on": true
+                                        },
+                                        "name": "Fm Dpt"
+                                    },
+                                    "common": {
+                                        "id": "effectB",
+                                        "infoPaneText": "Adjusts the amount of frequency modulation applied to the pitch of the wave.",
+                                        "position": {
+                                            "x": 20,
+                                            "y": 180
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 0,
+                                            "width": 0
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "image": "40x",
+                                    "mouse": {
+                                        "orientation": 0,
+                                        "scale": 1500
+                                    },
+                                    "value": {
+                                        "default": 0,
+                                        "max": 1000000,
+                                        "min": 0
+                                    }
+                                }
+                            },
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "effectBLabel",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 0,
+                                            "y": 220
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "custom_font",
+                                            "type": 0
+                                        },
+                                        "horizontalAlignment": 1,
+                                        "positionY": 0,
+                                        "string": "FX 2"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "index": 0,
+                    "value": {
+                        "common": {
+                            "id": "body",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 0,
+                                "y": 0
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "controls": [
+                            {
+                                "index": 7,
+                                "value": {
+                                    "automation": {
+                                        "disableUserAssign": false,
+                                        "hostAutomation": {
+                                            "id": 7,
+                                            "on": true
+                                        },
+                                        "name": "Fm Dpt"
+                                    },
+                                    "common": {
+                                        "id": "tune",
+                                        "infoPaneText": "Adjusts the amount of frequency modulation applied to the pitch of the wave.",
+                                        "position": {
+                                            "x": 20,
+                                            "y": 0
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 0,
+                                            "width": 0
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "image": "40x",
+                                    "mouse": {
+                                        "orientation": 0,
+                                        "scale": 1500
+                                    },
+                                    "value": {
+                                        "default": 0,
+                                        "max": 3600,
+                                        "min": -3600
+                                    }
+                                }
+                            },
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "tuneLabel",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 0,
+                                            "y": 40
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "custom_font",
+                                            "type": 0
+                                        },
+                                        "horizontalAlignment": 1,
+                                        "positionY": 0,
+                                        "string": "Tune"
+                                    }
+                                }
+                            },
+                            {
+                                "index": 7,
+                                "value": {
+                                    "automation": {
+                                        "disableUserAssign": false,
+                                        "hostAutomation": {
+                                            "id": 7,
+                                            "on": true
+                                        },
+                                        "name": "Fm Dpt"
+                                    },
+                                    "common": {
+                                        "id": "decay",
+                                        "infoPaneText": "Adjusts the amount of frequency modulation applied to the pitch of the wave.",
+                                        "position": {
+                                            "x": 20,
+                                            "y": 60
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 0,
+                                            "width": 0
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "image": "40x",
+                                    "mouse": {
+                                        "orientation": 0,
+                                        "scale": 1500
+                                    },
+                                    "value": {
+                                        "default": 0,
+                                        "max": 1000000,
+                                        "min": 0
+                                    }
+                                }
+                            },
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "decayLabel",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 0,
+                                            "y": 100
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "custom_font",
+                                            "type": 0
+                                        },
+                                        "horizontalAlignment": 1,
+                                        "positionY": 0,
+                                        "string": "Decay"
+                                    }
+                                }
+                            },
+                            {
+                                "index": 7,
+                                "value": {
+                                    "automation": {
+                                        "disableUserAssign": false,
+                                        "hostAutomation": {
+                                            "id": 7,
+                                            "on": true
+                                        },
+                                        "name": "Fm Dpt"
+                                    },
+                                    "common": {
+                                        "id": "pan",
+                                        "infoPaneText": "Adjusts the amount of frequency modulation applied to the pitch of the wave.",
+                                        "position": {
+                                            "x": 20,
+                                            "y": 120
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 0,
+                                            "width": 0
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "image": "40x",
+                                    "mouse": {
+                                        "orientation": 0,
+                                        "scale": 1500
+                                    },
+                                    "value": {
+                                        "default": 0,
+                                        "max": 1000,
+                                        "min": -1000
+                                    }
+                                }
+                            },
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "panLabel",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 0,
+                                            "y": 160
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "custom_font",
+                                            "type": 0
+                                        },
+                                        "horizontalAlignment": 1,
+                                        "positionY": 0,
+                                        "string": "Pan"
+                                    }
+                                }
+                            },
+                            {
+                                "index": 7,
+                                "value": {
+                                    "automation": {
+                                        "disableUserAssign": false,
+                                        "hostAutomation": {
+                                            "id": 7,
+                                            "on": true
+                                        },
+                                        "name": "Fm Dpt"
+                                    },
+                                    "common": {
+                                        "id": "volume",
+                                        "infoPaneText": "Adjusts the amount of frequency modulation applied to the pitch of the wave.",
+                                        "position": {
+                                            "x": 20,
+                                            "y": 180
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 0,
+                                            "width": 0
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "image": "40x",
+                                    "mouse": {
+                                        "orientation": 0,
+                                        "scale": 1500
+                                    },
+                                    "value": {
+                                        "default": 0,
+                                        "max": 3600,
+                                        "min": -3600
+                                    }
+                                }
+                            },
+                            {
+                                "index": 4,
+                                "value": {
+                                    "background": {
+                                        "frameIndex": 0,
+                                        "image": "",
+                                        "show": false
+                                    },
+                                    "common": {
+                                        "id": "volumeLabel",
+                                        "infoPaneText": "",
+                                        "position": {
+                                            "x": 0,
+                                            "y": 220
+                                        },
+                                        "show": true,
+                                        "size": {
+                                            "height": 18,
+                                            "width": 87
+                                        },
+                                        "zLayer": 1
+                                    },
+                                    "enableDragAndDrop": false,
+                                    "text": {
+                                        "font": {
+                                            "custom": "custom_font",
+                                            "type": 0
+                                        },
+                                        "horizontalAlignment": 1,
+                                        "positionY": 0,
+                                        "string": "Volume"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+}
