@@ -14,3 +14,7 @@ https://www.facebook.com/groups/704558249649073/
 
 If you are here looking for sublimeKSP, head over here:
 https://github.com/nojanath/SublimeKSP
+
+
+
+This project is licensed under the terms of the MIT license.
