@@ -1,0 +1,1110 @@
+{
+    "formatVersion": 0,
+    "type": {
+        "name": "Control",
+        "version": 0
+    },
+    "value": {
+        "index": 0,
+        "value": {
+            "common": {
+                "id": "flair",
+                "infoPaneText": "",
+                "position": {
+                    "x": 0,
+                    "y": 0
+                },
+                "show": false,
+                "size": {
+                    "height": 0,
+                    "width": 0
+                },
+                "zLayer": 1
+            },
+            "controls": [
+                {
+                    "index": 6,
+                    "value": {
+                        "common": {
+                            "id": "scan",
+                            "infoPaneText": "Selects one of three waveforms for the modulation: Triangle, Sawtooth Up, and Sawtooth Down.",
+                            "position": {
+                                "x": 70,
+                                "y": 10
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 65
+                            },
+                            "zLayer": 1
+                        },
+                        "entries": [
+                            {
+                                "show": true,
+                                "string": " Tri",
+                                "value": 0
+                            },
+                            {
+                                "show": true,
+                                "string": " SawU",
+                                "value": 1
+                            },
+                            {
+                                "show": true,
+                                "string": " SawD",
+                                "value": 2
+                            }
+                        ],
+                        "image": "66xDDbutton",
+                        "text": {
+                            "fonts": {
+                                "hoverOff": {
+                                    "custom": "custom_font",
+                                    "type": 1
+                                },
+                                "hoverOn": {
+                                    "custom": "custom_font",
+                                    "type": 10
+                                },
+                                "off": {
+                                    "custom": "custom_font",
+                                    "type": 1
+                                },
+                                "on": {
+                                    "custom": "custom_font",
+                                    "type": 10
+                                },
+                                "pressedOff": {
+                                    "custom": "custom_font",
+                                    "type": 1
+                                },
+                                "pressedOn": {
+                                    "custom": "custom_font",
+                                    "type": 10
+                                }
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "shiftOnPress": true,
+                            "string": ""
+                        }
+                    }
+                },
+                {
+                    "index": 6,
+                    "value": {
+                        "common": {
+                            "id": "mode",
+                            "infoPaneText": "Selects one of three flanger modes (Standard, Thru Zero, Scan).",
+                            "position": {
+                                "x": 135,
+                                "y": 10
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 65
+                            },
+                            "zLayer": 1
+                        },
+                        "entries": [
+                            {
+                                "show": true,
+                                "string": " Std",
+                                "value": 0
+                            },
+                            {
+                                "show": true,
+                                "string": " ThruZ",
+                                "value": 1
+                            },
+                            {
+                                "show": true,
+                                "string": " Scan",
+                                "value": 2
+                            }
+                        ],
+                        "image": "66xDDbutton",
+                        "text": {
+                            "fonts": {
+                                "hoverOff": {
+                                    "custom": "custom_font",
+                                    "type": 1
+                                },
+                                "hoverOn": {
+                                    "custom": "custom_font",
+                                    "type": 10
+                                },
+                                "off": {
+                                    "custom": "custom_font",
+                                    "type": 1
+                                },
+                                "on": {
+                                    "custom": "custom_font",
+                                    "type": 10
+                                },
+                                "pressedOff": {
+                                    "custom": "custom_font",
+                                    "type": 1
+                                },
+                                "pressedOn": {
+                                    "custom": "custom_font",
+                                    "type": 10
+                                }
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "shiftOnPress": false,
+                            "string": ""
+                        }
+                    }
+                },
+                {
+                    "index": 6,
+                    "value": {
+                        "common": {
+                            "id": "chord",
+                            "infoPaneText": "Sets a chord that defines the harmonic relationship between the four voices.",
+                            "position": {
+                                "x": 200,
+                                "y": 10
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 65
+                            },
+                            "zLayer": 1
+                        },
+                        "entries": [
+                            {
+                                "show": true,
+                                "string": " Major",
+                                "value": 0
+                            },
+                            {
+                                "show": true,
+                                "string": " Maj7",
+                                "value": 1
+                            },
+                            {
+                                "show": true,
+                                "string": " Minor",
+                                "value": 2
+                            },
+                            {
+                                "show": true,
+                                "string": " Min7",
+                                "value": 3
+                            },
+                            {
+                                "show": true,
+                                "string": " Add2",
+                                "value": 4
+                            },
+                            {
+                                "show": true,
+                                "string": " Sus2",
+                                "value": 5
+                            },
+                            {
+                                "show": true,
+                                "string": " Sus4",
+                                "value": 6
+                            },
+                            {
+                                "show": true,
+                                "string": " Neut3rd",
+                                "value": 7
+                            },
+                            {
+                                "show": true,
+                                "string": " Dom7",
+                                "value": 8
+                            },
+                            {
+                                "show": true,
+                                "string": " Quartal",
+                                "value": 9
+                            },
+                            {
+                                "show": true,
+                                "string": " MajMin",
+                                "value": 10
+                            },
+                            {
+                                "show": true,
+                                "string": " Cluster",
+                                "value": 11
+                            },
+                            {
+                                "show": true,
+                                "string": " Whole",
+                                "value": 12
+                            },
+                            {
+                                "show": true,
+                                "string": " Min3rd",
+                                "value": 13
+                            },
+                            {
+                                "show": true,
+                                "string": " Maj3rd",
+                                "value": 14
+                            },
+                            {
+                                "show": true,
+                                "string": " Fourth",
+                                "value": 15
+                            },
+                            {
+                                "show": true,
+                                "string": " Tritone",
+                                "value": 16
+                            },
+                            {
+                                "show": true,
+                                "string": " Fifth",
+                                "value": 17
+                            },
+                            {
+                                "show": true,
+                                "string": " Octave",
+                                "value": 18
+                            },
+                            {
+                                "show": true,
+                                "string": " Harmonic",
+                                "value": 19
+                            },
+                            {
+                                "show": true,
+                                "string": " Even",
+                                "value": 20
+                            },
+                            {
+                                "show": true,
+                                "string": " Odd",
+                                "value": 21
+                            },
+                            {
+                                "show": true,
+                                "string": " Inharm",
+                                "value": 22
+                            },
+                            {
+                                "show": true,
+                                "string": " Unison",
+                                "value": 23
+                            }
+                        ],
+                        "image": "85xDDbutton",
+                        "text": {
+                            "fonts": {
+                                "hoverOff": {
+                                    "custom": "custom_font",
+                                    "type": 1
+                                },
+                                "hoverOn": {
+                                    "custom": "custom_font",
+                                    "type": 10
+                                },
+                                "off": {
+                                    "custom": "custom_font",
+                                    "type": 1
+                                },
+                                "on": {
+                                    "custom": "custom_font",
+                                    "type": 10
+                                },
+                                "pressedOff": {
+                                    "custom": "custom_font",
+                                    "type": 1
+                                },
+                                "pressedOn": {
+                                    "custom": "custom_font",
+                                    "type": 10
+                                }
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "shiftOnPress": false,
+                            "string": ""
+                        }
+                    }
+                },
+                {
+                    "index": 8,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 38,
+                                "on": true
+                            },
+                            "name": "Fl InPhs"
+                        },
+                        "common": {
+                            "id": "invertPhase",
+                            "infoPaneText": "Swaps the position of the peaks and notches in the frequency spectrum by inverting the effect signal. When enabled, the perceived pitch of the flanger voices is one octave lower. In Thru Zero mode, enabling Invert creates strong signal cancellations at the center of modulation, which can lead to interesting rhythmical effects.",
+                            "position": {
+                                "x": 265,
+                                "y": 10
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 65
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "66xbutton",
+                        "text": {
+                            "fonts": {
+                                "hoverOff": {
+                                    "custom": "custom_font",
+                                    "type": 1
+                                },
+                                "hoverOn": {
+                                    "custom": "custom_font",
+                                    "type": 10
+                                },
+                                "off": {
+                                    "custom": "custom_font",
+                                    "type": 1
+                                },
+                                "on": {
+                                    "custom": "custom_font",
+                                    "type": 10
+                                },
+                                "pressedOff": {
+                                    "custom": "custom_font",
+                                    "type": 1
+                                },
+                                "pressedOn": {
+                                    "custom": "custom_font",
+                                    "type": 10
+                                }
+                            },
+                            "horizontalAlignment": 1,
+                            "positionY": 0,
+                            "shiftOnPress": false,
+                            "string": "InvPhs"
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 39,
+                                "on": true
+                            },
+                            "name": "Fl Dept"
+                        },
+                        "common": {
+                            "id": "amount",
+                            "infoPaneText": "Adjusts the amount of modulation applied to Pitch, adding movement to the flanging effect.",
+                            "position": {
+                                "x": 0,
+                                "y": 30
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "amountLabel",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 0,
+                                "y": 70
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 1
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "string": "Depth"
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 40,
+                                "on": true
+                            },
+                            "name": "Fl Rat"
+                        },
+                        "common": {
+                            "id": "rate",
+                            "infoPaneText": "Adjusts the frequency of the modulation applied to Pitch. The modulation effect becomes more pronounced as Depth is increased.",
+                            "position": {
+                                "x": 40,
+                                "y": 30
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "rateLabel",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 40,
+                                "y": 70
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 1
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "string": "Rate"
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 41,
+                                "on": true
+                            },
+                            "name": "Fl Pitch"
+                        },
+                        "common": {
+                            "id": "pitch",
+                            "infoPaneText": "Adjusts the fundamental frequency of the first flanger voice in semitones, effectively shifting the peaks and notches of all flanger voices in the frequency spectrum.",
+                            "position": {
+                                "x": 80,
+                                "y": 30
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 96,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "pitchLabel",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 80,
+                                "y": 70
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 1
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "string": "Pitch"
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 42,
+                                "on": true
+                            },
+                            "name": "Fl Voi"
+                        },
+                        "common": {
+                            "id": "voices",
+                            "infoPaneText": "On Standard or Thru Zero Mode, Voices fades from one to four flanger voices. The additional flanger voices are added in harmonic intervals, forming a chord as set with Chord. On Scan Mode, Voices scans through the four flanger voices one after the other by blending between the 1st and the 2nd flanger voice, then the 2nd and the 3d flanger voice, and so on.",
+                            "position": {
+                                "x": 120,
+                                "y": 30
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "voicesLaebl",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 120,
+                                "y": 70
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 1
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "string": "Voices"
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 43,
+                                "on": true
+                            },
+                            "name": "Fl Fb"
+                        },
+                        "common": {
+                            "id": "feedback",
+                            "infoPaneText": "Adjusts the level of the feedback signals from the outputs of the flanger voices to their inputs, creating a more resonant and metallic sound.",
+                            "position": {
+                                "x": 160,
+                                "y": 30
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "feedbackLabel",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 160,
+                                "y": 70
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 1
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "string": "Feedback"
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 44,
+                                "on": true
+                            },
+                            "name": "Fl Wide"
+                        },
+                        "common": {
+                            "id": "width",
+                            "infoPaneText": "Duplicates the flanger voices internally and pans them in opposite directions. ",
+                            "position": {
+                                "x": 0,
+                                "y": 90
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "widthLabel",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 0,
+                                "y": 130
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 1
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "string": "Width"
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 45,
+                                "on": true
+                            },
+                            "name": "Fl Damp"
+                        },
+                        "common": {
+                            "id": "damping",
+                            "infoPaneText": "Attenuates the high frequency content of the feedback signals from the outputs of the flanger voices to their inputs, allowing for soft sounds even at high Feedback settings.",
+                            "position": {
+                                "x": 40,
+                                "y": 90
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "dampingLabel",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 40,
+                                "y": 130
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 2
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "string": "Damp"
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 46,
+                                "on": true
+                            },
+                            "name": "Fl Det"
+                        },
+                        "common": {
+                            "id": "detune",
+                            "infoPaneText": "Alters the pitch of each individual flanger voice in a range of approximately +/- 60 cents. It is especially useful when Chord is set to Unison.",
+                            "position": {
+                                "x": 80,
+                                "y": 90
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "detuneLabel",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 80,
+                                "y": 130
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 1
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "string": "Detune"
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 47,
+                                "on": true
+                            },
+                            "name": "Fl Off"
+                        },
+                        "common": {
+                            "id": "offset",
+                            "infoPaneText": "Shifts the duplicated instances of the flanger voices in the frequency spectrum. Reduces the amount of signal cancellation when there is no modulation (Depth set to 0%).",
+                            "position": {
+                                "x": 120,
+                                "y": 90
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "offsetLabel",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 120,
+                                "y": 130
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 1
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "string": "Offset"
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 48,
+                                "on": true
+                            },
+                            "name": "Fl Mix"
+                        },
+                        "common": {
+                            "id": "mix",
+                            "infoPaneText": "Blends between the input signal and the effect signal.",
+                            "position": {
+                                "x": 160,
+                                "y": 90
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "mixLabel",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 160,
+                                "y": 130
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 1
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "string": "Wet"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

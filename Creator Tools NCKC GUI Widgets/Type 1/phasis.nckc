@@ -1,0 +1,847 @@
+{
+    "formatVersion": 0,
+    "type": {
+        "name": "Control",
+        "version": 0
+    },
+    "value": {
+        "index": 0,
+        "value": {
+            "common": {
+                "id": "phasis",
+                "infoPaneText": "",
+                "position": {
+                    "x": 0,
+                    "y": 0
+                },
+                "show": true,
+                "size": {
+                    "height": 0,
+                    "width": 0
+                },
+                "zLayer": 1
+            },
+            "controls": [
+                {
+                    "index": 8,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 26,
+                                "on": true
+                            },
+                            "name": "Ph Ultra"
+                        },
+                        "common": {
+                            "id": "ultra",
+                            "infoPaneText": "Extends the parameter ranges for Rate and Center, allowing for more extreme modulation frequencies across a wider frequency range.",
+                            "position": {
+                                "x": 70,
+                                "y": 10
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 65
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "66xbutton",
+                        "text": {
+                            "fonts": {
+                                "hoverOff": {
+                                    "custom": "custom_font",
+                                    "type": 1
+                                },
+                                "hoverOn": {
+                                    "custom": "custom_font",
+                                    "type": 10
+                                },
+                                "off": {
+                                    "custom": "custom_font",
+                                    "type": 1
+                                },
+                                "on": {
+                                    "custom": "custom_font",
+                                    "type": 10
+                                },
+                                "pressedOff": {
+                                    "custom": "custom_font",
+                                    "type": 1
+                                },
+                                "pressedOn": {
+                                    "custom": "custom_font",
+                                    "type": 10
+                                }
+                            },
+                            "horizontalAlignment": 1,
+                            "positionY": 0,
+                            "shiftOnPress": false,
+                            "string": "Ultra"
+                        }
+                    }
+                },
+                {
+                    "index": 8,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 27,
+                                "on": true
+                            },
+                            "name": "Ph InMod"
+                        },
+                        "common": {
+                            "id": "invertModMix",
+                            "infoPaneText": "Inverts the polarity of the modulation applied to Spread, hence reversing its effect in relation to the modulation applied to Center. ",
+                            "position": {
+                                "x": 135,
+                                "y": 10
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 65
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "66xbutton",
+                        "text": {
+                            "fonts": {
+                                "hoverOff": {
+                                    "custom": "custom_font",
+                                    "type": 1
+                                },
+                                "hoverOn": {
+                                    "custom": "custom_font",
+                                    "type": 10
+                                },
+                                "off": {
+                                    "custom": "custom_font",
+                                    "type": 1
+                                },
+                                "on": {
+                                    "custom": "custom_font",
+                                    "type": 9
+                                },
+                                "pressedOff": {
+                                    "custom": "custom_font",
+                                    "type": 1
+                                },
+                                "pressedOn": {
+                                    "custom": "custom_font",
+                                    "type": 10
+                                }
+                            },
+                            "horizontalAlignment": 1,
+                            "positionY": 0,
+                            "shiftOnPress": false,
+                            "string": "InvMix"
+                        }
+                    }
+                },
+                {
+                    "index": 8,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 28,
+                                "on": true
+                            },
+                            "name": "Ph InMix"
+                        },
+                        "common": {
+                            "id": "invertPhase",
+                            "infoPaneText": "Swaps the position of the peaks and notches in the frequency spectrum by inverting the effect signal.",
+                            "position": {
+                                "x": 200,
+                                "y": 10
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 65
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "66xbutton",
+                        "text": {
+                            "fonts": {
+                                "hoverOff": {
+                                    "custom": "custom_font",
+                                    "type": 1
+                                },
+                                "hoverOn": {
+                                    "custom": "custom_font",
+                                    "type": 10
+                                },
+                                "off": {
+                                    "custom": "custom_font",
+                                    "type": 1
+                                },
+                                "on": {
+                                    "custom": "custom_font",
+                                    "type": 10
+                                },
+                                "pressedOff": {
+                                    "custom": "custom_font",
+                                    "type": 1
+                                },
+                                "pressedOn": {
+                                    "custom": "custom_font",
+                                    "type": 10
+                                }
+                            },
+                            "horizontalAlignment": 1,
+                            "positionY": 0,
+                            "shiftOnPress": false,
+                            "string": "InvPhs"
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 29,
+                                "on": true
+                            },
+                            "name": "Ph Dept"
+                        },
+                        "common": {
+                            "id": "amount",
+                            "infoPaneText": "Adjusts the amount of modulation applied to Center and Spread. The modulation can be distributed between the two parameters with the Mod Mix knob. ",
+                            "position": {
+                                "x": 0,
+                                "y": 30
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "amountLabel",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 0,
+                                "y": 70
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 1
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "string": "Depth"
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 30,
+                                "on": true
+                            },
+                            "name": "Ph Rat"
+                        },
+                        "common": {
+                            "id": "rate",
+                            "infoPaneText": "Adjusts the frequency of the modulation applied to Center and Spread. The modulation effect becomes more pronounced as Depth is increased.",
+                            "position": {
+                                "x": 40,
+                                "y": 30
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "rateLabel",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 40,
+                                "y": 70
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 1
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "string": "Rate"
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 31,
+                                "on": true
+                            },
+                            "name": "Ph St"
+                        },
+                        "common": {
+                            "id": "stereo",
+                            "infoPaneText": "Adds a phase offset to the modulation applied to Center and Spread. In the center position, the phasing effect does not alter the stereo image. Stereo does not have an effect if Depth is set to 0.",
+                            "position": {
+                                "x": 80,
+                                "y": 30
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "stereoLabel",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 80,
+                                "y": 70
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 1
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "string": "Stereo"
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 32,
+                                "on": true
+                            },
+                            "name": "Ph Fb"
+                        },
+                        "common": {
+                            "id": "feedback",
+                            "infoPaneText": "Adjusts the amount of feedback applied to the all-pass filter chain, creating the resonance. Turning up Feedback makes the peaks and notches in the frequency spectrum more pronounced.",
+                            "position": {
+                                "x": 120,
+                                "y": 30
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "feedbackLabel",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 120,
+                                "y": 70
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 1
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "string": "Feed"
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 33,
+                                "on": true
+                            },
+                            "name": "Ph Notch"
+                        },
+                        "common": {
+                            "id": "notches",
+                            "infoPaneText": "Sets the number of peaks and notches in the frequency spectrum.",
+                            "position": {
+                                "x": 160,
+                                "y": 30
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 2,
+                            "max": 12,
+                            "min": 2
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "notchesLabel",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 160,
+                                "y": 70
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 1
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "string": "Notches"
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 34,
+                                "on": true
+                            },
+                            "name": "Ph Cent"
+                        },
+                        "common": {
+                            "id": "center",
+                            "infoPaneText": "Sets the middle frequency of the peak/notch pattern in the frequency spectrum of the phaser. This parameter is very similar to the cutoff parameter of a filter, changing it shifts the peaks and notches left or right.",
+                            "position": {
+                                "x": 0,
+                                "y": 90
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 2,
+                            "max": 1000000,
+                            "min": 2
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "centerLabel",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 0,
+                                "y": 130
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 1
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "string": "Center"
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 35,
+                                "on": true
+                            },
+                            "name": "Ph Sprd"
+                        },
+                        "common": {
+                            "id": "spread",
+                            "infoPaneText": "Adjusts the density of the peaks and notches in the frequency spectrum. Turning the knob to the left moves the peaks and notches closer to each other. Turning the knob to the right moves the peaks and notches further apart from each other.",
+                            "position": {
+                                "x": 40,
+                                "y": 90
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "spreadLabel",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 40,
+                                "y": 130
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 1
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "string": "Spread"
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 36,
+                                "on": true
+                            },
+                            "name": "Ph MoMix"
+                        },
+                        "common": {
+                            "id": "modMox",
+                            "infoPaneText": "Inverts the polarity of the modulation applied to Spread, hence reversing its effect in relation to the modulation applied to Center. ",
+                            "position": {
+                                "x": 80,
+                                "y": 90
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "modMoxLabel",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 80,
+                                "y": 130
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 1
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "string": "Mod Mix"
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 37,
+                                "on": true
+                            },
+                            "name": "Ph Mix"
+                        },
+                        "common": {
+                            "id": "mix",
+                            "infoPaneText": "Blends between the input signal and the effect signal.",
+                            "position": {
+                                "x": 120,
+                                "y": 90
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "mixLabel",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 120,
+                                "y": 130
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 1
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "string": "Wet"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,719 @@
+{
+    "formatVersion": 0,
+    "type": {
+        "name": "Control",
+        "version": 0
+    },
+    "value": {
+        "index": 0,
+        "value": {
+            "common": {
+                "id": "choral",
+                "infoPaneText": "",
+                "position": {
+                    "x": 0,
+                    "y": 0
+                },
+                "show": true,
+                "size": {
+                    "height": 0,
+                    "width": 0
+                },
+                "zLayer": 1
+            },
+            "controls": [
+                {
+                    "index": 6,
+                    "value": {
+                        "common": {
+                            "id": "mode",
+                            "infoPaneText": "Switches between four chorus modes, each with its own sound characteristic and modulation behavior.",
+                            "position": {
+                                "x": 70,
+                                "y": 10
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 65
+                            },
+                            "zLayer": 1
+                        },
+                        "entries": [
+                            {
+                                "show": true,
+                                "string": " Synth",
+                                "value": 0
+                            },
+                            {
+                                "show": true,
+                                "string": " Ensem",
+                                "value": 1
+                            },
+                            {
+                                "show": true,
+                                "string": " Dimen",
+                                "value": 2
+                            },
+                            {
+                                "show": true,
+                                "string": " Univ",
+                                "value": 3
+                            }
+                        ],
+                        "image": "66xDDbutton",
+                        "text": {
+                            "fonts": {
+                                "hoverOff": {
+                                    "custom": "",
+                                    "type": 1
+                                },
+                                "hoverOn": {
+                                    "custom": "",
+                                    "type": 10
+                                },
+                                "off": {
+                                    "custom": "custom_font",
+                                    "type": 1
+                                },
+                                "on": {
+                                    "custom": "custom_font",
+                                    "type": 10
+                                },
+                                "pressedOff": {
+                                    "custom": "",
+                                    "type": 1
+                                },
+                                "pressedOn": {
+                                    "custom": "",
+                                    "type": 10
+                                }
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "shiftOnPress": false,
+                            "string": ""
+                        }
+                    }
+                },
+                {
+                    "index": 8,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 17,
+                                "on": true
+                            },
+                            "name": "Ch Scat"
+                        },
+                        "common": {
+                            "id": "scatter",
+                            "infoPaneText": "Enables a special feedback routing for the chorus voices that introduces reverb-like behavior.",
+                            "position": {
+                                "x": 135,
+                                "y": 10
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 65
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "66xbutton",
+                        "text": {
+                            "fonts": {
+                                "hoverOff": {
+                                    "custom": "custom_font",
+                                    "type": 0
+                                },
+                                "hoverOn": {
+                                    "custom": "custom_font",
+                                    "type": 0
+                                },
+                                "off": {
+                                    "custom": "custom_font",
+                                    "type": 0
+                                },
+                                "on": {
+                                    "custom": "custom_font",
+                                    "type": 0
+                                },
+                                "pressedOff": {
+                                    "custom": "custom_font",
+                                    "type": 0
+                                },
+                                "pressedOn": {
+                                    "custom": "custom_font",
+                                    "type": 0
+                                }
+                            },
+                            "horizontalAlignment": 1,
+                            "positionY": 0,
+                            "shiftOnPress": false,
+                            "string": "Scatter"
+                        }
+                    }
+                },
+                {
+                    "index": 8,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 18,
+                                "on": true
+                            },
+                            "name": "Ch InPhs"
+                        },
+                        "common": {
+                            "id": "invertPhase",
+                            "infoPaneText": "Changes the sound characteristic of the chorusing effect by inverting the effect signal.",
+                            "position": {
+                                "x": 200,
+                                "y": 10
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 67
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "66xbutton",
+                        "text": {
+                            "fonts": {
+                                "hoverOff": {
+                                    "custom": "custom_font",
+                                    "type": 1
+                                },
+                                "hoverOn": {
+                                    "custom": "custom_font",
+                                    "type": 10
+                                },
+                                "off": {
+                                    "custom": "custom_font",
+                                    "type": 1
+                                },
+                                "on": {
+                                    "custom": "custom_font",
+                                    "type": 10
+                                },
+                                "pressedOff": {
+                                    "custom": "custom_font",
+                                    "type": 1
+                                },
+                                "pressedOn": {
+                                    "custom": "custom_font",
+                                    "type": 10
+                                }
+                            },
+                            "horizontalAlignment": 1,
+                            "positionY": 0,
+                            "shiftOnPress": false,
+                            "string": "InvPhs"
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 19,
+                                "on": true
+                            },
+                            "name": "Ch Dpt"
+                        },
+                        "common": {
+                            "id": "amount",
+                            "infoPaneText": "Adjusts the amount of modulation applied to Delay, altering the delay times of the chorus voices. This also changes the pitch of the chorus voices, creating the typical chorusing effect.",
+                            "position": {
+                                "x": 0,
+                                "y": 30
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "amountLabel",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 0,
+                                "y": 70
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 1
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "string": "Depth"
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 20,
+                                "on": true
+                            },
+                            "name": "Ch Rat"
+                        },
+                        "common": {
+                            "id": "rate",
+                            "infoPaneText": "Adjusts the speed of modulation, from slow pitch changes to fast vibratos. This becomes more pronounced as Depth  is increased.",
+                            "position": {
+                                "x": 40,
+                                "y": 30
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "rateLabel",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 40,
+                                "y": 70
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 1
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "string": "Rate"
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 21,
+                                "on": true
+                            },
+                            "name": "Ch Del"
+                        },
+                        "common": {
+                            "id": "delay",
+                            "infoPaneText": "Adjusts the delay times of the chorus voices, allowing you to change the spatial depth of the sound. This parameter strongly interacts with Feedback.",
+                            "position": {
+                                "x": 80,
+                                "y": 30
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "delayLabel",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 80,
+                                "y": 70
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 1
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "string": "Delay"
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 22,
+                                "on": true
+                            },
+                            "name": "Ch Fb"
+                        },
+                        "common": {
+                            "id": "feedback",
+                            "infoPaneText": "Adjusts the level of the feedback signals from the outputs of the chorus voices to their inputs, creating a more sustained and spacious sound.",
+                            "position": {
+                                "x": 120,
+                                "y": 30
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "feedbackLabel",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 120,
+                                "y": 70
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 1
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "string": "Feedback"
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 23,
+                                "on": true
+                            },
+                            "name": "Ch Voi"
+                        },
+                        "common": {
+                            "id": "voices",
+                            "infoPaneText": "Fades from one to three chorus voices. Increasing the number of chorus voices adds a dense and ensemble-like quality to the sound. The modulation affects the second and third chorus voice differently from the first, resulting in a wider and livelier sound.",
+                            "position": {
+                                "x": 0,
+                                "y": 90
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "voicesLabel",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 0,
+                                "y": 130
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 1
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "string": "Voices"
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 24,
+                                "on": true
+                            },
+                            "name": "Ch Wide"
+                        },
+                        "common": {
+                            "id": "width",
+                            "infoPaneText": "Pans the chorus voices in opposite directions, widening the stereo image. When Width is set to 0, the input’s stereo image is preserved.",
+                            "position": {
+                                "x": 40,
+                                "y": 90
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "widthLabel",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 40,
+                                "y": 130
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 1
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "string": "Width"
+                        }
+                    }
+                },
+                {
+                    "index": 7,
+                    "value": {
+                        "automation": {
+                            "disableUserAssign": false,
+                            "hostAutomation": {
+                                "id": 25,
+                                "on": true
+                            },
+                            "name": "Ch Mix"
+                        },
+                        "common": {
+                            "id": "mix",
+                            "infoPaneText": "Blends between the input signal and the effect signal.",
+                            "position": {
+                                "x": 80,
+                                "y": 90
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 0,
+                                "width": 0
+                            },
+                            "zLayer": 1
+                        },
+                        "image": "40x",
+                        "mouse": {
+                            "orientation": 0,
+                            "scale": 1500
+                        },
+                        "value": {
+                            "default": 0,
+                            "max": 1000000,
+                            "min": 0
+                        }
+                    }
+                },
+                {
+                    "index": 4,
+                    "value": {
+                        "background": {
+                            "frameIndex": 0,
+                            "image": "",
+                            "show": false
+                        },
+                        "common": {
+                            "id": "mixLabel",
+                            "infoPaneText": "",
+                            "position": {
+                                "x": 80,
+                                "y": 130
+                            },
+                            "show": true,
+                            "size": {
+                                "height": 18,
+                                "width": 87
+                            },
+                            "zLayer": 1
+                        },
+                        "enableDragAndDrop": false,
+                        "text": {
+                            "font": {
+                                "custom": "custom_font",
+                                "type": 1
+                            },
+                            "horizontalAlignment": 0,
+                            "positionY": 0,
+                            "string": "Wet"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}
