@@ -105,6 +105,12 @@ ctUtil.stringSplit(inputString,sep)
 -- Returns a table size
 ctUtil.tableSize(t)
 
+-- Check if a  value exists in a table
+ctUtil.tableValueCheck (t, v)
+
+-- Return where a value was found in a table
+ctUtil.tableValueIndex (t, v)
+
 -- ZONES
 
 -- Test function
