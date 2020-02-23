@@ -112,6 +112,7 @@ function CtUtil.samplesFolder(path,recursive)
 
 end
 
+-- Split a string and return the result after the seperator
 function CtUtil.stringSplit(inputString,sep)
 
 	for s in string.gmatch(inputString, "[^"..sep.."]+") do
@@ -120,6 +121,7 @@ function CtUtil.stringSplit(inputString,sep)
 
 end
 
+-- Return the size of a table
 function CtUtil.tableSize(t)
 
   local count = 0
@@ -128,5 +130,25 @@ function CtUtil.tableSize(t)
 
 end
 
+-- Check if a  value exists in a table
+function CtUtil.tableValueCheck (t, v)
+    for index, value in ipairs(t) do
+        if value == v then
+            return true
+        end
+    end
+    return false
+end
+
+-- Return where a value was found in a table
+function CtUtil.tableValueIndex (t, v)
+    for index, value in ipairs(t) do
+        if value == v then
+            return index
+        end
+    end
+end
+
 -- return the CtUtil object
 return CtUtil
+
