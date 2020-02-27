@@ -90,6 +90,9 @@ ctUtil.dashSepPrint()
 -- More readable debug printing. Set an optional global printToConsole boolean variable to control printing.
 ctUtil.debugPrint(debugMessage)
 
+-- Function for nicely printing the table results. Set an optional global printToConsole boolean variable to control printing.
+ctUtil.debugPrintR(arr)
+
 -- Check if a Kontakt instruments is connected and print instruments information
 ctUtil.instrumentConnected()
 
