@@ -87,6 +87,9 @@ ctUtil.testFunction()
 -- Check if a Kontakt instruments is connected and print instruments information
 ctUtil.instrumentConnected()
 
+-- Check if a file has a valid audio file extension
+ctUtil.isAudioFile(file)
+
 -- Check for a valid path and print the result
 ctUtil.pathCheck(path)
 
