@@ -46,14 +46,16 @@ end
 -- Function for nicely printing the table results. Set an optional global printToConsole boolean variable to control printing.
 function CtUtil.debugPrintR(arr)
     if printToConsole == nil then printToConsole = true end
-    local str = ""
-    i = 1
-    for index,value in pairs(arr) do
-		indentStr = i.."\t"
-        str = str..indentStr..index..": "..value.."\n"
-        i = i+1
+    if printToConsole then
+        local str = ""
+        i = 1
+        for index,value in pairs(arr) do
+    		indentStr = i.."\t"
+            str = str..indentStr..index..": "..value.."\n"
+            i = i+1
+        end
+        print(str)
     end
-    if printToConsole then print(str) end
 end
 
 -- Check if a Kontakt instruments is connected and print instruments information
