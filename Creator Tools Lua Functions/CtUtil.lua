@@ -30,6 +30,19 @@ function CtUtil.testFunction()
 
 end
 
+-- Just a separator for printing to the console. Set an optional global printToConsole boolean variable to control printing.
+function CtUtil.dashSepPrint()
+    local dashSep = "------------------------------------------------------------"
+    if printToConsole == nil then printToConsole = true end
+    if printToConsole then print(dashSep) end
+end
+
+-- More readable debug printing. Set an optional global printToConsole boolean variable to control printing.
+function CtUtil.debugPrint(debugMessage)
+    if printToConsole == nil then printToConsole = true end
+    if printToConsole then print(debugMessage) end
+end
+
 -- Check if a Kontakt instruments is connected and print instruments information
 function CtUtil.instrumentConnected()
 
