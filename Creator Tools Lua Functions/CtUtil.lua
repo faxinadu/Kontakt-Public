@@ -45,6 +45,26 @@ function CtUtil.instrumentConnected()
 
 end
 
+-- Check if a file has a valid audio file extension
+function CtUtil.isAudioFile(file)
+    local extensionList = {
+        ".wav",
+        ".aif",
+        ".aiff",
+        ".rex",
+        ".rx2",
+        ".snd",
+        ".ncw"
+    }
+    local checkFile = false
+    if filesystem.isRegularFile(file) then
+        for k,v in pairs(extensionList) do
+            if filesystem.extension(file) == v then checkFile = true end
+        end
+    end
+    return checkFile
+end
+
 -- Check for a valid path and print the result
 function CtUtil.pathCheck(path)
 
