@@ -84,6 +84,12 @@ ctMir.type_to_tag(var,mode,mirPathSingle)
 -- Test function
 ctUtil.testFunction()
 
+-- Just a separator for printing to the console. Set an optional global printToConsole boolean variable to control printing.
+ctUtil.dashSepPrint()
+
+-- More readable debug printing. Set an optional global printToConsole boolean variable to control printing.
+ctUtil.debugPrint(debugMessage)
+
 -- Check if a Kontakt instruments is connected and print instruments information
 ctUtil.instrumentConnected()
 
