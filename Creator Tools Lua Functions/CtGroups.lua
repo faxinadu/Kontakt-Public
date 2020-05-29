@@ -142,7 +142,7 @@ function CtGroups.groupNameSearch(searchName,startGroup,untilGroup,contains)
 					table.insert(groupsFound, g.name)
 				end
 			else
-				if g.name == g.name then
+				if g.name == searchName then
 			   		table.insert(groupsFound, g.name)
 			    end
 			end
