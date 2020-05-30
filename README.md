@@ -89,6 +89,9 @@ Sample Robot - autosampling:
 
 https://samplerobot.com/
 
+Signet - Command line audio tools
+https://github.com/SamWindell/Signet
+
 
 # Wavetable Tools
 
