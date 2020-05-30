@@ -82,6 +82,40 @@ Sample Robot - autosampling:
 https://samplerobot.com/
 
 
+# Wavetable Tools
+
+Synthesis Technology - Wave Edit
+https://synthtech.com/waveedit/
+
+Audio Term
+
+- no current link
+
+Harvey Ormston Osc Gen (Python)
+
+https://github.com/harveyormston/osc_gen
+
+Novation Wavetable Editor
+
+https://novationmusic.com/en/news/wavetable-editor-peak-summit
+
+Ocean Swift Wavetabler
+
+https://oceanswift.net/wavetabler/
+
+Glow Shrimp Software - Serum FM Wavetable Studio
+
+http://glowshrimpsoftware.com/sfmwts.html
+
+Waldorf Wavetable Creator
+
+http://lady.rdsor.ro/~kotro/index.php?m=soft
+
+Quilcom Wavemaker 4
+
+http://flowstoners.com/quilcom
+
+
 # History Lessons
 
 Sound On Sound Kontakt Reviews
