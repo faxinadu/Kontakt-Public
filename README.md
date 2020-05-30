@@ -84,7 +84,7 @@ https://samplerobot.com/
 
 # History Lessons
 
-Sound On Ssound Kontakt Reviews
+Sound On Sound Kontakt Reviews
 
 https://www.soundonsound.com/reviews/native-instruments-kontakt
 
