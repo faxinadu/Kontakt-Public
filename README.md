@@ -30,6 +30,10 @@ KSP Visual Studio Syntax:
 
 https://marketplace.visualstudio.com/items?itemName=rkoubou.ksp
 
+Lua Documentation:
+
+https://www.lua.org/docs.html
+
 
 # Sampling Tools
 
