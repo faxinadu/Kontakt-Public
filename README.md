@@ -34,6 +34,24 @@ Lua Documentation:
 
 https://www.lua.org/docs.html
 
+Kadenze (Berklee) Sound Design with Kontakt:
+
+https://www.kadenze.com/courses/sound-design-with-kontakt-i/info\
+
+Xtant Audio Mastering Kontakt Scripting:
+
+https://xtant-audio.com/product/kontakt-scripting-collection/
+
+David Hilowitz Muisc Kontakt Playlist:
+https://www.youtube.com/watch?v=swaoGvPY2mM&list=PLluATFZehvV2SGc1h76W8PiK-M_8_Z5VI
+
+ADSR Basic of Kontakt Scripting:
+
+https://www.adsrsounds.com/kontakt-tutorials/the-basics-of-kontakt-scripting/
+
+Ask Audio Introduction to Scripting in Kontakt:
+
+https://ask.audio/articles/introduction-to-scripting-in-kontakt-part-1
 
 # Sampling Tools
 
