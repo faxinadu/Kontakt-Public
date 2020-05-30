@@ -179,6 +179,14 @@ Splice Tips for Creating Your Own Sample Pack
 
 https://splice.com/blog/tips-for-creating-your-own-sample-pack/
 
+Music Radar 6 Tips for Creating Your Own Sample Library
+
+https://www.musicradar.com/how-to/6-tips-for-creating-your-own-sample-library
+
+Omega Studios 5 Steps to Sample an Instrument
+
+https://omegastudios.com/5-steps-sample-instrument/
+
 
 # Wikipedia
 
