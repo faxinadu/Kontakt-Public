@@ -118,5 +118,19 @@ Linkedin Kontakt Advanced Instrumentation and Sound Design
 https://www.linkedin.com/learning/kontakt-advanced-instrumentation-and-sound-design/welcome
 
 
+# Wikipedia
+
+Software Sampler
+
+https://en.wikipedia.org/wiki/Software_sampler
+
+Sampler
+
+https://en.wikipedia.org/wiki/Sampler_(musical_instrument
+
+Sampling
+
+https://en.wikipedia.org/wiki/Sampling_(music)
+
 
 This project is licensed under the terms of the MIT license.
