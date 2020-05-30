@@ -54,6 +54,23 @@ Ask Audio Introduction to Scripting in Kontakt:
 
 https://ask.audio/articles/introduction-to-scripting-in-kontakt-part-1
 
+Dinos Vallianatos - Creator tools: Building Kontakt instruments without Kontakt
+
+https://www.youtube.com/watch?v=NbxkltgJFcA
+
+Scripting with Simon - Kontakt Tutorials
+
+https://www.youtube.com/playlist?list=PLaDJPEYD1JUzVFdTtSwCiDrbB24xOURvM
+
+Oscar Lundberg - Setting up Kontakt GUI Designer with Creator Tools
+
+https://www.youtube.com/watch?v=RLJXUrYPvh0
+
+Christian Henson Music - How To Build A Piano Instrument In KONTAKT
+
+https://www.youtube.com/watch?v=b9mqaBy0Axs
+
+
 # Sampling Tools
 
 BLISS - autosampling:
@@ -80,6 +97,26 @@ https://www.soundonsound.com/reviews/native-instruments-kontakt-4
 https://www.soundonsound.com/reviews/ni-kontakt-5
 
 https://www.soundonsound.com/reviews/native-instruments-kontakt-6
+
+
+# Basics
+
+Guy Michelmore - Kontakt 6 in 20 Minutes
+
+https://www.youtube.com/watch?v=AdxX51_bflg
+
+Delicate Beats - How To Use Kontakt (Beginner Tutorial)
+
+https://www.youtube.com/watch?v=O8XYNrzmVvU
+
+Linkedin Learning Kontakt 5
+
+https://www.linkedin.com/learning/learning-kontakt-5
+
+Linkedin Kontakt Advanced Instrumentation and Sound Design
+
+https://www.linkedin.com/learning/kontakt-advanced-instrumentation-and-sound-design/welcome
+
 
 
 This project is licensed under the terms of the MIT license.
