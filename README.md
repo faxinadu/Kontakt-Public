@@ -74,6 +74,10 @@ Christian Henson Music - How To Build A Piano Instrument In KONTAKT
 
 https://www.youtube.com/watch?v=b9mqaBy0Axs
 
+Yummybeats KSP Tutorials
+
+https://blog.yummybeats.com/ksp-kontakt-scripting/
+
 
 # Sampling Tools
 
