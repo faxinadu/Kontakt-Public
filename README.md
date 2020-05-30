@@ -85,6 +85,7 @@ https://samplerobot.com/
 # Wavetable Tools
 
 Synthesis Technology - Wave Edit
+
 https://synthtech.com/waveedit/
 
 Audio Term
