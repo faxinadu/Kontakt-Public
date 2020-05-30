@@ -1,6 +1,6 @@
 # Resources for Native Instruments Kontakt builders
 
-Kontakt, User Manual, KSP Reference Manual, Creator Tools Manual
+Kontakt, User Manual, KSP Reference Manual, Creator Tools Manual:
 
 https://www.native-instruments.com/en/products/komplete/samplers/kontakt-6/downloads/
 
@@ -20,24 +20,26 @@ If you are here looking for sublimeKSP, head over here:
 
 https://github.com/nojanath/SublimeKSP
 
-Creator Tools Overview
+Creator Tools Overview:
 
 https://www.youtube.com/watch?v=ShLcw7-b5DU - Part 1
 
 https://www.youtube.com/watch?v=RMqiucxhk-s - Part 2
 
-KSP Visual Studio Syntax
+KSP Visual Studio Syntax:
 
 https://marketplace.visualstudio.com/items?itemName=rkoubou.ksp
 
+
 # Sampling Tools
 
-BLISS - autosampling
+BLISS - autosampling:
 
 https://www.discodsp.com/bliss/
 
-Sample Robot - autosampling
+Sample Robot - autosampling:
 
 https://samplerobot.com/
+
 
 This project is licensed under the terms of the MIT license.
