@@ -43,6 +43,7 @@ Xtant Audio Mastering Kontakt Scripting:
 https://xtant-audio.com/product/kontakt-scripting-collection/
 
 David Hilowitz Muisc Kontakt Playlist:
+
 https://www.youtube.com/watch?v=swaoGvPY2mM&list=PLluATFZehvV2SGc1h76W8PiK-M_8_Z5VI
 
 ADSR Basic of Kontakt Scripting:
