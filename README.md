@@ -84,7 +84,7 @@ https://samplerobot.com/
 
 # Wavetable Tools
 
-Synthesis Technology - Wave Edit
+Synthesis Technology Wave Edit
 
 https://synthtech.com/waveedit/
 
@@ -151,6 +151,29 @@ https://www.linkedin.com/learning/learning-kontakt-5
 Linkedin Kontakt Advanced Instrumentation and Sound Design
 
 https://www.linkedin.com/learning/kontakt-advanced-instrumentation-and-sound-design/welcome
+
+
+# Inspiration
+
+Native Instruments How To Make A Sample Pack
+
+https://blog.native-instruments.com/how-to-make-a-sample-pack/
+
+Spitfire Audio Grow Your Own Samples
+
+https://www.spitfireaudio.com/editorial/in-depth/grow-your-own-samples/
+
+Sonic Scoop 5 DIY Hacks for Creating Your Own Unique-Sounding Sample Library
+
+https://sonicscoop.com/2017/12/06/5-diy-hacks-creating-unique-sounding-sample-library/
+
+Making Music Mag How To Record and Create Your Own Sample Library
+
+https://makingmusicmag.com/sample-library/
+
+Splice Tips for Creating Your Own Sample Pack
+
+https://splice.com/blog/tips-for-creating-your-own-sample-pack/
 
 
 # Wikipedia
