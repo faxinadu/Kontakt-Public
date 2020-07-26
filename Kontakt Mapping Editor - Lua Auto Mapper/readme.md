@@ -18,7 +18,7 @@ The third section looks at the file system and prepares tables containing the pa
 
 The fourth section prepares the mapping itself.
 
-The example samples for this tutorial use the following naming convention:
+The example samples use the following naming convention:
 sampleName_root_lowKey_highKey_lowVel_highVel_roundRobin_articulation_signalType
 e.g.:
 broken piano_r60_lk0_hk127_lv0_hv127_rr0_normal_close
