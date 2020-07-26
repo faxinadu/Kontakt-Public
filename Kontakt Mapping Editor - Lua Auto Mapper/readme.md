@@ -34,6 +34,6 @@ broken piano_r60_lk0_hk127_lv0_hv127_rr0_normal_close
 - Press play in the Lua tool
 - Click the arrow in Creator Tools to push to Kontakt
 
-# Adapt Scernario
+# Adapt Scenario
 - Click the "Open in text editor" icon next to the play button in Creator Tools
 - Edit the USER VARIABLES section according to your scenario
