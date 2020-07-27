@@ -169,6 +169,13 @@ function CtUtil.stringSplit(inputString,sep)
 
 end
 
+-- Function for checking how a string starts.
+function CtUtil.stringStarts(inputString,startWith)
+   
+   return string.sub(inputString,1,string.len(startWith))==startWith
+
+end
+
 -- Return the size of a table
 function CtUtil.tableSize(t)
 
@@ -180,23 +187,26 @@ end
 
 -- Check if a  value exists in a table
 function CtUtil.tableValueCheck (t, v)
+
     for index, value in ipairs(t) do
         if value == v then
             return true
         end
     end
     return false
+
 end
 
 -- Return where a value was found in a table
 function CtUtil.tableValueIndex (t, v)
+
     for index, value in ipairs(t) do
         if value == v then
             return index
         end
     end
+
 end
 
 -- return the CtUtil object
 return CtUtil
-
