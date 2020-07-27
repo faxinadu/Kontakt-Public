@@ -114,6 +114,9 @@ ctUtil.samplesFolder(path,recursive)
 -- Split a string into two with a defined separator
 ctUtil.stringSplit(inputString,sep)
 
+-- Function for checking how a string starts
+function CtUtil.stringStarts(inputString,startWith)
+
 -- Returns a table size
 ctUtil.tableSize(t)
 
