@@ -51,18 +51,18 @@ local printToConsole = true
 -- Set the tokens the samples include and their order. A value of -1 means the token is not used.
 
 -- These tokens determine zone parameters.
-local rootLocation = 3
-local lowKeyLocation = -1
-local highKeyLocation = -1
-local lowVelLocation = -1
-local highVelLocation = -1
+local rootLocation = 2
+local lowKeyLocation = 3
+local highKeyLocation = 4
+local lowVelLocation = 5
+local highVelLocation = 6
 
 -- These tokens determine group placement and name.
 -- Sample name location should basically always be 1 (and exist) or else error handling gets iffy.
 local sampleNameLocation = 1 
 local signalNameLocation = -1
 local articulationLocation = -1
-local roundRobinLocation = -1
+local roundRobinLocation = 7
 
 -- Default values to replace non existing or erroneous tokens.
 local defaultRootValue = 48
