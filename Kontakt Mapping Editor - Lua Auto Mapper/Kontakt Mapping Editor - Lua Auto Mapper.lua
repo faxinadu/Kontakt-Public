@@ -124,11 +124,6 @@ local function print_r(arr)
     print(str)
 end
 
--- Function for checking how a string starts.
-function string.starts(inputString,startWith)
-   return string.sub(inputString,1,string.len(startWith))==startWith
-end
-
 -- Table with note names.
 local noteNames = {
 "C-2",
