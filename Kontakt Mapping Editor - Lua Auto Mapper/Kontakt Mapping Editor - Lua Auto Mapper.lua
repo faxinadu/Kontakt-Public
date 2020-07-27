@@ -57,6 +57,11 @@ local highKeyLocation = 4
 local lowVelLocation = 5
 local highVelLocation = 6
 
+-- Set to false if using an alphabetical naming convention.
+local rootIsNumbers = true
+local lowKeyIsNumbers = true
+local highKeyIsNumbers = true
+
 -- These tokens determine group placement and name.
 -- Sample name location should basically always be 1 (and exist) or else error handling gets iffy.
 local sampleNameLocation = 1 
@@ -449,7 +454,7 @@ for index, file in next,samplesPaths do
     -- Set the zone root key.
     if rootLocation ~= -1 then
         local value = 0
-        if string.starts(samplesTokens[index][rootLocation],'%d') then
+        if rootIsNumbers then
             -- Remove non numerical characters from the token.
         	value = tonumber(samplesTokens[index][rootLocation]:match('%d[%d.,]*'))
         else
@@ -475,7 +480,7 @@ for index, file in next,samplesPaths do
         -- Set the zone low key.
         if lowKeyLocation ~= -1 then
             local value = 0
-            if string.starts(samplesTokens[index][lowKeyLocation],'%d') then
+            if lowKeyIsNumbers then
                 -- Remove non numerical characters from the token.
             	value = tonumber(samplesTokens[index][lowKeyLocation]:match('%d[%d.,]*'))
             else
@@ -496,7 +501,7 @@ for index, file in next,samplesPaths do
         -- Set the zone high key.
         if highKeyLocation ~= -1 then
             local value = 0
-            if string.starts(samplesTokens[index][highKeyLocation],'%d') then
+            if highKeyIsNumbers then
                 -- Remove non numerical characters from the token.
             	value = tonumber(samplesTokens[index][highKeyLocation]:match('%d[%d.,]*'))
             else
