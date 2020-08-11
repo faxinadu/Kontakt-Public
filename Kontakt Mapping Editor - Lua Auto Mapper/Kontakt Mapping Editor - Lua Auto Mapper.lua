@@ -3,7 +3,7 @@
 Kontakt Mapping Editor - Lua Auto Mapper
 Author: Native Instruments
 Written by: Yaron Eshkar
-Modified: July 27, 2020
+Modified: August 11, 2020
 
     This script will parse information from file names in order to fill a sample mapping.
 
@@ -29,12 +29,15 @@ Modified: July 27, 2020
     broken piano_r60_lk0_hk127_lv0_hv127_rr0_normal_close
 
     Open Kontakt and double click in the rack area to create an empty instrument and then run the script.
-
 --]]
 
 ----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 
--- USER VARIABLES - set these to adapt the script to different mapping scenarios and naming conventions.
+-- USER VARIABLES -
+-- set these to adapt the script to different mapping scenarios and naming conventions.
 
 -- Set the directory path with the samples. 
 -- If using samples that are not part of the directory structure where the script is located use a full path e.g.:
@@ -56,6 +59,9 @@ local lowKeyLocation = 3
 local highKeyLocation = 4
 local lowVelLocation = 5
 local highVelLocation = 6
+
+-- If set to true, the root note will be detected using MIR pitch detection and override the root token if set.
+local rootDetect = false
 
 -- These tokens determine group placement and name.
 -- Sample name location should basically always be 1 (and exist) or else error handling gets iffy.
@@ -84,6 +90,19 @@ local setLoop = false
 local tokenSeparator = "([^_]+)"
 
 ----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+
+-- Round a float number
+local function roundNum(floatNum)
+   return math.floor(floatNum + 0.5) 
+end
+
+-- Check if a value is in a range.
+local function isInRange(val,min,max)
+    return val >= min and val <= max
+end    
 
 -- Check if a value exists in a table.
 local function tableValueCheck (tab, val)
@@ -104,14 +123,6 @@ local function tableValueIndex (tab, val)
     end
 end
 
--- Split a string and return the result after the separator.
-local function stringSplit(inputString,sep)
-	for s in string.gmatch(inputString, "[^"..sep.."]+") do
-    	print(s)
-    	return s
-	end
-end
-
 -- Function for nicely printing the table results.
 local function print_r(arr)
     local str = ""
@@ -124,140 +135,40 @@ local function print_r(arr)
     print(str)
 end
 
+-- Checks that a proposed zone value is in the right range.
+local function checkZoneValue(tokenValue,tokenType)
+    local tokenTypes = {"Root","Low Key","High Key","Low Vel","High Vel"}    
+    local defaultValues = {defaultRootValue,defaultLowKeyValue,defaultHighKeyValue,defaultLowVelValue,defaultHighVelValue}    
+    -- Check that the value is valid and in range.
+    if isInRange(tokenValue,0,127) then
+        if printToConsole then print(tokenTypes[tokenType].." set: " .. tokenValue) end
+    else
+        tokenValue = defaultValues[tokenType]
+        if printToConsole then print("ERROR: ".. tokenTypes[tokenType] .." OUT OF RANGE , SET TO: " .. tokenValue) end
+        errorFlag = true
+    end	
+end
+
 -- Table with note names.
 local noteNames = {
-"C-2",
-"C#-2",
-"D-2",
-"D#-2",
-"E-2",
-"F-2",
-"F#-2",
-"G-2",
-"G#-2",
-"A-2",
-"A#-2",
-"B-2",
-"C-1",
-"C#-1",
-"D-1",
-"D#-1",
-"E-1",
-"F-1",
-"F#-1",
-"G-1",
-"G#-1",
-"A-1",
-"A#-1",
-"B-1",
-"C0",
-"C#0",
-"D0",
-"D#0",
-"E0",
-"F0",
-"F#0",
-"G0",
-"G#0",
-"A0",
-"A#0",
-"B0",
-"C1",
-"C#1",
-"D1",
-"D#1",
-"E1",
-"F1",
-"F#1",
-"G1",
-"G#1",
-"A1",
-"A#1",
-"B1",
-"C2",
-"C#2",
-"D2",
-"D#2",
-"E2",
-"F2",
-"F#2",
-"G2",
-"G#2",
-"A2",
-"A#2",
-"B2",
-"C3",
-"C#3",
-"D3",
-"D#3",
-"E3",
-"F3",
-"F#3",
-"G3",
-"G#3",
-"A3",
-"A#3",
-"B3",
-"C4",
-"C#4",
-"D4",
-"D#4",
-"E4",
-"F4",
-"F#4",
-"G4",
-"G#4",
-"A4",
-"A#4",
-"B4",
-"C5",
-"C#5",
-"D5",
-"D#5",
-"E5",
-"F5",
-"F#5",
-"G5",
-"G#5",
-"A5",
-"A#5",
-"B5",
-"C6",
-"C#6",
-"D6",
-"D#6",
-"E6",
-"F6",
-"F#6",
-"G6",
-"G#6",
-"A6",
-"A#6",
-"B6",
-"C7",
-"C#7",
-"D7",
-"D#7",
-"E7",
-"F7",
-"F#7",
-"G7",
-"G#7",
-"A7",
-"A#7",
-"B7",
-"C8",
-"C#8",
-"D8",
-"D#8",
-"E8",
-"F8",
-"F#8",
-"G8",
-"G#8"
+"C-2","C#-2","D-2","D#-2","E-2","F-2","F#-2","G-2","G#-2","A-2","A#-2","B-2",
+"C-1","C#-1","D-1","D#-1","E-1","F-1","F#-1","G-1","G#-1","A-1","A#-1","B-1",
+"C0","C#0","D0","D#0","E0","F0","F#0","G0","G#0","A0","A#0","B0",
+"C1","C#1","D1","D#1","E1","F1","F#1","G1","G#1","A1","A#1","B1",
+"C2","C#2","D2","D#2","E2","F2","F#2","G2","G#2","A2","A#2","B2",
+"C3","C#3","D3","D#3","E3","F3","F#3","G3","G#3","A3","A#3","B3",
+"C4","C#4","D4","D#4","E4","F4","F#4","G4","G#4","A4","A#4","B4",
+"C5","C#5","D5","D#5","E5","F5","F#5","G5","G#5","A5","A#5","B5",
+"C6","C#6","D6","D#6","E6","F6","F#6","G6","G#6","A6","A#6","B6",
+"C7","C#7","D7","D#7","E7","F7","F#7","G7","G#7","A7","A#7","B7",
+"C8","C#8","D8","D#8","E8","F8","F#8","G8","G#8"
 }
 
 ----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+
 -- A flag that turns to true if there were any parsing errors.
 local errorFlag = false
 
@@ -351,6 +262,9 @@ if printToConsole then
 end
 
 ----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 
 -- Create the mapping.
 
@@ -359,6 +273,9 @@ local groupsList = {}
 
 -- Variable for easier indexing.
 local x = 1
+
+-- Variable for the token values
+local tokenValue
 
 -- Loop through all the sample paths and map each sample according to the tokens.
 for index, file in next,samplesPaths do
@@ -442,24 +359,24 @@ for index, file in next,samplesPaths do
 	end
 
     -- Set the zone root key.
-    if rootLocation ~= -1 then
-        local value = 0
-        if tableValueIndex(noteNames,samplesTokens[index][rootLocation]) == nil then
-            -- Remove non numerical characters from the token.
-        	value = tonumber(samplesTokens[index][rootLocation]:match('%d[%d.,]*'))
-        else
-            -- Check for the index value of the note string
-            value = tonumber(tableValueIndex(noteNames,samplesTokens[index][rootLocation]))-1
+    -- If MIR Detection is on, override token setting and perform MIR pitch detect
+    if rootDetect then
+        tokenValue = roundNum(mir.detectPitch(file))
+        if printToConsole then print("MIR Pitch detected as: " .. tokenValue) end
+        checkZoneValue(tokenValue,1)
+        z.rootKey = tokenValue
+    else
+        if rootLocation ~= -1 then
+            if tableValueIndex(noteNames,samplesTokens[index][rootLocation]) == nil then
+                -- Remove non numerical characters from the token.
+                tokenValue = tonumber(samplesTokens[index][rootLocation]:match('%d[%d.,]*'))
+            else
+                -- Check for the index value of the note string
+                tokenValue = tonumber(tableValueIndex(noteNames,samplesTokens[index][rootLocation]))-1
+            end
+            checkZoneValue(tokenValue,1)
+            z.rootKey = tokenValue
         end
-    	-- Check that the value is valid and in range.
-        if value > -1 and value < 128 then
-    		z.rootKey = value
-    		if printToConsole then print("Root set: " .. z.rootKey) end
-    	else
-    		z.rootKey = defaultRootValue
-    		if printToConsole then print("ERROR: ROOT OUT OF RANGE , SET TO: " .. z.rootKey) end
-    		errorFlag = true
-    	end	
     end
 
     -- Check if key confine is on.
@@ -469,44 +386,28 @@ for index, file in next,samplesPaths do
     else
         -- Set the zone low key.
         if lowKeyLocation ~= -1 then
-            local value = 0
             if tableValueIndex(noteNames,samplesTokens[index][lowKeyLocation]) == nil then
                 -- Remove non numerical characters from the token.
-            	value = tonumber(samplesTokens[index][lowKeyLocation]:match('%d[%d.,]*'))
+            	tokenValue = tonumber(samplesTokens[index][lowKeyLocation]:match('%d[%d.,]*'))
             else
                 -- Check for the index value of the note string
-                value = tonumber(tableValueIndex(noteNames,samplesTokens[index][lowKeyLocation]))-1
+                tokenValue = tonumber(tableValueIndex(noteNames,samplesTokens[index][lowKeyLocation]))-1
             end
-            -- Check that the value is valid and in range.
-        	if value > -1 and value < 128 then
-        		z.keyRange.low = value
-        		if printToConsole then print("Low key set: " .. z.keyRange.low) end
-        	else
-        		z.keyRange.low = defaultLowKeyValue
-        	    if printToConsole then print("ERROR: LOW KEY OUT OF RANGE , SET TO: " .. z.keyRange.low) end
-        		errorFlag = true
-        	end			
+            checkZoneValue(tokenValue,2)		
+            z.keyRange.low = tokenValue
         end
        
         -- Set the zone high key.
         if highKeyLocation ~= -1 then
-            local value = 0
             if tableValueIndex(noteNames,samplesTokens[index][highKeyLocation]) == nil then
                 -- Remove non numerical characters from the token.
-            	value = tonumber(samplesTokens[index][highKeyLocation]:match('%d[%d.,]*'))
+            	tokenValue = tonumber(samplesTokens[index][highKeyLocation]:match('%d[%d.,]*'))
             else
                 -- Check for the index value of the note string
-                value = tonumber(tableValueIndex(noteNames,samplesTokens[index][highKeyLocation]))-1
+                tokenValue = tonumber(tableValueIndex(noteNames,samplesTokens[index][highKeyLocation]))-1
             end
-            -- Check that the value is valid and in range.
-        	if value > -1 and value < 128 then
-        		z.keyRange.high = value
-        		if printToConsole then print("High key set: " .. z.keyRange.high) end
-        	else
-          		z.keyRange.high = defaultHighKeyValue
-        	    if printToConsole then print("ERROR: HIGH KEY OUT OF RANGE , SET TO: " .. z.keyRange.high) end
-        		errorFlag = true
-        	end		  		
+            checkZoneValue(tokenValue,3)	 
+            z.keyRange.high = tokenValue 		
         end
     end
 
@@ -518,31 +419,17 @@ for index, file in next,samplesPaths do
         -- Set the zone low velocity.
         if lowVelLocation ~= -1 then
             -- Remove non numerical characters from the token.
-        	local value = tonumber(samplesTokens[index][lowVelLocation]:match('%d[%d.,]*'))
-            -- Check that the value is valid and in range.
-        	if value > -1 and value < 128 then
-        		z.velocityRange.low = value
-        		if printToConsole then print("Low velocity set: " .. z.velocityRange.low) end
-        	else
-           		z.velocityRange.low = defaultLowVelValue
-        	    if printToConsole then print("ERROR: LOW VELOCITY OUT OF RANGE , SET TO: " .. z.velocityRange.low) end
-        		errorFlag = true
-        	end	
+        	tokenValue = tonumber(samplesTokens[index][lowVelLocation]:match('%d[%d.,]*'))
+            checkZoneValue(tokenValue,4)
+            z.velocityRange.low = tokenValue
         end
 
         -- Set the zone high  velocity.
         if highVelLocation ~= -1 then
             -- Remove non numerical characters from the token.
-        	local value = tonumber(samplesTokens[index][highVelLocation]:match('%d[%d.,]*'))
-            -- Check that the value is valid and in range.
-    		if value > -1 and value < 128 then
-        		z.velocityRange.high = value
-        		if printToConsole then print("High velocity set: " .. z.velocityRange.high) end
-        	else
-        	    z.velocityRange.high = defaultHighVelValue
-        	    if printToConsole then print("ERROR: HIGH VELOCITY OUT OF RANGE , SET TO: " .. z.velocityRange.high) end
-        		errorFlag = true
-        	end		
+        	tokenValue = tonumber(samplesTokens[index][highVelLocation]:match('%d[%d.,]*'))
+            checkZoneValue(tokenValue,5)
+            z.velocityRange.high = tokenValue
         end
     end
 
@@ -557,6 +444,9 @@ for index, file in next,samplesPaths do
 
 end
 
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------
 
 -- Fix wrong group indexing annoyance.
