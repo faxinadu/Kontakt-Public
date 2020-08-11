@@ -99,6 +99,9 @@ ctUtil.instrumentConnected()
 -- Check if a file has a valid audio file extension
 ctUtil.isAudioFile(file)
 
+-- Check if a value is in a range.
+ctUtil.isInRange(val,min,max)
+
 -- Check for a valid path and print the result
 ctUtil.pathCheck(path)
 
@@ -115,7 +118,7 @@ ctUtil.samplesFolder(path,recursive)
 ctUtil.stringSplit(inputString,sep)
 
 -- Function for checking how a string starts
-function CtUtil.stringStarts(inputString,startWith)
+ctUtil.stringStarts(inputString,startWith)
 
 -- Returns a table size
 ctUtil.tableSize(t)
