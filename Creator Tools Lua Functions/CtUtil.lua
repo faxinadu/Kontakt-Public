@@ -95,7 +95,9 @@ end
 
 -- Check if a value is in a range.
 function CtUtil.isInRange(val,min,max)
+	
 	return val >= min and val <= max
+	
 end   
 
 -- Check for a valid path and print the result
