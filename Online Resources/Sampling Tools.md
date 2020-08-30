@@ -18,7 +18,7 @@ https://download.cnet.com/Myriad/3000-2170_4-10265872.html
 
 # File Tools
 
-Advanced Rename
+Advanced Renamer
 
 https://www.advancedrenamer.com/
 
