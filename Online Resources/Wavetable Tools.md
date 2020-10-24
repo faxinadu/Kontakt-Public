@@ -20,6 +20,10 @@ Ocean Swift Wavetabler
 
 https://oceanswift.net/wavetabler/
 
+Online Waveform Generator
+
+https://bgc.github.io/waveformgenerator/#/
+
 Glow Shrimp Software - Serum FM Wavetable Studio
 
 http://glowshrimpsoftware.com/sfmwts.html
