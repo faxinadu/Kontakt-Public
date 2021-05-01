@@ -1,0 +1,616 @@
+{***********************************************
+Sounds of Life Maschine+
+Author: Faxi Nadu
+Written by: Yaron Eshkar
+Modified: April 22, 2021
+*************************************************}
+
+{
+ADSR for volume and filter modulation
+LFO for filter modulation
+Chorus, Delay, Reverb, Lofi and Saturation
+}
+
+{
+to do : set initial fx controls
+to do: add instructions on nki preparation
+}
+on init
+
+    {Set the instrument name}
+    declare @instrumentFramework
+    declare @instrumentTitle
+    declare @instrumentName
+    @instrumentFramework := "M+ Framework"
+    @instrumentTitle := "Sounds of Life Maschine+"
+    @instrumentName := @instrumentFramework & " " & @instrumentTitle
+
+    {Check if running on desktop or headless}
+    declare const $mPlus := $NI_KONTAKT_IS_HEADLESS
+
+    {GUI main offsets}
+    declare $guiOffsetX := 125
+    declare $guiOffsetY := 30
+    {GUI element spacing}
+    declare $guiSpacingX := 100
+    declare $guiSpacingY := 20
+
+    {Number of NKS macros}
+    declare const $numMacros := 22
+
+    {Variable for looping}
+    declare $i
+
+    {Variable for keeping track of the last touched control}
+    declare $touchedControl
+
+    {Variable for keeping track of the playable group}
+    declare $groupSelect
+
+    {Number of Poly Macros}
+    declare const $polyMacros := 11
+
+    {Effect dry wet scaling}
+    declare %drywet[1001] := (0, 46419, 58484, 66479, 73299, 79042, 83758, 88264, 92351, 95879, 99377, 102644, 105529, 108441, 111205, 113839, 116201, 118620, 120943, 123181, 125207, 127299, 129323, 131287, 133076, 134932, 136628, 138391, 140110, 141685, 143326, 144832, 146404, 147944, 149451, 150838, 152289, 153713, 155111, 156400, 157751, 159080, 160386, 161592, 162859, 164029, 165259, 166396, 167591, 168770, 169933, 171008, 172140, 173258, 174293, 175384, 176461, 177459, 178512, 179487, 180516, 181533, 182477, 183473, 184458, 185432, 186337, 187233, 188179, 189116, 189986, 190905, 191816, 192662, 193556, 194386, 195264, 196081, 196944, 197800, 198649, 199437, 200220, 201048, 201870, 202634, 203442, 204195, 204991, 205782, 206517, 207296, 208021, 208741, 209503, 210260, 210964, 211711, 212406, 213142, 213874, 214555, 215232, 215949, 216662, 217326, 217985, 218684, 219379, 220027, 220671, 221353, 222032, 222664, 223292, 223959, 224581, 225199, 225854, 226506, 227113, 227718, 228359, 228957, 229551, 230183, 230771, 231395, 231977, 232556, 233171, 233745, 234354, 234921, 235487, 236086, 236646, 237202, 237794, 238345, 238894, 239476, 240021, 240598, 241101, 241673, 242207, 242774, 243303, 243830, 244389, 244911, 245431, 245949, 246499, 246978, 247523, 248032, 248574, 249045, 249581, 250082, 250614, 251077, 251605, 252098, 252589, 253077, 253564, 254082, 254565, 255047, 255526, 256004, 256480, 256954, 257427, 257929, 258398, 258865, 259331, 259795, 260257, 260718, 261177, 261634, 262120, 262544, 262997, 263448, 263927, 264346, 264792, 265267, 265710, 266123, 266563, 267003, 267440, 267877, 268311, 268745, 269177, 269608, 270037, 270465, 270891, 271288, 271712, 272136, 272556, 272977, 273396, 273813, 274229, 274617, 275030, 275443, 275854, 276237, 276646, 277054, 277460, 277866, 278243, 278647, 279049, 279449, 279822, 280221, 280619, 280988, 281384, 281778, 282145, 282537, 282928, 283318, 283681, 284069, 284430, 284816, 285201, 285558, 285941, 286298, 286653, 287033, 287412, 287765, 288141, 288492, 288868, 289242, 289590, 289937, 290309, 290654, 291000, 291368, 291735, 292078, 292420, 292784, 293125, 293488, 293826, 294164, 294525, 294860, 295195, 295530, 295887, 296220, 296552, 296907, 297238, 297567, 297897, 298248, 298576, 298903, 299229, 299554, 299902, 300227, 300550, 300872, 301194, 301516, 301836, 302179, 302498, 302794, 303134, 303451, 303768, 304083, 304398, 304713, 305027, 305340, 305653, 305965, 306276, 306586, 306897, 307206, 307493, 307801, 308109, 308416, 308722, 309028, 309333, 309638, 309920, 310223, 310527, 310828, 311109, 311410, 311710, 312010, 312309, 312587, 312885, 313183, 313459, 313755, 314051, 314326, 314621, 314894, 315189, 315481, 315754, 316046, 316317, 316609, 316878, 317169, 317458, 317727, 317995, 318283, 318550, 318837, 319104, 319390, 319655, 319920, 320205, 320469, 320753, 321016, 321279, 321541, 321822, 322084, 322345, 322625, 322885, 323145, 323404, 323663, 323941, 324199, 324456, 324714, 324971, 325227, 325483, 325758, 325994, 326268, 326522, 326775, 327029, 327282, 327535, 327787, 328039, 328291, 328542, 328793, 329024, 329274, 329524, 329773, 330022, 330270, 330518, 330766, 330995, 331242, 331488, 331716, 331962, 332207, 332452, 332697, 332923, 333167, 333411, 333636, 333879, 334104, 334346, 334588, 334811, 335053, 335275, 335516, 335738, 335979, 336200, 336439, 336660, 336899, 337119, 337339, 337577, 337796, 338033, 338252, 338470, 338706, 338924, 339142, 339359, 339594, 339811, 340028, 340244, 340477, 340693, 340908, 341123, 341338, 341552, 341766, 341981, 342212, 342425, 342621, 342851, 343064, 343276, 343470, 343682, 343894, 344123, 344317, 344527, 344737, 344948, 345158, 345367, 345560, 345769, 345978, 346187, 346396, 346586, 346794, 347002, 347193, 347400, 347589, 347796, 348003, 348192, 348398, 348604, 348793, 348981, 349186, 349391, 349579, 349766, 349970, 350157, 350361, 350548, 350734, 350937, 351124, 351310, 351512, 351697, 351899, 352084, 352269, 352454, 352655, 352822, 353023, 353207, 353390, 353574, 353757, 353940, 354123, 354306, 354489, 354671, 354853, 355051, 355216, 355398, 355579, 355761, 355941, 356122, 356303, 356483, 356648, 356827, 357007, 357187, 357366, 357530, 357709, 357888, 358051, 358229, 358408, 358570, 358748, 358910, 359088, 359266, 359427, 359588, 359765, 359942, 360103, 360264, 360440, 360601, 360761, 360937, 361097, 361257, 361432, 361591, 361751, 361910, 362084, 362243, 362402, 362561, 362735, 362893, 363051, 363210, 363368, 363525, 363683, 363840, 363998, 364155, 364312, 364469, 364626, 364782, 364939, 365079, 365236, 365392, 365548, 365704, 365859, 366000, 366155, 366310, 366465, 366605, 366760, 366900, 367055, 367209, 367363, 367502, 367641, 367795, 367934, 368088, 368226, 368379, 368518, 368671, 368809, 368962, 369100, 369237, 369375, 369528, 369665, 369802, 369939, 370092, 370228, 370365, 370502, 370639, 370775, 370911, 371047, 371199, 371320, 371456, 371606, 371742, 371863, 371998, 372134, 372269, 372404, 372540, 372675, 372810, 372930, 373065, 373199, 373334, 373453, 373588, 373722, 373842, 373976, 374095, 374228, 374347, 374482, 374600, 374734, 374853, 374986, 375105, 375238, 375356, 375474, 375607, 375725, 375844, 375976, 376094, 376212, 376329, 376462, 376579, 376697, 376814, 376932, 377049, 377167, 377283, 377400, 377532, 377635, 377751, 377868, 377985, 378102, 378218, 378335, 378451, 378553, 378669, 378785, 378902, 379003, 379119, 379235, 379336, 379452, 379568, 379683, 379785, 379900, 380002, 380117, 380218, 380333, 380434, 380549, 380649, 380750, 380865, 380966, 381066, 381181, 381281, 381381, 381482, 381596, 381696, 381797, 381897, 381997, 382096, 382197, 382296, 382396, 382496, 382610, 382695, 382794, 382894, 382994, 383093, 383193, 383292, 383377, 383476, 383575, 383675, 383773, 383859, 383957, 384056, 384141, 384240, 384324, 384423, 384522, 384606, 384705, 384789, 384888, 384972, 385057, 385155, 385239, 385323, 385422, 385506, 385590, 385674, 385772, 385856, 385940, 386024, 386108, 386205, 386289, 386373, 386457, 386540, 386624, 386708, 386791, 386875, 386958, 387028, 387111, 387195, 387278, 387361, 387445, 387514, 387598, 387681, 387750, 387833, 387916, 387986, 388068, 388151, 388221, 388290, 388372, 388456, 388524, 388594, 388676, 388745, 388814, 388897, 388966, 389035, 389117, 389186, 389255, 389324, 389392, 389475, 389544, 389612, 389680, 389749, 389818, 389886, 389955, 390023, 390092, 390160, 390228, 390297, 390352, 390420, 390489, 390557, 390625, 390680, 390748, 390816, 390871, 390939, 391007, 391062, 391130, 391184, 391252, 391307, 391375, 391429, 391497, 391551, 391606, 391674, 391728, 391783, 391850, 391905, 391959, 392013, 392067, 392135, 392189, 392244, 392297, 392352, 392406, 392460, 392514, 392568, 392622, 392677, 392730, 392784, 392825, 392879, 392933, 392987, 393041, 393082, 393135, 393189, 393230, 393283, 393337, 393378, 393431, 393472, 393526, 393566, 393620, 393661, 393714, 393755, 393795, 393848, 393889, 393929, 393983, 394023, 394063, 394104, 394144, 394197, 394238, 394278, 394318, 394358, 394398, 394439, 394479, 394519, 394559, 394599, 394640, 394679, 394706, 394747, 394786, 394827, 394853, 394894, 394934, 394960, 395001, 395040, 395067, 395107, 395134, 395174, 395200, 395241, 395267, 395307, 395334, 395361, 395401, 395427, 395468, 395494, 395520, 395548, 395574, 395614, 395640, 395667, 395694, 395720, 395747, 395774, 395800, 395827, 395853, 395880, 395907, 395933, 395960, 395986, 395999, 396026, 396053, 396079, 396092, 396119, 396145, 396159, 396186, 396199, 396225, 396252, 396265, 396292, 396305, 396331, 396344, 396358, 396385, 396398, 396411, 396438, 396451, 396464, 396477, 396504, 396517, 396530, 396544, 396557, 396570, 396583, 396596, 396610, 396623, 396636, 396649, 396663, 396676, 396689, 396702, 396702, 396716, 396729, 396742, 396742, 396755, 396768, 396768, 396782, 396782, 396795, 396809, 396809, 396821, 396821, 396821, 396835, 396835, 396848, 396848, 396848, 396848, 396848, 396848, 396848, 396848, 396849, 396849, 396849, 396849, 396849, 396849, 396850)
+
+    {Delay Sync Variables}
+    declare const $NUM_FX_SYNC_TIMES := 20
+    declare const $DLY_DIV := 1000000 / ($NUM_FX_SYNC_TIMES-1)
+    declare %dly_sync_unit[$NUM_FX_SYNC_TIMES] := ($NI_SYNC_UNIT_64TH_TRIPLET, $NI_SYNC_UNIT_64TH, $NI_SYNC_UNIT_32ND_TRIPLET, $NI_SYNC_UNIT_256TH, $NI_SYNC_UNIT_32ND, $NI_SYNC_UNIT_16TH_TRIPLET, $NI_SYNC_UNIT_64TH, $NI_SYNC_UNIT_16TH, $NI_SYNC_UNIT_8TH_TRIPLET, $NI_SYNC_UNIT_32ND, $NI_SYNC_UNIT_8TH, $NI_SYNC_UNIT_QUARTER_TRIPLET, $NI_SYNC_UNIT_16TH, $NI_SYNC_UNIT_QUARTER, $NI_SYNC_UNIT_HALF_TRIPLET, $NI_SYNC_UNIT_8TH, $NI_SYNC_UNIT_HALF, $NI_SYNC_UNIT_WHOLE_TRIPLET, $NI_SYNC_UNIT_QUARTER, $NI_SYNC_UNIT_WHOLE)
+  	declare !dly_sync_string[$NUM_FX_SYNC_TIMES]
+	   !dly_sync_string[0] := "1/64 T"
+	   !dly_sync_string[1] := "1/64"
+	   !dly_sync_string[2] := "1/32 T"
+	   !dly_sync_string[3] := "1/64 D"
+	   !dly_sync_string[4] := "1/32"
+	   !dly_sync_string[5] := "1/16 T"
+	   !dly_sync_string[6] := "1/32 D"
+	   !dly_sync_string[7] := "1/16"
+	   !dly_sync_string[8] := "1/8 T"
+	   !dly_sync_string[9] := "1/16 D"
+	   !dly_sync_string[10] := "1/8"
+	   !dly_sync_string[11] := "1/4 T"
+	   !dly_sync_string[12] := "1/8 D"
+	   !dly_sync_string[13] := "1/4"
+	   !dly_sync_string[14] := "1/2 T"
+	   !dly_sync_string[15] := "1/4 D"
+	   !dly_sync_string[16] := "1/2"
+	   !dly_sync_string[17] := "1/1 T"
+	   !dly_sync_string[18] := "1/2 D"
+	   !dly_sync_string[19] := "1/1"
+  	declare %dly_sync_value[$NUM_FX_SYNC_TIMES] := (0, 0, 0, 454545, 0, 0, 181818, 0, 0, 181818, 0, 0, 181818, 0, 0, 181818, 0, 0, 181818, 0) 
+
+    {LFO Sync Variables}
+    declare const $NUM_MOD_SYNC_TIMES := 34
+    declare const $LFO_DIV := 1000000 / ($NUM_MOD_SYNC_TIMES-1)
+    declare %mod_sync_unit[$NUM_MOD_SYNC_TIMES] := ($NI_SYNC_UNIT_WHOLE, $NI_SYNC_UNIT_WHOLE, $NI_SYNC_UNIT_WHOLE, $NI_SYNC_UNIT_WHOLE, $NI_SYNC_UNIT_WHOLE, $NI_SYNC_UNIT_WHOLE, $NI_SYNC_UNIT_WHOLE, $NI_SYNC_UNIT_WHOLE, $NI_SYNC_UNIT_WHOLE, $NI_SYNC_UNIT_WHOLE, $NI_SYNC_UNIT_WHOLE, $NI_SYNC_UNIT_WHOLE, $NI_SYNC_UNIT_QUARTER, $NI_SYNC_UNIT_WHOLE_TRIPLET, $NI_SYNC_UNIT_HALF, $NI_SYNC_UNIT_8TH, $NI_SYNC_UNIT_HALF_TRIPLET, $NI_SYNC_UNIT_QUARTER, $NI_SYNC_UNIT_16TH, $NI_SYNC_UNIT_QUARTER_TRIPLET, $NI_SYNC_UNIT_8TH, $NI_SYNC_UNIT_32ND, $NI_SYNC_UNIT_8TH_TRIPLET, $NI_SYNC_UNIT_16TH, $NI_SYNC_UNIT_64TH, $NI_SYNC_UNIT_16TH_TRIPLET, $NI_SYNC_UNIT_32ND, $NI_SYNC_UNIT_256TH, $NI_SYNC_UNIT_32ND_TRIPLET, $NI_SYNC_UNIT_64TH, $NI_SYNC_UNIT_256TH, $NI_SYNC_UNIT_64TH, $NI_SYNC_UNIT_256TH, $NI_SYNC_UNIT_256TH)
+    declare !mod_sync_string[$NUM_MOD_SYNC_TIMES]
+        !mod_sync_string[0] := "12/1"
+        !mod_sync_string[1] := "11/1"
+        !mod_sync_string[2] := "10/1"
+        !mod_sync_string[3] := "9/1"
+        !mod_sync_string[4] := "8/1"
+        !mod_sync_string[5] := "7/1"
+        !mod_sync_string[6] := "6/1"
+        !mod_sync_string[7] := "5/1"
+        !mod_sync_string[8] := "4/1"
+        !mod_sync_string[9] := "3/1"
+        !mod_sync_string[10] := "2/1"
+        !mod_sync_string[11] := "1/1"
+        !mod_sync_string[12] := "1/2D"
+        !mod_sync_string[13] := "1/1T"
+        !mod_sync_string[14] := "1/2"
+        !mod_sync_string[15] := "1/4D"
+        !mod_sync_string[16] := "1/2T"
+        !mod_sync_string[17] := "1/4"
+        !mod_sync_string[18] := "1/8D"
+        !mod_sync_string[19] := "1/4T"
+        !mod_sync_string[20] := "1/8"
+        !mod_sync_string[21] := "1/16D"
+        !mod_sync_string[22] := "1/8T"
+        !mod_sync_string[23] := "1/16"
+        !mod_sync_string[24] := "1/32D"
+        !mod_sync_string[25] := "1/16T"
+        !mod_sync_string[26] := "1/32"
+        !mod_sync_string[27] := "1/64D"
+        !mod_sync_string[28] := "1/32T"
+        !mod_sync_string[29] := "1/64"
+        !mod_sync_string[30] := "1/128D"
+        !mod_sync_string[31] := "1/64T"
+        !mod_sync_string[32] := "1/128"
+        !mod_sync_string[33] := "1/256"
+    declare %mod_sync_value[$NUM_MOD_SYNC_TIMES] := (0, 90909, 181818, 272727, 363636, 454545, 545454, 636363, 727272, 818181, 909090, 999999, 818181, 999999, 999999, 818181, 999999, 999999, 818181, 999999, 999999, 818181, 999999, 999999, 818181, 999999, 999999, 545454, 999999, 999999, 818181, 999999, 909090, 999999)          
+
+    set_script_title(@instrumentFramework) {Set the sscript title}
+    message("") {Reset the messages}
+    set_snapshot_type(1) {Don't init on snapshots}
+
+    declare ui_label $labelInstrumentName(8,1) {Label for the full instrument name}
+
+    {Check if headless}
+    if($mPlus=0)
+        {Make the performance view}
+        set_ui_height(7)
+        make_perfview
+        set_ui_color(000000h)
+        {Set the instrument name label parameters}
+        set_text($labelInstrumentName, @instrumentName)
+        set_control_par(get_ui_id($labelInstrumentName),$CONTROL_PAR_WIDTH,300)
+        set_control_par(get_ui_id($labelInstrumentName),$CONTROL_PAR_TEXT_ALIGNMENT,1)
+        move_control_px($labelInstrumentName,175,10)
+    else
+        {Hide the instrument name label}
+        set_control_par(get_ui_id($labelInstrumentName),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)        
+    end if
+
+    {Group Effects}
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_FILTER,0,0,-1) 
+    set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE,$FILTER_TYPE_SV_LP4,0,0,-1)
+
+    {Instrument Effects}
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_CHORUS,-1,2,1)
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_REPLIKA,-1,3,1) 
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_REVERB,-1,4,1)
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_LOFI,-1,5,1)
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_SHAPER,-1,6,1)
+
+    {Main Effects}
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_TRANSLIM,-1,7,2)
+
+    declare ui_slider $macro0(0,$NUM_GROUPS-1)     {source select}
+    declare ui_slider $macro1(0,1000000)           {amp attack}
+    declare ui_slider $macro2(0,1000000)           {amp decay}
+    declare ui_slider $macro3(0,1000000)           {amp sustain}
+    declare ui_slider $macro4(0,1000000)           {amp release}
+    declare ui_slider $macro5(0,1000000)           {filter cut}
+    declare ui_slider $macro6(0,1000000)           {filter res}
+    declare ui_slider $macro7(0,1000000)           {filter env depth}
+    declare ui_slider $macro8(0,4)                 {lfo wave}
+    declare ui_slider $macro9(0,1000000)           {lfo depth}
+    declare ui_slider $macro10(0,1000000)          {lfo rate}
+    declare ui_slider $macro11(0,1000000)          {chorus depth}
+    declare ui_slider $macro12(0,1000000)          {chorus speed}
+    declare ui_slider $macro13(0,1000)             {chorus wet}
+    declare ui_slider $macro14(0,1000000)          {delay time}
+    declare ui_slider $macro15(0,1000000)          {delay feedback}
+    declare ui_slider $macro16(0,1000)             {delay wet}
+    declare ui_slider $macro17(0,1000000)          {reverb size}
+    declare ui_slider $macro18(0,1000000)          {reverb stereo}
+    declare ui_slider $macro19(0,1000)             {reverb wet}
+    declare ui_slider $macro20(0,1000000)          {lofi sr}
+    declare ui_slider $macro21(500000,1000000)     {saturation}
+
+    declare ui_label $label0(1,1)
+    declare ui_label $label1(1,1)
+    declare ui_label $label2(1,1)
+    declare ui_label $label3(1,1)
+    declare ui_label $label4(1,1)
+    declare ui_label $label5(1,1)
+    declare ui_label $label6(1,1)
+    declare ui_label $label7(1,1)
+    declare ui_label $label8(1,1)
+    declare ui_label $label9(1,1)
+    declare ui_label $label10(1,1)
+    declare ui_label $label11(1,1)
+    declare ui_label $label12(1,1)
+    declare ui_label $label13(1,1)
+    declare ui_label $label14(1,1)
+    declare ui_label $label15(1,1)
+    declare ui_label $label16(1,1)
+    declare ui_label $label17(1,1)
+    declare ui_label $label18(1,1)
+    declare ui_label $label19(1,1)
+    declare ui_label $label20(1,1)
+    declare ui_label $label21(1,1)
+
+    {Arrays for the GUI IDs}
+    declare %macroID[$numMacros]
+    declare %labelID[$numMacros]
+    
+    {Macro Arrays}
+    declare !macroText[$numMacros] {Macro Texts}
+    declare !valueType[$numMacros] {Value Types}
+    declare !lfoWav[5] {LFO Wavs}
+    declare %enginerPar[$numMacros] {Array for the engine parameters}
+    declare %groupSlot[$numMacros] := (-1) {Group slot array}   
+    declare %fxSlot[$numMacros] {FX slot array}  
+    declare %genericSlot[$numMacros] {Generic slot array}
+    
+    !macroText[0] := "Source"
+    !macroText[1] := "Attack"
+    !macroText[2] := "Decay"
+    !macroText[3] := "Sustain"
+    !macroText[4] := "Release"     
+    !macroText[5] := "Cut"
+    !macroText[6] := "Res"
+    !macroText[7] := "Env"
+    !macroText[8] := "LFO Wav"
+    !macroText[9] := "LFO Dept"
+    !macroText[10] := "LFO Rat"
+    !macroText[11] := "Chr Dept"
+    !macroText[12] := "Chr Spd"
+    !macroText[13] := "Chr Wet"
+    !macroText[14] := "Del Time"
+    !macroText[15] := "Del Feed"
+    !macroText[16] := "Del Wet"
+    !macroText[17] := "Rvb Size"
+    !macroText[18] := "Rvb Ster"
+    !macroText[19] := "Rvb Wet"
+    !macroText[20] := "Lofi"
+    !macroText[21] := "Sat"
+
+    !valueType[0] := ""
+    !valueType[1] := " ms"
+    !valueType[2] := " ms"
+    !valueType[3] := " dB"
+    !valueType[4] := " ms"
+    !valueType[5] := " Hz"
+    !valueType[6] := " %"
+    !valueType[7] := " %"
+    !valueType[8] := " "
+    !valueType[9] := " %"
+    !valueType[10] := " "
+    !valueType[11] := " %"
+    !valueType[12] := " Hz"
+    !valueType[13] := " %"
+    !valueType[14] := " "
+    !valueType[15] := " %"
+    !valueType[16] := " %"
+    !valueType[17] := " %"
+    !valueType[18] := " %"
+    !valueType[19] := " %"
+    !valueType[20] := " Hz"
+    !valueType[21] := " %"
+
+    !lfoWav[0] := "Sine"
+    !lfoWav[1] := "Tri"
+    !lfoWav[2] := "Saw"
+    !lfoWav[3] := "Squ"
+    !lfoWav[4] := "Rand"
+
+    %enginerPar[0] := -1                        {Group select, so unused}
+    %enginerPar[1] := $ENGINE_PAR_ATTACK        
+    %enginerPar[2] := $ENGINE_PAR_DECAY         
+    %enginerPar[3] := $ENGINE_PAR_SUSTAIN       
+    %enginerPar[4] := $ENGINE_PAR_RELEASE     
+    %enginerPar[5] := $ENGINE_PAR_CUTOFF
+    %enginerPar[6] := $ENGINE_PAR_RESONANCE
+    %enginerPar[7] := $ENGINE_PAR_MOD_TARGET_INTENSITY
+    %enginerPar[8] := -1
+    %enginerPar[9] := $ENGINE_PAR_MOD_TARGET_INTENSITY
+    %enginerPar[10] := -1
+    %enginerPar[11] := $ENGINE_PAR_CH_DEPTH
+    %enginerPar[12] := $ENGINE_PAR_CH_SPEED
+    %enginerPar[13] := $ENGINE_PAR_SEND_EFFECT_OUTPUT_GAIN
+    %enginerPar[14] := $ENGINE_PAR_RDL_TIME
+    %enginerPar[15] := $ENGINE_PAR_RDL_FEEDBACK
+    %enginerPar[16] := $ENGINE_PAR_SEND_EFFECT_OUTPUT_GAIN
+    %enginerPar[17] := $ENGINE_PAR_RV_SIZE
+    %enginerPar[18] := $ENGINE_PAR_RV_STEREO
+    %enginerPar[19] := $ENGINE_PAR_SEND_EFFECT_OUTPUT_GAIN
+    %enginerPar[20] := $ENGINE_PAR_FREQUENCY
+    %enginerPar[21] := $ENGINE_PAR_SHAPE
+
+    %fxSlot[0] := 0
+    %fxSlot[1] := 0
+    %fxSlot[2] := 0
+    %fxSlot[3] := 0
+    %fxSlot[4] := 0
+    %fxSlot[5] := 0
+    %fxSlot[6] := 0
+    %fxSlot[7] := 0
+    %fxSlot[8] := 1
+    %fxSlot[9] := 1
+    %fxSlot[10] := 1
+    %fxSlot[11] := 2
+    %fxSlot[12] := 2
+    %fxSlot[13] := 2
+    %fxSlot[14] := 3
+    %fxSlot[15] := 3
+    %fxSlot[16] := 3
+    %fxSlot[17] := 4
+    %fxSlot[18] := 4
+    %fxSlot[19] := 4
+    %fxSlot[20] := 5
+    %fxSlot[21] := 6
+
+    %genericSlot[0] := -1
+    %genericSlot[1] := -1
+    %genericSlot[2] := -1
+    %genericSlot[3] := -1
+    %genericSlot[4] := -1
+    %genericSlot[5] := -1
+    %genericSlot[6] := -1
+    %genericSlot[7] := 1
+    %genericSlot[8] := -1
+    %genericSlot[9] := 0
+    %genericSlot[10] := -1
+    %genericSlot[11] := 1
+    %genericSlot[12] := 1
+    %genericSlot[13] := 1
+    %genericSlot[14] := 1
+    %genericSlot[15] := 1
+    %genericSlot[16] := 1
+    %genericSlot[17] := 1
+    %genericSlot[18] := 1
+    %genericSlot[19] := 1
+    %genericSlot[20] := 1
+    %genericSlot[21] := 1
+
+    {Set the control parameters}
+    $i := 0
+    while($i<$numMacros)
+        {Put the controls in the GUI ID array}
+        %macroID[$i] := get_ui_id($macro0)+$i
+        %labelID[$i] := get_ui_id($label0)+$i
+        {Set the automation IDs}
+        set_control_par(%macroID[$i],$CONTROL_PAR_AUTOMATION_ID,$i)
+        set_control_par_str(%macroID[$i],$CONTROL_PAR_AUTOMATION_NAME,!macroText[$i])
+        {Hide all the controls}
+        set_control_par(%macroID[$i],$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+        set_control_par(%labelID[$i],$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+        {Check if running on headless}
+        if($mPlus=0)
+                {Hide all the controls}
+                set_control_par(%macroID[$i],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+                set_control_par(%labelID[$i],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+                {Position the controls}
+                if($i<4) {Position the first row of four controls and labels}    
+                    set_control_par(%macroID[$i],$CONTROL_PAR_POS_X,$guiOffsetX+($i*$guiSpacingX))
+                    set_control_par(%macroID[$i],$CONTROL_PAR_POS_Y,$guiOffsetY)
+                    set_control_par(%labelID[$i],$CONTROL_PAR_POS_X,$guiOffsetX+($i*$guiSpacingX))
+                    set_control_par(%labelID[$i],$CONTROL_PAR_POS_Y,$guiOffsetY+$guiSpacingY)
+                end if
+                if($i>3 and $i<8) {Position the second row of four controls and labels}
+                    set_control_par(%macroID[$i],$CONTROL_PAR_POS_X,$guiOffsetX+(($i-4)*$guiSpacingX))
+                    set_control_par(%macroID[$i],$CONTROL_PAR_POS_Y,$guiOffsetY+$guiSpacingY*2)
+                    set_control_par(%labelID[$i],$CONTROL_PAR_POS_X,$guiOffsetX+(($i-4)*$guiSpacingX))
+                    set_control_par(%labelID[$i],$CONTROL_PAR_POS_Y,$guiOffsetY+$guiSpacingY*3)
+                end if
+                if($i>7 and $i<12) {Position the third row of four controls and labels}
+                    set_control_par(%macroID[$i],$CONTROL_PAR_POS_X,$guiOffsetX+(($i-8)*$guiSpacingX))
+                    set_control_par(%macroID[$i],$CONTROL_PAR_POS_Y,$guiOffsetY+$guiSpacingY*4)
+                    set_control_par(%labelID[$i],$CONTROL_PAR_POS_X,$guiOffsetX+(($i-8)*$guiSpacingX))
+                    set_control_par(%labelID[$i],$CONTROL_PAR_POS_Y,$guiOffsetY+$guiSpacingY*5)
+                end if
+                if($i>11 and $i<16) {Position the fourthrow of four controls and labels}
+                    set_control_par(%macroID[$i],$CONTROL_PAR_POS_X,$guiOffsetX+(($i-12)*$guiSpacingX))
+                    set_control_par(%macroID[$i],$CONTROL_PAR_POS_Y,$guiOffsetY+$guiSpacingY*6)
+                    set_control_par(%labelID[$i],$CONTROL_PAR_POS_X,$guiOffsetX+(($i-12)*$guiSpacingX))
+                    set_control_par(%labelID[$i],$CONTROL_PAR_POS_Y,$guiOffsetY+$guiSpacingY*7)
+                end if
+                if($i>15 and $i<20) {Position the fifth row of four controls and labels}             
+                    set_control_par(%macroID[$i],$CONTROL_PAR_POS_X,$guiOffsetX+(($i-16)*$guiSpacingX))
+                    set_control_par(%macroID[$i],$CONTROL_PAR_POS_Y,$guiOffsetY+$guiSpacingY*8)
+                    set_control_par(%labelID[$i],$CONTROL_PAR_POS_X,$guiOffsetX+(($i-16)*$guiSpacingX))
+                    set_control_par(%labelID[$i],$CONTROL_PAR_POS_Y,$guiOffsetY+$guiSpacingY*9)
+                end if
+                if($i>19 and $i<$numMacros){Position the sixth row of four controls and labels}
+                    set_control_par(%macroID[$i],$CONTROL_PAR_POS_X,$guiOffsetX+(($i-20)*$guiSpacingX))
+                    set_control_par(%macroID[$i],$CONTROL_PAR_POS_Y,$guiOffsetY+$guiSpacingY*10)
+                    set_control_par(%labelID[$i],$CONTROL_PAR_POS_X,$guiOffsetX+(($i-20)*$guiSpacingX))
+                    set_control_par(%labelID[$i],$CONTROL_PAR_POS_Y,$guiOffsetY+$guiSpacingY*11)
+                end if
+
+        end if
+        inc($i)
+    end while
+
+end on
+
+on note {Note logic}
+    disallow_group($ALL_GROUPS) {First disallow all groups}
+    allow_group($groupSelect) {Play only the selected group}
+end on
+
+function set_control {Set normal controls}
+    {Check if a touched control is on group or instrument level}
+    if ($touchedControl<$polyMacros)
+        %groupSlot[$touchedControl] := $groupSelect
+    end if    
+    {Set the engine parameter}
+    set_engine_par(%enginerPar[$touchedControl],get_control_par(%macroID[$touchedControl],$CONTROL_PAR_VALUE),%groupSlot[$touchedControl],%fxSlot[$touchedControl],%genericSlot[$touchedControl])
+    {Update the internal slider label for host automation}
+    set_control_par_str(%macroID[$touchedControl],$CONTROL_PAR_LABEL,get_engine_par_disp(%enginerPar[$touchedControl],%groupSlot[$touchedControl],%fxSlot[$touchedControl],%genericSlot[$touchedControl]) & !valueType[$touchedControl])
+    {Update the GUI label}
+    if($mPlus=0)
+        set_control_par_str(%labelID[$touchedControl],$CONTROL_PAR_TEXT,!macroText[$touchedControl] & ": " & get_engine_par_disp(%enginerPar[$touchedControl],%groupSlot[$touchedControl],%fxSlot[$touchedControl],%genericSlot[$touchedControl]) & !valueType[$touchedControl])
+    end if
+end function
+
+
+function set_lfo_rate {Set synced lfo rate controls}
+    {Set the engine parameter}
+    set_engine_par($ENGINE_PAR_INTMOD_FREQUENCY_UNIT,%mod_sync_unit[get_control_par(%macroID[$touchedControl],$CONTROL_PAR_VALUE) / $LFO_DIV],%groupSlot[$touchedControl],%fxSlot[$touchedControl],%genericSlot[$touchedControl])
+    set_engine_par($ENGINE_PAR_INTMOD_FREQUENCY,%mod_sync_unit[get_control_par(%macroID[$touchedControl],$CONTROL_PAR_VALUE) / $LFO_DIV],%groupSlot[$touchedControl],%fxSlot[$touchedControl],%genericSlot[$touchedControl])
+    {Update the internal slider label for host automation}
+    set_control_par_str(%macroID[$touchedControl],$CONTROL_PAR_LABEL,!mod_sync_string[get_control_par(%macroID[$touchedControl],$CONTROL_PAR_VALUE) / $LFO_DIV])
+    {Update the GUI label}
+    if($mPlus=0)
+        set_control_par_str(%labelID[$touchedControl],$CONTROL_PAR_TEXT,!macroText[$touchedControl] & ": " & !mod_sync_string[get_control_par(%macroID[$touchedControl],$CONTROL_PAR_VALUE) / $LFO_DIV])
+    end if
+end function
+
+function set_lfo_wav {Set lfo wav controls}
+    {Set the engine parameter}
+    set_engine_par($ENGINE_PAR_INTMOD_SUBTYPE,get_control_par(%macroID[$touchedControl],$CONTROL_PAR_VALUE),%groupSlot[$touchedControl],%fxSlot[$touchedControl],%genericSlot[$touchedControl])
+    {Update the internal slider label for host automation}
+    set_control_par_str(%macroID[$touchedControl],$CONTROL_PAR_LABEL,!lfoWav[get_control_par(%macroID[$touchedControl],$CONTROL_PAR_VALUE)])
+    {Update the GUI label}
+    if($mPlus=0)
+        set_control_par_str(%labelID[$touchedControl],$CONTROL_PAR_TEXT,!macroText[$touchedControl] & ": " & !lfoWav[get_control_par(%macroID[$touchedControl],$CONTROL_PAR_VALUE)])
+    end if
+end function
+
+function set_group {Source select}
+    $groupSelect := $macro1
+    {Update the internal slider label for host automation}
+    set_control_par_str(%macroID[$touchedControl],$CONTROL_PAR_LABEL,$groupSelect+1)
+    {Update the GUI label}
+    if($mPlus=0)
+        set_control_par_str(%labelID[$touchedControl],$CONTROL_PAR_TEXT,!macroText[0] & ": " & $groupSelect+1)
+    end if
+    {Set the macro values for the selected group}
+    $i := 1
+    while ($i<$polyMacros)
+        $touchedControl := $i
+        call set_control
+        inc($i)
+    end while
+end function
+
+function set_wet {Set dry/wet controls}
+    set_engine_par($ENGINE_PAR_SEND_EFFECT_OUTPUT_GAIN,%drywet[get_control_par(%macroID[$touchedControl],$CONTROL_PAR_VALUE)],%groupSlot[$touchedControl],%fxSlot[$touchedControl],%genericSlot[$touchedControl])
+    set_engine_par($ENGINE_PAR_SEND_EFFECT_DRY_LEVEL,%drywet[1000 - get_control_par(%macroID[$touchedControl],$CONTROL_PAR_VALUE)],%groupSlot[$touchedControl],%fxSlot[$touchedControl],%genericSlot[$touchedControl])
+    {Update the internal slider label for host automation}
+    set_control_par_str(%macroID[$touchedControl],$CONTROL_PAR_LABEL,%drywet[get_control_par(%macroID[$touchedControl],$CONTROL_PAR_VALUE)] & !valueType[$touchedControl])
+    {Update the GUI label}
+    if($mPlus=0)
+        set_control_par_str(%labelID[$touchedControl],$CONTROL_PAR_TEXT,!macroText[$touchedControl] & ": " & real_to_int(100.0 * (int_to_real(get_control_par(%macroID[$touchedControl],$CONTROL_PAR_VALUE)) / 1001.0))  & !valueType[$touchedControl])
+    end if
+end function
+
+function set_delay_time {Set synced delay time controls}
+    {Set the engine parameter}
+    set_engine_par($ENGINE_PAR_RDL_TIME_UNIT,%dly_sync_unit[get_control_par(%macroID[$touchedControl],$CONTROL_PAR_VALUE) / $DLY_DIV],%groupSlot[$touchedControl],%fxSlot[$touchedControl],%genericSlot[$touchedControl])
+    set_engine_par($ENGINE_PAR_RDL_TIME,%dly_sync_unit[get_control_par(%macroID[$touchedControl],$CONTROL_PAR_VALUE) / $DLY_DIV],%groupSlot[$touchedControl],%fxSlot[$touchedControl],%genericSlot[$touchedControl])
+    {Update the internal slider label for host automation}
+    set_control_par_str(%macroID[$touchedControl],$CONTROL_PAR_LABEL,!dly_sync_string[get_control_par(%macroID[$touchedControl],$CONTROL_PAR_VALUE) / $DLY_DIV])
+    {Update the GUI label}
+    if($mPlus=0)
+        set_control_par_str(%labelID[$touchedControl],$CONTROL_PAR_TEXT,!macroText[$touchedControl] & ": " & !dly_sync_string[get_control_par(%macroID[$touchedControl],$CONTROL_PAR_VALUE) / $DLY_DIV])
+    end if
+end function
+
+on persistence_changed {Refresh on snapshots}
+    {Set the macro values for the selected group}
+    call set_group
+    $i := 0
+    while ($i<$polyMacros)
+        $touchedControl := $i
+        call set_control
+        inc($i)
+    end while
+    $touchedControl := 8
+    call set_lfo_wav
+    $touchedControl := 10
+    call set_lfo_rate
+    $touchedControl := 13
+    call set_wet
+    $touchedControl := 16
+    call set_wet
+    $touchedControl := 19
+    call set_wet
+    $touchedControl := 14
+    call set_delay_time
+end on
+
+on ui_control($macro0) {source select}
+    $touchedControl := 0
+    call set_group
+end on
+
+on ui_control($macro1) {amp attack}
+    $touchedControl := 1
+    call set_control
+end on
+
+on ui_control($macro2) {amp decay}
+    $touchedControl := 2
+    call set_control
+end on
+
+on ui_control($macro3) {amp sustain}
+    $touchedControl := 3
+    call set_control
+end on
+
+on ui_control($macro4) {amp release}
+    $touchedControl := 4
+    call set_control
+end on
+
+on ui_control($macro5) {filter cut}
+    $touchedControl := 5
+    call set_control
+end on
+
+on ui_control($macro6) {filter res}
+    $touchedControl := 6
+    call set_control
+end on
+
+on ui_control($macro7) {filter env}
+    $touchedControl := 7
+    call set_control
+end on
+
+on ui_control($macro8) {lfo wave}
+    $touchedControl := 8
+    call set_lfo_wav
+end on
+
+on ui_control($macro9) {lfo depth}
+    $touchedControl := 9
+    call set_control
+end on
+
+on ui_control($macro10) {lfo rate}
+    $touchedControl := 10
+    call set_lfo_rate
+end on
+
+on ui_control($macro11) {chorus depth}
+    $touchedControl := 11
+    call set_control
+end on
+
+on ui_control($macro12) {chorus speed}
+    $touchedControl := 12
+    call set_control
+end on
+
+on ui_control($macro13) {chorus wet}
+    $touchedControl := 13
+    call set_wet
+end on
+
+on ui_control($macro14) {delay time}
+    $touchedControl := 14
+    call set_delay_time
+end on
+
+on ui_control($macro15) {delay feed}
+    $touchedControl := 15
+    call set_control
+end on
+
+on ui_control($macro16) {delay wet}
+    $touchedControl := 16
+    call set_wet
+end on
+
+on ui_control($macro17) {reverb time}
+    $touchedControl := 17
+    call set_control
+end on
+
+on ui_control($macro18) {reverb stereo}
+    $touchedControl := 18
+    call set_control
+end on
+
+on ui_control($macro19) {reverb wet}
+    $touchedControl := 19
+    call set_wet
+end on
+
+on ui_control($macro20) {lofi frequency}
+    $touchedControl := 20
+    call set_control
+end on
+
+on ui_control($macro21) {saturator shape}
+    $touchedControl := 21
+    call set_control
+end on

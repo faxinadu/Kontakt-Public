@@ -1,0 +1,289 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/ctaudio.html">ctaudio</a></li>
+  <li><a href="../modules/ctfile.html">ctfile</a></li>
+  <li><a href="../modules/ctgroups.html">ctgroups</a></li>
+  <li><a href="../modules/ctinstrument.html">ctinstrument</a></li>
+  <li><strong>ctmap</strong></li>
+  <li><a href="../modules/ctmir.html">ctmir</a></li>
+  <li><a href="../modules/ctutil.html">ctutil</a></li>
+  <li><a href="../modules/ctwav.html">ctwav</a></li>
+  <li><a href="../modules/ctzones.html">ctzones</a></li>
+  <li><a href="../modules/installationandusage.html">installationandusage</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>ctmap</code></h1>
+<p>Creator Tools LUA Mapping Utilities File
+<p> Author: Native Instruments
+ Written by: Yaron Eshkar
+<p> This file includes useful functions for usage in Creator Tools Lua scripts.</p>
+<p>
+<p> Simply include this line in any script (if running a script from another location that users this file,
+ make sure to point to the correct path):
+ local ctMap = require("CtMap")
+<p> Then you can simply call any function like:
+ ctMap.test_function()
+<p> It is also possible of course to copy entire specific functions from this list directly into your script.
+ In that case remove the CtMap part from the function name, and then simply call it normally like:
+ test_function()
+</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#CtMap.test_function">CtMap.test_function ()</a></td>
+	<td class="summary">Test Function.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtMap.create_mapping">CtMap.create_mapping (sample_paths_table, sample_tokens_table, playback_mode, sample_name_location, signal_name_location, articulation_location, round_robin_location, root_detect, root_location, key_confine, low_key_location, high_key_location, vel_confine, low_vel_location, high_vel_location, set_loop, loop_xfade, default_root_value, default_low_key_value, default_high_key_value, default_low_vel_value, default_high_vel_value, verbose_mode, fix_tune)</a></td>
+	<td class="summary">Creates a sample map for Kontakt.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtMap.mapping_report">CtMap.mapping_report (error_flag)</a></td>
+	<td class="summary">Report map status.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "CtMap.test_function"></a>
+    <strong>CtMap.test_function ()</strong>
+    </dt>
+    <dd>
+    Test Function.
+ Takes no arguments, prints to console when called.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtMap.create_mapping"></a>
+    <strong>CtMap.create_mapping (sample_paths_table, sample_tokens_table, playback_mode, sample_name_location, signal_name_location, articulation_location, round_robin_location, root_detect, root_location, key_confine, low_key_location, high_key_location, vel_confine, low_vel_location, high_vel_location, set_loop, loop_xfade, default_root_value, default_low_key_value, default_high_key_value, default_low_vel_value, default_high_vel_value, verbose_mode, fix_tune)</strong>
+    </dt>
+    <dd>
+    Creates a sample map for Kontakt.
+ Generic sample map function that takes many argument and applies the resulting map to the Kontakt mapping editor.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">sample_paths_table</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         table containing the paths to the sample files.
+        </li>
+        <li><span class="parameter">sample_tokens_table</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         table containing the tokens contained in the name of each sample file.
+        </li>
+        <li><span class="parameter">playback_mode</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         sets the playback mode for the created groups. Can be one of:
+<p> dfd
+<p> sampler
+<p> wavetable
+<p> tone_machine
+<p> time_machine
+<p> time_machine_2
+<p> time_machine_pro
+<p> beat_machine
+<p> s1200
+<p> mp60
+        </li>
+        <li><span class="parameter">sample_name_location</span>
+            <span class="types"><span class="type">int</span></span>
+         the expected location of the sample name token in the sample_tokens_table.
+        </li>
+        <li><span class="parameter">signal_name_location</span>
+            <span class="types"><span class="type">int</span></span>
+         the expected location of the signal name token in the sample_tokens_table.
+        </li>
+        <li><span class="parameter">articulation_location</span>
+            <span class="types"><span class="type">int</span></span>
+         the expected location of the articulation token in the sample_tokens_table.
+        </li>
+        <li><span class="parameter">round_robin_location</span>
+            <span class="types"><span class="type">int</span></span>
+         the expected location of the round robin token in the sample_tokens_table.
+        </li>
+        <li><span class="parameter">root_detect</span>
+            <span class="types"><span class="type">bool</span></span>
+         if set to true, root will be detected using MIR. When set to false, root will be set manually by the relvent variables.
+        </li>
+        <li><span class="parameter">root_location</span>
+            <span class="types"><span class="type">int</span></span>
+         the expected location of the root note token in the sample_tokens_table.
+<p> Set to 0 to use the default value, set to -1 to not set the parameter at all.
+        </li>
+        <li><span class="parameter">key_confine</span>
+            <span class="types"><span class="type">bool</span></span>
+         when set to true, the zone low key, high key will be the same as the root key.
+        </li>
+        <li><span class="parameter">low_key_location</span>
+            <span class="types"><span class="type">int</span></span>
+         the expected location of the low key token in the sample_tokens_table.
+<p> Set to 0 to use the default value, set to -1 to not set the parameter at all.
+        </li>
+        <li><span class="parameter">high_key_location</span>
+            <span class="types"><span class="type">int</span></span>
+         the expected location of the high key token in the sample_tokens_table.
+<p> Set to 0 to use the default value, set to -1 to not set the parameter at all.
+        </li>
+        <li><span class="parameter">vel_confine</span>
+            <span class="types"><span class="type">bool</span></span>
+         if set to true, low vel and high vel will be set to the default parameters.
+        </li>
+        <li><span class="parameter">low_vel_location</span>
+            <span class="types"><span class="type">int</span></span>
+         the expected location of the low vel token in the sample_tokens_table.
+<p> Set to 0 to use the default value, set to -1 to not set the parameter at all.
+        </li>
+        <li><span class="parameter">high_vel_location</span>
+            <span class="types"><span class="type">int</span></span>
+         the expected location of the high vel token in the sample_tokens_table.
+<p> Set to 0 to use the default value, set to -1 to not set the parameter at all.
+        </li>
+        <li><span class="parameter">set_loop</span>
+            <span class="types"><span class="type">int</span></span>
+
+<p> 0: No loop.
+<p> 1: Turn on the first loop of the sample in mode 1.
+<p> 2: Turn on the first loop of the sample in mode 1 and set the loop parameters.
+        </li>
+        <li><span class="parameter">loop_xfade</span>
+            <span class="types"><span class="type">int</span></span>
+         anything greater than 0 sets the xfade to the given value.
+        </li>
+        <li><span class="parameter">default_root_value</span>
+            <span class="types"><span class="type">int</span></span>
+         the default root value to use if explicity told too or if an error is encountered parsing the token.
+        </li>
+        <li><span class="parameter">default_low_key_value</span>
+            <span class="types"><span class="type">int</span></span>
+         the default low key value to use if explicity told too or if an error is encountered parsing the token.
+        </li>
+        <li><span class="parameter">default_high_key_value</span>
+            <span class="types"><span class="type">int</span></span>
+         the default high key value to use if explicity told too or if an error is encountered parsing the token.
+        </li>
+        <li><span class="parameter">default_low_vel_value</span>
+            <span class="types"><span class="type">int</span></span>
+         the default low vel value to use if explicity told too or if an error is encountered parsing the token.
+        </li>
+        <li><span class="parameter">default_high_vel_value</span>
+            <span class="types"><span class="type">int</span></span>
+         the default high vel value to use if explicity told too or if an error is encountered parsing the token.
+        </li>
+        <li><span class="parameter">verbose_mode</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true, prints the results of the mapping operation to console.
+        </li>
+        <li><span class="parameter">fix_tune</span>
+            <span class="types"><span class="type">bool</span></span>
+         When true MIR is used to fine tune each sample to the nearest note.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtMap.mapping_report"></a>
+    <strong>CtMap.mapping_report (error_flag)</strong>
+    </dt>
+    <dd>
+    Report map status.
+ Report success or mapping with errors.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">error_flag</span>
+            <span class="types"><span class="type">bool</span></span>
+         determines whether to print a sucess or an error message.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2021-03-09 10:19:35 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

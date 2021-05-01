@@ -1,0 +1,1138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><strong>ctaudio</strong></li>
+  <li><a href="../modules/ctfile.html">ctfile</a></li>
+  <li><a href="../modules/ctgroups.html">ctgroups</a></li>
+  <li><a href="../modules/ctinstrument.html">ctinstrument</a></li>
+  <li><a href="../modules/ctmap.html">ctmap</a></li>
+  <li><a href="../modules/ctmir.html">ctmir</a></li>
+  <li><a href="../modules/ctutil.html">ctutil</a></li>
+  <li><a href="../modules/ctwav.html">ctwav</a></li>
+  <li><a href="../modules/ctzones.html">ctzones</a></li>
+  <li><a href="../modules/installationandusage.html">installationandusage</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>ctaudio</code></h1>
+<p>Creator Tools LUA Audio Utilities File
+<p> Author: Native Instruments
+ Written by: Yaron Eshkar
+<p> This file includes useful functions for usage in Creator Tools Lua scripts.</p>
+<p>
+ Simply include this line in any script (if running a script from another location that users this file,
+ make sure to point to the correct path):
+ local ctAudio = require("CtAudio")
+ Then you can simply call any function like:
+ ctAudio.test_function()
+<p> It is also possible of course to copy entire specific functions from this list directly into your script.
+ In that case remove the CtAudio part from the function name, and then simply call it normally like:
+ test_function()
+</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#CtAudio.test_function">CtAudio.test_function ()</a></td>
+	<td class="summary">Test Function.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtAudio.set_verbose_string">CtAudio.set_verbose_string (verbose_mode)</a></td>
+	<td class="summary">Sets Verbose Mode for SoX operations.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtAudio.decode_flac">CtAudio.decode_flac (input_file, output_file, delete_original, verbose_mode)</a></td>
+	<td class="summary">Decode a FLAC file to WAV.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtAudio.encode_flac">CtAudio.encode_flac (input_file, output_file, delete_original, verbose_mode)</a></td>
+	<td class="summary">Encode a WAV file to FLAC.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtAudio.encode_ogg">CtAudio.encode_ogg (input_file, compression_factor, output_file, delete_original, verbose_mode)</a></td>
+	<td class="summary">Encode a WAV file to OGG.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtAudio.filter_audio">CtAudio.filter_audio (file, filter_type, filter_cut, verbose_mode)</a></td>
+	<td class="summary">Filter an audio file.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtAudio.reverse_audio">CtAudio.reverse_audio (file, verbose_mode)</a></td>
+	<td class="summary">Reverse an audio file.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtAudio.silence_remove_audio">CtAudio.silence_remove_audio (file, verbose_mode)</a></td>
+	<td class="summary">Remove silence from the start if an audio file.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtAudio.normalize_audio">CtAudio.normalize_audio (file, dB, verbose_mode)</a></td>
+	<td class="summary">Normalize peaks of an audio file to set dB.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtAudio.concatenate_audio">CtAudio.concatenate_audio (file1, file2, file3, verbose_mode)</a></td>
+	<td class="summary">Append an audio file to the end of another.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtAudio.concatenate_audio_folder">CtAudio.concatenate_audio_folder (path, result_file, verbose_mode)</a></td>
+	<td class="summary">Append all audio found in a folder in an alphanumeric order.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtAudio.convert_audio_bd">CtAudio.convert_audio_bd (file, original_bit_depth, out_bit_depth, verbose_mode)</a></td>
+	<td class="summary">Convert the bit depth of an audio file.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtAudio.convert_audio_sr">CtAudio.convert_audio_sr (file, original_sample_rate, out_sample_rate, verbose_mode)</a></td>
+	<td class="summary">Convert the sample rate of an audio file.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtAudio.wave_synth">CtAudio.wave_synth (output_file, sampl_rate, length, shape, freq, verbose_mode)</a></td>
+	<td class="summary">Wave Synth
+ Synthesize a wave audio file.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtAudio.kick_synth">CtAudio.kick_synth (output_file, sample_rate, length, start_freq, end_freq, bend_start, bend_end, bend_freq, bend_twice, fade_time, verbose_mode)</a></td>
+	<td class="summary">Kick Synth.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtAudio.get_wav_chunk">CtAudio.get_wav_chunk (input_file, chunk_position, chunk_size)</a></td>
+	<td class="summary">Extract a chunk from a WAV file.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtAudio.inject_smpl_chunk">CtAudio.inject_smpl_chunk (input_file, file_size, channels_number, riff_chunk, fmt_chunk, data_chunk, fact_chunk, manufacturer, product, srate, mroot, mpitch, smptef, smpteo, lnum, sdata, lcue, ltype, lstart, lend, lfraction, ltimes)</a></td>
+	<td class="summary">Extract a chunk from a WAV file.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtAudio.run_audio_process">CtAudio.run_audio_process (file, process_type, param1, param2, param3, param4)</a></td>
+	<td class="summary">Run an audio process on a WAV file.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtAudio.check_sample_set_integrity">CtAudio.check_sample_set_integrity (path, verbose_mode, perform_rms_check, deviance_rms_factor, perform_loudness_check, deviance_loudness_factor, perform_peak_check, deviance_peak_factor, perform_rate_check, expected_sample_rate, perform_depth_check, expected_bit_depth, perform_loop_check, expected_loop, perform_file_size_check, deviance_file_size_factor, perform_file_names_check)</a></td>
+	<td class="summary">Check the integrity of a directory of samples using various comparison metrics.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtAudio.read_audio_file">CtAudio.read_audio_file (input_file)</a></td>
+	<td class="summary">Reads and prints detailed information about a WAV file.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtAudio.semitone_interval">CtAudio.semitone_interval ()</a></td>
+	<td class="summary">Helper that returns 1.05946.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "CtAudio.test_function"></a>
+    <strong>CtAudio.test_function ()</strong>
+    </dt>
+    <dd>
+    Test Function.
+ Takes no arguments, prints to console when called.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtAudio.set_verbose_string"></a>
+    <strong>CtAudio.set_verbose_string (verbose_mode)</strong>
+    </dt>
+    <dd>
+    Sets Verbose Mode for SoX operations.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">verbose_mode</span>
+            <span class="types"><span class="type">bool</span></span>
+         set to true or false.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        returns either "-V3" when verbose_mode is true or "-V0" when false or nil.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtAudio.decode_flac"></a>
+    <strong>CtAudio.decode_flac (input_file, output_file, delete_original, verbose_mode)</strong>
+    </dt>
+    <dd>
+    Decode a FLAC file to WAV.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">input_file</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the path to the FLAC file to decode.
+        </li>
+        <li><span class="parameter">output_file</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the desired path of the output file. Defaults to input_file.wav.
+        </li>
+        <li><span class="parameter">delete_original</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true the original file is deleted after the operation.
+        </li>
+        <li><span class="parameter">verbose_mode</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true prints information to console.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtAudio.encode_flac"></a>
+    <strong>CtAudio.encode_flac (input_file, output_file, delete_original, verbose_mode)</strong>
+    </dt>
+    <dd>
+    Encode a WAV file to FLAC.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">input_file</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the path to t he WAV file to encode.
+        </li>
+        <li><span class="parameter">output_file</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the desired path of the output file. Defaults to input_file.flac.
+        </li>
+        <li><span class="parameter">delete_original</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true the original file is deleted after the operation.
+        </li>
+        <li><span class="parameter">verbose_mode</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true prints information to console.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtAudio.encode_ogg"></a>
+    <strong>CtAudio.encode_ogg (input_file, compression_factor, output_file, delete_original, verbose_mode)</strong>
+    </dt>
+    <dd>
+    Encode a WAV file to OGG.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">input_file</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the path to t he WAV file to encode.
+        </li>
+        <li><span class="parameter">compression_factor</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the OGG compression factor, defaults to  5.
+        </li>
+        <li><span class="parameter">output_file</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the desired path of the output file. Defaults to input_file.ogg.
+        </li>
+        <li><span class="parameter">delete_original</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true the original file is deleted after the operation.
+        </li>
+        <li><span class="parameter">verbose_mode</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true prints information to console.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtAudio.filter_audio"></a>
+    <strong>CtAudio.filter_audio (file, filter_type, filter_cut, verbose_mode)</strong>
+    </dt>
+    <dd>
+    Filter an audio file.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the audio file to filter.
+        </li>
+        <li><span class="parameter">filter_type</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         filter type. Can be:
+<p> highpass
+<p> lowpass
+
+        </li>
+        <li><span class="parameter">filter_cut</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         cutoff point of the filter.
+        </li>
+        <li><span class="parameter">verbose_mode</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true prints information to console.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtAudio.reverse_audio"></a>
+    <strong>CtAudio.reverse_audio (file, verbose_mode)</strong>
+    </dt>
+    <dd>
+    Reverse an audio file.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the source file to reverse.
+        </li>
+        <li><span class="parameter">verbose_mode</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true prints information to console.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtAudio.silence_remove_audio"></a>
+    <strong>CtAudio.silence_remove_audio (file, verbose_mode)</strong>
+    </dt>
+    <dd>
+    Remove silence from the start if an audio file.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the source file to remove silence from.
+        </li>
+        <li><span class="parameter">verbose_mode</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true prints information to console.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtAudio.normalize_audio"></a>
+    <strong>CtAudio.normalize_audio (file, dB, verbose_mode)</strong>
+    </dt>
+    <dd>
+    Normalize peaks of an audio file to set dB.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the source file to normalise.
+        </li>
+        <li><span class="parameter">dB</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         setting to normalise to.
+        </li>
+        <li><span class="parameter">verbose_mode</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true prints information to console.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtAudio.concatenate_audio"></a>
+    <strong>CtAudio.concatenate_audio (file1, file2, file3, verbose_mode)</strong>
+    </dt>
+    <dd>
+    Append an audio file to the end of another.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file1</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the path to the first source audio file.
+        </li>
+        <li><span class="parameter">file2</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the path to the second source audio file to append to the first.
+        </li>
+        <li><span class="parameter">file3</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the desired path and name for the resulting audio file.
+        </li>
+        <li><span class="parameter">verbose_mode</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true prints information to console.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtAudio.concatenate_audio_folder"></a>
+    <strong>CtAudio.concatenate_audio_folder (path, result_file, verbose_mode)</strong>
+    </dt>
+    <dd>
+    Append all audio found in a folder in an alphanumeric order.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">path</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the path to the directory containing audio files.
+        </li>
+        <li><span class="parameter">result_file</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the desired path and name for the resulting audio file.
+        </li>
+        <li><span class="parameter">verbose_mode</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true prints information to console.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtAudio.convert_audio_bd"></a>
+    <strong>CtAudio.convert_audio_bd (file, original_bit_depth, out_bit_depth, verbose_mode)</strong>
+    </dt>
+    <dd>
+    Convert the bit depth of an audio file.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the path to the audio file to be converted.
+        </li>
+        <li><span class="parameter">original_bit_depth</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the original sample rate of the audio file.
+        </li>
+        <li><span class="parameter">out_bit_depth</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the desired new sample rate for the file.
+        </li>
+        <li><span class="parameter">verbose_mode</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true prints information to console.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtAudio.convert_audio_sr"></a>
+    <strong>CtAudio.convert_audio_sr (file, original_sample_rate, out_sample_rate, verbose_mode)</strong>
+    </dt>
+    <dd>
+    Convert the sample rate of an audio file.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the path to the audio file to be converted.
+        </li>
+        <li><span class="parameter">original_sample_rate</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the original sample rate of the audio file.
+        </li>
+        <li><span class="parameter">out_sample_rate</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the desired new sample rate for the file.
+        </li>
+        <li><span class="parameter">verbose_mode</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true prints information to console.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtAudio.wave_synth"></a>
+    <strong>CtAudio.wave_synth (output_file, sampl_rate, length, shape, freq, verbose_mode)</strong>
+    </dt>
+    <dd>
+    Wave Synth
+ Synthesize a wave audio file.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">output_file</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the desired path of the output file. Defaults to synth.wav in the directory where script was run.
+        </li>
+        <li><span class="parameter">sampl_rate</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the sample rate of the resulting file. Defaults to 44100.
+        </li>
+        <li><span class="parameter">length</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the length of the resulting sample in seconds. Defaults to 0.5.
+        </li>
+        <li><span class="parameter">shape</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the shape of the wave. Defaults to sine, can be one of:
+<p> sine
+<p> triangle
+<p> sawtooth
+<p> trapezium
+<p> exp
+<p> noise
+<p> tpdfnoise
+<p> pinknoise
+<p> brownnoise
+<p> pluck
+        </li>
+        <li><span class="parameter">freq</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the frequency of the wave.
+        </li>
+        <li><span class="parameter">verbose_mode</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true prints information to console.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtAudio.kick_synth"></a>
+    <strong>CtAudio.kick_synth (output_file, sample_rate, length, start_freq, end_freq, bend_start, bend_end, bend_freq, bend_twice, fade_time, verbose_mode)</strong>
+    </dt>
+    <dd>
+    Kick Synth.
+ kick audio sample generator.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">output_file</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         output_file the desired path of the output file. Defaults to kick.wav in the directory where script was run.
+        </li>
+        <li><span class="parameter">sample_rate</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the sample rate of the resulting files. Defaults to 44100.
+        </li>
+        <li><span class="parameter">length</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the total length of the sample in seconds. Defaults to 0.5
+        </li>
+        <li><span class="parameter">start_freq</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the starting frequency of the oscillation. Defaults to 100.
+        </li>
+        <li><span class="parameter">end_freq</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the end frequency of the oscillation. Defaults to 40.
+        </li>
+        <li><span class="parameter">bend_start</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the place in the sample from which to start the bend operation in % of overall sample length. Defaults to 0.
+        </li>
+        <li><span class="parameter">bend_end</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the place in the sample where the bend operation will end in % of overall sample length. Defaults to 0.25.
+        </li>
+        <li><span class="parameter">bend_freq</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the amount of pitch bend to apply over time from bend_start to bend_end, in cents. Defaults to -1200.
+        </li>
+        <li><span class="parameter">bend_twice</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true, performs the bend operation twice.
+        </li>
+        <li><span class="parameter">fade_time</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the volume fade out time, in % of overall sample length.
+        </li>
+        <li><span class="parameter">verbose_mode</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true prints information to console.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtAudio.get_wav_chunk"></a>
+    <strong>CtAudio.get_wav_chunk (input_file, chunk_position, chunk_size)</strong>
+    </dt>
+    <dd>
+    Extract a chunk from a WAV file.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">input_file</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the file to open.
+        </li>
+        <li><span class="parameter">chunk_position</span>
+            <span class="types"><span class="type">int</span></span>
+         the starting byte position of the chunk.
+        </li>
+        <li><span class="parameter">chunk_size</span>
+            <span class="types"><span class="type">int</span></span>
+         the length of the chunk in bytes.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        returns a string containing the chunk.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtAudio.inject_smpl_chunk"></a>
+    <strong>CtAudio.inject_smpl_chunk (input_file, file_size, channels_number, riff_chunk, fmt_chunk, data_chunk, fact_chunk, manufacturer, product, srate, mroot, mpitch, smptef, smpteo, lnum, sdata, lcue, ltype, lstart, lend, lfraction, ltimes)</strong>
+    </dt>
+    <dd>
+    Extract a chunk from a WAV file.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">input_file</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the WAV file to inject the smpl chunk into.
+        </li>
+        <li><span class="parameter">file_size</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+        </li>
+        <li><span class="parameter">channels_number</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+        </li>
+        <li><span class="parameter">riff_chunk</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+        </li>
+        <li><span class="parameter">fmt_chunk</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+        </li>
+        <li><span class="parameter">data_chunk</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+        </li>
+        <li><span class="parameter">fact_chunk</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+        </li>
+        <li><span class="parameter">manufacturer</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+        </li>
+        <li><span class="parameter">product</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+        </li>
+        <li><span class="parameter">srate</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+        </li>
+        <li><span class="parameter">mroot</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+        </li>
+        <li><span class="parameter">mpitch</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+        </li>
+        <li><span class="parameter">smptef</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+        </li>
+        <li><span class="parameter">smpteo</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+        </li>
+        <li><span class="parameter">lnum</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+        </li>
+        <li><span class="parameter">sdata</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+        </li>
+        <li><span class="parameter">lcue</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+        </li>
+        <li><span class="parameter">ltype</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+        </li>
+        <li><span class="parameter">lstart</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+        </li>
+        <li><span class="parameter">lend</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+        </li>
+        <li><span class="parameter">lfraction</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+        </li>
+        <li><span class="parameter">ltimes</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtAudio.run_audio_process"></a>
+    <strong>CtAudio.run_audio_process (file, process_type, param1, param2, param3, param4)</strong>
+    </dt>
+    <dd>
+    Run an audio process on a WAV file.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the path to the file to process.
+        </li>
+        <li><span class="parameter">process_type</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the type of process to run. Can be one of:
+<p> normalize
+<p> filter
+<p> reverse
+<p> silence
+<p> convert_sr
+<p> convert_bd
+<p> concatenate
+        </li>
+        <li><span class="parameter">param1</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the first parameter to pass to the audio process.
+        </li>
+        <li><span class="parameter">param2</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the second parameter to pass to the audio process.
+        </li>
+        <li><span class="parameter">param3</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the third parameter to pass to the audio process.
+        </li>
+        <li><span class="parameter">param4</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the fourth parameter to pass to the audio process.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtAudio.check_sample_set_integrity"></a>
+    <strong>CtAudio.check_sample_set_integrity (path, verbose_mode, perform_rms_check, deviance_rms_factor, perform_loudness_check, deviance_loudness_factor, perform_peak_check, deviance_peak_factor, perform_rate_check, expected_sample_rate, perform_depth_check, expected_bit_depth, perform_loop_check, expected_loop, perform_file_size_check, deviance_file_size_factor, perform_file_names_check)</strong>
+    </dt>
+    <dd>
+    Check the integrity of a directory of samples using various comparison metrics.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">path</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the path to the directory of samples to check and compare.
+        </li>
+        <li><span class="parameter">verbose_mode</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true prints information to console.
+        </li>
+        <li><span class="parameter">perform_rms_check</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true, compare RMS values.
+        </li>
+        <li><span class="parameter">deviance_rms_factor</span>
+            <span class="types"><span class="type">number</span></span>
+         the accpetable deviance in RMS valus between the files.
+        </li>
+        <li><span class="parameter">perform_loudness_check</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true, compare loudness values.
+        </li>
+        <li><span class="parameter">deviance_loudness_factor</span>
+            <span class="types"><span class="type">number</span></span>
+         the accpetable deviance in loudness valus between the files.
+        </li>
+        <li><span class="parameter">perform_peak_check</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true, compare peak values.
+        </li>
+        <li><span class="parameter">deviance_peak_factor</span>
+            <span class="types"><span class="type">number</span></span>
+         the accpetable deviance in peak valus between the files.
+        </li>
+        <li><span class="parameter">perform_rate_check</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true, compare sample rate values.
+        </li>
+        <li><span class="parameter">expected_sample_rate</span>
+            <span class="types"><span class="type">int</span></span>
+         the expected sample rate. Defaults to 44100.
+        </li>
+        <li><span class="parameter">perform_depth_check</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true, compare bit depth values.
+        </li>
+        <li><span class="parameter">expected_bit_depth</span>
+            <span class="types"><span class="type">int</span></span>
+         the expected bit depth. Defaults to 24.
+        </li>
+        <li><span class="parameter">perform_loop_check</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true, compare check if loop points exists.
+        </li>
+        <li><span class="parameter">expected_loop</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true and performing a loop check, the check should pass if a loop exists.
+        </li>
+        <li><span class="parameter">perform_file_size_check</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true, compare file size values.
+        </li>
+        <li><span class="parameter">deviance_file_size_factor</span>
+            <span class="types"><span class="type">int</span></span>
+         the acceptable different between the file sizes.
+        </li>
+        <li><span class="parameter">perform_file_names_check</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true, compare file names, if duplicates exist the check fails.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+        returns true when all checks pass, false when any check fails.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtAudio.read_audio_file"></a>
+    <strong>CtAudio.read_audio_file (input_file)</strong>
+    </dt>
+    <dd>
+    Reads and prints detailed information about a WAV file.
+ The following information is printed to console:
+<p> File mode
+<p> File name
+<p> Header chunks list
+<p> File size
+<p> Channels
+
+ Sample rate
+<p> Byte rate
+<p> Block align
+<p> Bit depth
+<p> Samples per channel
+<p> Header size
+<p> Chunk data size
+<p> Chunk fmt size
+<p> Chunk smpl size
+<p> Chunk fact size
+<p> Extra chunks size
+<p> Chunk fmt position
+<p> Chunk data position
+<p> Chunk smpl position
+<p> Chunk fact position
+<p> Loop count position
+<p> Sampler data size
+<p> Number of loops
+<p> Loop cue
+<p> Loop cue position
+<p> Loop type
+
+ Loop type position
+<p> Loop start
+<p> Loop start position
+<p> Loop end
+<p> Loop end position
+<p> Loop fraction
+<p> Loop fraction position
+<p> Loop times
+<p> Loop times position
+
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">input_file</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the WAV file to read.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtAudio.semitone_interval"></a>
+    <strong>CtAudio.semitone_interval ()</strong>
+    </dt>
+    <dd>
+    Helper that returns 1.05946.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">float</span></span>
+        simply returns 1.05946.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2021-03-09 10:19:35 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

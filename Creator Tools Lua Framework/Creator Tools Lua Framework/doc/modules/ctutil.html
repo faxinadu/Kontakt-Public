@@ -1,0 +1,900 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/ctaudio.html">ctaudio</a></li>
+  <li><a href="../modules/ctfile.html">ctfile</a></li>
+  <li><a href="../modules/ctgroups.html">ctgroups</a></li>
+  <li><a href="../modules/ctinstrument.html">ctinstrument</a></li>
+  <li><a href="../modules/ctmap.html">ctmap</a></li>
+  <li><a href="../modules/ctmir.html">ctmir</a></li>
+  <li><strong>ctutil</strong></li>
+  <li><a href="../modules/ctwav.html">ctwav</a></li>
+  <li><a href="../modules/ctzones.html">ctzones</a></li>
+  <li><a href="../modules/installationandusage.html">installationandusage</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>ctutil</code></h1>
+<p>Creator Tools LUA Utilities File
+<p> Author: Native Instruments
+ Written by: Yaron Eshkar
+<p> This file includes useful functions for usage in Creator Tools Lua scripts.</p>
+<p>
+
+ Simply include this line in any script (if running a script from another location that users this file,
+ make sure to point to the correct path):
+ local ctUtil = require("CtUtil")
+<p> Then you can simply call any function like:
+ ctUtil.test_function()
+<p> It is also possible of course to copy entire specific functions from this list directly into your script.
+ In that case remove the CtUtil part from the function name, and then simply call it normally like:
+ test_function()
+</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#CtUtil.test_function">CtUtil.test_function ()</a></td>
+	<td class="summary">Test Function.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtUtil.alpha_numeric_sort">CtUtil.alpha_numeric_sort (o)</a></td>
+	<td class="summary">Sort a table alpha numerically.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtUtil.compare_two_numbers">CtUtil.compare_two_numbers (first, second)</a></td>
+	<td class="summary">Compare absolute of two numbers and return the greater number.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtUtil.dash_sep_print">CtUtil.dash_sep_print (verbose_mode)</a></td>
+	<td class="summary">Dash line separator printed to the console.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtUtil.debug_print">CtUtil.debug_print (debug_message, verbose_mode)</a></td>
+	<td class="summary">Controlled print, only prints if set to verbose.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtUtil.debug_print_r">CtUtil.debug_print_r (arr, verbose_mode)</a></td>
+	<td class="summary">Controled print function for nicely printing the table results.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtUtil.get_image_width_height">CtUtil.get_image_width_height (file)</a></td>
+	<td class="summary">Get the width and height of an image file</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtUtil.instrument_connected">CtUtil.instrument_connected ()</a></td>
+	<td class="summary">Check if a Kontakt instruments is connected.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtUtil.is_audio_file">CtUtil.is_audio_file (file)</a></td>
+	<td class="summary">Check if a file has a valid audio file extension.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtUtil.is_in_range">CtUtil.is_in_range (val, min, max)</a></td>
+	<td class="summary">Check if a number is in a range.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtUtil.ntob">CtUtil.ntob (n, length)</a></td>
+	<td class="summary">Parses a number into bytes.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtUtil.path_check">CtUtil.path_check (path)</a></td>
+	<td class="summary">Check for a valid path and print the result.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtUtil.paths_to_table">CtUtil.paths_to_table (path, file)</a></td>
+	<td class="summary">Fill the table with the sample files from the directory.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtUtil.print_r">CtUtil.print_r (arr)</a></td>
+	<td class="summary">Function for nicely printing table results.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtUtil.random_float">CtUtil.random_float (min, max)</a></td>
+	<td class="summary">Generate a random float between the minimum and maximum range.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtUtil.round">CtUtil.round (float_num)</a></td>
+	<td class="summary">Round a float number option 1</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtUtil.round_num">CtUtil.round_num (float_num)</a></td>
+	<td class="summary">Round a float number option 2</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtUtil.samplesFolder">CtUtil.samplesFolder (path, recursive)</a></td>
+	<td class="summary">Scan a directory and load all files into a table, optionally recursive.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtUtil.string_split">CtUtil.string_split (input_string, sep)</a></td>
+	<td class="summary">Split a string and return the result after the seperator</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtUtil.string_starts">CtUtil.string_starts (input_string, start_with)</a></td>
+	<td class="summary">Check if a string starts with a sub-string.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtUtil.table_collect_duplicates">CtUtil.table_collect_duplicates (file_table, paths_table, element)</a></td>
+	<td class="summary">Collect duplicate entires in a table.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtUtil.table_remove_duplicates">CtUtil.table_remove_duplicates (tbl, element)</a></td>
+	<td class="summary">Remove duplicate entries from a table.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtUtil.table_size">CtUtil.table_size (t)</a></td>
+	<td class="summary">Check how many entries are in a table.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtUtil.table_value_check">CtUtil.table_value_check (t, v)</a></td>
+	<td class="summary">Check if a  value exists in a table.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtUtil.tokens_to_table">CtUtil.tokens_to_table (sample_paths_table, token_separator)</a></td>
+	<td class="summary">Parse each file and make a tokens list.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "CtUtil.test_function"></a>
+    <strong>CtUtil.test_function ()</strong>
+    </dt>
+    <dd>
+    Test Function.
+ Takes no arguments, prints to console when called.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtUtil.alpha_numeric_sort"></a>
+    <strong>CtUtil.alpha_numeric_sort (o)</strong>
+    </dt>
+    <dd>
+    Sort a table alpha numerically.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">o</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         original table.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        o sorted table.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtUtil.compare_two_numbers"></a>
+    <strong>CtUtil.compare_two_numbers (first, second)</strong>
+    </dt>
+    <dd>
+    Compare absolute of two numbers and return the greater number.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">first</span>
+            <span class="types"><span class="type">number</span></span>
+         the first number to compare.
+        </li>
+        <li><span class="parameter">second</span>
+            <span class="types"><span class="type">number</span></span>
+         the second number to compare.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+        the greater of the two numbers.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtUtil.dash_sep_print"></a>
+    <strong>CtUtil.dash_sep_print (verbose_mode)</strong>
+    </dt>
+    <dd>
+    Dash line separator printed to the console.
+ Set an optional verbose_mode boolean variable to control printing.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">verbose_mode</span>
+            <span class="types"><span class="type">bool</span></span>
+         only prints when set to true.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtUtil.debug_print"></a>
+    <strong>CtUtil.debug_print (debug_message, verbose_mode)</strong>
+    </dt>
+    <dd>
+    Controlled print, only prints if set to verbose.
+ Set an optional global verbose_mode boolean variable to control printing.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">debug_message</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the message to print.
+        </li>
+        <li><span class="parameter">verbose_mode</span>
+            <span class="types"><span class="type">bool</span></span>
+         only prints if set to true.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtUtil.debug_print_r"></a>
+    <strong>CtUtil.debug_print_r (arr, verbose_mode)</strong>
+    </dt>
+    <dd>
+    Controled print function for nicely printing the table results.
+ Set an optional global verbose_mode boolean variable to control printing.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">arr</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         the table to print.
+        </li>
+        <li><span class="parameter">verbose_mode</span>
+            <span class="types"><span class="type">bool</span></span>
+         only prints if set to true.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtUtil.get_image_width_height"></a>
+    <strong>CtUtil.get_image_width_height (file)</strong>
+    </dt>
+    <dd>
+    Get the width and height of an image file
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         path to image file
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><span class="type">int</span></span>
+        image width in pixels</li>
+        <li>
+           <span class="types"><span class="type">int</span></span>
+        image height in pixels</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtUtil.instrument_connected"></a>
+    <strong>CtUtil.instrument_connected ()</strong>
+    </dt>
+    <dd>
+    Check if a Kontakt instruments is connected.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtUtil.is_audio_file"></a>
+    <strong>CtUtil.is_audio_file (file)</strong>
+    </dt>
+    <dd>
+    Check if a file has a valid audio file extension.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the path to the file.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+        returns true if the file has a valid audio extention.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtUtil.is_in_range"></a>
+    <strong>CtUtil.is_in_range (val, min, max)</strong>
+    </dt>
+    <dd>
+    Check if a number is in a range.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">val</span>
+            <span class="types"><span class="type">number</span></span>
+         the number to check.
+        </li>
+        <li><span class="parameter">min</span>
+            <span class="types"><span class="type">number</span></span>
+         the minimum range.
+        </li>
+        <li><span class="parameter">max</span>
+            <span class="types"><span class="type">number</span></span>
+         the maximum range.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+        returns true if the value is in the specified range.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtUtil.ntob"></a>
+    <strong>CtUtil.ntob (n, length)</strong>
+    </dt>
+    <dd>
+    Parses a number into bytes.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">n</span>
+            <span class="types"><span class="type">number</span></span>
+
+        </li>
+        <li><span class="parameter">length</span>
+            <span class="types"><span class="type">number</span></span>
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        bytes
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtUtil.path_check"></a>
+    <strong>CtUtil.path_check (path)</strong>
+    </dt>
+    <dd>
+    Check for a valid path and print the result.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">path</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the path to check.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+        returns true if the path exits,
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtUtil.paths_to_table"></a>
+    <strong>CtUtil.paths_to_table (path, file)</strong>
+    </dt>
+    <dd>
+    Fill the table with the sample files from the directory.
+ Optionally it is also possible to scan all the sub-directories .
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">path</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the path to start looking in.
+        </li>
+        <li><span class="parameter">file</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         extention to look for.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        returns a table with paths to all samples found.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtUtil.print_r"></a>
+    <strong>CtUtil.print_r (arr)</strong>
+    </dt>
+    <dd>
+    Function for nicely printing table results.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">arr</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         the table to print.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtUtil.random_float"></a>
+    <strong>CtUtil.random_float (min, max)</strong>
+    </dt>
+    <dd>
+    Generate a random float between the minimum and maximum range.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">min</span>
+            <span class="types"><span class="type">number</span></span>
+         the minimum range.
+        </li>
+        <li><span class="parameter">max</span>
+            <span class="types"><span class="type">number</span></span>
+         the maximum range.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">float</span></span>
+        returns a random float within the specified range.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtUtil.round"></a>
+    <strong>CtUtil.round (float_num)</strong>
+    </dt>
+    <dd>
+    Round a float number option 1
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">float_num</span>
+            <span class="types"><span class="type">float</span></span>
+         the float numbet to round.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        returns rounded integer.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtUtil.round_num"></a>
+    <strong>CtUtil.round_num (float_num)</strong>
+    </dt>
+    <dd>
+    Round a float number option 2
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">float_num</span>
+            <span class="types"><span class="type">float</span></span>
+         the float number to round.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        returns rounded integer.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtUtil.samplesFolder"></a>
+    <strong>CtUtil.samplesFolder (path, recursive)</strong>
+    </dt>
+    <dd>
+    Scan a directory and load all files into a table, optionally recursive.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">path</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the path to check.
+        </li>
+        <li><span class="parameter">recursive</span>
+            <span class="types"><span class="type">bool</span></span>
+         when set to true, checks all sub directories in the path.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        returns a table with the paths to the files.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtUtil.string_split"></a>
+    <strong>CtUtil.string_split (input_string, sep)</strong>
+    </dt>
+    <dd>
+    Split a string and return the result after the seperator
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">input_string</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the string to check.
+        </li>
+        <li><span class="parameter">sep</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the seperator to look for.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        returns the sub-strung after the seperator.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtUtil.string_starts"></a>
+    <strong>CtUtil.string_starts (input_string, start_with)</strong>
+    </dt>
+    <dd>
+    Check if a string starts with a sub-string.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">input_string</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the string to check.
+        </li>
+        <li><span class="parameter">start_with</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the sub-string to check.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+        returns true if the string starts with the sub-string.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtUtil.table_collect_duplicates"></a>
+    <strong>CtUtil.table_collect_duplicates (file_table, paths_table, element)</strong>
+    </dt>
+    <dd>
+    Collect duplicate entires in a table.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file_table</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+
+        </li>
+        <li><span class="parameter">paths_table</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+
+        </li>
+        <li><span class="parameter">element</span>
+            <span class="types"><span class="type">var</span></span>
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtUtil.table_remove_duplicates"></a>
+    <strong>CtUtil.table_remove_duplicates (tbl, element)</strong>
+    </dt>
+    <dd>
+    Remove duplicate entries from a table.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">tbl</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         table to check.
+        </li>
+        <li><span class="parameter">element</span>
+            <span class="types"><span class="type">var</span></span>
+         the element to look for.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        returns a table containing only the first occurance of the element.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtUtil.table_size"></a>
+    <strong>CtUtil.table_size (t)</strong>
+    </dt>
+    <dd>
+    Check how many entries are in a table.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         table to check.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        returns the number of entries.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtUtil.table_value_check"></a>
+    <strong>CtUtil.table_value_check (t, v)</strong>
+    </dt>
+    <dd>
+    Check if a  value exists in a table.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">t</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         the table to check.
+        </li>
+        <li><span class="parameter">v</span>
+            <span class="types"><span class="type">var</span></span>
+         the value to check for.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+        returns true if the value exists in the table.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtUtil.tokens_to_table"></a>
+    <strong>CtUtil.tokens_to_table (sample_paths_table, token_separator)</strong>
+    </dt>
+    <dd>
+    Parse each file and make a tokens list.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">sample_paths_table</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the table of paths to iterate over.
+        </li>
+        <li><span class="parameter">token_separator</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the string separating each token.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        returns a table with the tokens found in the file name.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2021-03-09 10:19:35 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

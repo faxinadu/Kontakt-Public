@@ -1,0 +1,225 @@
+{***********************************************
+Envelope and Filter Shell
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: April 27, 2021
+*************************************************}
+
+{
+- Enter edit mode, select group editor and enable edit all groups
+- Add velocity external modulator in group amplifier mod, set intensity to 40%
+- Add pitch bend external modular in source mod, set intensity to 12st
+- Add AHDSR envelope in group amplifiter mod, set intensity to 100%
+}
+
+on init
+
+    {Set the instrument name}
+    declare @instrumentFramework
+    declare @instrumentTitle
+    declare @instrumentName
+    @instrumentFramework := "Test Instrument"
+    @instrumentTitle := "Instrument"
+    @instrumentName := @instrumentFramework & " " & @instrumentTitle
+
+    declare const $mPlus := $NI_KONTAKT_IS_HEADLESS {Check if running on desktop or headless}
+
+    set_script_title(@instrumentFramework) {Set the script title}
+    message("") {Reset the messages}
+    set_snapshot_type(1) {Don't init on snapshots}
+
+    declare ui_label $labelInstrumentName(8,1) {Label for the full instrument name}
+
+    if($mPlus=0) {Check if headless}
+        {Make the performance view}
+        set_ui_height(3)
+        make_perfview
+        set_ui_color(000000h)
+        {Set the instrument name label parameters}
+        set_text($labelInstrumentName, @instrumentName)
+        set_control_par(get_ui_id($labelInstrumentName),$CONTROL_PAR_WIDTH,300)
+        set_control_par(get_ui_id($labelInstrumentName),$CONTROL_PAR_TEXT_ALIGNMENT,1)
+        move_control_px($labelInstrumentName,175,10)
+    else
+        set_control_par(get_ui_id($labelInstrumentName),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL) {Hide the instrument name label}        
+    end if
+    
+    declare $i {Variable for looping}
+    declare $value {Variable for setting the scaled macro value}
+    declare $touchedControl {Variable for keeping track of the last touched control}
+    declare $groupSelect {Variable for keeping track of the playable group}
+    declare const $numMacros := 8 {Number of NKS macros}
+    declare $polyMacros {Number of Poly Macros}
+    
+    {8 NKS Macros}
+    declare ui_slider $macro1(0,$NUM_GROUPS-1)
+    declare ui_slider $macro2(0,1000000)
+    declare ui_slider $macro3(0,1000000)
+    declare ui_slider $macro4(0,1000000)
+    declare ui_slider $macro5(0,1000000)
+    declare ui_slider $macro6(0,1000000)
+    declare ui_slider $macro7(0,1000000)
+    declare ui_slider $macro8(500000,1000000)    
+
+    {Labels for each macro}
+    declare ui_label $label1(1,1)
+    declare ui_label $label2(1,1)
+    declare ui_label $label3(1,1)
+    declare ui_label $label4(1,1)
+    declare ui_label $label5(1,1)
+    declare ui_label $label6(1,1)
+    declare ui_label $label7(1,1)
+    declare ui_label $label8(1,1)
+
+    declare $guiOffsetX := 125 {GUI main offset x}
+    declare $guiOffsetY := 30 {GUI main offset y}
+    declare $guiSpacingX := 100 {GUI element spacing x}
+    declare $guiSpacingY := 20 {GUI element spacing y}
+
+    {Make all macros persistent}
+    make_persistent($macro1)
+    make_persistent($macro2)
+    make_persistent($macro3)
+    make_persistent($macro4)
+    make_persistent($macro5)
+    make_persistent($macro6)
+    make_persistent($macro7)
+    make_persistent($macro8)
+
+    declare !macroText[$numMacros] {Macro Texts}
+    declare !valueType[$numMacros] {Value Types}
+    declare %enginerPar[$numMacros] := (-1,$ENGINE_PAR_ATTACK,$ENGINE_PAR_DECAY,$ENGINE_PAR_SUSTAIN,$ENGINE_PAR_RELEASE,$ENGINE_PAR_CUTOFF,$ENGINE_PAR_RESONANCE,$ENGINE_PAR_SHAPE) {Egine parameters}
+    declare %groupSlot[$numMacros] := (-1) {Group slot}  
+    declare %fxSlot[$numMacros] := (0,0,0,0,0,0,0,1) {FX slot}  
+    declare %genericSlot[$numMacros] := (-1,-1,-1,-1,-1,1,1,1) {Generic slot}
+
+    !macroText[0] := "Source"
+    !macroText[1] := "Attack"
+    !macroText[2] := "Decay"
+    !macroText[3] := "Sustain"
+    !macroText[4] := "Release"     
+    !macroText[5] := "Cutoff"
+    !macroText[6] := "Res"
+    !macroText[7] := "Saturate"
+
+    !valueType[0] := ""
+    !valueType[1] := " ms"
+    !valueType[2] := " ms"
+    !valueType[3] := " dB"
+    !valueType[4] := " ms"
+    !valueType[5] := " Hz"
+    !valueType[6] := " %"
+    !valueType[7] := " %"
+    
+    $polyMacros := 5
+
+    declare %macroID[$numMacros] {Array for the control GUI IDs}
+    declare %labelID[$numMacros] {Array for the label GUI IDs}
+
+    $i := 0 {Set the control parameters}
+    while($i<$numMacros)
+        %macroID[$i] := get_ui_id($macro1)+$i {Put the controls in the GUI ID array}
+        %labelID[$i] := get_ui_id($label1)+$i {Put the labels in the GUI ID array}
+        set_control_par(%macroID[$i],$CONTROL_PAR_AUTOMATION_ID,$i) {Set the automation IDs}
+        set_control_par_str(%macroID[$i],$CONTROL_PAR_AUTOMATION_NAME,!macroText[$i]) {Set the automation names}
+        if($mPlus=0) {Check if running on headless}
+            if($i<4) {Position the first row of four controls and labels}
+                set_control_par(%macroID[$i],$CONTROL_PAR_POS_X,$guiOffsetX+($i*$guiSpacingX))
+                set_control_par(%macroID[$i],$CONTROL_PAR_POS_Y,$guiOffsetY)
+                set_control_par(%labelID[$i],$CONTROL_PAR_POS_X,$guiOffsetX+($i*$guiSpacingX))
+                set_control_par(%labelID[$i],$CONTROL_PAR_POS_Y,$guiOffsetY+$guiSpacingY)
+            else {Position the second row of four controls and labels}  
+                set_control_par(%macroID[$i],$CONTROL_PAR_POS_X,$guiOffsetX+(($i-4)*$guiSpacingX))
+                set_control_par(%macroID[$i],$CONTROL_PAR_POS_Y,$guiOffsetY+$guiSpacingY*2)
+                set_control_par(%labelID[$i],$CONTROL_PAR_POS_X,$guiOffsetX+(($i-4)*$guiSpacingX))
+                set_control_par(%labelID[$i],$CONTROL_PAR_POS_Y,$guiOffsetY+$guiSpacingY*3)
+            end if
+        else {Hide all the controls}
+            set_control_par(%macroID[$i],$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+            set_control_par(%labelID[$i],$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL) 
+        end if
+        inc($i)
+    end while
+
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_FILTER,-1,0,1) 
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_SHAPER,-1,1,1)
+    set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE,$FILTER_TYPE_SV_LP4,-1,0,1) 
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_LIMITER,-1,7,2) 
+    $macro2 := 110000
+    $macro3 := 110000
+    $macro4 := 1000000
+    $macro5 := 110000
+    $macro6 := 1000000
+    $macro7 := 0
+    $macro8 := 500000
+
+end on
+
+function setMacro {Set the macros}
+    if ($touchedControl<$polyMacros) {Check if a touched control is on group or instrument level}
+        %groupSlot[$touchedControl] := $groupSelect
+    end if    
+    {Set the engine parameter}
+    set_engine_par(%enginerPar[$touchedControl],get_control_par(%macroID[$touchedControl],$CONTROL_PAR_VALUE),%groupSlot[$touchedControl],%fxSlot[$touchedControl],%genericSlot[$touchedControl])
+    {Update the internal slider label for host automation}
+    set_control_par_str(%macroID[$touchedControl],$CONTROL_PAR_LABEL,get_engine_par_disp(%enginerPar[$touchedControl],%groupSlot[$touchedControl],%fxSlot[$touchedControl],%genericSlot[$touchedControl]) & !valueType[$touchedControl])
+    if($mPlus=0) {Update the GUI label}
+        set_control_par_str(%labelID[$touchedControl],$CONTROL_PAR_TEXT,!macroText[$touchedControl] & ": " & get_engine_par_disp(%enginerPar[$touchedControl],%groupSlot[$touchedControl],%fxSlot[$touchedControl],%genericSlot[$touchedControl]) & !valueType[$touchedControl])
+    end if
+end function
+
+function setGroupSelect {Set the selected group}
+    $groupSelect := $macro1
+    set_control_par_str(%macroID[$touchedControl],$CONTROL_PAR_LABEL,$groupSelect+1) {Update the internal slider label for host automation}
+    if($mPlus=0) {Update the GUI label}
+        set_control_par_str(%labelID[$touchedControl],$CONTROL_PAR_TEXT,!macroText[0] & ": " & $groupSelect+1)
+    end if
+    $i := 1 {Set the macro values for the selected group}
+    while ($i<$numMacros)
+        $touchedControl := $i
+        call setMacro
+        inc($i)
+    end while
+end function
+
+on persistence_changed {executed after the init callback or whenever a snapshot has been loaded}
+    call setGroupSelect
+end on
+
+on note {Note logic}
+    disallow_group($ALL_GROUPS) {First disallow all groups}
+    allow_group($groupSelect) {Play only the selected group}
+end on
+
+on ui_control($macro1) {Group Select}
+    $touchedControl := 0
+    call setGroupSelect {In this case call the group select function and not the macro function}
+end on
+on ui_control($macro2) {Amp Attack}
+    $touchedControl := 1
+    call setMacro
+end on
+on ui_control($macro3) {Amp Decay}
+    $touchedControl := 2
+    call setMacro
+end on
+on ui_control($macro4) {Amp Sustain}
+    $touchedControl := 3
+    call setMacro
+end on
+on ui_control($macro5) {Amp Release}
+    $touchedControl := 4
+    call setMacro
+end on
+on ui_control($macro6) {Filter Cut}
+    $touchedControl := 5
+    call setMacro
+end on
+on ui_control($macro7) {Filter Res}
+    $touchedControl := 6
+    call setMacro
+end on
+on ui_control($macro8) {Saturation Amount}
+    $touchedControl := 7
+    call setMacro
+end on

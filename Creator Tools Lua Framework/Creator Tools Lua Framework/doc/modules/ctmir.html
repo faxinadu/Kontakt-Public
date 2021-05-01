@@ -1,0 +1,335 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/ctaudio.html">ctaudio</a></li>
+  <li><a href="../modules/ctfile.html">ctfile</a></li>
+  <li><a href="../modules/ctgroups.html">ctgroups</a></li>
+  <li><a href="../modules/ctinstrument.html">ctinstrument</a></li>
+  <li><a href="../modules/ctmap.html">ctmap</a></li>
+  <li><strong>ctmir</strong></li>
+  <li><a href="../modules/ctutil.html">ctutil</a></li>
+  <li><a href="../modules/ctwav.html">ctwav</a></li>
+  <li><a href="../modules/ctzones.html">ctzones</a></li>
+  <li><a href="../modules/installationandusage.html">installationandusage</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>ctmir</code></h1>
+<p>Creator Tools LUA MIR Utilities File
+<p> Author: Native Instruments
+ Written by: Yaron Eshkar
+<p> This file includes useful functions for usage in Creator Tools Lua scripts.</p>
+<p>
+
+ Simply include this line in any script (if running a script from another location that users this file,
+ make sure to point to the correct path):
+ local ctMir = require("CtMir")
+<p> Then you can simply call any function like:
+ ctMir.test_function()
+<p> It is also possible of course to copy entire specific functions from this list directly into your script.
+ In that case remove the CtMir part from the function name, and then simply call it normally like:
+ test_function()
+</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#CtMir.test_function">CtMir.test_function ()</a></td>
+	<td class="summary">Test Function.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtMir.mir_detect">CtMir.mir_detect (path, mir_type, batch, frame_size_in_seconds, hop_size_in_seconds)</a></td>
+	<td class="summary">Perform any of the MIR operations.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtMir.mir_test">CtMir.mir_test (perform_batch, perform_single, mir_path_batch, mir_path_single)</a></td>
+	<td class="summary">Run MIR detection on a folder or single file and print the results.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtMir.tune_all_zones">CtMir.tune_all_zones ()</a></td>
+	<td class="summary">Tune all zones.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtMir.type_tags">CtMir.type_tags (mode)</a></td>
+	<td class="summary">Helper function for converting MIR type tag enums to strings.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtMir.type_to_tag">CtMir.type_to_tag (var, mode, mir_path_single)</a></td>
+	<td class="summary">Helper function for implementing MIR type tags to strings.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "CtMir.test_function"></a>
+    <strong>CtMir.test_function ()</strong>
+    </dt>
+    <dd>
+    Test Function.
+ Takes no arguments, prints to console when called.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtMir.mir_detect"></a>
+    <strong>CtMir.mir_detect (path, mir_type, batch, frame_size_in_seconds, hop_size_in_seconds)</strong>
+    </dt>
+    <dd>
+    Perform any of the MIR operations.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">path</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the path to the audio files. A directory for batch operation, a file for a single operation.
+        </li>
+        <li><span class="parameter">mir_type</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the type of MIR operation to perform. Can be one of:
+<p> sample
+<p> drum
+<p> instrument
+<p> pitch
+<p> peak
+<p> rms
+<p> loudness
+        </li>
+        <li><span class="parameter">batch</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true performs the operation on a directory, otherwise on a single file.
+        </li>
+        <li><span class="parameter">frame_size_in_seconds</span>
+            <span class="types"><span class="type">float</span></span>
+         the frame size for RMS and loudness detection. Degfault to 0.4.
+        </li>
+        <li><span class="parameter">hop_size_in_seconds</span>
+            <span class="types"><span class="type">float</span></span>
+         the hop size for RMS and loudness detection. Defaults to 0.1.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        return the operation result. Batch returns a table, single returns a variable.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtMir.mir_test"></a>
+    <strong>CtMir.mir_test (perform_batch, perform_single, mir_path_batch, mir_path_single)</strong>
+    </dt>
+    <dd>
+    Run MIR detection on a folder or single file and print the results.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">perform_batch</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true performs the batch operation.
+        </li>
+        <li><span class="parameter">perform_single</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true performs the single operation.
+        </li>
+        <li><span class="parameter">mir_path_batch</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the directory path containing audio files for batch operation.
+        </li>
+        <li><span class="parameter">mir_path_single</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the file path to an audio file for single file operation.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtMir.tune_all_zones"></a>
+    <strong>CtMir.tune_all_zones ()</strong>
+    </dt>
+    <dd>
+    Tune all zones.
+ Use MIR to tune all zones to the nearest note.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtMir.type_tags"></a>
+    <strong>CtMir.type_tags (mode)</strong>
+    </dt>
+    <dd>
+    Helper function for converting MIR type tag enums to strings.
+ tparam enum v the enum to be parsed. Depending on the mode, can be one of:
+<p>  SampleType.INVALID
+<p> SampleType.INSTRUMENT
+<p> SampleType.DRUM
+
+ DrumType.INVALID
+<p> DrumType.KICK
+<p> DrumType.SNARE
+<p> DrumType.CLOSED_HH
+<p> DrumType.OPEN_HH
+<p> DrumType.TOM
+<p> DrumType.CYMBAL
+<p> DrumType.CLAP
+<p> DrumType.SHAKER
+<p> DrumType.PERC_DRUM
+<p> DrumType.PERC_OTHER
+<p> InstrumentType.INVALID
+<p> InstrumentType.BASS
+<p> InstrumentType.BOWED_STRING
+<p> InstrumentType.BRASS
+<p> InstrumentType.FLUTE
+<p> InstrumentType.GUITAR
+<p> InstrumentType.KEYBOARD
+<p> InstrumentType.MALLET
+<p> InstrumentType.ORGAN
+<p> InstrumentType.PLUCKED_STRING
+<p> InstrumentType.REED
+<p> InstrumentType.SYNTH
+<p> InstrumentType.VOCAL
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">mode</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the expected type tag mode. Can be one of:
+<p> type
+<p> drum
+<p> instrument
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        returns a string with the parsed tag.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtMir.type_to_tag"></a>
+    <strong>CtMir.type_to_tag (var, mode, mir_path_single)</strong>
+    </dt>
+    <dd>
+    Helper function for implementing MIR type tags to strings.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">var</span>
+         table or enum. If called with a single MIR operation, var is a string and the mir_path_single argument must be present.
+        </li>
+        <li><span class="parameter">mode</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the mode to pass to the next function. Can be one of:
+<p> type
+<p> drum
+<p> instrument
+        </li>
+        <li><span class="parameter">mir_path_single</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         if the input type is not a table, path must be provided.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">var</span></span>
+        returns either a string or a table depending on the input type.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2021-03-09 10:19:35 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

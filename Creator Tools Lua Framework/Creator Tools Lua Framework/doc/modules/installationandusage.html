@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/ctaudio.html">ctaudio</a></li>
+  <li><a href="../modules/ctfile.html">ctfile</a></li>
+  <li><a href="../modules/ctgroups.html">ctgroups</a></li>
+  <li><a href="../modules/ctinstrument.html">ctinstrument</a></li>
+  <li><a href="../modules/ctmap.html">ctmap</a></li>
+  <li><a href="../modules/ctmir.html">ctmir</a></li>
+  <li><a href="../modules/ctutil.html">ctutil</a></li>
+  <li><a href="../modules/ctwav.html">ctwav</a></li>
+  <li><a href="../modules/ctzones.html">ctzones</a></li>
+  <li><strong>installationandusage</strong></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>installationandusage</code></h1>
+<p>Creator Tools LUA Framework v0.2
+<p>
+ Author: Yaron Eshkar
+
+ Modified: October 9, 2020
+<p>
+<p> Sample Mapping --------------------------------------------------------------------------
+<p> The core of the framework involves quick and efficient sample preparation and mapping into Kontakt.</p>
+<p> Various small functions are provided that facilitate mapping tasks, as well as more holistic higher level mapping features.
+<p> Wav File Tools --------------------------------------------------------------------------
+<p> The library includes a wav file reader that allows querying the wav file and retrieving detailed relevant information from various header chunks.
+<p> Included are also functions that allow direct manipulation of the wav file smpl chunk.
+<p> Graphical Interface ---------------------------------------------------------------------
+<p> In order to make use of the framework's graphical tools LOVE must be installed and set into the environment:
+<p> Download LOVE at: https://love2d.org/
+<p> Mac:
+ - Run in Terminal app:
+ - sudo ln -s /Applications/love.app/Contents/MacOS/love /usr/local/bin/love
+<p> Windows:
+ - Set up environment variables:
+ Edit the system environment variables
+ Path
+ New
+ Enter the path all the way to the Love executable e.g. - C:\Program Files\LOVE
+<p> From within a Love application access to the file system is restricted to specific open folders, information on using Love and the file system together when writing scripts can be found here:
+ https://love2d.org/wiki/love.filesystem
+<p> Audio Tools ------------------------------------------------------------------------------
+<p> The framework allows manipulation of audio files, using wrappers for SoX, FFMPEG and FLAC. There are included functions for normalization, filtering, dc removal, silence removal, sample rate conversion and more. The framework also allows decoding and encoding of FLAC files as well as encoding of OGG files.
+<p> In order to make use of the batch audio tools SoX must be installed and set into the environment:
+<p> SoX
+ Mac:
+ - Press Command+Space and type Terminal and press enter/return key.
+ - Run in Terminal app:
+ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null
+ If the screen prompts you to enter a password, please enter your Mac's user password to continue. Then wait for the command to finish.
+ -Run in Terminal app:
+ brew install sox
+<p> Windows:
+ - Download SoX at: https://sourceforge.net/projects/sox/files/sox/
+ - Set up environment variables:
+ Edit the system environment variables
+ Path
+ New
+ Enter the path all the way to the FLAC executable e.g. - C:\Program Files (x86)\sox-14-4-2
+<p> In order to make use of the FLAC encoding and decoding tools FLAC must be installed and set into the environment:
+<p> FLAC
+ Mac: FLAC is part of the operating system and is available by default.
+
+ Windows:
+ - Download FLAC at: http://downloads.xiph.org/releases/flac/
+ - Set up environment variables:
+ Edit the system environment variables
+ Path
+ New
+ Enter the path all the way to the FLAC executable e.g. - C:\Program Files\flac-1.3.2-win\win64
+<p> MIDI Tools ------------------------------------------------------------------------------
+<p> The framework can explore sending MIDI via Lua scripts by calling the SendMIDI command line library, found here: https://github.com/gbevin/SendMIDI
+<p>
+<p> Example Usage:
+ - Download the Creator Tools Lua Framework
+ - Download and install SoX via the method described above
+ - If using Windows - download and install FLAC via the method described above
+ - Double click on the Kontakt rack to create a new NKI
+ - Enter the NKI's edit mode
+ - Launch Creator Tools
+ - Navigate to the Lua tab in Creator Tools
+ - Drag and drop the Lua script "Run Mapping.lua" unto the Lua tool
+ - Press play in the Lua tool
+ - Click the arrow in Creator Tools to push to Kontakt
+ - Adapt the script to user scenarios:
+ -- Click the "Open in text editor" icon next to the play button in Creator Tools
+ -- Edit the USER VARIABLES section according to the scenario
+ -- Run the script
+<p>
+ TODO
+ - Function to create NKS folder structure
+ - Function to copy all processed files
+ - FFMPEG as audio option
+ - set inst wav chunk
+ - </p>
+
+
+
+<br/>
+<br/>
+
+
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2021-03-09 10:19:35 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
