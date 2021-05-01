@@ -1,0 +1,460 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/ctaudio.html">ctaudio</a></li>
+  <li><a href="../modules/ctfile.html">ctfile</a></li>
+  <li><a href="../modules/ctgroups.html">ctgroups</a></li>
+  <li><a href="../modules/ctinstrument.html">ctinstrument</a></li>
+  <li><a href="../modules/ctmap.html">ctmap</a></li>
+  <li><a href="../modules/ctmir.html">ctmir</a></li>
+  <li><a href="../modules/ctutil.html">ctutil</a></li>
+  <li><a href="../modules/ctwav.html">ctwav</a></li>
+  <li><strong>ctzones</strong></li>
+  <li><a href="../modules/installationandusage.html">installationandusage</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>ctzones</code></h1>
+<p>Creator Tools LUA Zone Utilities File
+<p> Author: Native Instruments
+ Written by: Yaron Eshkar
+<p> This file includes useful functions for usage in Creator Tools Lua scripts.</p>
+<p>
+
+ Simply include this line in any script (if running a script from another location that users this file,
+ make sure to point to the correct path):
+ local ctZones = require("CtZones")
+<p> Then you can simply call any function like:
+ ctZones.test_function()
+<p> It is also possible of course to copy entire specific functions from this list directly into your script.
+ In that case remove the ctZones part from the function name, and then simply call it normally like:
+ test_function()
+</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#CtZones.test_function">CtZones.test_function ()</a></td>
+	<td class="summary">Test Function.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtZones.zone_confine">CtZones.zone_confine (zone, the)</a></td>
+	<td class="summary">Confine a zone so that root key, low key and high key are all the same.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtZones.zone_count">CtZones.zone_count (group)</a></td>
+	<td class="summary">Check and print the total zone count of a group or the entire instrument.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtZones.zone_info">CtZones.zone_info (group, zone)</a></td>
+	<td class="summary">Print detailed information about a zone, all the zones in a group or all the zones in the instrument.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtZones.zone_move">CtZones.zone_move (from_group, to_group, zone_number)</a></td>
+	<td class="summary">Move all zones or a specific zone from one group to another.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtZones.zone_params">CtZones.zone_params (group, zone, root_key, high_key, low_key, high_vel, low_vel, volume, tune, pan)</a></td>
+	<td class="summary">Set all zone parameters.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtZones.zone_param_single">CtZones.zone_param_single (source_group, source_zone, dest_group, dest_zone, param)</a></td>
+	<td class="summary">Copy zone parameters from one zone to another.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtZones.zone_root">CtZones.zone_root (start_root, start_zone, until_zone, start_group, until_group, increment, confine)</a></td>
+	<td class="summary">Set the root note of a range of zones over a range of groups with optional arguments.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtZones.zones_with_same_key">CtZones.zones_with_same_key (root_key, group)</a></td>
+	<td class="summary">Find and count the number of all zones that have the same root key within a group or all groups.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "CtZones.test_function"></a>
+    <strong>CtZones.test_function ()</strong>
+    </dt>
+    <dd>
+    Test Function.
+ Takes no arguments, prints to console when called.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtZones.zone_confine"></a>
+    <strong>CtZones.zone_confine (zone, the)</strong>
+    </dt>
+    <dd>
+    Confine a zone so that root key, low key and high key are all the same.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">zone</span>
+            <span class="types"><span class="type">enum</span></span>
+         the zone to confine.
+        </li>
+        <li><span class="parameter">the</span>
+            <span class="types"><span class="type">int</span></span>
+         value from 0-127 to confine the zone values to.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtZones.zone_count"></a>
+    <strong>CtZones.zone_count (group)</strong>
+    </dt>
+    <dd>
+    Check and print the total zone count of a group or the entire instrument.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">group</span>
+            <span class="types"><span class="type">int</span></span>
+         the group number to check, if none provided checks entire instrument.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtZones.zone_info"></a>
+    <strong>CtZones.zone_info (group, zone)</strong>
+    </dt>
+    <dd>
+    Print detailed information about a zone, all the zones in a group or all the zones in the instrument.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">group</span>
+            <span class="types"><span class="type">int</span></span>
+         the group number to check, if none provided checks entire instrument.
+        </li>
+        <li><span class="parameter">zone</span>
+            <span class="types"><span class="type">int</span></span>
+         the zone number to check, if none provided checks all the zones in the group.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtZones.zone_move"></a>
+    <strong>CtZones.zone_move (from_group, to_group, zone_number)</strong>
+    </dt>
+    <dd>
+    Move all zones or a specific zone from one group to another.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">from_group</span>
+            <span class="types"><span class="type">int</span></span>
+         the source group index.
+        </li>
+        <li><span class="parameter">to_group</span>
+            <span class="types"><span class="type">int</span></span>
+         the destination group index.
+        </li>
+        <li><span class="parameter">zone_number</span>
+            <span class="types"><span class="type">int</span></span>
+         the zone to move, if not specified all zones will be moved from the source group to the destination.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtZones.zone_params"></a>
+    <strong>CtZones.zone_params (group, zone, root_key, high_key, low_key, high_vel, low_vel, volume, tune, pan)</strong>
+    </dt>
+    <dd>
+    Set all zone parameters.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">group</span>
+            <span class="types"><span class="type">int</span></span>
+         the group index.
+        </li>
+        <li><span class="parameter">zone</span>
+            <span class="types"><span class="type">int</span></span>
+         the zone index witin the group.
+        </li>
+        <li><span class="parameter">root_key</span>
+            <span class="types"><span class="type">int</span></span>
+         the root key valuae to set.
+        </li>
+        <li><span class="parameter">high_key</span>
+            <span class="types"><span class="type">int</span></span>
+         the high key value to set.
+        </li>
+        <li><span class="parameter">low_key</span>
+            <span class="types"><span class="type">int</span></span>
+         the low key value to set.
+        </li>
+        <li><span class="parameter">high_vel</span>
+            <span class="types"><span class="type">int</span></span>
+         the high vel value to set.
+        </li>
+        <li><span class="parameter">low_vel</span>
+            <span class="types"><span class="type">int</span></span>
+         the low vel value to set.
+        </li>
+        <li><span class="parameter">volume</span>
+            <span class="types"><span class="type">int</span></span>
+         the volume value to set.
+        </li>
+        <li><span class="parameter">tune</span>
+            <span class="types"><span class="type">int</span></span>
+         the tune value to set.
+        </li>
+        <li><span class="parameter">pan</span>
+            <span class="types"><span class="type">int</span></span>
+         the pan value to set.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtZones.zone_param_single"></a>
+    <strong>CtZones.zone_param_single (source_group, source_zone, dest_group, dest_zone, param)</strong>
+    </dt>
+    <dd>
+    Copy zone parameters from one zone to another.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">source_group</span>
+            <span class="types"><span class="type">int</span></span>
+         the group index of the source group.
+        </li>
+        <li><span class="parameter">source_zone</span>
+            <span class="types"><span class="type">int</span></span>
+         the zone index of the source zone within the source group.
+        </li>
+        <li><span class="parameter">dest_group</span>
+            <span class="types"><span class="type">int</span></span>
+         the group index of the destination group.
+        </li>
+        <li><span class="parameter">dest_zone</span>
+            <span class="types"><span class="type">int</span></span>
+         the zone index of the destination zone within the destination group.
+        </li>
+        <li><span class="parameter">param</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         if set to "all" copies all zone parameters.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtZones.zone_root"></a>
+    <strong>CtZones.zone_root (start_root, start_zone, until_zone, start_group, until_group, increment, confine)</strong>
+    </dt>
+    <dd>
+    Set the root note of a range of zones over a range of groups with optional arguments.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">start_root</span>
+            <span class="types"><span class="type">int</span></span>
+         the root note number to start from for every zone. Defaults to 60.
+        </li>
+        <li><span class="parameter">start_zone</span>
+            <span class="types"><span class="type">int</span></span>
+         the index of the zone to start the iteration from. Defaults to 0.
+        </li>
+        <li><span class="parameter">until_zone</span>
+            <span class="types"><span class="type">int</span></span>
+         the index of the zone to end the iteration on. Defaults to 0.
+        </li>
+        <li><span class="parameter">start_group</span>
+            <span class="types"><span class="type">int</span></span>
+         the index of the group to start the iteration from. Defaults to 0.
+        </li>
+        <li><span class="parameter">until_group</span>
+            <span class="types"><span class="type">int</span></span>
+         the index of the group to end the iteration on. Defaults to 0.
+        </li>
+        <li><span class="parameter">increment</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true will increment the root note for each zone in the set zone range starting from the start_root value.
+        </li>
+        <li><span class="parameter">confine</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true, sets the zone low key and high key to the same value as the root note.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtZones.zones_with_same_key"></a>
+    <strong>CtZones.zones_with_same_key (root_key, group)</strong>
+    </dt>
+    <dd>
+    Find and count the number of all zones that have the same root key within a group or all groups.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">root_key</span>
+            <span class="types"><span class="type">int</span></span>
+         the root key to compare.
+        </li>
+        <li><span class="parameter">group</span>
+            <span class="types"><span class="type">int</span></span>
+         the group to check in, if none specified checks in all groups.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        returns a table containing a list of zones that are in the same key as the specified one.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2021-03-09 10:19:35 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

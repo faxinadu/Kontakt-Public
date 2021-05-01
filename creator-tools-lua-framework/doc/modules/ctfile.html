@@ -1,0 +1,473 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/ctaudio.html">ctaudio</a></li>
+  <li><strong>ctfile</strong></li>
+  <li><a href="../modules/ctgroups.html">ctgroups</a></li>
+  <li><a href="../modules/ctinstrument.html">ctinstrument</a></li>
+  <li><a href="../modules/ctmap.html">ctmap</a></li>
+  <li><a href="../modules/ctmir.html">ctmir</a></li>
+  <li><a href="../modules/ctutil.html">ctutil</a></li>
+  <li><a href="../modules/ctwav.html">ctwav</a></li>
+  <li><a href="../modules/ctzones.html">ctzones</a></li>
+  <li><a href="../modules/installationandusage.html">installationandusage</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>ctfile</code></h1>
+<p>Creator Tools LUA File Utilities File
+<p> Author: Native Instruments
+ Written by: Yaron Eshkar
+<p> This file includes useful functions for usage in Creator Tools Lua scripts.</p>
+<p>
+ Simply include this line in any script (if running a script from another location that users this file,
+ make sure to point to the correct path):
+ local ctFile = require("CtFile")
+ Then you can simply call any function like:
+ ctFile.test_function()
+
+ It is also possible of course to copy entire specific functions from this list directly into your script.
+ In that case remove the CtFile part from the function name, and then simply call it normally like:
+ test_function()
+</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#CtFile.test_function">CtFile.test_function ()</a></td>
+	<td class="summary">Test Function.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtFile.check_duplicate_file_names">CtFile.check_duplicate_file_names (path, file_extention, verbose_mode)</a></td>
+	<td class="summary">Check duplicate file names in path.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtFile.copy_file">CtFile.copy_file (source, destination)</a></td>
+	<td class="summary">Copy a file.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtFile.create_directory">CtFile.create_directory (directory, verbose_mode)</a></td>
+	<td class="summary">Create a directory.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtFile.delete_file">CtFile.delete_file (file)</a></td>
+	<td class="summary">Delete a file.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtFile.get_os">CtFile.get_os ()</a></td>
+	<td class="summary">Get the Operating System type.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtFile.run_shell_command">CtFile.run_shell_command (command, verbose_mode)</a></td>
+	<td class="summary">Run an OS shell command.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtFile.capture_shell_command">CtFile.capture_shell_command (command, raw)</a></td>
+	<td class="summary">Run shell command and return a string.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtFile.run_file_process">CtFile.run_file_process (command, file, temp_file)</a></td>
+	<td class="summary">Run a shell command on a file, overwriting the original file.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtFile.read_file_to_string">CtFile.read_file_to_string (file, mode)</a></td>
+	<td class="summary">Reads a file and returns the contents as a string.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtFile.replace_line_in_file">CtFile.replace_line_in_file (input_file, replace_line, replace_content)</a></td>
+	<td class="summary">Replace a line in a file.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "CtFile.test_function"></a>
+    <strong>CtFile.test_function ()</strong>
+    </dt>
+    <dd>
+    Test Function.
+ Takes no arguments, prints to console when called.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtFile.check_duplicate_file_names"></a>
+    <strong>CtFile.check_duplicate_file_names (path, file_extention, verbose_mode)</strong>
+    </dt>
+    <dd>
+    Check duplicate file names in path.
+ Checks a path and subfolders and returns a table listing paths of duplicate file names.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">path</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the directory path to start checking from.
+        </li>
+        <li><span class="parameter">file_extention</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the file extention to look for.
+        </li>
+        <li><span class="parameter">verbose_mode</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true prints information to console.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        returns a table with the paths of all duplicate file names.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtFile.copy_file"></a>
+    <strong>CtFile.copy_file (source, destination)</strong>
+    </dt>
+    <dd>
+    Copy a file.
+ Copies a file from source to destination path.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">source</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the source file to copy.
+        </li>
+        <li><span class="parameter">destination</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the destination path to copy to.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtFile.create_directory"></a>
+    <strong>CtFile.create_directory (directory, verbose_mode)</strong>
+    </dt>
+    <dd>
+    Create a directory.
+ Creates a directory with the specified path name.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">directory</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the directory path to create.
+        </li>
+        <li><span class="parameter">verbose_mode</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true prints information to console.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtFile.delete_file"></a>
+    <strong>CtFile.delete_file (file)</strong>
+    </dt>
+    <dd>
+    Delete a file.
+ Deletes the specified file.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the file to delete.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtFile.get_os"></a>
+    <strong>CtFile.get_os ()</strong>
+    </dt>
+    <dd>
+    Get the Operating System type.
+ Determine if the script is running on Windows or Mac.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+        true if windows, otherwise false.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtFile.run_shell_command"></a>
+    <strong>CtFile.run_shell_command (command, verbose_mode)</strong>
+    </dt>
+    <dd>
+    Run an OS shell command.
+ Executes a command on the operating system console.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">command</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the shell command to execute.
+        </li>
+        <li><span class="parameter">verbose_mode</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true prints information to console.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtFile.capture_shell_command"></a>
+    <strong>CtFile.capture_shell_command (command, raw)</strong>
+    </dt>
+    <dd>
+    Run shell command and return a string.
+ Executes a command on the operating system console, optionally returing anything printed by the command to the console as a string.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">command</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the shell command to execute.
+        </li>
+        <li><span class="parameter">raw</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true the function will return the result formated.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        returns the console print result.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtFile.run_file_process"></a>
+    <strong>CtFile.run_file_process (command, file, temp_file)</strong>
+    </dt>
+    <dd>
+    Run a shell command on a file, overwriting the original file.
+ Executes a shell command on a file, overwriting the original file with the result. A temporary file location must be specified for the processing.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">command</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the shell command to execute.
+        </li>
+        <li><span class="parameter">file</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the original file.
+        </li>
+        <li><span class="parameter">temp_file</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         a temporary file path for the intermediate operation.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtFile.read_file_to_string"></a>
+    <strong>CtFile.read_file_to_string (file, mode)</strong>
+    </dt>
+    <dd>
+    Reads a file and returns the contents as a string.
+ Reads a file in the specified mode and returns the contents as a string.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the file to read.
+        </li>
+        <li><span class="parameter">mode</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the read mode.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        returns a string with the file contents.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtFile.replace_line_in_file"></a>
+    <strong>CtFile.replace_line_in_file (input_file, replace_line, replace_content)</strong>
+    </dt>
+    <dd>
+    Replace a line in a file.
+ Overwrites a given line in a file with the specfied string.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">input_file</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the file to read and wtie to.
+        </li>
+        <li><span class="parameter">replace_line</span>
+            <span class="types"><span class="type">int</span></span>
+         the line in the file to be replaced.
+        </li>
+        <li><span class="parameter">replace_content</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the content that should replace the line.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2021-03-09 10:19:35 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

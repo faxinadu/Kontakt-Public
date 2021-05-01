@@ -1,0 +1,509 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/ctaudio.html">ctaudio</a></li>
+  <li><a href="../modules/ctfile.html">ctfile</a></li>
+  <li><strong>ctgroups</strong></li>
+  <li><a href="../modules/ctinstrument.html">ctinstrument</a></li>
+  <li><a href="../modules/ctmap.html">ctmap</a></li>
+  <li><a href="../modules/ctmir.html">ctmir</a></li>
+  <li><a href="../modules/ctutil.html">ctutil</a></li>
+  <li><a href="../modules/ctwav.html">ctwav</a></li>
+  <li><a href="../modules/ctzones.html">ctzones</a></li>
+  <li><a href="../modules/installationandusage.html">installationandusage</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>ctgroups</code></h1>
+<p>Creator Tools LUA Group Utilities File
+<p> Author: Native Instruments
+ Written by: Yaron Eshkar
+<p> This file includes useful functions for usage in Creator Tools Lua scripts.</p>
+<p>
+<p> Simply include this line in any script (if running a script from another location that users this file,
+ make sure to point to the correct path):
+ local ctGroups = require("CtGroups")
+<p> Then you can simply call any function like:
+ ctGroups.test_function()
+
+ It is also possible of course to copy entire specific functions from this list directly into your script.
+ In that case remove the CtGroups part from the function name, and then simply call it normally like:
+ test_function()
+</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#CtGroups.test_function">CtGroups.test_function ()</a></td>
+	<td class="summary">Test Function.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtGroups.group_count">CtGroups.group_count ()</a></td>
+	<td class="summary">Check group count.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtGroups.group_create">CtGroups.group_create (number, insert_at, group_name, increment, increment_start)</a></td>
+	<td class="summary">Create an x number of groups.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtGroups.group_copy">CtGroups.group_copy (group_to_copy, times_to_paste, insert_at, group_name, increment, increment_start)</a></td>
+	<td class="summary">Copy a group and paste it x times.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtGroups.groupInfo">CtGroups.groupInfo (group)</a></td>
+	<td class="summary">Print detailed information about a group or all groups.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtGroups.group_name_replace">CtGroups.group_name_replace (replace_this, replace_with, start_group, until_group)</a></td>
+	<td class="summary">Replace group name.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtGroups.group_name_search">CtGroups.group_name_search (search_name, start_group, until_group, contains)</a></td>
+	<td class="summary">Search for a group name or a string in the name.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtGroups.group_remove">CtGroups.group_remove (start_group, until_group)</a></td>
+	<td class="summary">Remove groups within a range of groups.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtGroups.group_rename">CtGroups.group_rename (new_name, start_group, until_group, increment, increment_start)</a></td>
+	<td class="summary">Rename groups.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtGroups.group_names">CtGroups.group_names ()</a></td>
+	<td class="summary">Print group names.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CtGroups.group_params">CtGroups.group_params (group, volume, tune, pan, name)</a></td>
+	<td class="summary">Set all group parameters.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "CtGroups.test_function"></a>
+    <strong>CtGroups.test_function ()</strong>
+    </dt>
+    <dd>
+    Test Function.
+ Takes no arguments, prints to console when called.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtGroups.group_count"></a>
+    <strong>CtGroups.group_count ()</strong>
+    </dt>
+    <dd>
+    Check group count.
+ Takes no arguments, check and print the total group count of the instrument.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtGroups.group_create"></a>
+    <strong>CtGroups.group_create (number, insert_at, group_name, increment, increment_start)</strong>
+    </dt>
+    <dd>
+    Create an x number of groups.
+ Optionally choose where to insert and if and how to rename.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">number</span>
+            <span class="types"><span class="type">int</span></span>
+         the number of groups to create.
+        </li>
+        <li><span class="parameter">insert_at</span>
+            <span class="types"><span class="type">int</span></span>
+         the group index after which to start creating new groups.
+        </li>
+        <li><span class="parameter">group_name</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the name for the created groups.
+        </li>
+        <li><span class="parameter">increment</span>
+            <span class="types"><span class="type">bool</span></span>
+         when set to true, add an incremental numeric count to the group name.
+        </li>
+        <li><span class="parameter">increment_start</span>
+            <span class="types"><span class="type">int</span></span>
+         the number from which to start incrementing from.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtGroups.group_copy"></a>
+    <strong>CtGroups.group_copy (group_to_copy, times_to_paste, insert_at, group_name, increment, increment_start)</strong>
+    </dt>
+    <dd>
+    Copy a group and paste it x times.
+ Optionally at the end or by insertion as well as optionally rename the copied groups.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">group_to_copy</span>
+            <span class="types"><span class="type">int</span></span>
+         the group to copy.
+        </li>
+        <li><span class="parameter">times_to_paste</span>
+            <span class="types"><span class="type">int</span></span>
+         how many copies should be created.
+        </li>
+        <li><span class="parameter">insert_at</span>
+            <span class="types"><span class="type">int</span></span>
+         the group index after which to start creating new groups.
+        </li>
+        <li><span class="parameter">group_name</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the name for the created groups.
+        </li>
+        <li><span class="parameter">increment</span>
+            <span class="types"><span class="type">bool</span></span>
+         when set to true, add an incremental numeric count to the group name.
+        </li>
+        <li><span class="parameter">increment_start</span>
+            <span class="types"><span class="type">int</span></span>
+         the number from which to start incrementing from.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtGroups.groupInfo"></a>
+    <strong>CtGroups.groupInfo (group)</strong>
+    </dt>
+    <dd>
+    Print detailed information about a group or all groups.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">group</span>
+            <span class="types"><span class="type">int</span></span>
+         the group to check. If no group is given, report on all the groups.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtGroups.group_name_replace"></a>
+    <strong>CtGroups.group_name_replace (replace_this, replace_with, start_group, until_group)</strong>
+    </dt>
+    <dd>
+    Replace group name.
+ Searches for a string in the group name and replaces it with a new string.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">replace_this</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the sub-string in the group name to look for.
+        </li>
+        <li><span class="parameter">replace_with</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the sub-string to replace matches with.
+        </li>
+        <li><span class="parameter">start_group</span>
+            <span class="types"><span class="type">int</span></span>
+         the index of the first group to start checking in. Defaults to 0.
+        </li>
+        <li><span class="parameter">until_group</span>
+            <span class="types"><span class="type">int</span></span>
+         the index of the last group to start checking in. Defaults to start_group.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtGroups.group_name_search"></a>
+    <strong>CtGroups.group_name_search (search_name, start_group, until_group, contains)</strong>
+    </dt>
+    <dd>
+    Search for a group name or a string in the name.
+ Return a table with all groups that match.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">search_name</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the group name or sub-string in the name to look for.
+        </li>
+        <li><span class="parameter">start_group</span>
+            <span class="types"><span class="type">int</span></span>
+         the index of the first group to start checking in. Defaults to 0.
+        </li>
+        <li><span class="parameter">until_group</span>
+            <span class="types"><span class="type">int</span></span>
+         the index of the last group to start checking in. Defaults to start_group.
+        </li>
+        <li><span class="parameter">contains</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true searches for a sub-string within the group name, otherwise searches for matches in the entire group name.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        returns a table with the indexes of the groups matching the condition.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtGroups.group_remove"></a>
+    <strong>CtGroups.group_remove (start_group, until_group)</strong>
+    </dt>
+    <dd>
+    Remove groups within a range of groups.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">start_group</span>
+            <span class="types"><span class="type">int</span></span>
+         the index of the first group to remove. Defaults to 0.
+        </li>
+        <li><span class="parameter">until_group</span>
+            <span class="types"><span class="type">int</span></span>
+         the index of the last group to remove. Defaults to start_group.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtGroups.group_rename"></a>
+    <strong>CtGroups.group_rename (new_name, start_group, until_group, increment, increment_start)</strong>
+    </dt>
+    <dd>
+    Rename groups.
+ Change name and an add optional incremental count
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">new_name</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the new name for the groups.
+        </li>
+        <li><span class="parameter">start_group</span>
+            <span class="types"><span class="type">int</span></span>
+         the index of the group to start renaming. Defaults to 0.
+        </li>
+        <li><span class="parameter">until_group</span>
+            <span class="types"><span class="type">int</span></span>
+         the index of the last group to be renamed. Defaults to start_group.
+        </li>
+        <li><span class="parameter">increment</span>
+            <span class="types"><span class="type">bool</span></span>
+         when true will add an incremental count to every group name.
+        </li>
+        <li><span class="parameter">increment_start</span>
+            <span class="types"><span class="type">int</span></span>
+         the number from which to start the incremental count from. Defaults to 1.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtGroups.group_names"></a>
+    <strong>CtGroups.group_names ()</strong>
+    </dt>
+    <dd>
+    Print group names.
+ Takes no arguments, prints all group names.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "CtGroups.group_params"></a>
+    <strong>CtGroups.group_params (group, volume, tune, pan, name)</strong>
+    </dt>
+    <dd>
+    Set all group parameters.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">group</span>
+            <span class="types"><span class="type">int</span></span>
+         the index of the group to set. Defaults to 0.
+        </li>
+        <li><span class="parameter">volume</span>
+            <span class="types"><span class="type">int</span></span>
+         the group volume. Defaults to 0.
+        </li>
+        <li><span class="parameter">tune</span>
+            <span class="types"><span class="type">int</span></span>
+         the group tune. Defaults to 0.
+        </li>
+        <li><span class="parameter">pan</span>
+            <span class="types"><span class="type">int</span></span>
+         the group pan. Defaults to 0.
+        </li>
+        <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         the name of the group, if specified.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">bool</span></span>
+
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2021-03-09 10:19:35 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

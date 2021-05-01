@@ -1,0 +1,109 @@
+----------------------------------------------------------------------------------------------------
+-- Creator Tools LUA Framework v0.3
+----------------------------------------------------------------------------------------------------
+-- 
+-- Author: Yaron Eshkar
+-- Consulting: Mario Kruselj
+-- 
+-- Modified: April 23, 2021
+--
+----------------------------------------------------------------------------------------------------
+--
+---------- Sample Mapping --------------------------------------------------------------------------
+--
+-- The core of the framework involves quick and efficient sample preparation and mapping into Kontakt. 
+-- Various small functions are provided that facilitate mapping tasks, as well as more holistic higher level mapping features.
+--
+---------- Wav File Tools --------------------------------------------------------------------------
+--
+-- The library includes a wav file reader that allows querying the wav file and retrieving detailed relevant information from various header chunks.
+--
+-- Included are also functions that allow direct manipulation of the wav file smpl chunk.
+--
+---------- Graphical Interface ---------------------------------------------------------------------
+--
+-- In order to make use of the framework's graphical tools LOVE must be installed and set into the environment:
+--
+-- Download LOVE at: https://love2d.org/
+--
+-- Mac: 
+-- - Run in Terminal app:
+-- - sudo ln -s /Applications/love.app/Contents/MacOS/love /usr/local/bin/love
+--
+-- Windows:
+-- - Set up environment variables:
+-- Edit the system environment variables
+--- Path
+--- New
+--- Enter the path all the way to the Love executable e.g. - C:\Program Files\LOVE
+--
+-- From within a Love application access to the file system is restricted to specific open folders, information on using Love and the file system together when writing scripts can be found here:
+-- https://love2d.org/wiki/love.filesystem
+--
+---------- Audio Tools ------------------------------------------------------------------------------
+--
+-- The framework allows manipulation of audio files, using wrappers for SoX, FFMPEG and FLAC. There are included functions for normalization, filtering, dc removal, silence removal, sample rate conversion and more. The framework also allows decoding and encoding of FLAC files as well as encoding of OGG files.
+--
+-- In order to make use of the batch audio tools SoX must be installed and set into the environment:
+--
+-- SoX
+-- Mac: 
+-- - Press Command+Space and type Terminal and press enter/return key.
+-- - Run in Terminal app:
+-- ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null
+-- If the screen prompts you to enter a password, please enter your Mac's user password to continue. Then wait for the command to finish.
+-- -Run in Terminal app:
+-- brew install sox
+--
+-- Windows: 
+-- - Download SoX at: https://sourceforge.net/projects/sox/files/sox/
+-- - Set up environment variables:
+-- Edit the system environment variables
+--- Path
+--- New
+--- Enter the path all the way to the FLAC executable e.g. - C:\Program Files (x86)\sox-14-4-2
+--
+-- In order to make use of the FLAC encoding and decoding tools FLAC must be installed and set into the environment:
+--
+-- FLAC
+-- Mac: FLAC is part of the operating system and is available by default.
+-- 
+-- Windows: 
+-- - Download FLAC at: http://downloads.xiph.org/releases/flac/
+-- - Set up environment variables:
+-- Edit the system environment variables
+--- Path
+--- New
+--- Enter the path all the way to the FLAC executable e.g. - C:\Program Files\flac-1.3.2-win\win64
+--
+---------- MIDI Tools ------------------------------------------------------------------------------
+--
+-- The framework can explore sending MIDI via Lua scripts by calling the SendMIDI command line library, found here: https://github.com/gbevin/SendMIDI
+--
+----------------------------------------------------------------------------------------------------
+--
+-- Example Usage:
+-- - Download the Creator Tools Lua Framework
+-- - Download and install SoX via the method described above
+-- - If using Windows - download and install FLAC via the method described above
+-- - Double click on the Kontakt rack to create a new NKI
+-- - Enter the NKI's edit mode
+-- - Launch Creator Tools
+-- - Navigate to the Lua tab in Creator Tools
+-- - Drag and drop the Lua script "Run Mapping.lua" unto the Lua tool
+-- - Press play in the Lua tool
+-- - Click the arrow in Creator Tools to push to Kontakt
+-- - Adapt the script to user scenarios:
+-- -- Click the "Open in text editor" icon next to the play button in Creator Tools
+-- -- Edit the USER VARIABLES section according to the scenario
+-- -- Run the script
+--
+--
+-- TODO
+-- - Function to create NKS folder structure
+-- - Function to copy all processed files
+-- - FFMPEG as audio option
+-- - set inst wav chunk
+-- - 
+
+----------------------------------------------------------------------------------------------------
