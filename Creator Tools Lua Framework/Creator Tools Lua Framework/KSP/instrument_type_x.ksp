@@ -1,8 +1,8 @@
 {***********************************************
-Sounds of Life Maschine+
+Template for Maschine+
 Author: Faxi Nadu
 Written by: Yaron Eshkar
-Modified: April 22, 2021
+Modified: May 7, 2021
 *************************************************}
 
 {
@@ -21,18 +21,25 @@ on init
     declare @instrumentFramework
     declare @instrumentTitle
     declare @instrumentName
-    @instrumentFramework := "M+ Framework"
-    @instrumentTitle := "Sounds of Life Maschine+"
+    @instrumentFramework := ""
+    @instrumentTitle := "Template for Maschine+"
     @instrumentName := @instrumentFramework & " " & @instrumentTitle
+
+    declare @backgroundPicture
+    declare @iconPicture
+    @backgroundPicture := "myPicture"
+    @iconPicture := "myIcon" 
 
     {Check if running on desktop or headless}
     declare const $mPlus := $NI_KONTAKT_IS_HEADLESS
 
+	declare $ui_height := 300
+
     {GUI main offsets}
-    declare $guiOffsetX := 125
+    declare $guiOffsetX := 255
     declare $guiOffsetY := 30
     {GUI element spacing}
-    declare $guiSpacingX := 100
+    declare $guiSpacingX := 95
     declare $guiSpacingY := 20
 
     {Number of NKS macros}
@@ -130,22 +137,29 @@ on init
     {Check if headless}
     if($mPlus=0)
         {Make the performance view}
-        set_ui_height(7)
+        set_ui_height_px(300)
         make_perfview
         set_ui_color(000000h)
+		set_control_par_str ($INST_WALLPAPER_ID,$CONTROL_PAR_PICTURE,@backgroundPicture)
+		set_control_par_str($INST_ICON_ID,$CONTROL_PAR_PICTURE,@iconPicture)
+
         {Set the instrument name label parameters}
         set_text($labelInstrumentName, @instrumentName)
         set_control_par(get_ui_id($labelInstrumentName),$CONTROL_PAR_WIDTH,300)
         set_control_par(get_ui_id($labelInstrumentName),$CONTROL_PAR_TEXT_ALIGNMENT,1)
-        move_control_px($labelInstrumentName,175,10)
+        move_control_px($labelInstrumentName,$guiOffsetX+25,10)
     else
         {Hide the instrument name label}
         set_control_par(get_ui_id($labelInstrumentName),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)        
     end if
 
     {Group Effects}
-    set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_FILTER,0,0,-1) 
-    set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE,$FILTER_TYPE_SV_LP4,0,0,-1)
+	$i := 0
+	while($i<$NUM_GROUPS)
+    	set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_FILTER,$i,0,-1) 
+    	set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE,$FILTER_TYPE_SV_LP4,$i,0,-1)
+		inc($i)
+	end while
 
     {Instrument Effects}
     set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_CHORUS,-1,2,1)
@@ -179,6 +193,29 @@ on init
     declare ui_slider $macro19(0,1000)             {reverb wet}
     declare ui_slider $macro20(0,1000000)          {lofi sr}
     declare ui_slider $macro21(500000,1000000)     {saturation}
+
+	make_persistent($macro0)
+	make_persistent($macro1)
+	make_persistent($macro2)
+	make_persistent($macro3)
+	make_persistent($macro4)
+	make_persistent($macro5)
+	make_persistent($macro6)
+	make_persistent($macro7)
+	make_persistent($macro8)
+	make_persistent($macro9)
+	make_persistent($macro10)
+	make_persistent($macro11)
+	make_persistent($macro12)
+	make_persistent($macro13)
+	make_persistent($macro14)
+	make_persistent($macro15)
+	make_persistent($macro16)
+	make_persistent($macro17)
+	make_persistent($macro18)
+	make_persistent($macro19)
+	make_persistent($macro20)
+	make_persistent($macro21)
 
     declare ui_label $label0(1,1)
     declare ui_label $label1(1,1)
@@ -418,11 +455,10 @@ function set_control {Set normal controls}
     end if
 end function
 
-
 function set_lfo_rate {Set synced lfo rate controls}
     {Set the engine parameter}
-    set_engine_par($ENGINE_PAR_INTMOD_FREQUENCY_UNIT,%mod_sync_unit[get_control_par(%macroID[$touchedControl],$CONTROL_PAR_VALUE) / $LFO_DIV],%groupSlot[$touchedControl],%fxSlot[$touchedControl],%genericSlot[$touchedControl])
-    set_engine_par($ENGINE_PAR_INTMOD_FREQUENCY,%mod_sync_unit[get_control_par(%macroID[$touchedControl],$CONTROL_PAR_VALUE) / $LFO_DIV],%groupSlot[$touchedControl],%fxSlot[$touchedControl],%genericSlot[$touchedControl])
+    set_engine_par($ENGINE_PAR_INTMOD_FREQUENCY_UNIT,%mod_sync_unit[get_control_par(%macroID[$touchedControl],$CONTROL_PAR_VALUE) / $LFO_DIV],$groupSelect,%fxSlot[$touchedControl],%genericSlot[$touchedControl])
+    set_engine_par($ENGINE_PAR_INTMOD_FREQUENCY,%mod_sync_unit[get_control_par(%macroID[$touchedControl],$CONTROL_PAR_VALUE) / $LFO_DIV],$groupSelect,%fxSlot[$touchedControl],%genericSlot[$touchedControl])
     {Update the internal slider label for host automation}
     set_control_par_str(%macroID[$touchedControl],$CONTROL_PAR_LABEL,!mod_sync_string[get_control_par(%macroID[$touchedControl],$CONTROL_PAR_VALUE) / $LFO_DIV])
     {Update the GUI label}
@@ -433,7 +469,7 @@ end function
 
 function set_lfo_wav {Set lfo wav controls}
     {Set the engine parameter}
-    set_engine_par($ENGINE_PAR_INTMOD_SUBTYPE,get_control_par(%macroID[$touchedControl],$CONTROL_PAR_VALUE),%groupSlot[$touchedControl],%fxSlot[$touchedControl],%genericSlot[$touchedControl])
+    set_engine_par($ENGINE_PAR_INTMOD_SUBTYPE,get_control_par(%macroID[$touchedControl],$CONTROL_PAR_VALUE),$groupSelect,%fxSlot[$touchedControl],%genericSlot[$touchedControl])
     {Update the internal slider label for host automation}
     set_control_par_str(%macroID[$touchedControl],$CONTROL_PAR_LABEL,!lfoWav[get_control_par(%macroID[$touchedControl],$CONTROL_PAR_VALUE)])
     {Update the GUI label}
@@ -443,12 +479,16 @@ function set_lfo_wav {Set lfo wav controls}
 end function
 
 function set_group {Source select}
-    $groupSelect := $macro1
+    $groupSelect := $macro0
     {Update the internal slider label for host automation}
     set_control_par_str(%macroID[$touchedControl],$CONTROL_PAR_LABEL,$groupSelect+1)
     {Update the GUI label}
     if($mPlus=0)
-        set_control_par_str(%labelID[$touchedControl],$CONTROL_PAR_TEXT,!macroText[0] & ": " & $groupSelect+1)
+		if ($groupSelect = $NUM_GROUPS-1)
+			set_control_par_str(%labelID[$touchedControl],$CONTROL_PAR_TEXT,!macroText[0] & ": " & "All Meow")
+		else
+        	set_control_par_str(%labelID[$touchedControl],$CONTROL_PAR_TEXT,!macroText[0] & ": " & $groupSelect+1)
+		end if
     end if
     {Set the macro values for the selected group}
     $i := 1
@@ -457,6 +497,11 @@ function set_group {Source select}
         call set_control
         inc($i)
     end while
+	$touchedControl := 8
+    call set_lfo_wav
+    $touchedControl := 10
+    call set_lfo_rate
+    $touchedControl := 13
 end function
 
 function set_wet {Set dry/wet controls}
@@ -485,8 +530,8 @@ end function
 on persistence_changed {Refresh on snapshots}
     {Set the macro values for the selected group}
     call set_group
-    $i := 0
-    while ($i<$polyMacros)
+    $i := 1
+    while ($i<$numMacros)
         $touchedControl := $i
         call set_control
         inc($i)

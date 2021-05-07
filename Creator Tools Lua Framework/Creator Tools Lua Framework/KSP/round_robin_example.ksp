@@ -1,0 +1,13 @@
+on init
+    declare $round_robin := 0
+end on
+
+on note
+    disallow_group($ALL_GROUPS)
+    allow_group($round_robin)
+    if ($round_robin=$NUM_GROUPS)
+        $round_robin := 0
+    else
+        inc($round_robin)
+    end if
+end on
