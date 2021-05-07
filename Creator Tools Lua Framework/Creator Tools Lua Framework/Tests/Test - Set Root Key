@@ -1,0 +1,16 @@
+--[[ 
+Set Root Key
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: May 7, 2021
+--]]
+
+-- Script
+
+local zone_root_key = 60
+
+for _,g in pairs(instrument.groups) do
+    for n,z in pairs(g.zones) do
+        z.rootKey = zone_root_key
+    end
+ end
