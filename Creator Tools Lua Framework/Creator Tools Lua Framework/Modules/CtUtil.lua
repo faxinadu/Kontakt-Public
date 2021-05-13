@@ -430,6 +430,17 @@ function CtUtil.samplesFolder(path,recursive)
 	return samples
 end
 
+--- Scale a value from an old range to a new range
+-- @tparam old_val number the value to be scaled 
+-- @tparam old_min number the old minimum range of the value
+-- @tparam old_max number the old maximum range of the value
+-- @tparam new_min number the new minimum range of the value
+-- @tparam new_max number the new maximum range of the value
+-- @treturn returns the value within the new range
+function CtUtil.scale_value(old_val,old_min,old_max,new_min,new_max)
+	local new_val = (((old_val - old_min) * (new_max - new_min)) / (old_max - old_min)) + new_min
+	return new_val
+end
 
 --- Split a string and return the result after the seperator.
 -- @tparam string input_string the string to check.
