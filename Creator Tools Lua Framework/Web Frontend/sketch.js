@@ -67,8 +67,6 @@ var ksp_script_bypass_button;
 
 var auto_mapper_set_button;
 	var auto_mapper_set_bool = false;
-var reset_groups_button;
-	var reset_groups_bool = false;
 var root_detect_button;
 	var root_detect_bool = false;
 var fix_tune_button;
@@ -150,6 +148,8 @@ var rms_check_slider;
 var loudness_check_slider;
 var peak_check_slider;
 
+var reset_groups_select;
+
 var playback_mode_select;
 var set_loop_select;
 var token_separator_select;
@@ -183,6 +183,12 @@ function setup() {
 
 	load_prest_file = createFileInput(handle_preset_file);
 	load_prest_file.position(button_interval_x*5,button_interval_y*2);
+
+	reset_groups_select = createSelect();
+		reset_groups_select.position(button_interval_x,button_interval_y*8);
+		reset_groups_select.option(-1);
+		reset_groups_select.option(0);
+		reset_groups_select.selected(0);
 
 	playback_mode_select = createSelect();
 		playback_mode_select.position(button_interval_x*3,button_interval_y*10);
@@ -407,21 +413,6 @@ function setup() {
 				auto_mapper_set_bool = true;
 			}
 		}    
-
-	reset_groups_button = new Clickable();
-		reset_groups_button.color = button_color_off;
-		reset_groups_button.text = "";
-		reset_groups_button.cornerRadius = button_corner_radius;
-		reset_groups_button.resize(button_size_x,button_size_y);
-		reset_groups_button.onPress = function () {
-			if (reset_groups_bool) {
-				this.color = button_color_off;
-				reset_groups_bool = false;
-			} else {
-				this.color = button_color_on;
-				reset_groups_bool = true;
-			}
-		}   
 
 	root_detect_button = new Clickable();
 		root_detect_button.color = button_color_off;
@@ -889,7 +880,6 @@ function setup() {
 	ksp_script_bypass_button.locate(button_interval_x*2.75,button_interval_y*6);
 
 	auto_mapper_set_button.locate(button_interval_x*1.5,button_interval_y*7);
-	reset_groups_button.locate(button_interval_x,button_interval_y*8);
 	root_detect_button.locate(button_interval_x,button_interval_y*9);
 	fix_tune_button.locate(button_interval_x,button_interval_y*10);
 
@@ -1089,7 +1079,6 @@ function draw() {
 	ksp_script_bypass_button.draw();
 
 	auto_mapper_set_button.draw();
-	reset_groups_button.draw();
 	root_detect_button.draw();
 	fix_tune_button.draw();
 	key_confine_button.draw();
@@ -1125,7 +1114,7 @@ function export_variables() {
 	parameter_array[0] = samples_path_input.value();
 	parameter_array[1] = verbose_mode_bool;
 	parameter_array[2] = auto_mapper_set_bool;
-	parameter_array[3] = reset_groups_bool;
+	parameter_array[3] = reset_groups_select.value();
 	parameter_array[4] = playback_mode_select.value();
 	parameter_array[5] = root_detect_bool;
 	parameter_array[6] = root_key_location_slider.value();
@@ -1231,8 +1220,7 @@ function handle_preset_file(file) {
 	verbose_mode_button.onPress();
 	auto_mapper_set_bool = (preset_params[2] === "false");
 	auto_mapper_set_button.onPress();
-	reset_groups_bool = (preset_params[3] === "false");
-	reset_groups_button.onPress();
+	reset_groups_select.selected(preset_params[3]);
 	playback_mode_select.selected(preset_params[4]);
 	root_detect_bool = (preset_params[5] === "false");
 	root_detect_button.onPress();
