@@ -1,20 +1,10 @@
 {***********************************************
-Template for Maschine+
+Template Instrument Type X
 Author: Faxi Nadu
 Written by: Yaron Eshkar
-Modified: May 7, 2021
+Modified: May 17, 2021
 *************************************************}
 
-{
-ADSR for volume and filter modulation
-LFO for filter modulation
-Chorus, Delay, Reverb, Lofi and Saturation
-}
-
-{
-to do : set initial fx controls
-to do: add instructions on nki preparation
-}
 on init
 
     {Set the instrument name}
@@ -22,7 +12,7 @@ on init
     declare @instrumentTitle
     declare @instrumentName
     @instrumentFramework := ""
-    @instrumentTitle := "Template for Maschine+"
+    @instrumentTitle := "Template Instrument Type X"
     @instrumentName := @instrumentFramework & " " & @instrumentTitle
 
     declare @backgroundPicture
@@ -554,107 +544,86 @@ on ui_control($macro0) {source select}
     $touchedControl := 0
     call set_group
 end on
-
 on ui_control($macro1) {amp attack}
     $touchedControl := 1
     call set_control
 end on
-
 on ui_control($macro2) {amp decay}
     $touchedControl := 2
     call set_control
 end on
-
 on ui_control($macro3) {amp sustain}
     $touchedControl := 3
     call set_control
 end on
-
 on ui_control($macro4) {amp release}
     $touchedControl := 4
     call set_control
 end on
-
 on ui_control($macro5) {filter cut}
     $touchedControl := 5
     call set_control
 end on
-
 on ui_control($macro6) {filter res}
     $touchedControl := 6
     call set_control
 end on
-
 on ui_control($macro7) {filter env}
     $touchedControl := 7
     call set_control
 end on
-
 on ui_control($macro8) {lfo wave}
     $touchedControl := 8
     call set_lfo_wav
 end on
-
 on ui_control($macro9) {lfo depth}
     $touchedControl := 9
     call set_control
 end on
-
 on ui_control($macro10) {lfo rate}
     $touchedControl := 10
     call set_lfo_rate
 end on
-
 on ui_control($macro11) {chorus depth}
     $touchedControl := 11
     call set_control
 end on
-
 on ui_control($macro12) {chorus speed}
     $touchedControl := 12
     call set_control
 end on
-
 on ui_control($macro13) {chorus wet}
     $touchedControl := 13
     call set_wet
 end on
-
 on ui_control($macro14) {delay time}
     $touchedControl := 14
     call set_delay_time
 end on
-
 on ui_control($macro15) {delay feed}
     $touchedControl := 15
     call set_control
 end on
-
 on ui_control($macro16) {delay wet}
     $touchedControl := 16
     call set_wet
 end on
-
 on ui_control($macro17) {reverb time}
     $touchedControl := 17
     call set_control
 end on
-
 on ui_control($macro18) {reverb stereo}
     $touchedControl := 18
     call set_control
 end on
-
 on ui_control($macro19) {reverb wet}
     $touchedControl := 19
     call set_wet
 end on
-
 on ui_control($macro20) {lofi frequency}
     $touchedControl := 20
     call set_control
 end on
-
 on ui_control($macro21) {saturator shape}
     $touchedControl := 21
     call set_control

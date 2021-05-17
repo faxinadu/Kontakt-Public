@@ -30,6 +30,17 @@ function CtUtil.test_function()
 	print("Test function called")
 end
 
+--- Add any amount of numbers.
+-- @tparam any number of comma seperated number arguments.
+-- @treturn the sum of all arguments.
+function CtUtil.add_numbers(...)
+    local s = 0
+    for i=1,select("#", ...) do
+        s = s + select(i, ...)
+    end
+    return s
+end
+
 --- Sort a table alpha numerically.
 -- @tparam table o original table.
 -- @treturn table o sorted table.
