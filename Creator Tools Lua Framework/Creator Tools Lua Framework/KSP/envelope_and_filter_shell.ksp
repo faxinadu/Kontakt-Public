@@ -2,15 +2,8 @@
 Envelope and Filter Shell
 Author: Native Instruments
 Written by: Yaron Eshkar
-Modified: April 27, 2021
+Modified: May 17, 2021
 *************************************************}
-
-{
-- Enter edit mode, select group editor and enable edit all groups
-- Add velocity external modulator in group amplifier mod, set intensity to 40%
-- Add pitch bend external modular in source mod, set intensity to 12st
-- Add AHDSR envelope in group amplifiter mod, set intensity to 100%
-}
 
 on init
 
