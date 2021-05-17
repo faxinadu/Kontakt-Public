@@ -1,7 +1,7 @@
 /Users/yaron.eshkar/Faxi/ct-lua-framework/Kontakt-Public/Creator Tools Lua Framework/Creator Tools Lua Framework/Samples
 true
 true
-true
+0
 dfd
 false
 0

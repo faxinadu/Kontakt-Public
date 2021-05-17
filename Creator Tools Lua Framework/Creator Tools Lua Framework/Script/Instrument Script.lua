@@ -17,7 +17,7 @@ end
 local path = filesystem.preferred(parameters_table[1])
 local verbose_mode = ctUtil.tobool(parameters_table[2])
 local perform_mapping = ctUtil.tobool(parameters_table[3])
-local reset_groups = ctUtil.tobool(parameters_table[4])
+local reset_groups = tonumber(parameters_table[4])
 local playback_mode = parameters_table[5]
 local root_detect = ctUtil.tobool(parameters_table[6])
 local root_location = tonumber(parameters_table[7])
@@ -149,7 +149,7 @@ if perform_mapping then
 	if verbose_mode then ctUtil.instrument_connected() end
 
 	-- Reset the instrument groups.
-	if reset_groups then
+	if reset_groups == -1 then
 		instrument.groups:reset()
 		if verbose_mode then 
 			print(dash_sep) 
@@ -171,7 +171,7 @@ if perform_mapping then
 	end
 
 	-- Create the mapping
-	ctMap.create_mapping(sample_paths_table,sample_tokens_table,playback_mode,sample_name_location,signal_name_location,articulation_location,round_robin_location,root_detect,root_location,key_confine,low_key_location,high_key_location,vel_confine,low_vel_location,high_vel_location,set_loop,loop_xfade,default_root_value,default_low_key_value,default_high_key_value,default_low_vel_value,default_high_vel_value,verbose_mode,fix_tune)
+	ctMap.create_mapping(sample_paths_table,sample_tokens_table,playback_mode,sample_name_location,signal_name_location,articulation_location,round_robin_location,root_detect,root_location,key_confine,low_key_location,high_key_location,vel_confine,low_vel_location,high_vel_location,set_loop,loop_xfade,default_root_value,default_low_key_value,default_high_key_value,default_low_vel_value,default_high_vel_value,verbose_mode,fix_tune,reset_groups)
 
 	if verbose_mode then
 		print(dash_sep)

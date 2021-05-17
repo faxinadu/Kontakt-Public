@@ -100,9 +100,11 @@ end
 -- @tparam int default_high_vel_value the default high vel value to use if explicity told too or if an error is encountered parsing the token.
 -- @tparam bool verbose_mode when true, prints the results of the mapping operation to console.
 -- @tparam bool fix_tune When true MIR is used to fine tune each sample to the nearest note.
+-- @tparam bool reset_groups If this value is greater than -1, the created groups will be a deep copy of this value's group slot instead of empty groups.
 -- @treturn bool
-function CtMap.create_mapping(sample_paths_table,sample_tokens_table,playback_mode,sample_name_location,signal_name_location,articulation_location,round_robin_location,root_detect,root_location,key_confine,low_key_location,high_key_location,vel_confine,low_vel_location,high_vel_location,set_loop,loop_xfade,default_root_value,default_low_key_value,default_high_key_value,default_low_vel_value,default_high_vel_value,verbose_mode,fix_tune)
+function CtMap.create_mapping(sample_paths_table,sample_tokens_table,playback_mode,sample_name_location,signal_name_location,articulation_location,round_robin_location,root_detect,root_location,key_confine,low_key_location,high_key_location,vel_confine,low_vel_location,high_vel_location,set_loop,loop_xfade,default_root_value,default_low_key_value,default_high_key_value,default_low_vel_value,default_high_vel_value,verbose_mode,fix_tune,reset_groups)
 	if verbose_mode == nil then verbose_mode = true end
+	if reset_groups == nil then reset_groups = -1 end
 	
 	-- Set the playback mode.
 	if playback_mode == "dfd" then playback_mode = PlaybackMode.DirectFromDisk 
@@ -229,11 +231,20 @@ function CtMap.create_mapping(sample_paths_table,sample_tokens_table,playback_mo
 	    	if verbose_mode then print("Group exists. Sample put in group #"..temp_group_index) end
 		else
 			-- Initialize a new group.
-			local g = Group()
-			-- Set playback mode
-			g.playbackMode = playback_mode
-			-- Add the group to the instrument.
-			instrument.groups:add(g)
+            local g
+            -- If told to copy a group, copy that one.
+            if reset_groups > -1 then 
+                instrument.groups:insert(x,instrument.groups[reset_groups])
+				g = instrument.groups[x]
+            -- Create a new group.
+            else
+                g = Group()
+                -- Set playback mode
+                g.playbackMode = playback_mode
+                -- Add the group to the instrument.
+                instrument.groups:add(g)
+            end
+
 			-- Add a zone for each sample.
 			g.zones:add(z)
 			-- Name the group.
