@@ -1,10 +1,10 @@
-/Users/yaron.eshkar/Faxi/ct-lua-framework/Kontakt-Public/Creator Tools Lua Framework/Creator Tools Lua Framework/Samples
+/Users/yaron.eshkar/Faxi/ct-lua-framework/Kontakt-Public/Creator Tools Lua Framework/Creator Tools Lua Framework
 true
-true
+false
 0
 dfd
 false
-0
+-1
 -1
 -1
 -1
@@ -24,12 +24,12 @@ false
 false
 0
 20
-false
+true
 false
 false
 10
-false
--0.1
+true
+-1
 false
 false
 false
@@ -37,7 +37,7 @@ false
 false
 16
 false
-false
+true
 false
 false
 /Users/yaron.eshkar/Faxi/creator-tools-lua-framework/KSP/ksp_script.ksp
