@@ -53,6 +53,19 @@ function CtUtil.alpha_numeric_sort(o)
 	return o
 end
 
+--- Check if a terminal command path exists.
+-- The path to the terminal command to be run.
+-- @tparam bool returns true if the command can be run in terminal.
+function CtUtil.command_exists(command_path)
+	f = assert (io.popen (command_path))
+	local counter = 0
+	for line in f:lines() do
+		counter = counter + 1
+	end
+	f:close()
+	if counter > 0 then return true else return false end
+end
+
 --- Compare absolute of two numbers and return the greater number.
 -- @tparam number first the first number to compare.
 -- @tparam number second the second number to compare.
@@ -441,13 +454,13 @@ function CtUtil.samplesFolder(path,recursive)
 	return samples
 end
 
---- Scale a value from an old range to a new range
--- @tparam old_val number the value to be scaled 
--- @tparam old_min number the old minimum range of the value
--- @tparam old_max number the old maximum range of the value
--- @tparam new_min number the new minimum range of the value
--- @tparam new_max number the new maximum range of the value
--- @treturn returns the value within the new range
+--- Scale a value from an old range to a new range.
+-- @tparam old_val number the value to be scaled.
+-- @tparam old_min number the old minimum range of the value.
+-- @tparam old_max number the old maximum range of the value.
+-- @tparam new_min number the new minimum range of the value.
+-- @tparam new_max number the new maximum range of the value.
+-- @treturn returns the value within the new range.
 function CtUtil.scale_value(old_val,old_min,old_max,new_min,new_max)
 	local new_val = (((old_val - old_min) * (new_max - new_min)) / (old_max - old_min)) + new_min
 	return new_val

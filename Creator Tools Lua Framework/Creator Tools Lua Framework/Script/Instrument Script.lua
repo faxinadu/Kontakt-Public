@@ -78,11 +78,15 @@ local perform_sample_set_loop_exists_check = ctUtil.tobool(parameters_table[61])
 local sample_set_file_names_check = ctUtil.tobool(parameters_table[62])
 
 if ctFile.get_os() then
-    sox_path = filesystem.preferred(parameters_table[64])
-    flac_path = filesystem.preferred(parameters_table[66])
+	local get_path = "\"".. parameters_table[64] .. "\""
+    sox_path = filesystem.preferred(get_path)
+	get_path = "\"".. parameters_table[66] .. "\""
+    flac_path = filesystem.preferred(get_path)
 else
-    sox_path = filesystem.preferred(parameters_table[63])
-    flac_path = filesystem.preferred(parameters_table[65])
+	local get_path = "\"".. parameters_table[63] .. "\""
+    sox_path = filesystem.preferred(get_path)
+	get_path = "\"".. parameters_table[65] .. "\""
+    flac_path = filesystem.preferred(get_path)
 end
 
 local free_flag_bool_1 = false
@@ -108,7 +112,7 @@ if verbose_mode then
     if filesystem.exists(path) then 
         print("The samples are located in " .. path) 
     else
-        print ("Path ".. path .. " not found... aborting script...") 
+        print ("Path ".. path .. " not found, aborting script.") 
         return
     end
 	print(dash_sep) 
@@ -125,6 +129,8 @@ table.sort(sample_paths_table)
 
 -- Run audio process
 if perform_audio then
+	assert(ctUtil.command_exists(sox_path),"Can not find SoX command, check path")
+	if decode_flac or encode_flac then assert(ctUtil.command_exists(flac_path),"Can not find FLAC command, check path") end
     for index, file in pairs(sample_paths_table) do
     	if decode_flac then ctAudio.decode_flac(file,"same",false,verbose_mode) end
         if perform_filter then ctAudio.run_audio_process(file,"filter","highpass",filter_cut,verbose_mode) end

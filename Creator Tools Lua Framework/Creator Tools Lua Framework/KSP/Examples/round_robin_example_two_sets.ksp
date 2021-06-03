@@ -1,0 +1,29 @@
+{***********************************************
+Round Robin Example - Two Sets
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: May 19, 2021
+*************************************************}
+
+on init
+    declare const $round_robin_set_1 := 3
+    declare const $round_robin_set_2 := 6
+    declare $round_robin_counter_1 := 0
+    declare $round_robin_counter_2 := 4
+end on
+
+on note
+    disallow_group($ALL_GROUPS)
+    allow_group($round_robin_counter_1)
+    allow_group($round_robin_counter_2)
+    if ($round_robin_counter_1=$round_robin_set_1)
+        $round_robin_counter_1 := 0
+    else
+        inc($round_robin_counter_1)
+    end if
+    if ($round_robin_counter_2=$round_robin_set_2)
+        $round_robin_counter_2 := 4
+    else
+        inc($round_robin_counter_2)
+    end if
+end on
