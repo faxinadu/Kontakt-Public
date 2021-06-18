@@ -15,3 +15,9 @@ https://www.linkedin.com/learning/learning-kontakt-5
 Linkedin Kontakt Advanced Instrumentation and Sound Design
 
 https://www.linkedin.com/learning/kontakt-advanced-instrumentation-and-sound-design/welcome
+
+Sound Design with Kontakt | Kadenze
+https://www.kadenze.com/courses/sound-design-with-kontakt-i/info
+
+Getting Started With Kontakt ADSR
+https://www.adsrsounds.com/product/courses/getting-started-with-kontakt/
