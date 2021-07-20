@@ -1,8 +1,8 @@
 --[[ 
-Rename File
+Rename File String Sub
 Author: Native Instruments
 Written by: Yaron Eshkar
-Modified: May 7, 2021
+Modified: July 19, 2021
 --]]
 
 -- Imports
@@ -15,7 +15,8 @@ local ctUtil = require("Modules.CtUtil")
 -- Script
 
 -- New file name
-local new_name = "cat"
+local expr_1 = "Uni Cycle Longs Vol 1%-31%-Uni Cycle Sync Creative Open 05"
+local expr_2 = "Sound 7"
 
 -- Path to the samples
 local current_path = root_path .. filesystem.preferred("/Samples/")
@@ -24,6 +25,6 @@ sample_paths_table = ctUtil.paths_to_table(current_path,".wav")
 table.sort(sample_paths_table)
 
 for index, file in pairs(sample_paths_table) do
-    print(filesystem.parentPath(file))
-    os.rename(file, filesystem.parentPath(file).. "/" .. new_name .. index .. ".wav")
+    local new_name = string.gsub(file,expr_1,expr_2)
+    os.rename(file,new_name)
 end

@@ -1,8 +1,8 @@
 --[[ 
-Find Loop
+Find Loop (and Map Samples)
 Author: Native Instruments
 Written by: Yaron Eshkar
-Modified: April 23, 2021
+Modified: June 8, 2021
 --]]
 
 -- Script
@@ -31,9 +31,28 @@ for _,p in filesystem.directoryRecursive(path) do
     end
 end
 
+local start_root = 36
+
 -- Create zones and place one file in each of the created groups.
 for index, file in next, samples do
     local loop_start,loop_end = mir.findLoop(file)
+    local loop_length = loop_end-loop_start
     print(file .. " loop start: " .. loop_start )
     print(file .. " loop end: " .. loop_end )
+
+    local g = Group()
+    instrument.groups:add(g)
+    local z 
+
+    z = Zone()
+    g.zones:add(z)
+    z.rootKey = start_root
+    z.keyRange.high = start_root
+    z.keyRange.low = start_root
+    z.loops[0].mode = 1
+    z.loops[0].start = loop_start
+    z.loops[0].length = loop_length
+    z.file = file
+    start_root = start_root +1
 end
+
