@@ -47,6 +47,38 @@ function CtAudio.set_verbose_string(verbose_mode)
 	return verbose_string
 end
 
+--- Print info of an audio file to console.
+-- @tparam string file the source file to analyze. 
+-- @tparam bool verbose_mode when true prints information to console.
+-- @treturn bool 
+function CtAudio.audio_info(file,verbose_mode)
+	if verbose_mode == nil then verbose_mode = true end
+	if verbose_mode then print("----------Audio Info----------") end
+	local verbose_string = CtAudio.set_verbose_string(verbose_mode)
+	local s0 = sox_path
+	local s1 = "--info"
+	local execute_string = string.format([[%s %s "%s"]],s0,s1,file)
+	print(execute_string)
+	local result = ctFile.capture_shell_command(execute_string,true)
+	if verbose_mode then print(result) end
+end
+
+--- Print stats of an audio file to console.
+-- @tparam string file the source file to analyze. 
+-- @tparam bool verbose_mode when true prints information to console.
+-- @treturn bool 
+function CtAudio.audio_stats(file,verbose_mode)
+	if verbose_mode == nil then verbose_mode = true end
+	if verbose_mode then print("----------Audio Stats----------") end
+	local s0 = sox_path
+	local s1 = "-n"
+	local s2 = "stats"
+	local execute_string = string.format([[%s "%s" %s %s]],s0,file,s1,s2)
+	print(execute_string)
+	local result = ctFile.capture_shell_command(execute_string,true)
+	if verbose_mode then print(result) end
+end
+
 --- Decode a FLAC file to WAV.
 -- @tparam string input_file the path to the FLAC file to decode.
 -- @tparam string output_file the desired path of the output file. Defaults to input_file.wav.
@@ -174,8 +206,8 @@ function CtAudio.silence_remove_audio(file,verbose_mode)
 end
 
 --- Normalize peaks of an audio file to set dB.
--- @tparam string file the source file to normalise. 
--- @tparam string dB setting to normalise to. 
+-- @tparam string file the source file to normalize. 
+-- @tparam string dB setting to normalize to. 
 -- @tparam bool verbose_mode when true prints information to console.
 -- @treturn bool 
 function CtAudio.normalize_audio(file,normalize_db,verbose_mode)
@@ -187,8 +219,9 @@ function CtAudio.normalize_audio(file,normalize_db,verbose_mode)
 	local s1 = "gain"
 	local s2 = "-n"
 	local execute_string = string.format([[%s %s "%s" "%s" %s %s %s]],s0,verbose_string,file,temp_file,s1,s2,normalize_db)
+	if verbose_mode then print ("Peak of: " .. mir.detectPeak(file) .. "dB detected") end
 	ctFile.run_file_process(execute_string,file,temp_file)
-	if verbose_mode then print("Performed normalize to "..normalize_db.."dB on "..file) end
+	if verbose_mode then print("Performed normalize to " .. mir.detectPeak(file) .. "dB on "..file) end
 	return true
 end
 
@@ -344,6 +377,7 @@ function CtAudio.wave_synth(output_file,sample_rate,length,shape,freq,verbose_mo
 	local s8 = freq
 	local execute_string
 	local execute_string = string.format([[%s %s %s %s "%s" %s %s %s %s]],s0,s1,s2,s3,s4,s5,s6,s7,s8)
+	print(execute_string)
 	ctFile.run_shell_command(execute_string,false)
 	if verbose_mode then print(shape.." wave "..output_file.." created") end	
 	return true

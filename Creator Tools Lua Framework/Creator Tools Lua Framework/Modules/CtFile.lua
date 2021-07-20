@@ -108,10 +108,11 @@ function CtFile.create_directory(directory,verbose_mode)
 	    execute_string = string.format([[mkdir "%s"]],directory)
 		CtFile.run_shell_command(execute_string,false)
 		if verbose_mode then print("Directory "..directory.." created") end
+        return true
 	else
 		if verbose_mode then print("Directory "..directory.." exists") end
+        return false
 	end
-    return true
 end
 
 --- Delete a file.
@@ -161,7 +162,7 @@ end
 -- @tparam string command the shell command to execute.
 -- @tparam bool raw when true the function will return the result formated.
 -- @treturn string returns the console print result.
-function CtFile.capture_shell_command(command, raw)
+function CtFile.capture_shell_command(command,raw)
   local f = assert(io.popen(command, 'r'))
   local s = assert(f:read('*a'))
   f:close()
@@ -170,6 +171,16 @@ function CtFile.capture_shell_command(command, raw)
   s = string.gsub(s, '%s+$', '')
   s = string.gsub(s, '[\n\r]+', ' ')
   return s
+end
+
+--- Runs a shell command and prints the result to console.
+function CtFile.print_shell_command(command)
+    f = assert (io.popen (command))
+    for line in f:lines() do
+        print(line)
+    end
+    f:close()
+    return true
 end
 
 --- Run a shell command on a file, overwriting the original file.
@@ -217,6 +228,14 @@ function CtFile.replace_line_in_file(input_file,replace_line,replace_content)
     for index, value in ipairs(file_content) do
         file:write(value..'\n')
     end
+    io.close(file)
+    return true
+end
+
+
+function CtFile.write_file(input_file,file_content)
+    local file = io.open(input_file, 'w')
+    file:write(file_content)
     io.close(file)
     return true
 end

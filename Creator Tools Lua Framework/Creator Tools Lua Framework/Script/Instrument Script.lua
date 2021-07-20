@@ -129,6 +129,8 @@ table.sort(sample_paths_table)
 
 -- Run audio process
 if perform_audio then
+	print("path to SoX is:" .. sox_path)
+	print("path to FLAC is:" .. flac_path)
 	assert(ctUtil.command_exists(sox_path),"Can not find SoX command, check path")
 	if decode_flac or encode_flac then assert(ctUtil.command_exists(flac_path),"Can not find FLAC command, check path") end
     for index, file in pairs(sample_paths_table) do
