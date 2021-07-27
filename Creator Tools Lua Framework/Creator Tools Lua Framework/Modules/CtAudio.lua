@@ -542,46 +542,47 @@ end
 -- @tparam string param3 the third parameter to pass to the audio process.
 -- @tparam string param4 the fourth parameter to pass to the audio process.
 -- @treturn bool
-function CtAudio.run_audio_process(file,process_type,param1,param2,param3,param4)
-	local reader = wav.create_context(file, "r")
-	local original_file_samples = reader.get_samples_per_channel()
-	local original_sample_rate = reader.get_sample_rate()
-	local original_bit_depth = reader.get_bits_per_sample()
-	-- smpl chunk 
-	local midi_root = reader.get_midi_root_note()
-	if midi_root == nil then midi_root = 0 end
-	local midi_pitch = reader.get_midi_pitch_fraction()
-	if midi_pitch == nil then midi_pitch = 0 end
-	local smptef = reader.get_smpte_format()
-	if smptef == nil then smptef = 0 end
-	local smpto =  reader.get_smpte_offset()
-	if smpteo == nil then smpteo = 0 end
-	local loop_count = reader.get_loop_count()
+function CtAudio.run_audio_process(file,process_type,param1,param2,param3,param4,retain_meta)
+	if retain_meta == nil then retain_meta = false end
+		local reader = wav.create_context(file, "r")
+		local original_file_samples = reader.get_samples_per_channel()
+		local original_sample_rate = reader.get_sample_rate()
+		local original_bit_depth = reader.get_bits_per_sample()
+		-- smpl chunk 
+		local midi_root = reader.get_midi_root_note()
+		if midi_root == nil then midi_root = 0 end
+		local midi_pitch = reader.get_midi_pitch_fraction()
+		if midi_pitch == nil then midi_pitch = 0 end
+		local smptef = reader.get_smpte_format()
+		if smptef == nil then smptef = 0 end
+		local smpto =  reader.get_smpte_offset()
+		if smpteo == nil then smpteo = 0 end
+		local loop_count = reader.get_loop_count()
 
-	local loop_cue
-	local loop_type
-	local loop_start
-	local loop_end
-	local loop_fraction
-	local loop_times
-	local loop_start_ms
-	local loop_end_ms
-	if loop_count and loop_count>0 then
-		loop_cue = reader.get_loop_cue()[1]
-		loop_start = reader.get_loop_start()[1]
-		loop_end = reader.get_loop_end()[1]
-		loop_type = reader.get_loop_type()[1]
-		loop_fraction = reader.get_loop_fraction()[1]
-		loop_times = reader.get_loop_times()[1]
-	else
-		loop_count = 0
-		loop_cue = 0
-		loop_type = 0
-		loop_start = 0
-		loop_end = 0
-		loop_fraction = 0
-		loop_times = 0
-	end
+		local loop_cue
+		local loop_type
+		local loop_start
+		local loop_end
+		local loop_fraction
+		local loop_times
+		local loop_start_ms
+		local loop_end_ms
+		if loop_count and loop_count>0 then
+			loop_cue = reader.get_loop_cue()[1]
+			loop_start = reader.get_loop_start()[1]
+			loop_end = reader.get_loop_end()[1]
+			loop_type = reader.get_loop_type()[1]
+			loop_fraction = reader.get_loop_fraction()[1]
+			loop_times = reader.get_loop_times()[1]
+		else
+			loop_count = 0
+			loop_cue = 0
+			loop_type = 0
+			loop_start = 0
+			loop_end = 0
+			loop_fraction = 0
+			loop_times = 0
+		end
 
 	local process_done
 
@@ -602,13 +603,15 @@ function CtAudio.run_audio_process(file,process_type,param1,param2,param3,param4
 		end
 	elseif process_type == "convert_sr" then
 		process_done = CtAudio.convert_audio_sr(file,original_sample_rate,param1,param2)
-		local reader = wav.create_context(file, "r")
-		local new_sample_rate = reader.get_sample_rate()
-		if loop_count and loop_count>0 then
-			loop_start = loop_start * (new_sample_rate / original_sample_rate)
-			loop_end =  loop_end * (new_sample_rate / original_sample_rate)
+		if retain_meta then
+			local reader = wav.create_context(file, "r")
+			local new_sample_rate = reader.get_sample_rate()
+			if loop_count and loop_count>0 then
+				loop_start = loop_start * (new_sample_rate / original_sample_rate)
+				loop_end =  loop_end * (new_sample_rate / original_sample_rate)
+			end
+			original_sample_rate = new_sample_rate
 		end
-		original_sample_rate = new_sample_rate
 	elseif process_type == "convert_bd" then
 		process_done = CtAudio.convert_audio_bd(file,original_bit_depth,param1,param2)
 	elseif process_type == "concatenate" then
@@ -616,28 +619,30 @@ function CtAudio.run_audio_process(file,process_type,param1,param2,param3,param4
 		-- we don't have an smpl chunk to set after this operation, so do not set process done
 	end
 
-	if process_done then
-		local reader = wav.create_context(file, "r")
+	if retain_meta then
+		if process_done then
+			local reader = wav.create_context(file, "r")
 
-		local fmt_size = reader.get_chunk_size("fmt")
-		local fmt_position = reader.get_chunk_position("fmt")
-		local data_position = reader.get_chunk_position("data")
-		local data_size = reader.get_chunk_size("data")
-		local fact_position = reader.get_chunk_position("fact")
-		local fact_size = reader.get_chunk_size("fact")
+			local fmt_size = reader.get_chunk_size("fmt")
+			local fmt_position = reader.get_chunk_position("fmt")
+			local data_position = reader.get_chunk_position("data")
+			local data_size = reader.get_chunk_size("data")
+			local fact_position = reader.get_chunk_position("fact")
+			local fact_size = reader.get_chunk_size("fact")
+			
+			local riff_chunk = CtAudio.get_wav_chunk(file,0,fmt_position) 
+			local fmt_chunk = CtAudio.get_wav_chunk(file,fmt_position,fmt_size+8)
+			--local data_chunk = CtAudio.get_wav_chunk(file,data_position,data_size+8+1)
+			local data_chunk = CtAudio.get_wav_chunk(file,data_position,data_size+8)
+			local fact_chunk
+			if fact_position then fact_chunk = CtAudio.get_wav_chunk(file,fact_position,fact_size+8) end
+
+			local file_size = reader.get_file_size()
+			local channels_number = reader.get_channels_number()
+			local sampler_data = 0
 		
-		local riff_chunk = CtAudio.get_wav_chunk(file,0,fmt_position) 
-		local fmt_chunk = CtAudio.get_wav_chunk(file,fmt_position,fmt_size+8)
-		--local data_chunk = CtAudio.get_wav_chunk(file,data_position,data_size+8+1)
-		local data_chunk = CtAudio.get_wav_chunk(file,data_position,data_size+8)
-		local fact_chunk
-		if fact_position then fact_chunk = CtAudio.get_wav_chunk(file,fact_position,fact_size+8) end
-
-		local file_size = reader.get_file_size()
-		local channels_number = reader.get_channels_number()
-		local sampler_data = 0
-	
-		CtAudio.inject_smpl_chunk(file,file_size,channels_number,riff_chunk,fmt_chunk,data_chunk,fact_chunk,002109,1,original_sample_rate,midi_root,midi_pitch,smptef,smpteo,loop_count,sampler_data,loop_cue,loop_type,loop_start,loop_end,loop_fraction,loop_times)
+			CtAudio.inject_smpl_chunk(file,file_size,channels_number,riff_chunk,fmt_chunk,data_chunk,fact_chunk,002109,1,original_sample_rate,midi_root,midi_pitch,smptef,smpteo,loop_count,sampler_data,loop_cue,loop_type,loop_start,loop_end,loop_fraction,loop_times)
+		end
 	end
 
 	return true

@@ -55,7 +55,7 @@ for index, file in pairs(sample_paths_table) do
 	instrument.groups:add(g)
 
 	local temp_table = {}
-	local loop_start,loop_end = mir.findBestLoop(file)
+	local loop_start,loop_end = mir.findLoop(file)
 	local loop_length = loop_end-loop_start
 	table.insert(temp_table,filesystem.filename(file))
 	table.insert(temp_table,loop_start)
