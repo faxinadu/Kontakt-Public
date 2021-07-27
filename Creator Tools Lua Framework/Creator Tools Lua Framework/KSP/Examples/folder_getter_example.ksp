@@ -1,0 +1,24 @@
+{***********************************************
+Folder Getter Example
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: June 16, 2020
+*************************************************}
+
+{ View results in Creator Tools KSP debugger }
+
+on init
+
+	declare @factory_dir
+	declare @patch_dir
+	declare @library_dir
+
+	@factory_dir := "Factory Dir: " & get_folder($GET_FOLDER_FACTORY_DIR)
+	@patch_dir := "Patch Dir: " & get_folder($GET_FOLDER_PATCH_DIR)
+	@library_dir := "Library Dir: " & get_folder($GET_FOLDER_LIBRARY_DIR)
+
+    message(@factory_dir)
+    message(@patch_dir)
+    message(@library_dir)
+
+end on

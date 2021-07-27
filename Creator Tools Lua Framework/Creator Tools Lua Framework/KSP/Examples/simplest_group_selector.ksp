@@ -1,0 +1,17 @@
+
+{***********************************************
+Simpleest Group Selector
+Author: Faxi Nadu
+Written by: Yaron Eshkar
+Modified: July 27, 2021
+*************************************************}
+
+on init
+    declare ui_knob $source(0,$NUM_GROUPS-1,1) { Slider maximum set by the number of groups }
+    make_persistent($source) { Recall the slider on snapshots }
+end on
+
+on note { note callback, executed whenever a note on message is received }
+    disallow_group($ALL_GROUPS) { Disallow all groups }
+    allow_group($source) { Play the slected group }
+end on
