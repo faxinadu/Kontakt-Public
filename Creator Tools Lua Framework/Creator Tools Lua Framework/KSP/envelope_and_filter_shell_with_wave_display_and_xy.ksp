@@ -29,7 +29,7 @@ on init
     set_script_title(@instrumentName) { Set the script title }
     set_snapshot_type(1) { Don't init on snapshots }
 
-    if ($NI_KONTAKT_IS_HEADLESS = 0) { Check if running headless, onlt do GUI stuff if on desktop }
+    if ($NI_KONTAKT_IS_HEADLESS = 0) { Check if running headless, only do GUI stuff if on desktop }
         make_perfview { Make the performance view }
         set_ui_height(8) { Set the height of the UI }
         set_ui_color(000000h) { Background to black }
@@ -45,12 +45,11 @@ on init
     
     declare $i { Loop counter }
     declare $dummyNote { Variable for playing a dummy note to set the waveform display }
-    declare $value { Variable for setting the scaled macro value }
     declare $touchedControl { Variable for keeping track of the last touched control }
     declare $groupSelect { Variable for keeping track of the playable group }
     declare const $numMacros := 8 { Number of NKS macros }
     declare const $groupMacros := 5 { Number of Poly Macros }
-    
+
     { 8 NKS Macros }
     declare ui_slider $macro1 (0, $NUM_GROUPS - 1) { Source select }
     declare ui_slider $macro2 (110000, 900000) { Amp envelope attack, limit to useful ranges }
