@@ -205,6 +205,25 @@ function CtAudio.silence_remove_audio(file,verbose_mode)
 	return true
 end
 
+--- Mix two audio files.
+-- @tparam string file_1 the first file to mix.
+-- @tparam string file_2 the second file to mix.
+-- @tparam string file_2 the desired path to the result file.
+-- @tparam bool verbose_mode when true prints information to console.
+-- @treturn bool 
+function CtAudio.mix_audio(file_1,file_2,output_file,verbose_mode)
+	if verbose_mode == nil then verbose_mode = true end
+	if verbose_mode then print("----------Mix Audio----------") end
+	local verbose_string = CtAudio.set_verbose_string(verbose_mode)
+	if output_file == nil then output_file = scriptPath..filesystem.preferred("/temp.wav") end
+	local s0 = sox_path
+	local s1 = "-m"
+	local execute_string = string.format([[%s %s %s "%s" "%s" "%s"]],s0,verbose_string,s1,file_1,file_2,output_file)
+	if verbose_mode then print ("Audio files mixed to: " .. output_file) end
+	ctFile.run_shell_command(execute_string,false)
+	return true
+end
+
 --- Normalize peaks of an audio file to set dB.
 -- @tparam string file the source file to normalize. 
 -- @tparam string dB setting to normalize to. 
@@ -212,7 +231,7 @@ end
 -- @treturn bool 
 function CtAudio.normalize_audio(file,normalize_db,verbose_mode)
 	if verbose_mode == nil then verbose_mode = true end
-	if verbose_mode then print("----------normalize Audio----------") end
+	if verbose_mode then print("----------Mormalize Audio----------") end
 	local verbose_string = CtAudio.set_verbose_string(verbose_mode)
 	local temp_file = scriptPath..filesystem.preferred("/temp.wav")
 	local s0 = sox_path
@@ -583,10 +602,10 @@ function CtAudio.run_audio_process(file,process_type,param1,param2,param3,param4
 			loop_fraction = 0
 			loop_times = 0
 		end
-
 	local process_done
-
-	if process_type == "normalize" then
+	if process_type == "mix" then
+		process_done = CtAudio.mix_audio(file,param1,param2,param3)
+	elseif process_type == "normalize" then
 		process_done = CtAudio.normalize_audio(file,param1,param2)
 	elseif process_type == "filter" then
 		process_done = CtAudio.filter_audio(file,param1,param2,param3)

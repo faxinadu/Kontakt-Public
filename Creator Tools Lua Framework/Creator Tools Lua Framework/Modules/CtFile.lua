@@ -189,10 +189,11 @@ end
 -- @tparam string file the original file.
 -- @tparam string temp_file a temporary file path for the intermediate operation.
 -- @treturn bool
-function CtFile.run_file_process(command,file,temp_file)
+function CtFile.run_file_process(command,file,temp_file,delete_temp)
+    if delete_temp == nil then delete_temp = true end
 	CtFile.run_shell_command(command,false)
 	CtFile.copy_file(temp_file,file)
-	CtFile.delete_file(temp_file)
+	if delete_temp then CtFile.delete_file(temp_file) end
     return true
 end
 
