@@ -15,19 +15,16 @@ on init
     @instrumentTitle := "Instrument"
     @instrumentName := @instrumentFramework & " " & @instrumentTitle
 
-    declare const $mPlus := $NI_KONTAKT_IS_HEADLESS {Check if running on desktop or headless}
-
     set_script_title(@instrumentFramework) {Set the script title}
     message("") {Reset the messages}
     set_snapshot_type(1) {Don't init on snapshots}
 
     declare ui_label $labelInstrumentName(8,1) {Label for the full instrument name}
 
-    if($mPlus=0) {Check if headless}
-        {Make the performance view}
-        set_ui_height(3)
-        make_perfview
-        set_ui_color(000000h)
+    if($NI_KONTAKT_IS_HEADLESS=0) {Check if headless}
+        make_perfview {Make the performance view}
+        set_ui_height(3) {Performance view height}
+        set_ui_color(000000h) {Performance view background color - black}
         {Set the instrument name label parameters}
         set_text($labelInstrumentName, @instrumentName)
         set_control_par(get_ui_id($labelInstrumentName),$CONTROL_PAR_WIDTH,300)
@@ -42,7 +39,7 @@ on init
     declare $touchedControl {Variable for keeping track of the last touched control}
     declare $groupSelect {Variable for keeping track of the playable group}
     declare const $numMacros := 8 {Number of NKS macros}
-    declare $polyMacros {Number of Poly Macros}
+    declare $groupMacros {Number of Poly Macros}
     
     {8 NKS Macros}
     declare ui_slider $macro1(0,$NUM_GROUPS-1)
@@ -104,7 +101,7 @@ on init
     !valueType[6] := " %"
     !valueType[7] := " %"
     
-    $polyMacros := 5
+    $groupMacros := 5
 
     declare %macroID[$numMacros] {Array for the control GUI IDs}
     declare %labelID[$numMacros] {Array for the label GUI IDs}
@@ -115,7 +112,7 @@ on init
         %labelID[$i] := get_ui_id($label1)+$i {Put the labels in the GUI ID array}
         set_control_par(%macroID[$i],$CONTROL_PAR_AUTOMATION_ID,$i) {Set the automation IDs}
         set_control_par_str(%macroID[$i],$CONTROL_PAR_AUTOMATION_NAME,!macroText[$i]) {Set the automation names}
-        if($mPlus=0) {Check if running on headless}
+        if($NI_KONTAKT_IS_HEADLESS=0) {Check if running on headless}
             if($i<4) {Position the first row of four controls and labels}
                 set_control_par(%macroID[$i],$CONTROL_PAR_POS_X,$guiOffsetX+($i*$guiSpacingX))
                 set_control_par(%macroID[$i],$CONTROL_PAR_POS_Y,$guiOffsetY)
@@ -149,14 +146,14 @@ on init
 end on
 
 function setMacro {Set the macros}
-    if ($touchedControl<$polyMacros) {Check if a touched control is on group or instrument level}
+    if ($touchedControl<$groupMacros) {Check if a touched control is on group or instrument level}
         %groupSlot[$touchedControl] := $groupSelect
     end if    
     {Set the engine parameter}
     set_engine_par(%enginerPar[$touchedControl],get_control_par(%macroID[$touchedControl],$CONTROL_PAR_VALUE),%groupSlot[$touchedControl],%fxSlot[$touchedControl],%genericSlot[$touchedControl])
     {Update the internal slider label for host automation}
     set_control_par_str(%macroID[$touchedControl],$CONTROL_PAR_LABEL,get_engine_par_disp(%enginerPar[$touchedControl],%groupSlot[$touchedControl],%fxSlot[$touchedControl],%genericSlot[$touchedControl]) & !valueType[$touchedControl])
-    if($mPlus=0) {Update the GUI label}
+    if($NI_KONTAKT_IS_HEADLESS=0) {Update the GUI label}
         set_control_par_str(%labelID[$touchedControl],$CONTROL_PAR_TEXT,!macroText[$touchedControl] & ": " & get_engine_par_disp(%enginerPar[$touchedControl],%groupSlot[$touchedControl],%fxSlot[$touchedControl],%genericSlot[$touchedControl]) & !valueType[$touchedControl])
     end if
 end function
@@ -164,7 +161,7 @@ end function
 function setGroupSelect {Set the selected group}
     $groupSelect := $macro1
     set_control_par_str(%macroID[$touchedControl],$CONTROL_PAR_LABEL,$groupSelect+1) {Update the internal slider label for host automation}
-    if($mPlus=0) {Update the GUI label}
+    if($NI_KONTAKT_IS_HEADLESS=0) {Update the GUI label}
         set_control_par_str(%labelID[$touchedControl],$CONTROL_PAR_TEXT,!macroText[0] & ": " & $groupSelect+1)
     end if
     $i := 1 {Set the macro values for the selected group}

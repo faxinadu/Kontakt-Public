@@ -1,4 +1,4 @@
-/Users/yaron.eshkar/Faxi/ct-lua-framework/Kontakt-Public/Creator Tools Lua Framework/Creator Tools Lua Framework
+/Users/yaron.eshkar/Faxi/ct-lua-framework/Kontakt-Public/Creator Tools Lua Framework/Creator Tools Lua Framework/Samples
 true
 true
 0
@@ -22,25 +22,25 @@ true
 true
 ([^-]+)
 false
-2
-19
-false
+3
+20
+true
 false
 false
 10
+true
+-1
 false
--0.1
 false
-false
-false
+true
 44100
-false
+true
 16
 false
 false
 false
-false
-/Users/yaron.eshkar/Faxi/creator-tools-lua-framework/KSP/ksp_script.ksp
+true
+/Users/yaron.eshkar/Faxi/ct-lua-framework/Kontakt-Public/Creator Tools Lua Framework/Creator Tools Lua Framework/KSP/Shells/instrument_type_x.ksp
 false
 0
 false
