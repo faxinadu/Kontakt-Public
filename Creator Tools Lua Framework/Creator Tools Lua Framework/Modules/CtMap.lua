@@ -420,6 +420,86 @@ function CtMap.create_mapping(sample_paths_table,sample_tokens_table,playback_mo
 	return true
 end
 
+--- Simple mapper that maps each sample to its own group.
+-- Report success or mapping with errors.
+-- @tparam table sample_paths_table
+-- @tparam int root_key
+-- @tparam int low_key
+-- @tparam int high_key
+-- @tparam int low_vel
+-- @tparam int high_vel
+-- @tparam bool set_loop
+-- @tparam int loop_xfade
+-- @tparam bool verbose_mode
+-- @treturn bool
+function CtMap.simplest_mapper_groups(sample_paths_table,root_key,low_key,high_key,low_vel,high_vel,set_loop,loop_xfade,verbose_mode)
+    for index, file in pairs(sample_paths_table) do
+        instrument.groups:insert(#instrument.groups,instrument.groups[0])
+        local g = instrument.groups[#instrument.groups-1]
+                -- Name the group.
+                g.name = "group ".. index
+        local z = Zone()
+        g.zones:add(z)
+        z.rootKey = root_key
+        z.keyRange.low = low_key
+        z.keyRange.high = high_key
+        z.velocityRange.low = low_vel
+        z.velocityRange.high = high_vel
+        if set_loop then 
+            local loop_start,loop_end = mir.findLoop(file)
+            local loop_length = loop_end - loop_start
+            z.loops:resize(1)
+            z.loops[0].mode = 1
+            z.loops[0].start = loop_start
+            z.loops[0].length = loop_length
+            z.loops[0].xfade = loop_xfade
+            if verbose_mode then print("Loop start: "..loop_start.." Loop length: "..loop_length) end
+        end
+        -- Populate the zone with a sample from our table.
+        z.file = file
+    end
+    -- Fix wrong group indexing annoyance.
+	instrument.groups:remove(0)
+    if verbose_mode then print("Mapping complete, no errors") end
+end
+
+--- Simple mapper that maps each sample to one key confined zone.
+-- Report success or mapping with errors.
+-- @tparam table sample_paths_table
+-- @tparam int root_key
+-- @tparam int low_vel
+-- @tparam int high_vel
+-- @tparam bool set_loop
+-- @tparam int loop_xfade
+-- @tparam bool verbose_mode
+-- @treturn bool
+function CtMap.simplest_mapper_zones(sample_paths_table,root_key,low_vel,high_vel,set_loop,loop_xfade,verbose_mode)
+    for index, file in pairs(sample_paths_table) do
+        local g = instrument.groups[#instrument.groups-1]
+        local z = Zone()
+        g.zones:add(z)
+        z.rootKey = root_key
+        z.keyRange.low = root_key
+        z.keyRange.high = root_key
+        z.velocityRange.low = low_vel
+        z.velocityRange.high = high_vel
+        if set_loop then 
+            local loop_start,loop_end = mir.findLoop(file)
+            local loop_length = loop_end - loop_start
+            z.loops:resize(1)
+            z.loops[0].mode = 1
+            z.loops[0].start = loop_start
+            z.loops[0].length = loop_length
+            z.loops[0].xfade = loop_xfade
+            if verbose_mode then print("Loop start: "..loop_start.." Loop length: "..loop_length) end
+        end
+        -- Populate the zone with a sample from our table.
+        z.file = file
+        root_key = root_key + 1
+    end
+    if verbose_mode then print("Mapping complete, no errors") end
+end
+
 --- Report map status.
 -- Report success or mapping with errors.
 -- @tparam bool error_flag determines whether to print a sucess or an error message.
