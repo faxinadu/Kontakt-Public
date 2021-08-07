@@ -421,7 +421,7 @@ function CtMap.create_mapping(sample_paths_table,sample_tokens_table,playback_mo
 end
 
 --- Simple mapper that maps each sample to its own group.
--- Report success or mapping with errors.
+-- All options except sample_paths table are optional.
 -- @tparam table sample_paths_table
 -- @tparam int root_key
 -- @tparam int low_key
@@ -432,8 +432,16 @@ end
 -- @tparam int loop_xfade
 -- @tparam bool verbose_mode
 -- @treturn bool
-function CtMap.simplest_mapper_groups(sample_paths_table,root_key,low_key,high_key,low_vel,high_vel,set_loop,loop_xfade,verbose_mode)
-    for index, file in pairs(sample_paths_table) do
+function CtMap.simplest_mapper_groups(sample_paths_table,set_loop,loop_xfade,root_key,low_key,high_key,low_vel,high_vel,verbose_mode)
+	if set_loop == nil then set_loop = false end
+	if loop_xfade == nil then loop_xfade = 20 end
+	if root_key == nil then root_key = 60 end
+	if low_key == nil then low_key = 0 end
+	if high_key == nil then high_key = 127 end
+	if low_vel == nil then low_vel = 0 end
+	if high_vel == nil then high_vel = 127 end
+	if verbose_mode == nil then verbose_mode = true end
+	for index, file in pairs(sample_paths_table) do
         instrument.groups:insert(#instrument.groups,instrument.groups[0])
         local g = instrument.groups[#instrument.groups-1]
                 -- Name the group.
@@ -461,10 +469,11 @@ function CtMap.simplest_mapper_groups(sample_paths_table,root_key,low_key,high_k
     -- Fix wrong group indexing annoyance.
 	instrument.groups:remove(0)
     if verbose_mode then print("Mapping complete, no errors") end
+	return true
 end
 
 --- Simple mapper that maps each sample to one key confined zone.
--- Report success or mapping with errors.
+-- All options except sample_paths table are optional.
 -- @tparam table sample_paths_table
 -- @tparam int root_key
 -- @tparam int low_vel
@@ -473,7 +482,13 @@ end
 -- @tparam int loop_xfade
 -- @tparam bool verbose_mode
 -- @treturn bool
-function CtMap.simplest_mapper_zones(sample_paths_table,root_key,low_vel,high_vel,set_loop,loop_xfade,verbose_mode)
+function CtMap.simplest_mapper_zones(sample_paths_table,set_loop,loop_xfade,root_key,low_vel,high_vel,verbose_mode)
+	if set_loop == nil then set_loop = false end
+	if loop_xfade == nil then loop_xfade = 20 end
+	if root_key == nil then root_key = 60 end
+	if low_vel == nil then low_vel = 0 end
+	if high_vel == nil then high_vel = 127 end
+	if verbose_mode == nil then verbose_mode = true end
     for index, file in pairs(sample_paths_table) do
         local g = instrument.groups[#instrument.groups-1]
         local z = Zone()
@@ -498,6 +513,7 @@ function CtMap.simplest_mapper_zones(sample_paths_table,root_key,low_vel,high_ve
         root_key = root_key + 1
     end
     if verbose_mode then print("Mapping complete, no errors") end
+	return true
 end
 
 --- Report map status.
@@ -511,7 +527,7 @@ function CtMap.mapping_report(error_flag)
 	else
 		print("Mapping complete, no errors")
 		return true
-	end	
+	end
 end
 
 -- return the CtMap object.
