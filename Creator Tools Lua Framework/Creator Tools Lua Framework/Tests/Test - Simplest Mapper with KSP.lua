@@ -40,8 +40,8 @@ local high_vel = 127
 local set_loop = false
 local loop_xfade = 20
 
---ctMap.simplest_mapper_zones(sample_paths_table,root_key,low_vel,high_vel,set_loop,loop_xfade,verbose_mode)
-ctMap.simplest_mapper_groups(sample_paths_table,root_key,low_key,high_key,low_vel,high_vel,set_loop,loop_xfade,verbose_mode)
+ctMap.simplest_mapper_groups(sample_paths_table,set_loop,loop_xfade,root_key,low_key,high_key,low_vel,high_vel,verbose_mode)
+----ctMap.simplest_mapper_zones(sample_paths_table,set_loop,loop_xfade,root_key,low_vel,high_vel,verbose_mode)
 
 -- Set KSP
 local ksp_script_string = ctFile.read_file_to_string(ksp_script_path,"r")
