@@ -498,7 +498,7 @@ function CtMap.simplest_mapper_zones(sample_paths_table,set_loop,loop_xfade,root
         z.keyRange.high = root_key
         z.velocityRange.low = low_vel
         z.velocityRange.high = high_vel
-        if set_loop then 
+        if set_loop then
             local loop_start,loop_end = mir.findLoop(file)
             local loop_length = loop_end - loop_start
             z.loops:resize(1)
