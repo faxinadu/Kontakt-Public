@@ -421,7 +421,7 @@ function CtMap.create_mapping(sample_paths_table,sample_tokens_table,playback_mo
 end
 
 --- Simple mapper that maps each sample to its own group.
--- All options except sample_paths table are optional.
+-- All parameters except sample_paths table are optional.
 -- @tparam table sample_paths_table
 -- @tparam int root_key
 -- @tparam int low_key
@@ -473,7 +473,7 @@ function CtMap.simplest_mapper_groups(sample_paths_table,set_loop,loop_xfade,roo
 end
 
 --- Simple mapper that maps each sample to one key confined zone.
--- All options except sample_paths table are optional.
+-- All parameters except sample_paths table are optional.
 -- @tparam table sample_paths_table
 -- @tparam int root_key
 -- @tparam int low_vel
