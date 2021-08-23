@@ -9,6 +9,9 @@ Native Instruments Kontakt scripting forum:
 
 https://www.native-instruments.com/forum/forums/scripting-workshop.205/
 
+Discord:
+https://discord.gg/rTpCcpg
+
 VI Control Kontakt scripting forum:
 
 https://vi-control.net/community/forums/kontakt-sampling-programming-scripting.65/
