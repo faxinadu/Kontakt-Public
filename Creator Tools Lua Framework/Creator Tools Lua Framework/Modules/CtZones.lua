@@ -286,7 +286,7 @@ function CtZones.zone_param_single(source_group,source_zone,dest_group,dest_zone
     return true
 end
 
---- Tune the sample in the zone to the nearest note.
+--- Tune the sample of each zone in a group to the nearest note.
 -- @tparam int the group to loop through all zones.
 -- @tparam bool verbose_mode when true prints information to console.
 function CtZones.fix_zone_tune(group,verbose_mode)
