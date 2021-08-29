@@ -1,0 +1,62 @@
+{***********************************************
+File Selector Example
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: August 29,  2021
+*************************************************}
+
+on init
+	message("") { Reset the messages }
+	make_perfview { Make the performance view }
+	set_ui_height(5) { Set the UI height }
+	set_ui_color(9000000h) { Black background }
+
+	declare @basepath { Base path for the browser }
+	@basepath :=  get_folder($GET_FOLDER_PATCH_DIR) & "Data/Presets/" { Set the base path }
+	declare @file_path { Full path to the selected file }
+	declare @file_name { The selected file name }
+	make_persistent(@file_name) { Make the file name persistent }
+	declare ui_file_selector $file_browser { Browser for showing the found files }
+	declare $browser_id { Browser UI ID }
+	$browser_id := get_ui_id($file_browser) { Get the browser ID }
+	
+	set_control_par($browser_id,$CONTROL_PAR_FILE_TYPE,$NI_FILE_TYPE_AUDIO) { Browser should only display audio files }
+	set_control_par_str($browser_id,$CONTROL_PAR_BASEPATH,@basepath) { Set the browser base path }
+	read_persistent_var(@file_name) { Read the stored file name }
+	set_control_par_str($browser_id,$CONTROL_PAR_FILEPATH,@basepath & @file_name) { Recall the selected file }
+	set_control_par($browser_id,$CONTROL_PAR_COLUMN_WIDTH,180) { Browser column width }
+	set_control_par($browser_id,$CONTROL_PAR_HEIGHT,170) { Height of the browser }
+	set_control_par($browser_id,$CONTROL_PAR_WIDTH,550) { Width of the browser } 
+	move_control_px($file_browser,66,2) { Postion the browser }
+
+	declare ui_button $prev { Button for moving up the list }
+	declare ui_button $next { Button for moving down the list }
+	move_control($prev,3,1) { Position the prev button }
+	move_control($next,3,2) { Position the next button }
+
+	set_num_user_zones(1) { Declare a user zone }
+end on
+
+function set_file { Set the file in the user zone }
+	wait_async(set_sample(%NI_USER_ZONE_IDS[0],@file_path))
+end function
+ 
+on ui_control($file_browser) { Browser }
+	@file_name := fs_get_filename($browser_id,1) { Get the name of the selected file with extention }
+	@file_path := fs_get_filename($browser_id,2) { Get the path to the selected file }
+	call set_file 
+end on
+
+on ui_control ($prev) { Previous }
+	if($prev=1)
+		fs_navigate($browser_id,0) { Move up the list }
+		$prev := 0 { Reset the button state }
+	end if
+end on
+
+on ui_control ($next) { Next }
+	if($next=1)
+		fs_navigate($browser_id,1) { Move down the list }
+		$next := 0 { Reset the button state }
+	end if
+end on
