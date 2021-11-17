@@ -1,0 +1,44 @@
+{***********************************************
+Controls In Array Example
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: July 15, 2020
+*************************************************}
+
+on init
+	declare ui_slider $slider_1 (0,1000000)
+	declare ui_slider $slider_2 (0,1000000)
+	declare ui_slider $slider_3 (0,1000000)
+	declare ui_slider $slider_4 (0,1000000)
+	declare %controlID[4]
+		%controlID[0] := get_ui_id($slider_1)
+		%controlID[1] := get_ui_id($slider_2)
+		%controlID[2] := get_ui_id($slider_3)
+		%controlID[3] := get_ui_id($slider_4)
+	declare $touched_control 
+	declare ui_label$label (1,1)
+end on
+
+function process_control
+	set_text($label,get_control_par(%controlID[$touched_control],$CONTROL_PAR_VALUE))
+end function
+
+on ui_control ($slider_1)
+	$touched_control := 0
+	call process_control
+end on
+
+on ui_control ($slider_2)
+	$touched_control := 1
+	call process_control
+end on
+
+on ui_control ($slider_3)
+	$touched_control := 2
+	call process_control
+end on
+
+on ui_control ($slider_4)
+	$touched_control := 3
+	call process_control
+end on

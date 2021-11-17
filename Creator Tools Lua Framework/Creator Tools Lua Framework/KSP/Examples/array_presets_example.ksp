@@ -1,0 +1,48 @@
+{***********************************************
+Array Presets Example
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: October 6, 2021
+*************************************************}
+
+on init
+    declare ui_slider $attack(0,1000000)
+    declare ui_slider $decay(0,1000000)
+    declare ui_slider $sustain(0,1000000)
+    declare ui_slider $release(0,1000000)
+    declare ui_switch $save
+    declare ui_switch $load
+    declare %params[4]
+end on
+
+on ui_control($save)
+    save_array(%params,0)
+end on
+
+on ui_control($load)
+    wait_async(load_array(%params,0))
+    $attack := %params[0]
+    $decay := %params[1]
+    $sustain := %params[2]
+    $release := %params[3]
+end on
+
+on ui_control($attack)
+    set_engine_par($ENGINE_PAR_ATTACK,$attack,0,0,-1)
+    %params[0] := $attack
+end on
+
+on ui_control($decay)
+    set_engine_par($ENGINE_PAR_DECAY,$decay,0,0,-1)
+    %params[1] := $decay
+end on
+
+on ui_control($sustain)
+    set_engine_par($ENGINE_PAR_SUSTAIN,$sustain,0,0,-1)
+    %params[2] := $sustain
+end on
+
+on ui_control($release)
+    set_engine_par($ENGINE_PAR_RELEASE,$release,0,0,-1)
+    %params[3] := $release
+end on
