@@ -1,0 +1,224 @@
+{***********************************************
+Flair Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: July 15, 2020
+*************************************************}
+
+on init
+
+  set_script_title("Flair Test")
+  set_ui_height(3)
+  make_perfview
+  set_snapshot_type(1)
+
+  declare ui_button $InvertPhase
+
+  declare ui_menu $Mode
+    add_menu_item ($Mode, "Standard",0)
+    add_menu_item ($Mode, "ThruZero",1)
+    add_menu_item ($Mode, "Scan",2)
+    make_persistent($Mode)
+
+  declare ui_menu $ScanMode
+    add_menu_item ($ScanMode, "Triangle",0)
+    add_menu_item ($ScanMode, "Saw Up",1)
+    add_menu_item ($ScanMode, "Saw Down",2)
+    make_persistent($ScanMode)
+
+  declare ui_slider $Offset (0, 1000000)
+
+  declare ui_knob $Rate (0, 1000000, 1)
+  declare ui_knob $Amount (0, 1000000, 1)
+  declare ui_knob $Pitch (0, 96, 1)
+  declare ui_knob $Voices (0, 1000000, 1)
+  declare ui_knob $Mix (0, 1000000, 1)
+  declare ui_knob $Feedback (0, 1000000, 1)
+  declare ui_knob $Width (0, 1000000, 1)
+  declare ui_knob $Damping (0, 1000000, 1)
+  declare ui_knob $Detune (0, 1000000, 1)
+  declare ui_knob $Output (0, 1000000, 1)
+
+  declare ui_menu $Chord
+    add_menu_item ($Chord, "Major",0)
+    add_menu_item ($Chord, "Major7",1)
+    add_menu_item ($Chord, "Minor",2)
+    add_menu_item ($Chord, "Minor7",3)
+    add_menu_item ($Chord, "Add2",4)
+    add_menu_item ($Chord, "Sus2",5)
+    add_menu_item ($Chord, "Sus4",6)
+    add_menu_item ($Chord, "Neutral3rd",7)
+    add_menu_item ($Chord, "Dom7",8)
+    add_menu_item ($Chord, "Quartal",9)
+    add_menu_item ($Chord, "MajMin",10)
+    add_menu_item ($Chord, "Cluster",11)
+    add_menu_item ($Chord, "Whole",12)
+    add_menu_item ($Chord, "Min3rd",13)
+    add_menu_item ($Chord, "Maj3rd",14)
+    add_menu_item ($Chord, "Fourth",15)
+    add_menu_item ($Chord, "Tritone",16)
+    add_menu_item ($Chord, "Fifth",17)
+    add_menu_item ($Chord, "Octave",18)
+    add_menu_item ($Chord, "Harmonic",19)
+    add_menu_item ($Chord, "Even",20)
+    add_menu_item ($Chord, "Odd",21)
+    add_menu_item ($Chord, "Inharm",22)
+    add_menu_item ($Chord, "Unison",23)
+    make_persistent($Chord)
+
+  set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_FLAIR,-1,0,1)
+
+  set_engine_par($ENGINE_PAR_FLAIR_AMOUNT,1000000,-1,0,1)
+  set_engine_par($ENGINE_PAR_FLAIR_PITCH,60,-1,0,1)
+  set_engine_par($ENGINE_PAR_FLAIR_RATE,1000000,-1,0,1)
+  set_engine_par($ENGINE_PAR_FLAIR_WIDTH,1000000,-1,0,1)
+  set_engine_par($ENGINE_PAR_FLAIR_MIX,1000000,-1,0,1)
+  set_engine_par($ENGINE_PAR_FLAIR_VOICES,1000000,-1,0,1)
+  set_engine_par($ENGINE_PAR_FLAIR_FEEDBACK,1000000,-1,0,1)
+  set_engine_par($ENGINE_PAR_FLAIR_DAMPING,1000000,-1,0,1)
+  set_engine_par($ENGINE_PAR_FLAIR_DETUNE,1000000,-1,0,1)
+  set_engine_par($ENGINE_PAR_FLAIR_OFFSET,1000000,-1,0,1)
+  set_engine_par($ENGINE_PAR_INSERT_EFFECT_OUTPUT_GAIN,1000000,-1,0,1)
+
+  set_engine_par($ENGINE_PAR_FLAIR_INVERT_PHASE,1,-1,0,1)
+
+  set_engine_par($ENGINE_PAR_FLAIR_MODE,$NI_FLAIR_MODE_THRU_ZERO,-1,0,1)
+  set_control_par(get_ui_id($Offset),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+
+  set_engine_par($ENGINE_PAR_FLAIR_SCANMODE,$NI_FLAIR_SCANMODE_SAW_UP,-1,0,1)
+  set_engine_par($ENGINE_PAR_FLAIR_CHORD,10,-1,0,1)
+  set_engine_par($ENGINE_PAR_FLAIR_RATE_UNIT,5,-1,0,1)
+  set_engine_par($ENGINE_PAR_FLAIR_RATE,4,-1,0,1)
+
+  {set_engine_par($ENGINE_PAR_FLAIR_RATE_UNIT,17,-1,0,1)}
+
+end on
+
+on ui_control ($Offset)
+  set_engine_par($ENGINE_PAR_FLAIR_OFFSET,$Offset,-1,0,1)
+end on
+
+on ui_control ($InvertPhase)
+  set_engine_par($ENGINE_PAR_FLAIR_INVERT_PHASE, $InvertPhase, -1, 0, 1)
+end on
+
+on ui_control ($Mode)
+  select ($Mode) 
+        case 0
+        set_engine_par($ENGINE_PAR_FLAIR_MODE,$NI_FLAIR_MODE_STANDARD,-1,0,1)
+        set_control_par(get_ui_id($Offset),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+        set_control_par(get_ui_id($ScanMode),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+        case 1
+        set_engine_par($ENGINE_PAR_FLAIR_MODE,$NI_FLAIR_MODE_THRU_ZERO,-1,0,1)
+        set_control_par(get_ui_id($Offset),$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+        set_control_par(get_ui_id($ScanMode),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+        case 2
+        set_engine_par($ENGINE_PAR_FLAIR_MODE,$NI_FLAIR_MODE_SCAN,-1,0,1)
+        set_control_par(get_ui_id($ScanMode),$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+        set_control_par(get_ui_id($Offset),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+  end select
+end on
+
+on ui_control ($ScanMode)
+  select ($ScanMode) 
+        case 0
+        set_engine_par($ENGINE_PAR_FLAIR_SCANMODE,$NI_FLAIR_SCANMODE_TRIANGLE,-1,0,1)
+        case 1
+        set_engine_par($ENGINE_PAR_FLAIR_SCANMODE,$NI_FLAIR_SCANMODE_SAW_UP,-1,0,1)
+        case 2
+        set_engine_par($ENGINE_PAR_FLAIR_SCANMODE,$NI_FLAIR_SCANMODE_SAW_DOWN,-1,0,1)
+  end select
+end on
+
+on ui_control ($Chord)
+  select ($Chord) 
+        case 0
+        set_engine_par($ENGINE_PAR_FLAIR_CHORD,0,-1,0,1)
+        case 1
+        set_engine_par($ENGINE_PAR_FLAIR_CHORD,1,-1,0,1)
+        case 2
+        set_engine_par($ENGINE_PAR_FLAIR_CHORD,2,-1,0,1)
+        case 3
+        set_engine_par($ENGINE_PAR_FLAIR_CHORD,3,-1,0,1)
+        case 4
+        set_engine_par($ENGINE_PAR_FLAIR_CHORD,4,-1,0,1)
+        case 5
+        set_engine_par($ENGINE_PAR_FLAIR_CHORD,5,-1,0,1)
+        case 6
+        set_engine_par($ENGINE_PAR_FLAIR_CHORD,6,-1,0,1)
+        case 7
+        set_engine_par($ENGINE_PAR_FLAIR_CHORD,7,-1,0,1)
+        case 8
+        set_engine_par($ENGINE_PAR_FLAIR_CHORD,8,-1,0,1)
+        case 9
+        set_engine_par($ENGINE_PAR_FLAIR_CHORD,9,-1,0,1)
+        case 10
+        set_engine_par($ENGINE_PAR_FLAIR_CHORD,10,-1,0,1)
+        case 11
+        set_engine_par($ENGINE_PAR_FLAIR_CHORD,11,-1,0,1)
+        case 12
+        set_engine_par($ENGINE_PAR_FLAIR_CHORD,12,-1,0,1)
+        case 13
+        set_engine_par($ENGINE_PAR_FLAIR_CHORD,13,-1,0,1)
+        case 14
+        set_engine_par($ENGINE_PAR_FLAIR_CHORD,14,-1,0,1)
+        case 15
+        set_engine_par($ENGINE_PAR_FLAIR_CHORD,15,-1,0,1)
+        case 16
+        set_engine_par($ENGINE_PAR_FLAIR_CHORD,16,-1,0,1)
+        case 17
+        set_engine_par($ENGINE_PAR_FLAIR_CHORD,17,-1,0,1)
+        case 18
+        set_engine_par($ENGINE_PAR_FLAIR_CHORD,18,-1,0,1)
+        case 19
+        set_engine_par($ENGINE_PAR_FLAIR_CHORD,19,-1,0,1)
+        case 20
+        set_engine_par($ENGINE_PAR_FLAIR_CHORD,20,-1,0,1)
+        case 21
+        set_engine_par($ENGINE_PAR_FLAIR_CHORD,21,-1,0,1)
+        case 22
+        set_engine_par($ENGINE_PAR_FLAIR_CHORD,22,-1,0,1)
+        case 23
+        set_engine_par($ENGINE_PAR_FLAIR_CHORD,23,-1,0,1)
+  end select
+end on
+
+on ui_control ($Rate)
+  set_engine_par($ENGINE_PAR_FLAIR_RATE,$Rate,-1,0,1)
+end on
+
+on ui_control ($Amount)
+  set_engine_par($ENGINE_PAR_FLAIR_AMOUNT,$Amount,-1,0,1)
+end on
+
+on ui_control ($Pitch)
+  set_engine_par($ENGINE_PAR_FLAIR_PITCH,$Pitch,-1,0,1)
+end on
+
+on ui_control ($Voices)
+  set_engine_par($ENGINE_PAR_FLAIR_VOICES,$Voices,-1,0,1)
+end on
+
+on ui_control ($Mix)
+  set_engine_par($ENGINE_PAR_FLAIR_MIX,$Mix,-1,0,1)
+end on
+
+on ui_control ($Feedback)
+  set_engine_par($ENGINE_PAR_FLAIR_FEEDBACK,$Feedback,-1,0,1)
+end on
+
+on ui_control ($Width)
+  set_engine_par($ENGINE_PAR_FLAIR_WIDTH,$Width,-1,0,1)
+end on
+
+on ui_control ($Damping)
+  set_engine_par($ENGINE_PAR_FLAIR_DAMPING,$Damping,-1,0,1)
+end on
+
+on ui_control ($Detune)
+  set_engine_par($ENGINE_PAR_FLAIR_DETUNE,$Detune,-1,0,1)
+end on
+
+on ui_control ($Output)
+  set_engine_par($ENGINE_PAR_INSERT_EFFECT_OUTPUT_GAIN,$Output,-1,0,1)
+end on
