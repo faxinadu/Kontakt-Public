@@ -1,0 +1,41 @@
+{***********************************************
+MIDI Sender Test 2
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: September 15, 2021
+*************************************************}
+
+
+on init
+	message("")
+	make_perfview
+	set_listener($NI_SIGNAL_TRANSP_STOP,1)
+	set_listener($NI_SIGNAL_TRANSP_START,1)
+	set_listener($NI_SIGNAL_TIMER_BEAT,4)
+	declare ui_switch $sendCC
+	declare ui_label $label (1,1)
+	declare ui_knob $ccNum (0,127,1)
+	declare $value
+	make_persistent($ccNum)
+end on
+
+function setValue
+	if($sendCC=1)
+		$value := random(0, 127)
+		set_text($label, $value)
+		set_controller ($ccNum, $value)
+	end if
+end function
+
+on ui_control($sendCC)
+	call setValue
+end on
+
+on ui_control($ccNum)
+	call setValue
+end on
+
+on listener
+	call setValue
+end on
+
