@@ -1,0 +1,29 @@
+{***********************************************
+UI Menu Example
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: December 2, 2021
+*************************************************}
+
+on init
+    declare ui_menu $menu
+        add_menu_item($menu,"Hello",0)
+        add_menu_item($menu,"Wassup",1)
+        add_menu_item($menu,"World",2)
+
+    declare ui_label $label(1,1)
+        set_text($label,"Yo")
+
+    declare !itemTexts[3]
+        !itemTexts[0] := "Hey there"    
+        !itemTexts[1] := "All good"
+        !itemTexts[2] := "Word up"    
+end on
+
+function check_menu
+    set_text($label,!itemTexts[$menu])
+end function
+
+on ui_control($menu)
+    call check_menu
+end on
