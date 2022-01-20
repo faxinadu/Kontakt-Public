@@ -16,3 +16,6 @@ UI Mother
 
 https://uimother.com/
 
+KSP Font Generator (Figma plugin)
+
+https://www.figma.com/community/plugin/1065342724528543013/KSP-Font-Generator
