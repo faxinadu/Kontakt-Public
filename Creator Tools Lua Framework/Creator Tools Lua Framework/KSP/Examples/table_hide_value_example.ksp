@@ -1,0 +1,21 @@
+{***********************************************
+Table Hide Value Example
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: May 5, 2020
+*************************************************}
+
+on init
+	message("")
+	declare ui_table %table[20] (4,4,100)
+    declare ui_button $hide
+end on
+
+on ui_control($hide)
+	{Hide the value if the button is on}
+	if($hide = 1)
+	    hide_part(%table,$HIDE_PART_VALUE)
+	else
+	    hide_part(%table,$HIDE_PART_NOTHING)
+	end if
+end on
