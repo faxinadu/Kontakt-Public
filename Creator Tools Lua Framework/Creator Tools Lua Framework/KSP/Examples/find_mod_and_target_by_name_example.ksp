@@ -1,0 +1,22 @@
+{***********************************************
+Find Mod And Target By Name Example
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: February 5, 2022
+*************************************************}
+
+{ On new NKI rename Amp envelope intensity and amp envelope itself to "VOL_ENV. Edit view must be open, right click on mod to rename}
+
+on init
+    declare ui_slider $env_amount(0,1000000)
+    declare ui_slider $env_decay(0,1000000)
+end on
+
+on ui_control($env_amount)
+    set_engine_par($ENGINE_PAR_MOD_TARGET_INTENSITY,$env_amount,0,find_mod(0,"VOL_ENV"),0)
+end on
+
+on ui_control($env_decay)
+    set_engine_par($ENGINE_PAR_DECAY,$env_decay,0,find_target(0,find_mod(0,"VOL_ENV"),"VOL_ENV"),-1)
+end on
+
