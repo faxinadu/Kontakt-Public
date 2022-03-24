@@ -10,8 +10,10 @@ on init
     declare const $view_width := 250
     declare const $view_height := 60
     set_listener($NI_SIGNAL_TIMER_MS,40000)
-    declare $note_a
-    declare $note_b
+    declare polyphonic $note_a
+    declare $curr_a_event
+    declare polyphonic $note_b
+    declare $curr_b_event
     make_perfview
     set_ui_color(9656966h)
     set_ui_height(6)
@@ -93,26 +95,36 @@ on ui_control ($drop_b_area)
     end if
 end on
 
+
 on note
     ignore_event($ALL_EVENTS)
-    set_event_par_arr($ALL_EVENTS,$EVENT_PAR_ALLOW_GROUP,0,$ALL_GROUPS)
 
     $note_a := play_note($EVENT_NOTE,$EVENT_VELOCITY,0,-1)
+    set_event_par_arr($note_a,$EVENT_PAR_ALLOW_GROUP,0,$ALL_GROUPS)
     set_event_par_arr($note_a,$EVENT_PAR_ALLOW_GROUP,1,0)
 
     $note_b := play_note($EVENT_NOTE,$EVENT_VELOCITY,0,-1)
+    set_event_par_arr($note_b,$EVENT_PAR_ALLOW_GROUP,0,$ALL_GROUPS)
     set_event_par_arr($note_b,$EVENT_PAR_ALLOW_GROUP,1,1)
+
+    $curr_a_event := $note_a
+    $curr_b_event := $note_b
+end on
+
+on release
+    note_off($note_a)
+    note_off($note_b)
 end on
 
 on listener
     if ($NI_SIGNAL_TYPE = $NI_SIGNAL_TIMER_MS)
-        if (event_status($note_a) = $EVENT_STATUS_NOTE_QUEUE)
-            set_ui_wf_property($wave_a_view,$UI_WF_PROP_PLAY_CURSOR,0,get_event_par($note_a,$EVENT_PAR_PLAY_POS))
+        if (event_status($curr_a_event) = $EVENT_STATUS_NOTE_QUEUE)
+            set_ui_wf_property($wave_a_view,$UI_WF_PROP_PLAY_CURSOR,0,get_event_par($curr_a_event,$EVENT_PAR_PLAY_POS))
         else
             set_ui_wf_property($wave_a_view,$UI_WF_PROP_PLAY_CURSOR,0,-1)
         end if
-        if (event_status($note_b) = $EVENT_STATUS_NOTE_QUEUE)
-            set_ui_wf_property($wave_b_view,$UI_WF_PROP_PLAY_CURSOR,0,get_event_par($note_b,$EVENT_PAR_PLAY_POS))
+        if (event_status($curr_b_event) = $EVENT_STATUS_NOTE_QUEUE)
+            set_ui_wf_property($wave_b_view,$UI_WF_PROP_PLAY_CURSOR,0,get_event_par($curr_b_event,$EVENT_PAR_PLAY_POS))
         else
             set_ui_wf_property($wave_b_view,$UI_WF_PROP_PLAY_CURSOR,0,-1)
         end if
