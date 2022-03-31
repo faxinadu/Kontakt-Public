@@ -2,7 +2,7 @@
 Array Presets Example
 Author: Native Instruments
 Written by: Yaron Eshkar
-Modified: October 6, 2021
+Modified: March 31, 2022
 *************************************************}
 
 on init
@@ -15,34 +15,64 @@ on init
     declare %params[4]
 end on
 
+function set_attack
+    set_engine_par($ENGINE_PAR_ATTACK,%params[0],0,0,-1)
+end function
+
+function set_decay
+    set_engine_par($ENGINE_PAR_DECAY,%params[1],0,0,-1)
+end function
+
+function set_sustain
+    set_engine_par($ENGINE_PAR_SUSTAIN,%params[2],0,0,-1)
+end function
+
+function set_release
+    set_engine_par($ENGINE_PAR_RELEASE,%params[3],0,0,-1)
+end function
+
+function set_envelope
+    call set_attack
+    call set_decay
+    call set_sustain
+    call set_release
+end function
+
 on ui_control($save)
-    save_array(%params,0)
+    if($save=1)
+        save_array(%params,0)
+        $save := 0
+    end if
 end on
 
 on ui_control($load)
-    wait_async(load_array(%params,0))
-    $attack := %params[0]
-    $decay := %params[1]
-    $sustain := %params[2]
-    $release := %params[3]
+    if($load=1)
+        wait_async(load_array(%params,0))
+        $attack := %params[0]
+        $decay := %params[1]
+        $sustain := %params[2]
+        $release := %params[3]
+        call set_envelope
+        $load := 0
+    end if
 end on
 
 on ui_control($attack)
-    set_engine_par($ENGINE_PAR_ATTACK,$attack,0,0,-1)
     %params[0] := $attack
+    call set_attack
 end on
 
 on ui_control($decay)
-    set_engine_par($ENGINE_PAR_DECAY,$decay,0,0,-1)
     %params[1] := $decay
+    call set_decay
 end on
 
 on ui_control($sustain)
-    set_engine_par($ENGINE_PAR_SUSTAIN,$sustain,0,0,-1)
     %params[2] := $sustain
+    call set_sustain
 end on
 
 on ui_control($release)
-    set_engine_par($ENGINE_PAR_RELEASE,$release,0,0,-1)
     %params[3] := $release
+    call set_release
 end on
