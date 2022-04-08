@@ -1,5 +1,9 @@
 # GUI Design Tools
 
+Figma
+
+https://www.figma.com/
+
 Knobman
 
 https://www.g200kg.com/knobman/
