@@ -22,7 +22,6 @@ local signet_commands = {
 }
 
 function run_signet_command(signet_path,signet_options,samples_path,signet_command)
-  if not signet_options then signet_options = "" end
   local execute_string = string.format([["%s" %s "%s" %s]],signet_path,signet_options,samples_path,signet_command)
 
   print("Executing command:")
@@ -39,6 +38,6 @@ function run_signet_command(signet_path,signet_options,samples_path,signet_comma
 end
 
 for k,v in pairs(signet_commands) do
-  run_signet_command(signet_path,signet_options,samples_path,signet_commands[k])
+  run_signet_command(signet_path,signet_options,samples_path,v)
 end
 
