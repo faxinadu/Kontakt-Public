@@ -7,14 +7,19 @@ Modified: April 21, 2022
 
 on init
     message("")
+    declare $i
     declare ui_slider $slider(0,1000000)
         make_persistent($slider)
     declare ui_label $label(1,1)
 end on
 
 function set_controls
-    set_engine_par($ENGINE_PAR_MOD_TARGET_INTENSITY,$slider,0,16,-1) {velocity on default new nki}
-    set_text($label,"Velocity: " & $slider / 10000 & "%")
+    $i := 0
+    while($i<$NUM_GROUPS)
+        set_engine_par($ENGINE_PAR_MOD_TARGET_INTENSITY,$slider,$i,16,-1) {velocity on default new nki}
+        inc($i)
+    end while
+     set_text($label,"Velocity: " & $slider / 10000 & "%")
 end function
 
 on persistence_changed
