@@ -1,5 +1,8 @@
 # Basics
 
+Kontakt Sampling Engine In 999 Seconds
+https://www.youtube.com/watch?v=rsnT8_Rp-1w
+
 Guy Michelmore - Kontakt 6 in 20 Minutes
 
 https://www.youtube.com/watch?v=AdxX51_bflg

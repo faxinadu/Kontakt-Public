@@ -1,0 +1,25 @@
+{***********************************************
+Timers Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: April 25, 2022
+*************************************************}
+
+on init
+    set_listener($NI_SIGNAL_TIMER_MS,100000)
+    declare ui_label $engine(1,1)
+    declare ui_label $ksp(1,1)
+    declare ui_switch $reset
+end on
+
+on ui_control($reset)
+    if($reset=1)
+        reset_ksp_timer
+        $reset := 0
+    end if
+end on
+
+on listener
+    set_text($engine,$ENGINE_UPTIME)
+    set_text($ksp,$KSP_TIMER)
+end on
