@@ -3,7 +3,7 @@
 Additive Synthesis Example Type II
 Author: Native Instruments
 Written by: Yaron Eshkar
-Modified: July 31,  2021
+Modified: July 31, 2021
 *************************************************}
 
 { 1 Sine partial per group for a total of 16 partials in 16 groups }

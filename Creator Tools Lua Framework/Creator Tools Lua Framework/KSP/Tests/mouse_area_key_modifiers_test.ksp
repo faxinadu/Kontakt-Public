@@ -1,0 +1,25 @@
+{***********************************************
+Mouse Area Key Modifiers Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: May 16, 2022
+*************************************************}
+
+on init
+    make_perfview
+    set_ui_height(8)
+    declare ui_mouse_area $drop_area
+        set_control_par(get_ui_id($drop_area),$CONTROL_PAR_HEIGHT,500)
+        set_control_par(get_ui_id($drop_area),$CONTROL_PAR_WIDTH,500)
+        set_control_par(get_ui_id($drop_area),$CONTROL_PAR_DND_ACCEPT_AUDIO,$NI_DND_ACCEPT_ONE)
+        set_control_par(get_ui_id($drop_area),$CONTROL_PAR_RECEIVE_DRAG_EVENTS,1)
+    declare ui_waveform $wave_view(1,1)
+        set_control_par(get_ui_id($wave_view),$CONTROL_PAR_HEIGHT,500)
+        set_control_par(get_ui_id($wave_view),$CONTROL_PAR_WIDTH,500)
+end on
+
+on ui_control ($drop_area)
+    message("SHIFT: " & get_control_par(get_ui_id($drop_area),$CONTROL_PAR_KEY_SHIFT))
+    message("ALT: " & get_control_par(get_ui_id($drop_area),$CONTROL_PAR_KEY_ALT))
+    message("CONTROL: " & get_control_par(get_ui_id($drop_area),$CONTROL_PAR_KEY_CONTROL))
+end on

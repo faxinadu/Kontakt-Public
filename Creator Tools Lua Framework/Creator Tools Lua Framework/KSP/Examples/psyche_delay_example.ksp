@@ -1,0 +1,260 @@
+{***********************************************
+Psyche Delay Example
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: May 09, 2022
+*************************************************}
+
+on init
+
+    message("")
+    set_script_title("Psyche Delay Example")
+    set_ui_height(3)
+    make_perfview
+
+    declare const $spacing_x := 100
+    declare const $spacing_y := 20
+
+    declare const $num_controls := 15
+
+    declare $i
+    declare $touched
+
+    declare const $group := -1
+    declare const $slot := 0
+    declare $generic
+
+    {Delay Sync Variables}
+    declare const $NUM_FX_SYNC_TIMES := 20
+    declare const $DLY_DIV := 1000000 / ($NUM_FX_SYNC_TIMES-1)
+    declare %dly_sync_unit[$NUM_FX_SYNC_TIMES] := ($NI_SYNC_UNIT_64TH_TRIPLET, $NI_SYNC_UNIT_64TH, $NI_SYNC_UNIT_32ND_TRIPLET, $NI_SYNC_UNIT_256TH, $NI_SYNC_UNIT_32ND, $NI_SYNC_UNIT_16TH_TRIPLET, $NI_SYNC_UNIT_64TH, $NI_SYNC_UNIT_16TH, $NI_SYNC_UNIT_8TH_TRIPLET, $NI_SYNC_UNIT_32ND, $NI_SYNC_UNIT_8TH, $NI_SYNC_UNIT_QUARTER_TRIPLET, $NI_SYNC_UNIT_16TH, $NI_SYNC_UNIT_QUARTER, $NI_SYNC_UNIT_HALF_TRIPLET, $NI_SYNC_UNIT_8TH, $NI_SYNC_UNIT_HALF, $NI_SYNC_UNIT_WHOLE_TRIPLET, $NI_SYNC_UNIT_QUARTER, $NI_SYNC_UNIT_WHOLE)
+  	declare !dly_sync_string[$NUM_FX_SYNC_TIMES]
+	   !dly_sync_string[0] := "1/64 T"
+	   !dly_sync_string[1] := "1/64"
+	   !dly_sync_string[2] := "1/32 T"
+	   !dly_sync_string[3] := "1/64 D"
+	   !dly_sync_string[4] := "1/32"
+	   !dly_sync_string[5] := "1/16 T"
+	   !dly_sync_string[6] := "1/32 D"
+	   !dly_sync_string[7] := "1/16"
+	   !dly_sync_string[8] := "1/8 T"
+	   !dly_sync_string[9] := "1/16 D"
+	   !dly_sync_string[10] := "1/8"
+	   !dly_sync_string[11] := "1/4 T"
+	   !dly_sync_string[12] := "1/8 D"
+	   !dly_sync_string[13] := "1/4"
+	   !dly_sync_string[14] := "1/2 T"
+	   !dly_sync_string[15] := "1/4 D"
+	   !dly_sync_string[16] := "1/2"
+	   !dly_sync_string[17] := "1/1 T"
+	   !dly_sync_string[18] := "1/2 D"
+	   !dly_sync_string[19] := "1/1"
+  	declare %dly_sync_value[$NUM_FX_SYNC_TIMES] := (0, 0, 0, 454545, 0, 0, 181818, 0, 0, 181818, 0, 0, 181818, 0, 0, 181818, 0, 0, 181818, 0) 
+
+
+    declare %engine_pars[9]
+        %engine_pars[0] := $ENGINE_PAR_PSYDL_TIME
+        %engine_pars[1] := $ENGINE_PAR_PSYDL_FEEDBACK
+        %engine_pars[2] := $ENGINE_PAR_PSYDL_PITCH
+        %engine_pars[3] := $ENGINE_PAR_PSYDL_LR_OFFSET
+        %engine_pars[4] := $ENGINE_PAR_PSYDL_CROSS_FEEDBACK
+        %engine_pars[5] := $ENGINE_PAR_PSYDL_DETUNE
+        %engine_pars[6] := $ENGINE_PAR_PSYDL_REVERSE
+        %engine_pars[7] := $ENGINE_PAR_PSYDL_REVERSE_STEREO
+        %engine_pars[8] := $ENGINE_PAR_PSYDL_DETUNE_STEREO
+
+    declare !labels[6]
+        !labels[0] := "Time: "
+        !labels[1] := "Feed: "
+        !labels[2] := "Pitch: "
+        !labels[3] := "Offset: "
+        !labels[4] := "Cross: "
+        !labels[5] := "Detune: "
+    
+    declare !types[6]
+        !types[0] := "ms"
+        !types[1] := "%"
+        !types[2] := "st"
+        !types[3] := "%"
+        !types[4] := "%"
+        !types[5] := "ct"
+
+    declare ui_menu $effect_slot
+        add_menu_item($effect_slot,"Bus",0)
+        add_menu_item($effect_slot,"Insert",1)
+        add_menu_item($effect_slot,"Main",2)
+        add_menu_item($effect_slot,"Send",3)
+
+    declare ui_switch $sync
+        set_text($sync,"Sync")
+
+    declare ui_panel $controls
+
+    declare ui_slider $time(0,1000000)
+    declare ui_slider $feedback(0,1000000)
+    declare ui_slider $pitch(0,1000000)
+    declare ui_slider $offset(0,1000000)
+    declare ui_slider $cross(0,1000000)
+    declare ui_slider $detune(0,1000000)
+
+    declare ui_label $time_label(1,1)
+    declare ui_label $feedback_label(1,1)
+    declare ui_label $pitch_label(1,1)
+    declare ui_label $offset_label(1,1)
+    declare ui_label $cross_label(1,1)
+    declare ui_label $detune_label(1,1)
+
+    declare ui_switch $reverse
+        set_text($reverse,"Reverse")
+    declare ui_switch $sreverse
+        set_text($sreverse,"S Reverse")
+    declare ui_switch $sdetune
+        set_text($sdetune,"S Detune")
+
+    make_persistent($time)
+    make_persistent($feedback)
+    make_persistent($pitch)
+    make_persistent($offset)
+    make_persistent($cross)
+    make_persistent($detune)
+    make_persistent($reverse)
+    make_persistent($sreverse)
+    make_persistent($sdetune)
+
+    make_persistent($effect_slot)
+
+    declare %controlID[15]
+
+    $i := 0
+    while($i<$num_controls)
+        %controlID[$i] := get_ui_id($time)+$i
+        set_control_par(%controlID[$i],$CONTROL_PAR_PARENT_PANEL,get_ui_id($controls))
+        select ($i)
+            case 0 to 5
+                set_control_par(%controlID[$i],$CONTROL_PAR_POS_X,$spacing_x * $i)
+            case 6 to 11
+                set_control_par(%controlID[$i],$CONTROL_PAR_POS_X,$spacing_x * ($i-6))
+                set_control_par(%controlID[$i],$CONTROL_PAR_POS_Y,$spacing_y)
+            case 12 to $num_controls   
+                set_control_par(%controlID[$i],$CONTROL_PAR_POS_X,$spacing_x * ($i-11))
+                set_control_par(%controlID[$i],$CONTROL_PAR_POS_Y,$spacing_y*2)
+        end select
+        inc($i)
+    end while
+
+    set_control_par(get_ui_id($controls),$CONTROL_PAR_POS_X,25)
+    set_control_par(get_ui_id($controls),$CONTROL_PAR_POS_Y,50)
+
+    set_control_par(get_ui_id($effect_slot),$CONTROL_PAR_POS_X,250)
+    set_control_par(get_ui_id($effect_slot),$CONTROL_PAR_POS_Y,25)
+
+    set_control_par(get_ui_id($sync),$CONTROL_PAR_POS_X,350)
+    set_control_par(get_ui_id($sync),$CONTROL_PAR_POS_Y,25)
+end on
+
+function set_controls
+    if($touched<6)
+        if($touched=0)
+            if($sync=0)
+                set_engine_par($ENGINE_PAR_PSYDL_TIME_UNIT,$NI_SYNC_UNIT_ABS,$group,$slot,$generic)
+                set_engine_par(%engine_pars[$touched],get_control_par(%controlID[$touched],$CONTROL_PAR_VALUE),$group,$slot,$generic)
+                set_control_par_str(%controlID[$touched+6],$CONTROL_PAR_TEXT,!labels[$touched] & get_engine_par_disp(%engine_pars[$touched],$group,$slot,$generic) & !types[$touched])
+            else
+                set_engine_par($ENGINE_PAR_PSYDL_TIME_UNIT,%dly_sync_unit[get_control_par(%controlID[$touched],$CONTROL_PAR_VALUE) / $DLY_DIV],$group,$slot,$generic)
+                set_engine_par($ENGINE_PAR_PSYDL_TIME,%dly_sync_unit[get_control_par(%controlID[$touched],$CONTROL_PAR_VALUE) / $DLY_DIV],$group,$slot,$generic)
+                set_control_par_str(%controlID[$touched+6],$CONTROL_PAR_TEXT,!dly_sync_string[get_control_par(%controlID[$touched],$CONTROL_PAR_VALUE) / $DLY_DIV])
+            end if
+        else
+            set_engine_par(%engine_pars[$touched],get_control_par(%controlID[$touched],$CONTROL_PAR_VALUE),$group,$slot,$generic)
+            set_control_par_str(%controlID[$touched+6],$CONTROL_PAR_TEXT,!labels[$touched] & get_engine_par_disp(%engine_pars[$touched],$group,$slot,$generic) & !types[$touched])
+        end if
+    else
+        set_engine_par(%engine_pars[$touched],get_control_par(%controlID[$touched+6],$CONTROL_PAR_VALUE),$group,$slot,$generic)
+    end if
+end function
+
+function set_all_controls
+    $touched := 0 
+    while($touched<9)
+        call set_controls
+        inc($touched)
+    end while
+end function
+
+function set_effect_slot
+    wait_async(set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_NONE,$group,$slot,$generic))
+    select($effect_slot)
+        case 0 {bus}
+            $generic := $NI_BUS_OFFSET
+        case 1 {insert}
+            $generic := $NI_INSERT_BUS
+        case 2 {main}
+            $generic := $NI_MAIN_BUS
+        case 3 {send}
+            $generic := $NI_SEND_BUS
+    end select
+    if($effect_slot<3)
+        wait_async(set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_PSYCHEDELAY,$group,$slot,$generic))
+    else
+        wait_async(set_engine_par($ENGINE_PAR_SEND_EFFECT_TYPE,$EFFECT_TYPE_PSYCHEDELAY,$group,$slot,$generic))
+    end if
+    call set_all_controls
+end function
+
+on persistence_changed
+    call set_effect_slot
+end on
+
+on ui_control($effect_slot)
+    call set_effect_slot
+end on
+
+on ui_control($time)
+    $touched := 0
+    call set_controls
+end on
+
+on ui_control($sync)
+    $touched := 0
+    call set_controls
+end on
+
+on ui_control($feedback)
+    $touched := 1
+    call set_controls
+end on
+
+on ui_control($pitch)
+    $touched := 2
+    call set_controls
+end on
+
+on ui_control($offset)
+    $touched := 3
+    call set_controls
+end on
+
+on ui_control($cross)
+    $touched := 4
+    call set_controls
+end on
+
+on ui_control($detune)
+    $touched := 5
+    call set_controls
+end on
+
+on ui_control($reverse)
+    $touched := 6
+    call set_controls
+end on
+
+on ui_control($sreverse)
+    $touched := 7
+    call set_controls
+end on
+
+on ui_control($sdetune)
+    $touched := 8
+    call set_controls
+end on

@@ -1,0 +1,30 @@
+{***********************************************
+Info from NKI example
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: July 08, 2022
+*************************************************}
+
+{ Place a bypassed Saturator on the last fx slot in the last bus }
+
+on init
+    declare $bg_check
+    $bg_check := get_engine_par($ENGINE_PAR_SHAPE,-1,0,$NI_BUS_OFFSET+15) 
+    message( $bg_check )
+    select($bg_check)
+        case 0 {-100%}
+            set_control_par_str($INST_WALLPAPER_ID,$CONTROL_PAR_PICTURE,"funnies")
+        case 2500 {-95%}
+            set_control_par_str($INST_WALLPAPER_ID,$CONTROL_PAR_PICTURE,"bflute")
+        case 50000 {-90%}
+            set_control_par_str($INST_WALLPAPER_ID,$CONTROL_PAR_PICTURE,"cat") 
+        case 75000 {-85%}
+            set_control_par_str($INST_WALLPAPER_ID,$CONTROL_PAR_PICTURE,"musicbox")
+        case 100000 {-80%}
+            set_control_par_str($INST_WALLPAPER_ID,$CONTROL_PAR_PICTURE,"sbahn")
+        case 125000 {-75%}
+            set_control_par_str($INST_WALLPAPER_ID,$CONTROL_PAR_PICTURE,"scatman")
+        case 150000 {-70%}
+            set_control_par_str($INST_WALLPAPER_ID,$CONTROL_PAR_PICTURE,"stoya")
+    end select
+end on
