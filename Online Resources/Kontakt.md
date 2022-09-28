@@ -77,3 +77,7 @@ https://www.youtube.com/watch?v=b9mqaBy0Axs
 Yummybeats KSP Tutorials
 
 https://blog.yummybeats.com/ksp-kontakt-scripting/
+
+Kontakt Script Manual Walkthrough
+
+https://www.youtube.com/playlist?list=PLJVa380lNdCRy0SJYm_O65TWGCSI8VDTz
