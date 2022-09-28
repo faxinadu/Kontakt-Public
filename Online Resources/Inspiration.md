@@ -1,5 +1,9 @@
 # Inspiration
 
+Chromofonic Kontakt Videos
+
+https://www.youtube.com/user/chromofonic
+
 Native Instruments How To Make A Sample Pack
 
 https://blog.native-instruments.com/how-to-make-a-sample-pack/
