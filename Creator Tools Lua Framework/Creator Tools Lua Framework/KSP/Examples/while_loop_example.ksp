@@ -1,0 +1,16 @@
+{***********************************************
+While Loop Example
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: August 09, 2022
+*************************************************}
+
+on init
+    declare $i
+    declare const $items := 100
+    $i := 0
+    while($i<$items)
+        message("Looped " & $i & " times")
+        inc($i)
+    end while
+end on

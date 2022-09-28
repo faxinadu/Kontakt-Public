@@ -1,0 +1,193 @@
+{***********************************************
+Kontakt DEMO - UI level meters, redirect_output, modulation per event
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: May 26, 2021
+*************************************************}
+
+on init
+    message("") {reset the debugger}
+
+    set_ui_color(9000000h) {ui backgorund black}
+    set_ui_height(3) {ui height}
+    make_perfview {make the performance view}
+
+    declare $i {variable for looping}
+    declare $touched_control {tracking touched control}
+
+    {place compressor effects in slots}
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_LIMITER,-1,0,1) {insert}
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_COMPRESSOR,-1,0,$NI_BUS_OFFSET) {bus 0}
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_COMPRESSOR,-1,0,$NI_BUS_OFFSET+1) {bus 1}
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_COMPRESSOR,-1,0,$NI_BUS_OFFSET+2) {bus 2}
+
+    {Place filter effects in slots}
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_FILTER,-1,1,$NI_BUS_OFFSET) {bus 0}
+    set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE,$FILTER_TYPE_SV_LP1,-1,1,$NI_BUS_OFFSET) {bus 0}
+
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_FILTER,-1,1,$NI_BUS_OFFSET+1) {bus 1}
+    set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE,$FILTER_TYPE_SV_BP2,-1,1,$NI_BUS_OFFSET+1) {bus 1}
+
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_FILTER,-1,1,$NI_BUS_OFFSET+2) {bus 2}
+    set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE,$FILTER_TYPE_SV_HP1,-1,1,$NI_BUS_OFFSET+2) {bus 2}
+
+    {delcare filter cutoff knobs}
+    declare ui_knob $filter_1 (0,1000000,1)
+        set_text( $filter_1, "LP" )
+    declare ui_knob $filter_2 (0,1000000,1)
+        set_text( $filter_2, "BP" )
+    declare ui_knob $filter_3 (0,1000000,1)
+        set_text( $filter_3, "HP" )
+
+    {make knobs persistent}
+    make_persistent($filter_1)
+    make_persistent($filter_2)
+    make_persistent($filter_3)
+
+    declare const $num_knobs := 3 {constant for looping}
+
+    declare %knob_array[$num_knobs] {declare knob gui array}
+    declare %bus_array[$num_knobs] {declare bus offset array}
+    
+    {put the variables in the arrays}
+    $i := 0
+    while($i<$num_knobs)
+        %knob_array[$i] := get_ui_id($filter_1)+$i
+        %bus_array[$i] := $NI_BUS_OFFSET+$i
+        inc($i)
+    end while
+
+    {declare the level meters}
+    declare ui_level_meter $meter_bus_0
+    declare ui_level_meter $meter_bus_1
+    declare ui_level_meter $meter_bus_2
+    declare ui_level_meter $meter_insert
+
+    declare %meter_array[$num_knobs] {declare meter gui array}
+
+    {put the variables in the arrays}
+    $i := 0
+    while($i<$num_knobs)
+        %meter_array[$i] := get_ui_id($meter_bus_0)+$i
+        inc($i)
+    end while
+
+    {attach the level meters}
+    attach_level_meter(get_ui_id($meter_bus_0),-1,0,0,0) {bus}
+    attach_level_meter(get_ui_id($meter_bus_1),-1,0,0,1) {bus}
+    attach_level_meter(get_ui_id($meter_bus_2),-1,0,0,2) {bus}
+    attach_level_meter(get_ui_id($meter_insert),-1,0,0,-1) {insert}
+
+    {gui offset and spacing}
+    declare const $knob_x_offset := 100
+    declare const $knob_x_spacing := 125
+    declare const $knob_y_offset := 50
+
+    {instrument name}
+    declare ui_label $name_label(1,1)
+        set_text($name_label,"Best Instrument")
+
+    {place the name}
+    set_control_par(get_ui_id($name_label),$CONTROL_PAR_POS_X,$knob_x_offset*2)
+    set_control_par(get_ui_id($name_label),$CONTROL_PAR_POS_Y,$knob_y_offset-25)
+
+    {place the limiter meter}
+    set_control_par(get_ui_id($meter_insert),$CONTROL_PAR_POS_X,$knob_x_offset*3)
+    set_control_par(get_ui_id($meter_insert),$CONTROL_PAR_POS_Y,$knob_y_offset-25)
+    
+    {place knobs and meters}
+    $i := 0
+    while($i<$num_knobs)
+        set_control_par(%knob_array[$i],$CONTROL_PAR_POS_X,$knob_x_offset+($i*$knob_x_spacing))
+        set_control_par(%knob_array[$i],$CONTROL_PAR_POS_Y,$knob_y_offset)
+
+        set_control_par(%meter_array[$i],$CONTROL_PAR_POS_X,$knob_x_offset+($i*$knob_x_spacing))
+        set_control_par(%meter_array[$i],$CONTROL_PAR_POS_Y,$knob_y_offset*2)
+
+        inc($i)
+    end while
+
+    {compressor range(zoom) to half}
+    $i := 0
+    while($i<$num_knobs)
+        set_control_par(%meter_array[$i],$CONTROL_PAR_RANGE_MIN,500000)
+        set_control_par(%meter_array[$i],$CONTROL_PAR_RANGE_MAX,1000000)
+        inc($i)
+    end while
+
+    {limiter range(zoom) to lots of zoom}
+    set_control_par(get_ui_id($meter_insert),$CONTROL_PAR_RANGE_MIN,10000)
+    set_control_par(get_ui_id($meter_insert),$CONTROL_PAR_RANGE_MAX,0)
+   
+    {set resonance of bandpass filter}
+    set_engine_par( $ENGINE_PAR_RESONANCE,500000,-1,1,$NI_BUS_OFFSET+1)
+end on
+
+{do funky modulation per event note stuff}
+on note
+    while($NOTE_HELD=1)
+        select($EVENT_NOTE)
+            case 0 to 59 {notes 0 to 59}
+                redirect_output($EVENT_ID,$OUTPUT_TYPE_BUS_OUT,0)
+                set_event_par_arr($EVENT_ID,$EVENT_PAR_MOD_VALUE_ID,1000000,0)
+                wait($DURATION_SIXTEENTH)
+                set_event_par_arr($EVENT_ID,$EVENT_PAR_MOD_VALUE_ID,500000,0)
+                wait($DURATION_SIXTEENTH)
+                set_event_par_arr($EVENT_ID,$EVENT_PAR_MOD_VALUE_ID,750000,0)
+                wait($DURATION_SIXTEENTH)
+                set_event_par_arr($EVENT_ID,$EVENT_PAR_MOD_VALUE_ID,25000,0)
+                wait($DURATION_SIXTEENTH)
+            case 60 to 71 {notes 60 to 72}
+                redirect_output($EVENT_ID,$OUTPUT_TYPE_BUS_OUT,1)
+                set_event_par_arr($EVENT_ID,$EVENT_PAR_MOD_VALUE_ID,1000000,0)
+                wait($DURATION_QUARTER)
+                set_event_par_arr($EVENT_ID,$EVENT_PAR_MOD_VALUE_ID,500000,0)
+                wait($DURATION_EIGHTH_TRIPLET)
+                set_event_par_arr($EVENT_ID,$EVENT_PAR_MOD_VALUE_ID,750000,0)
+                wait($DURATION_QUARTER)
+                set_event_par_arr($EVENT_ID,$EVENT_PAR_MOD_VALUE_ID,25000,0)
+                wait($DURATION_EIGHTH_TRIPLET)
+            case 72 to 127 {notes 72 to 127}
+                redirect_output($EVENT_ID,$OUTPUT_TYPE_BUS_OUT,2)
+                set_event_par_arr($EVENT_ID,$EVENT_PAR_MOD_VALUE_ID,1000000,0)
+                wait($DURATION_SIXTEENTH_TRIPLET)
+                set_event_par_arr($EVENT_ID,$EVENT_PAR_MOD_VALUE_ID,500000,0)
+                wait($DURATION_EIGHTH)
+                set_event_par_arr($EVENT_ID,$EVENT_PAR_MOD_VALUE_ID,750000,0)
+                wait($DURATION_SIXTEENTH_TRIPLET)
+                set_event_par_arr($EVENT_ID,$EVENT_PAR_MOD_VALUE_ID,25000,0)
+                wait($DURATION_EIGHTH)    
+        end select
+    end while
+end on
+
+{set the filters}
+function set_filters
+    set_engine_par($ENGINE_PAR_CUTOFF,get_control_par(%knob_array[$touched_control],$CONTROL_PAR_VALUE),-1,1,%bus_array[$touched_control])
+    set_control_par_str(%knob_array[$touched_control],$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_CUTOFF,-1,1,%bus_array[$touched_control]) & " Hz")
+end function
+
+{recall parameters}
+on persistence_changed
+    $i := 0
+    while ($i<$num_knobs)
+        $touched_control := $i
+        call set_filters
+        inc($i)
+    end while
+end on
+
+on ui_control($filter_1) {filter 1}
+    $touched_control := 0
+    call set_filters
+end on
+
+on ui_control($filter_2) {filter 1}
+    $touched_control := 1
+    call set_filters
+end on
+
+on ui_control($filter_3) {filter 1}
+    $touched_control := 2
+    call set_filters
+end on

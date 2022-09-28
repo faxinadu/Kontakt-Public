@@ -1,0 +1,19 @@
+{***********************************************
+Allow Group Simple Example
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: June 15, 2022
+*************************************************}
+
+on init
+    declare ui_menu $group_select
+        add_menu_item($group_select,"Group 1",0)
+        add_menu_item($group_select,"Group 2",1)
+        add_menu_item($group_select,"Group 3",2)
+        add_menu_item($group_select,"Group 4",3)
+end on
+
+on note
+    disallow_group($ALL_GROUPS)
+    allow_group($group_select)
+end on
