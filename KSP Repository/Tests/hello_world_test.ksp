@@ -1,0 +1,30 @@
+{***********************************************
+Hello World Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: March 24, 2022
+*************************************************}
+
+on init
+    make_perfview
+    declare @text
+    @text := "HELLO WORLD"
+    declare ui_label $Hello(1,1)
+    declare ui_label $World(1,1)
+    declare ui_label $hello_world(1,1)
+        set_text($hello_world,@text)
+    declare ui_button $button
+        set_text($button,"HELLO")
+    message(@text)
+    declare ui_menu $menu
+        add_menu_item($menu,"HELLO",0)
+        add_menu_item($menu,"WORLD",1)
+end on
+
+on ui_control($button)
+    if($button=1)
+        set_text($button,"WORLD")
+    else
+        set_text($button,"HELLO")
+    end if
+end on

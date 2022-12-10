@@ -1,0 +1,132 @@
+{***********************************************
+Play Pos Dual Example
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: March 24, 2022
+*************************************************}
+
+on init
+    message( "" )
+    declare const $view_width := 250
+    declare const $view_height := 60
+    set_listener($NI_SIGNAL_TIMER_MS,40000)
+    declare polyphonic $note_a
+    declare $curr_a_event
+    declare polyphonic $note_b
+    declare $curr_b_event
+    make_perfview
+    set_ui_color(9656966h)
+    set_ui_height(6)
+    set_num_user_zones(2)
+        set_zone_par(%NI_USER_ZONE_IDS[0],$ZONE_PAR_HIGH_KEY,127)
+        set_zone_par(%NI_USER_ZONE_IDS[0],$ZONE_PAR_HIGH_VELO,127)
+        set_zone_par(%NI_USER_ZONE_IDS[1],$ZONE_PAR_HIGH_KEY,127)
+        set_zone_par(%NI_USER_ZONE_IDS[1],$ZONE_PAR_HIGH_VELO,127)
+        set_zone_par(%NI_USER_ZONE_IDS[1],$ZONE_PAR_GROUP,1)
+    declare @sample_a_path
+        make_persistent(@sample_a_path)
+    declare @sample_b_path
+        make_persistent(@sample_b_path)
+    declare ui_panel $view_panel
+        set_control_par(get_ui_id($view_panel),$CONTROL_PAR_POS_X,100)
+        set_control_par(get_ui_id($view_panel),$CONTROL_PAR_POS_Y,25)
+    declare ui_mouse_area $drop_a_area
+        set_control_par(get_ui_id($drop_a_area),$CONTROL_PAR_PARENT_PANEL,get_ui_id($view_panel))
+        set_control_par(get_ui_id($drop_a_area),$CONTROL_PAR_POS_Y,25)
+        set_control_par(get_ui_id($drop_a_area),$CONTROL_PAR_HEIGHT,$view_height)
+        set_control_par(get_ui_id($drop_a_area),$CONTROL_PAR_WIDTH,$view_width)
+        set_control_par(get_ui_id($drop_a_area),$CONTROL_PAR_DND_ACCEPT_AUDIO, $NI_DND_ACCEPT_ONE)
+        set_control_par(get_ui_id($drop_a_area),$CONTROL_PAR_RECEIVE_DRAG_EVENTS,1)
+    declare ui_mouse_area $drop_b_area
+        set_control_par(get_ui_id($drop_b_area),$CONTROL_PAR_PARENT_PANEL,get_ui_id($view_panel))
+        set_control_par(get_ui_id($drop_b_area),$CONTROL_PAR_POS_Y,100)
+        set_control_par(get_ui_id($drop_b_area),$CONTROL_PAR_HEIGHT,$view_height)
+        set_control_par(get_ui_id($drop_b_area),$CONTROL_PAR_WIDTH,$view_width)
+        set_control_par(get_ui_id($drop_b_area),$CONTROL_PAR_DND_ACCEPT_AUDIO, $NI_DND_ACCEPT_ONE)
+        set_control_par(get_ui_id($drop_b_area),$CONTROL_PAR_RECEIVE_DRAG_EVENTS,1)
+    declare ui_waveform $wave_a_view(1,1)
+        set_control_par(get_ui_id($wave_a_view),$CONTROL_PAR_PARENT_PANEL,get_ui_id($view_panel))
+        set_control_par(get_ui_id($wave_a_view),$CONTROL_PAR_POS_Y,25)
+        set_control_par(get_ui_id($wave_a_view),$CONTROL_PAR_HEIGHT,$view_height)
+        set_control_par(get_ui_id($wave_a_view),$CONTROL_PAR_WIDTH,$view_width)
+        set_control_par(get_ui_id($wave_a_view),$CONTROL_PAR_HIDE,$HIDE_PART_BG)
+        set_control_par(get_ui_id($wave_a_view),$CONTROL_PAR_BG_ALPHA,255)
+        attach_zone($wave_a_view,%NI_USER_ZONE_IDS[0],0)
+    declare ui_waveform $wave_b_view(1,1)
+        set_control_par(get_ui_id($wave_b_view),$CONTROL_PAR_PARENT_PANEL,get_ui_id($view_panel))
+        set_control_par(get_ui_id($wave_b_view),$CONTROL_PAR_POS_Y,100)
+        set_control_par(get_ui_id($wave_b_view),$CONTROL_PAR_HEIGHT,$view_height)
+        set_control_par(get_ui_id($wave_b_view),$CONTROL_PAR_WIDTH,$view_width)
+        set_control_par(get_ui_id($wave_b_view),$CONTROL_PAR_HIDE,$HIDE_PART_BG)
+        set_control_par(get_ui_id($wave_b_view),$CONTROL_PAR_BG_ALPHA,255)
+        attach_zone($wave_b_view,%NI_USER_ZONE_IDS[1],0)
+end on
+
+function set_a_sample_file
+    wait_async(set_sample(%NI_USER_ZONE_IDS[0],@sample_a_path))
+    wait_async(set_loop_par(%NI_USER_ZONE_IDS[0],0,$LOOP_PAR_MODE,0))
+end function
+
+function set_b_sample_file
+    wait_async(set_sample(%NI_USER_ZONE_IDS[1],@sample_b_path))
+    wait_async(set_loop_par(%NI_USER_ZONE_IDS[1],0,$LOOP_PAR_MODE,1))
+end function
+
+on persistence_changed
+    call set_a_sample_file
+    call set_b_sample_file
+end on
+
+on ui_control ($drop_a_area)
+    if ($NI_MOUSE_EVENT_TYPE = $NI_MOUSE_EVENT_TYPE_DROP)
+        if (num_elements(!NI_DND_ITEMS_AUDIO) = 1)
+            @sample_a_path := !NI_DND_ITEMS_AUDIO[0]
+            call set_a_sample_file
+        end if
+    end if
+end on
+
+on ui_control ($drop_b_area)
+    if ($NI_MOUSE_EVENT_TYPE = $NI_MOUSE_EVENT_TYPE_DROP)
+        if (num_elements(!NI_DND_ITEMS_AUDIO) = 1)
+            @sample_b_path := !NI_DND_ITEMS_AUDIO[0]
+            call set_b_sample_file
+        end if
+    end if
+end on
+
+
+on note
+    ignore_event($ALL_EVENTS)
+
+    $note_a := play_note($EVENT_NOTE,$EVENT_VELOCITY,0,-1)
+    set_event_par_arr($note_a,$EVENT_PAR_ALLOW_GROUP,0,$ALL_GROUPS)
+    set_event_par_arr($note_a,$EVENT_PAR_ALLOW_GROUP,1,0)
+
+    $note_b := play_note($EVENT_NOTE,$EVENT_VELOCITY,0,-1)
+    set_event_par_arr($note_b,$EVENT_PAR_ALLOW_GROUP,0,$ALL_GROUPS)
+    set_event_par_arr($note_b,$EVENT_PAR_ALLOW_GROUP,1,1)
+
+    $curr_a_event := $note_a
+    $curr_b_event := $note_b
+end on
+
+on release
+    note_off($note_a)
+    note_off($note_b)
+end on
+
+on listener
+    if ($NI_SIGNAL_TYPE = $NI_SIGNAL_TIMER_MS)
+        if (event_status($curr_a_event) = $EVENT_STATUS_NOTE_QUEUE)
+            set_ui_wf_property($wave_a_view,$UI_WF_PROP_PLAY_CURSOR,0,get_event_par($curr_a_event,$EVENT_PAR_PLAY_POS))
+        else
+            set_ui_wf_property($wave_a_view,$UI_WF_PROP_PLAY_CURSOR,0,-1)
+        end if
+        if (event_status($curr_b_event) = $EVENT_STATUS_NOTE_QUEUE)
+            set_ui_wf_property($wave_b_view,$UI_WF_PROP_PLAY_CURSOR,0,get_event_par($curr_b_event,$EVENT_PAR_PLAY_POS))
+        else
+            set_ui_wf_property($wave_b_view,$UI_WF_PROP_PLAY_CURSOR,0,-1)
+        end if
+    end if
+end on

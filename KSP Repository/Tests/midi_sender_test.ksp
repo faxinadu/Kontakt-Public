@@ -1,0 +1,35 @@
+{***********************************************
+MIDI Sender Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: September 15, 2021
+*************************************************}
+
+
+on init
+	message("")
+	make_perfview
+	declare ui_switch $runCC
+	declare $value
+	declare $i
+end on
+
+function runCC
+	set_controller($VCC_MONO_AT,80)
+	set_controller($VCC_PITCH_BEND,8191)
+	$i := 0
+	while($i<128)
+		$value := random(0, 127)
+		play_note($i,60,0,50)
+		set_controller($i, $value)
+		set_controller($i, $i)
+		set_controller($i, $value)
+		wait(100000)
+		inc($i)
+	end while
+	$runCC := 0
+end function
+
+on ui_control($runCC)
+	call runCC
+end on

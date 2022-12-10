@@ -1,0 +1,15 @@
+{***********************************************
+Song Position Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: July 15, 2020
+*************************************************}
+
+on init
+    declare ui_label $Pos (2, 1)
+    set_listener($NI_SIGNAL_TIMER_BEAT, 24)
+end on
+
+on listener
+    set_text($Pos, $NI_SONG_POSITION)
+end on

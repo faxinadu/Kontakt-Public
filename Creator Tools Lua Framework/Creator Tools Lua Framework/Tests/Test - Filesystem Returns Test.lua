@@ -5,7 +5,7 @@ Written by: Yaron Eshkar
 Modified: May 04, 2022
 --]]
 
-local path = filesystem.preferred("/Users/yaron.eshkar/Faxi/Repositories/CT Lua/Kontakt-Public/Creator Tools Lua Framework/Creator Tools Lua Framework/NKI/Tests/Same Sample Name/Same Sample Name Samples/d/Melodic Loop  2.wav")
+local path = filesystem.preferred("/Samples/1.wav")
 
 print("filesystem.native(path) " .. filesystem.native(path))
 print("filesystem.rootName(path) " .. filesystem.rootName(path)) 

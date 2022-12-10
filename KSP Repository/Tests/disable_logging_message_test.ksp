@@ -1,0 +1,11 @@
+{***********************************************
+Disable Logging Message Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: October 19, 2022
+*************************************************}
+
+on init
+    disable_logging($NI_LOG_MESSAGE)
+    message( "Should not print this" )
+end on

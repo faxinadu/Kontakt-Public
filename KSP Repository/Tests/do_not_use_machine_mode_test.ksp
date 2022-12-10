@@ -1,0 +1,21 @@
+{***********************************************
+Do Not Use Machine Mode Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: October 26, 2022
+*************************************************}
+
+{Zone in Time Machine group as example}
+
+on init
+    message("")
+    make_perfview
+    declare ui_switch $machine
+    make_persistent($machine)
+end on
+
+on note
+    if($machine=0)
+        dont_use_machine_mode($EVENT_ID)
+    end if
+end on

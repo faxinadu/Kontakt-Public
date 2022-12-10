@@ -1,0 +1,66 @@
+{***********************************************
+Dynamic Decay Example
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: October 19, 2022
+*************************************************}
+
+on init
+    make_perfview
+    message("")
+    set_script_title("Dynamic Decay")
+    set_ui_height_px(100)
+    set_ui_color(9000000h)
+
+    declare ui_slider $amp_decay_slider(0,600000)
+    declare ui_slider $amp_decay_mod_slider(0,100000)
+    declare ui_label $amp_decay_label(1,1)
+    declare ui_label $amp_decay_mod_label(1,1)
+
+    make_persistent($amp_decay_slider)
+    make_persistent($amp_decay_mod_slider)
+    
+    move_control_px($amp_decay_slider,100,20)
+    move_control_px($amp_decay_mod_slider,200,20)
+    move_control_px($amp_decay_label,100,40)
+    move_control_px($amp_decay_mod_label,200,40)
+end on
+
+function set_amp_decay_text
+    set_text($amp_decay_label,"Decay: " & get_engine_par_disp($ENGINE_PAR_DECAY,0,0,1) & "ms")
+end function
+
+function set_amp_decay
+    set_engine_par($ENGINE_PAR_DECAY,$amp_decay_slider,0,0,1)
+    call set_amp_decay_text
+end function
+
+function set_amp_decay_mod_text
+     set_text($amp_decay_mod_label,"Mod: " & $amp_decay_mod_slider/1000 & "%")
+end function
+
+function set_amp_decay_mod
+    call set_amp_decay_mod_text
+end function
+
+on note
+    set_engine_par($ENGINE_PAR_DECAY,$amp_decay_slider + random(-($amp_decay_mod_slider/2),$amp_decay_mod_slider),0,0,1)
+    call set_amp_decay_text
+end on
+
+on release
+    call set_amp_decay
+end on
+
+on persistence_changed
+    call set_amp_decay_text
+    call set_amp_decay_mod_text
+end on
+
+on ui_control($amp_decay_slider)
+    call set_amp_decay
+end on
+
+on ui_control($amp_decay_mod_slider)
+    call set_amp_decay_mod
+end on

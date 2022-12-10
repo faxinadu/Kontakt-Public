@@ -1,0 +1,195 @@
+{***********************************************
+Perc Synth Simple
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: October 19, 2022
+*************************************************}
+
+{White noise as sample}
+
+on init
+    make_perfview
+    message("")
+    set_script_title("Perc Synth")
+    set_ui_height_px(100)
+    set_ui_color(9000000h)
+    set_snapshot_type(2)
+
+    declare const $x_offset := 25
+    declare const $y_offset := 20
+
+    declare ui_label $main_label(1,1)
+        set_text($main_label,"Perc Synth Simple")
+    declare ui_label $amp_label(1,1)
+        set_text($amp_label,"Amp")
+    declare ui_label $filters_label(1,1)
+        set_text($filters_label,"Filters")
+
+    declare ui_value_edit $note(0,127,1)
+        set_control_par_str(get_ui_id($note),$CONTROL_PAR_TEXT,"Note")
+    declare ui_slider $amp_decay_slider(0,600000)
+    declare ui_slider $amp_decay_mod_slider(0,100000)
+    declare ui_slider $hp_slider(0,1000000)
+    declare ui_slider $bp_slider(0,1000000)
+    declare ui_slider $res_slider(0,1000000)
+    declare ui_slider $lp_slider(0,1000000)
+    declare ui_label $amp_decay_label(1,1)
+    declare ui_label $amp_decay_mod_label(1,1)
+    declare ui_label $hp_label(1,1)
+    declare ui_label $bp_label(1,1)
+    declare ui_label $res_label(1,1)
+    declare ui_label $lp_label(1,1)
+
+    make_persistent($note)
+    make_persistent($amp_decay_slider)
+    make_persistent($amp_decay_mod_slider)
+    make_persistent($hp_slider)
+    make_persistent($bp_slider)
+    make_persistent($res_slider)
+    make_persistent($lp_slider)
+
+    set_control_par(get_ui_id($amp_decay_slider),$CONTROL_PAR_AUTOMATION_ID,0)
+    set_control_par(get_ui_id($amp_decay_mod_slider),$CONTROL_PAR_AUTOMATION_ID,1)
+    set_control_par(get_ui_id($hp_slider),$CONTROL_PAR_AUTOMATION_ID,2)
+    set_control_par(get_ui_id($bp_slider),$CONTROL_PAR_AUTOMATION_ID,3)
+    set_control_par(get_ui_id($res_slider),$CONTROL_PAR_AUTOMATION_ID,4)
+    set_control_par(get_ui_id($lp_slider),$CONTROL_PAR_AUTOMATION_ID,5)
+
+    set_control_par_str(get_ui_id($amp_decay_slider),$CONTROL_PAR_AUTOMATION_NAME,"Decay")
+    set_control_par_str(get_ui_id($amp_decay_mod_slider),$CONTROL_PAR_AUTOMATION_NAME,"Decay Mod")
+    set_control_par_str(get_ui_id($hp_slider),$CONTROL_PAR_AUTOMATION_NAME,"HP")
+    set_control_par_str(get_ui_id($bp_slider),$CONTROL_PAR_AUTOMATION_NAME,"BP")
+    set_control_par_str(get_ui_id($res_slider),$CONTROL_PAR_AUTOMATION_NAME,"Res")
+    set_control_par_str(get_ui_id($lp_slider),$CONTROL_PAR_AUTOMATION_NAME,"HP")
+
+    move_control_px($main_label,200+$x_offset,0)
+    move_control_px($note,400+$x_offset,0)
+    move_control_px($amp_label,0+$x_offset,$y_offset)
+    move_control_px($filters_label,200+$x_offset,$y_offset)
+    
+    move_control_px($amp_decay_slider,0+$x_offset,20+$y_offset)
+    move_control_px($amp_decay_mod_slider,100+$x_offset,20+$y_offset)
+    move_control_px($hp_slider,200+$x_offset,20+$y_offset)
+    move_control_px($bp_slider,300+$x_offset,20+$y_offset)
+    move_control_px($res_slider,400+$x_offset,20+$y_offset)
+    move_control_px($lp_slider,500+$x_offset,20+$y_offset)
+
+    move_control_px($amp_decay_label,0+$x_offset,40+$y_offset)
+    move_control_px($amp_decay_mod_label,100+$x_offset,40+$y_offset)
+    move_control_px($hp_label,200+$x_offset,40+$y_offset)
+    move_control_px($bp_label,300+$x_offset,40+$y_offset)
+    move_control_px($res_label,400+$x_offset,40+$y_offset)
+    move_control_px($lp_label,500+$x_offset,40+$y_offset)
+end on
+
+function set_amp_decay_text
+    set_text($amp_decay_label,"Decay: " & get_engine_par_disp($ENGINE_PAR_DECAY,0,0,1) & "ms")
+    set_control_par_str(get_ui_id($amp_decay_slider),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_DECAY,0,0,1) & "ms")
+end function
+
+function set_amp_decay
+    set_engine_par($ENGINE_PAR_DECAY,$amp_decay_slider,0,0,1)
+    call set_amp_decay_text
+end function
+
+function set_amp_decay_mod_text
+     set_text($amp_decay_mod_label,"Mod: " & $amp_decay_mod_slider/1000 & "%")
+     set_control_par_str(get_ui_id($amp_decay_mod_slider),$CONTROL_PAR_LABEL,$amp_decay_mod_slider/1000 & "%")
+end function
+
+function set_amp_decay_mod
+    call set_amp_decay_mod_text
+end function
+
+function set_hp_text
+    set_text($hp_label,"HP: " & get_engine_par_disp($ENGINE_PAR_HP_CUTOFF,-1,0,1))
+    set_control_par_str(get_ui_id($hp_slider),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_HP_CUTOFF,-1,0,1) & "Hz")
+end function
+
+function set_hp
+    set_engine_par($ENGINE_PAR_HP_CUTOFF,$hp_slider,-1,0,1)
+    call set_hp_text
+end function
+
+function set_bp_text
+    set_text($bp_label,"Band: " & get_engine_par_disp($ENGINE_PAR_CUTOFF,-1,1,1))
+    set_control_par_str(get_ui_id($bp_slider),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_CUTOFF,-1,1,1) & "Hz")
+end function
+
+function set_bp
+    set_engine_par($ENGINE_PAR_CUTOFF,$bp_slider,-1,1,1)
+    call set_bp_text
+end function
+
+function set_res_text
+    set_text($res_label,"Res: " & get_engine_par_disp($ENGINE_PAR_RESONANCE,-1,1,1))
+    set_control_par_str(get_ui_id($res_slider),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_RESONANCE,-1,1,1) & "%")
+end function
+
+function set_res
+    set_engine_par($ENGINE_PAR_RESONANCE,$res_slider,-1,1,1)
+    call set_res_text
+end function
+
+function set_lp_text
+    set_text($lp_label,"LP: " & get_engine_par_disp($ENGINE_PAR_LP_CUTOFF,-1,0,1))
+    set_control_par_str(get_ui_id($lp_slider),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_LP_CUTOFF,-1,0,1) & "Hz")
+end function
+
+function set_lp
+    set_engine_par($ENGINE_PAR_LP_CUTOFF,$lp_slider,-1,0,1)
+    call set_lp_text
+end function
+
+function set_note
+    set_zone_par(0,$ZONE_PAR_ROOT_KEY,$note)
+    set_zone_par(0,$ZONE_PAR_HIGH_KEY,$note)
+    set_zone_par(0,$ZONE_PAR_LOW_KEY,$note)
+end function
+
+on persistence_changed
+    call set_hp_text
+    call set_bp_text
+    call set_res_text
+    call set_lp_text
+    call set_amp_decay_text
+    call set_amp_decay_mod_text
+end on
+
+on note
+    set_engine_par($ENGINE_PAR_DECAY,$amp_decay_slider + random(-($amp_decay_mod_slider/2),$amp_decay_mod_slider),0,0,1)
+    call set_amp_decay_text
+end on
+
+on release
+    call set_amp_decay
+end on
+
+on ui_control($note)
+    call set_note
+end on
+
+on ui_control($amp_decay_slider)
+    call set_amp_decay
+end on
+
+on ui_control($amp_decay_mod_slider)
+    call set_amp_decay_mod
+end on
+
+on ui_control($hp_slider)
+    call set_hp
+end on
+
+on ui_control($bp_slider)
+    call set_bp
+end on
+
+on ui_control($res_slider)
+    call set_res
+end on
+
+on ui_control($lp_slider)
+    call set_lp
+end on
+

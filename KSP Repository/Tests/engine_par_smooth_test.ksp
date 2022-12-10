@@ -1,0 +1,31 @@
+{***********************************************
+Engine Par Smooth Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: November 17, 2022
+*************************************************}
+
+on init
+    message("")
+    make_perfview
+    declare ui_slider $tm_smooth_slider(0,1000000)
+    declare ui_label $tm_smooth_label(1,1)
+end on
+
+function set_smooth_label
+    set_text($tm_smooth_label,get_engine_par_disp($ENGINE_PAR_SMOOTH,0,-1,-1) & "%")
+end function
+
+function set_smooth_slider
+    set_engine_par($ENGINE_PAR_SMOOTH,$tm_smooth_slider,0,-1,-1)
+    call set_smooth_label   
+end function
+
+on persistence_changed
+    call set_smooth_label   
+end on
+
+on ui_control($tm_smooth_slider)
+    call set_smooth_slider  
+end on
+

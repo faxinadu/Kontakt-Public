@@ -1,0 +1,25 @@
+{***********************************************
+Flexible Envelope One Shot and Loop Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: October 29, 2022
+*************************************************}
+
+on init
+    message( "" )
+    make_perfview
+    declare ui_switch $loop
+    declare ui_switch $oneshot
+    declare ui_label $loop_label(1,1)
+    declare ui_label $oneshot_label(1,1)
+end on
+
+on ui_control($loop)
+    set_engine_par($ENGINE_PAR_FLEXENV_LOOP,$loop,0,0,-1)
+    set_text($loop_label,get_engine_par($ENGINE_PAR_FLEXENV_LOOP,0,0,-1))
+end on
+
+on ui_control($oneshot)
+    set_engine_par($ENGINE_PAR_FLEXENV_ONESHOT,$oneshot,0,0,-1)
+    set_text($oneshot_label,get_engine_par($ENGINE_PAR_FLEXENV_ONESHOT,0,0,-1))
+end on

@@ -1,0 +1,40 @@
+{***********************************************
+Get Group Mod Target IDs Example
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: October 07, 2022
+*************************************************}
+
+on init
+    make_perfview
+    declare ui_switch $get_group
+    declare ui_switch $get_group_bad
+    declare ui_switch $get_mod_id
+     declare ui_switch $get_mod_id_bad
+    declare ui_switch $get_target_id
+    declare ui_switch $get_target_id_bad
+end on
+
+on ui_control($get_group)
+    message(get_group_id("Group 2"))
+end on
+
+on ui_control($get_group_bad)
+    message(get_group_id("Group 999"))
+end on
+
+on ui_control($get_mod_id)
+    message(get_mod_id(0,"Dragon"))
+end on
+
+on ui_control($get_mod_id_bad)
+    message(get_mod_id(0,"Luigi"))
+end on
+
+on ui_control($get_target_id)
+    message(get_target_id(get_group_id("Group 2"),get_mod_id(0,"Evil"),"Kontakt"))
+end on
+
+on ui_control($get_target_id_bad)
+    message(get_target_id(get_group_id("Group XXX"),get_mod_id(0,"Good"),"Reaktor"))
+end on

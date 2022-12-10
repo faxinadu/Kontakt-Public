@@ -1,0 +1,20 @@
+{***********************************************
+Zone Par Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: October 07, 2022
+*************************************************}
+
+on init
+    make_perfview
+    message("")
+    set_snapshot_type(2) {Must be 2 or 3 or else set_zone_par works only on user zones}
+    declare ui_slider $slider1(0,127)
+    declare ui_label $label(1,1)
+    message(get_num_zones())
+end on
+
+on ui_control($slider1)
+    set_zone_par(get_zone_id(0),$ZONE_PAR_HIGH_KEY,$slider1)
+    set_text($label,get_zone_par(0,$ZONE_PAR_HIGH_KEY))
+end on

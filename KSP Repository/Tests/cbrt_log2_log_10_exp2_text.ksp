@@ -1,0 +1,24 @@
+{***********************************************
+Cbrt Log2 Log10 Exp2
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: November 3, 2022
+*************************************************}
+
+on init
+    declare ~var
+    declare ui_label $cbrt(2,1)
+    declare ui_label $log2(2,1)
+    declare ui_label $log10(2,1)
+    declare ui_label $exp2(2,1)
+    declare ui_slider $slider(0,1000000)
+end on
+
+
+on ui_control($slider)
+    ~var := real($slider)
+    set_text($cbrt,cbrt(~var))
+    set_text($log2,log2(~var))
+    set_text($log10,log10(~var))
+    set_text($exp2,exp2(~var))
+end on

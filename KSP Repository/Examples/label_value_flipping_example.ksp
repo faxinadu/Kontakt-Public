@@ -1,0 +1,62 @@
+{***********************************************
+Label value flipping example
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: July 15, 2020
+*************************************************}
+
+on init
+
+	declare $i
+
+	{Wait Timer}
+	declare $timer := 10000
+	declare $pgs_counter
+	pgs_create_key(CONTROLS, 1)
+	pgs_set_key_val(CONTROLS, 0, 0)
+
+	declare ui_label $label1 (1,1)
+	declare ui_label $label2 (1,1)
+	declare ui_slider $slider1 (0,1000000)
+	declare ui_slider $slider2 (0,1000000)
+
+	declare %labelID[2]
+		%labelID[0] := get_ui_id($label1)
+		%labelID[1] := get_ui_id($label2)
+
+	declare !labelString[2]
+		!labelString[0] := "Hello"
+		!labelString[1] := "World"
+end on
+
+function pgsControl
+  if(pgs_get_key_val(CONTROLS, 0) = 0)
+    $pgs_counter := 100
+    pgs_set_key_val(CONTROLS, 0, 1)
+  end if
+end function
+
+on pgs_changed
+  if(pgs_key_exists(CONTROLS) and pgs_get_key_val(CONTROLS, 0) = 1)
+    while ($pgs_counter > 0)
+      wait($timer)
+      dec($pgs_counter)
+    end while
+  end if
+  $i := 0
+  while ($i<num_elements(%labelID))
+    set_control_par_str(%labelID[$i],$CONTROL_PAR_TEXT,!labelString[$i])
+    inc($i)
+  end while
+  pgs_set_key_val(CONTROLS, 0,0)
+end on
+
+on ui_control($slider1)
+	set_text($label1,$slider1)
+	call pgsControl
+end on
+
+on ui_control($slider2)
+	set_text($label2,$slider2)
+	call pgsControl
+end on

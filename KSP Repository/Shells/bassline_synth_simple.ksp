@@ -1,0 +1,232 @@
+{***********************************************
+Bassline Synth Simple
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: October 19, 2022
+*************************************************}
+
+{Saw or square as sample}
+
+on init
+    make_perfview
+    message("")
+    set_script_title("Bassline Synth")
+    set_ui_height_px(140)
+    set_ui_color(9000000h)
+    set_snapshot_type(2)
+
+    declare const $x_offset := 25
+    declare const $y_offset := 20
+
+    declare ui_label $main_label(1,1)
+        set_text($main_label,"Bass Synth Simple")
+    declare ui_label $amp_label(1,1)
+        set_text($amp_label,"Amp")
+    declare ui_label $filter_label(1,1)
+        set_text($filter_label,"Filter")
+
+    declare ui_slider $amp_decay_slider(0,600000)
+    declare ui_slider $amp_decay_mod_slider(0,50000)
+    declare ui_slider $filter_cut_slider(0,1000000)
+    declare ui_slider $filter_res_slider(0,1000000)
+
+    declare ui_slider $filter_env_slider(0,1000000)
+    declare ui_slider $saturation_slider(0,1000000)
+
+    declare ui_slider $filter_decay_slider(0,600000)
+    declare ui_slider $filter_decay_mod_slider(0,100000)
+    declare ui_label $amp_decay_label(1,1)
+    declare ui_label $amp_decay_mod_label(1,1)
+    declare ui_label $filter_cut_label(1,1)
+    declare ui_label $filter_res_label(1,1)
+
+    declare ui_label $filter_env_label(1,1)
+    declare ui_label $saturation_label(1,1)
+
+    declare ui_label $filter_decay_label(1,1)
+    declare ui_label $filter_decay_mod_label(1,1)
+
+    make_persistent($amp_decay_slider)
+    make_persistent($amp_decay_mod_slider)
+    make_persistent($filter_cut_slider)
+    make_persistent($filter_res_slider)
+    make_persistent($filter_decay_slider)
+    make_persistent($filter_decay_mod_slider)
+
+    set_control_par(get_ui_id($amp_decay_slider),$CONTROL_PAR_AUTOMATION_ID,0)
+    set_control_par(get_ui_id($amp_decay_mod_slider),$CONTROL_PAR_AUTOMATION_ID,1)
+    set_control_par(get_ui_id($filter_cut_slider),$CONTROL_PAR_AUTOMATION_ID,2)
+    set_control_par(get_ui_id($filter_res_slider),$CONTROL_PAR_AUTOMATION_ID,3)
+    set_control_par(get_ui_id($filter_env_slider),$CONTROL_PAR_AUTOMATION_ID,4)
+    set_control_par(get_ui_id($saturation_slider),$CONTROL_PAR_AUTOMATION_ID,5)
+    set_control_par(get_ui_id($filter_decay_slider),$CONTROL_PAR_AUTOMATION_ID,6)
+    set_control_par(get_ui_id($filter_decay_mod_slider),$CONTROL_PAR_AUTOMATION_ID,7)
+
+    set_control_par_str(get_ui_id($amp_decay_slider),$CONTROL_PAR_AUTOMATION_NAME,"A Decay")
+    set_control_par_str(get_ui_id($amp_decay_mod_slider),$CONTROL_PAR_AUTOMATION_NAME,"A Decay Mod")
+    set_control_par_str(get_ui_id($filter_cut_slider),$CONTROL_PAR_AUTOMATION_NAME,"Cut")
+    set_control_par_str(get_ui_id($filter_res_slider),$CONTROL_PAR_AUTOMATION_NAME,"Res")
+    set_control_par_str(get_ui_id($filter_env_slider),$CONTROL_PAR_AUTOMATION_NAME,"Env")
+    set_control_par_str(get_ui_id($saturation_slider),$CONTROL_PAR_AUTOMATION_NAME,"Sat")
+    set_control_par_str(get_ui_id($filter_decay_slider),$CONTROL_PAR_AUTOMATION_NAME,"F Decay")
+    set_control_par_str(get_ui_id($filter_decay_mod_slider),$CONTROL_PAR_AUTOMATION_NAME,"F Decay Mod")
+
+    move_control_px($main_label,200+$x_offset,0)
+    move_control_px($amp_label,0+$x_offset,$y_offset)
+    move_control_px($filter_label,200+$x_offset,$y_offset)
+    
+    move_control_px($amp_decay_slider,0+$x_offset,20+$y_offset)
+    move_control_px($amp_decay_mod_slider,100+$x_offset,20+$y_offset)
+    move_control_px($filter_cut_slider,200+$x_offset,20+$y_offset)
+    move_control_px($filter_res_slider,300+$x_offset,20+$y_offset)
+
+    move_control_px($filter_env_slider,400+$x_offset,20+$y_offset)
+    move_control_px($saturation_slider,500+$x_offset,20+$y_offset)
+
+    move_control_px($amp_decay_label,0+$x_offset,40+$y_offset)
+    move_control_px($amp_decay_mod_label,100+$x_offset,40+$y_offset)
+    move_control_px($filter_cut_label,200+$x_offset,40+$y_offset)
+    move_control_px($filter_res_label,300+$x_offset,40+$y_offset)
+
+    move_control_px($filter_env_label,400+$x_offset,40+$y_offset)
+    move_control_px($saturation_label,500+$x_offset,40+$y_offset)
+
+    move_control_px($filter_decay_slider,200+$x_offset,60+$y_offset)
+    move_control_px($filter_decay_mod_slider,300+$x_offset,60+$y_offset)
+
+    move_control_px($filter_decay_label,200+$x_offset,80+$y_offset)
+    move_control_px($filter_decay_mod_label,300+$x_offset,80+$y_offset)
+end on
+
+function set_amp_decay_text
+    set_text($amp_decay_label,"Decay: " & get_engine_par_disp($ENGINE_PAR_DECAY,0,0,1) & "ms")
+    set_control_par_str(get_ui_id($amp_decay_slider),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_DECAY,0,0,1) & "ms")
+end function
+
+function set_amp_decay
+    set_engine_par($ENGINE_PAR_DECAY,$amp_decay_slider,0,0,1)
+    call set_amp_decay_text
+end function
+
+function set_amp_decay_mod_text
+     set_text($amp_decay_mod_label,"Mod: " & $amp_decay_mod_slider/1000 & "%")
+     set_control_par_str(get_ui_id($amp_decay_mod_slider),$CONTROL_PAR_LABEL,$amp_decay_mod_slider/1000 & "%")
+end function
+
+function set_amp_decay_mod
+    call set_amp_decay_mod_text
+end function
+
+function set_filter_cut_text
+    set_text($filter_cut_label,"Cut: " & get_engine_par_disp($ENGINE_PAR_CUTOFF,0,0,-1) & "Hz")
+    set_control_par_str(get_ui_id($filter_cut_slider),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_CUTOFF,0,0,-1) & "Hz")
+end function
+
+function set_filter_cut
+    set_engine_par($ENGINE_PAR_CUTOFF,$filter_cut_slider,0,0,-1)
+    call set_filter_cut_text
+end function
+
+function set_filter_res_text
+    set_text($filter_res_label,"Res: " & get_engine_par_disp($ENGINE_PAR_RESONANCE,0,0,-1) & "%")
+    set_control_par_str(get_ui_id($filter_res_slider),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_RESONANCE,0,0,-1) & "%")
+end function
+
+function set_filter_res
+    set_engine_par($ENGINE_PAR_RESONANCE,$filter_res_slider,0,0,-1)
+    call set_filter_res_text
+end function
+
+function set_filter_env_text
+    set_text($filter_env_label,"Env: " & get_engine_par_disp($ENGINE_PAR_MOD_TARGET_INTENSITY,0,1,0) & "%")
+    set_control_par_str(get_ui_id($filter_env_slider),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_MOD_TARGET_INTENSITY,0,1,0) & "%")
+end function
+
+function set_filter_env
+    set_engine_par($ENGINE_PAR_MOD_TARGET_INTENSITY,$filter_env_slider,0,1,0)
+    call set_filter_env_text
+end function
+
+function set_saturation_text
+    set_text($saturation_label,"Warm: " & get_engine_par_disp($ENGINE_PAR_SHAPE,-1,0,1) & "%")
+    set_control_par_str(get_ui_id($saturation_slider),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_SHAPE,-1,0,1) & "%")
+end function
+
+function set_saturation
+    set_engine_par($ENGINE_PAR_SHAPE,$saturation_slider,-1,0,1)
+    call set_saturation_text
+end function
+
+function set_filter_decay_text
+    set_text($filter_decay_label,"Decay: " & get_engine_par_disp($ENGINE_PAR_DECAY,0,1,-1)& "ms")
+    set_control_par_str(get_ui_id($filter_decay_slider),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_DECAY,0,1,-1) & "ms")
+end function
+
+function set_filter_decay
+    set_engine_par($ENGINE_PAR_DECAY,$filter_decay_slider,0,1,-1)
+    call set_filter_decay_text
+end function
+
+function set_filter_decay_mod_text
+    set_text($filter_decay_mod_label,"Mod: " & $filter_decay_mod_slider/1000 & "%")
+    set_control_par_str(get_ui_id($filter_decay_mod_slider),$CONTROL_PAR_LABEL,$filter_decay_mod_slider/1000 & "%")
+end function
+
+function set_filter_decay_mod
+    call set_filter_decay_mod_text
+end function
+
+on persistence_changed
+    call set_amp_decay_text
+    call set_amp_decay_mod_text
+    call set_filter_cut_text
+    call set_filter_res_text
+    call set_filter_env_text
+    call set_saturation_text
+    call set_filter_decay_text
+    call set_filter_decay_mod_text
+end on
+
+on note
+    set_engine_par($ENGINE_PAR_DECAY,$amp_decay_slider + random(-($amp_decay_mod_slider/2),$amp_decay_mod_slider),0,0,-1)
+    set_engine_par($ENGINE_PAR_DECAY,$filter_decay_slider + random(-($filter_decay_mod_slider/2),$filter_decay_mod_slider),0,1,-1)
+    call set_amp_decay_text
+    call set_filter_decay_text
+end on
+
+on release
+    call set_amp_decay
+end on
+
+on ui_control($amp_decay_slider)
+    call set_amp_decay
+end on
+
+on ui_control($amp_decay_mod_slider)
+    call set_amp_decay_mod
+end on
+
+on ui_control($filter_cut_slider)
+    call set_filter_cut
+end on
+
+on ui_control($filter_res_slider)
+    call set_filter_res
+end on
+
+on ui_control($filter_env_slider)
+    call set_filter_env
+end on
+
+on ui_control($saturation_slider)
+    call set_saturation
+end on
+
+on ui_control($filter_decay_slider)
+    call set_filter_decay
+end on
+
+on ui_control($filter_decay_mod_slider)
+    call set_filter_decay_mod
+end on
+

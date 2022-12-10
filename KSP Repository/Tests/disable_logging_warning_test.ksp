@@ -1,0 +1,13 @@
+{***********************************************
+Disable Logging Warning Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: October 19, 2022
+*************************************************}
+
+on init
+    disable_logging($NI_LOG_WARNING)
+    declare %test[2]
+    declare $test
+    $test := %test[3]
+end on

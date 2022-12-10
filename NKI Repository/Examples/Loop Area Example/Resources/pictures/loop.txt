@@ -1,0 +1,9 @@
+Has Alpha Channel: yes
+Number of Animations: 6
+Horizontal Animation: yes
+Vertical Resizable: yes
+Horizontal Resizable: yes
+Fixed Top: 0
+Fixed Bottom: 0
+Fixed Left: 0
+Fixed Right: 0

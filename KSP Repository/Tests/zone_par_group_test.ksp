@@ -1,0 +1,35 @@
+{***********************************************
+Zone Par Group Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: October 19, 2022
+*************************************************}
+
+{Place a single sample in a zone, create additional empty group}
+
+on init
+    make_perfview
+    message( "" )
+    set_snapshot_type(2)
+    declare ui_label $label(1,1)
+    declare ui_menu $group
+    declare $i := 0
+    while($i<$NUM_GROUPS)
+        add_menu_item($group,$i,$i)
+        inc($i)
+    end while
+    make_persistent($group)
+end on
+
+function set_group
+    wait_async(set_zone_par(0,$ZONE_PAR_GROUP,$group))
+    set_text($label,"Group: " & get_zone_par(0,$ZONE_PAR_GROUP))
+end function
+
+on persistence_changed
+    call set_group
+end on
+
+on ui_control($group)
+    call set_group
+end on

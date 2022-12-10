@@ -1,0 +1,20 @@
+{***********************************************
+Set Automation Value Example
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: August 20, 2021
+*************************************************}
+
+on init
+    declare ui_slider $slider (0,1000000)
+    declare $sliderID
+    $sliderID := get_ui_id($slider)
+    set_control_par($sliderID,$CONTROL_PAR_AUTOMATION_ID,0)
+    set_control_par_str($sliderID,$CONTROL_PAR_AUTOMATION_NAME,"slider")
+end on
+
+on ui_control($slider)
+    { In this example if this line is present, the automation value reported to the host will be in this case 0-100% }
+    { If this line is commented out, the actual declared slider range will be the automation value reported to the host, in this case 0-1000000}
+    set_control_par_str($sliderID,$CONTROL_PAR_LABEL,real_to_int(int_to_real($slider) / 10000.0) & "%")
+end on

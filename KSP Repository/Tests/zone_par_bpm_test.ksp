@@ -1,0 +1,106 @@
+{***********************************************
+Zone Par BPM Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: October 26, 2022
+*************************************************}
+
+on init
+    message("")
+    make_perfview
+    set_ui_height(2)
+
+    set_snapshot_type( 3 )
+
+    declare const $num_controls := 8
+    declare const $x_spacing := 100
+    declare const $y_spacing := 20
+
+    declare $i
+    declare $touched
+
+    declare ui_value_edit $bpm_slider_wav(0,400,1)
+        set_text($bpm_slider_wav,"wav")
+    declare ui_value_edit $bpm_slider_rex(0,400,1)
+        set_text($bpm_slider_rex,"rex")
+    declare ui_value_edit $bpm_slider_acid(0,400,1)
+        set_text($bpm_slider_acid,"acid")
+    declare ui_value_edit $bpm_slider_aiff(0,400,1)
+        set_text($bpm_slider_aiff,"aiff")
+
+    declare ui_label $bpm_label_wav(1,1)
+    declare ui_label $bpm_label_rex(1,1)
+    declare ui_label $bpm_label_acid(1,1)
+    declare ui_label $bpm_label_aiff(1,1)
+
+    declare %control_id[$num_controls]
+
+    declare ui_panel $main_panel
+
+    declare !name_string[$num_controls/2]
+        !name_string[0] := "WAV: "
+        !name_string[1] := "REX: "
+        !name_string[2] := "ACID: "
+        !name_string[3] := "AIFF: "
+
+    make_persistent($bpm_slider_wav)
+    make_persistent($bpm_slider_rex)
+    make_persistent($bpm_slider_acid)
+    make_persistent($bpm_slider_aiff)
+
+    $i := 0
+    while($i<$num_controls)
+        %control_id[$i] := get_ui_id($bpm_slider_wav)+$i
+        set_control_par(%control_id[$i],$CONTROL_PAR_PARENT_PANEL,get_ui_id($main_panel))
+        if($i<$num_controls/2)
+            set_control_par(%control_id[$i],$CONTROL_PAR_POS_X,$x_spacing*$i)
+            set_control_par(%control_id[$i],$CONTROL_PAR_AUTOMATION_ID,$i)
+            set_control_par_str(%control_id[$i],$CONTROL_PAR_AUTOMATION_NAME,!name_string[$i])
+        else
+            set_control_par(%control_id[$i],$CONTROL_PAR_POS_X,$x_spacing*($i-($num_controls/2)))
+            set_control_par(%control_id[$i],$CONTROL_PAR_POS_Y,$y_spacing)
+        end if
+        inc($i)
+    end while
+
+    move_control_px($main_panel,$x_spacing,$y_spacing)
+end on
+
+function set_bpm_label
+    set_control_par_str(%control_id[$touched+($num_controls/2)],$CONTROL_PAR_TEXT,!name_string[$touched] & get_zone_par($touched,$ZONE_PAR_BPM)/1000)
+    set_control_par_str(%control_id[$touched],$CONTROL_PAR_LABEL,!name_string[$touched] & get_zone_par($touched,$ZONE_PAR_BPM)/1000)
+end function
+
+function set_bpm_slider
+    wait_async(set_zone_par($touched,$ZONE_PAR_BPM,get_control_par(%control_id[$touched],$CONTROL_PAR_VALUE)*1000))
+    call set_bpm_label
+end function
+
+on persistence_changed
+    $touched := 0
+    while ($touched<$num_controls/2)
+        call set_bpm_label
+        inc($touched)
+    end while
+end on
+
+on ui_control($bpm_slider_wav)
+    $touched := 0 
+    call set_bpm_slider
+end on
+
+on ui_control($bpm_slider_rex)
+    $touched := 1 
+    call set_bpm_slider
+end on
+
+on ui_control($bpm_slider_acid)
+    $touched := 2 
+    call set_bpm_slider
+end on
+
+on ui_control($bpm_slider_aiff)
+    $touched := 3 
+    call set_bpm_slider
+end on
+

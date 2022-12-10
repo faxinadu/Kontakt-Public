@@ -1,0 +1,48 @@
+{***********************************************
+Modulation Depth Ranges Example
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: April 22, 2022
+*************************************************}
+
+on init
+    message("")
+    declare $i
+    declare ui_slider $mod_depth_slider(0,1000000)
+        make_persistent($mod_depth_slider)
+    declare ui_label $mod_depth_label(1,1)
+    declare ui_slider $velocity_range_slider(0,1000000)
+        make_persistent($velocity_range_slider)
+    declare ui_label $velocity_range_label(1,1)
+    declare ui_slider $pitch_range_slider(0,1000000)
+        make_persistent($pitch_range_slider)
+    declare ui_label $pitch_range_label(1,1)
+end on
+
+function set_controls
+    $i := 0
+    while($i<$NUM_GROUPS)
+        set_engine_par($ENGINE_PAR_MOD_TARGET_INTENSITY,real_to_int(int_to_real($mod_depth_slider) * (int_to_real($velocity_range_slider) / 1000000.0)),$i,16,-1) {velocity on default new nki}
+        set_engine_par($ENGINE_PAR_MOD_TARGET_INTENSITY,real_to_int(int_to_real($mod_depth_slider) * (int_to_real($pitch_range_slider) / 1000000.0)),$i,17,-1) {pitchbend on default new nki}
+        inc($i)
+    end while
+    set_text($mod_depth_label,"Depth: " & $mod_depth_slider / 10000 & "%")
+    set_text($velocity_range_label,"VRange: " & $velocity_range_slider / 10000 & "%")
+    set_text($pitch_range_label,"PRange: " & $pitch_range_slider / 10000 & "%")
+end function
+
+on persistence_changed
+    call set_controls
+end on
+
+on ui_control($mod_depth_slider)
+    call set_controls
+end on
+
+on ui_control($velocity_range_slider)
+    call set_controls
+end on
+
+on ui_control($pitch_range_slider)
+    call set_controls
+end on

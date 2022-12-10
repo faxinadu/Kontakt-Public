@@ -1,0 +1,15 @@
+{***********************************************
+Attach Level Meter Example
+Author: Native Instruments
+Written by: Native Instruments
+Modified: December 5, 2022
+*************************************************}
+
+on init
+    message("")
+    make_perfview
+    declare ui_level_meter $Level1
+    declare ui_level_meter $Level2
+    attach_level_meter (get_ui_id($Level1),-1,-1,0,-1)
+    attach_level_meter (get_ui_id($Level2),-1,-1,1,-1)
+end on
