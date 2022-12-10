@@ -1,0 +1,113 @@
+{***********************************************
+Single Playable and Dummy Group Example
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: November 13, 2022
+*************************************************}
+
+on init
+    message("")
+    make_perfview
+    set_ui_height_px(50)
+    set_snapshot_type(3)
+
+    declare $i
+    declare $current_selected_zone
+    declare const $zone_count := 27
+    declare const $sampleset_count := 3
+
+    declare ui_menu $zone_select
+    declare !sample_names[$zone_count]
+        read_persistent_var(!sample_names)
+        load_array(!sample_names,2)
+    $i := 0
+    while($i<$zone_count)
+        add_menu_item($zone_select,"",$i)
+        set_zone_par($i,$ZONE_PAR_GROUP,0)
+        inc($i)
+    end while
+    make_persistent($zone_select)
+
+    declare ui_menu $sampleset_select
+    declare !sampleset_names[$zone_count]
+        read_persistent_var(!sampleset_names)
+        load_array(!sampleset_names,2)
+    $i := 0
+    while($i<$sampleset_count)
+        add_menu_item($sampleset_select,!sampleset_names[$i],$i)
+        inc($i)
+    end while
+    make_persistent($sampleset_select)
+
+    declare %sampleset_zone_count[$sampleset_count]
+    read_persistent_var(%sampleset_zone_count)
+    load_array(%sampleset_zone_count,2)
+
+    declare %zone_count_offset[$sampleset_count]
+    read_persistent_var(%zone_count_offset)
+    load_array(%zone_count_offset,2)
+
+    declare ui_slider $filter_cutoff_slider(0,1000000)
+        make_persistent($filter_cutoff_slider)
+    declare ui_label $filter_cutoff_label(1,1)
+
+    move_control_px($zone_select,100,0)
+    move_control_px($sampleset_select,200,0)
+    move_control_px($filter_cutoff_slider,300,0)
+    move_control_px($filter_cutoff_label,400,0)
+
+end on
+
+function set_played_zone
+    set_zone_par($current_selected_zone,$ZONE_PAR_GROUP,0)
+    set_zone_par($zone_select+%zone_count_offset[$sampleset_select],$ZONE_PAR_GROUP,1)
+    $current_selected_zone := $zone_select+%zone_count_offset[$sampleset_select]
+end function
+
+function set_sampleset
+    $i := 0
+    while($i<$zone_count)
+        set_menu_item_visibility(get_ui_id($zone_select),$i,0)
+        inc($i)
+    end while
+
+    $i := 0
+    while($i<%sampleset_zone_count[$sampleset_select])
+        set_menu_item_visibility(get_ui_id($zone_select),$i,1)
+        set_menu_item_str(get_ui_id($zone_select),$i,!sample_names[$i+%zone_count_offset[$sampleset_select]])
+        inc($i)
+    end while
+
+    call set_played_zone
+end function
+
+function set_filter_cutoff_label
+    set_text($filter_cutoff_label,"Cut: " & get_engine_par_disp($ENGINE_PAR_CUTOFF,1,0,-1) & " Hz")
+end function
+
+function set_filter_cutoff_slider
+    set_engine_par($ENGINE_PAR_CUTOFF,$filter_cutoff_slider,1,0,-1)
+    call set_filter_cutoff_label
+end function
+
+on persistence_changed
+    call set_sampleset
+    call set_filter_cutoff_label
+end on
+
+on ui_control($zone_select)
+    call set_played_zone
+end on
+
+on ui_control($sampleset_select)
+    call set_sampleset
+end on
+
+on ui_control($filter_cutoff_slider)
+    call set_filter_cutoff_slider
+end on
+
+on note
+    disallow_group($ALL_GROUPS)
+    allow_group(1)
+end on

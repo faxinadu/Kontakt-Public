@@ -1,0 +1,10 @@
+{***********************************************
+Load Performance View Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: July 03, 2022
+*************************************************}
+
+on init
+   load_performance_view("instrtument")
+end on

@@ -1,0 +1,45 @@
+{***********************************************
+Button Selector Example
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: October 29, 2022
+*************************************************}
+
+on init
+    message( "" )
+    make_perfview
+    declare $i
+    declare $selected
+        make_persistent($selected)
+    declare ui_button $select
+    declare ui_label $label(1,1)
+    declare !selected_string[3]
+        !selected_string[0] := "Chorus"
+        !selected_string[1] := "Delay"
+        !selected_string[2] := "Reverb"
+    declare %effect_type[3]
+        %effect_type[0] := $EFFECT_TYPE_CHORUS
+        %effect_type[1] := $EFFECT_TYPE_DELAY
+        %effect_type[2] := $EFFECT_TYPE_REVERB
+end on
+
+function set_selection
+    set_text($label,!selected_string[$selected])
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE,%effect_type[$selected],-1,0,1)
+end function
+
+on persistence_changed
+    call set_selection
+end on
+
+on ui_control($select)
+    if($select=1)
+        if($selected=2)
+            $selected := 0
+        else
+            inc($selected)
+        end if
+        call set_selection
+        $select := 0
+    end if
+end on

@@ -1,0 +1,35 @@
+{***********************************************
+Play Multiple Groups Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: July 1, 2022
+*************************************************}
+
+on init
+    message("")
+    make_perfview
+    declare $i
+    declare ui_slider $group_count(1,481)
+    declare ui_label $group_label(2,1)
+end on
+
+function set_label
+    set_text($group_label,"samples played: " & $group_count)
+end function
+
+on persistence_changed
+    call set_label
+end on
+
+on ui_control($group_count)
+    call set_label
+end on
+
+on note
+    disallow_group($ALL_GROUPS)
+    $i := 0
+    while($i<$group_count)
+        allow_group($i)
+        inc($i)
+    end while
+end on

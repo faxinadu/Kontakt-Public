@@ -1,0 +1,159 @@
+{***********************************************
+Listener Callback 40 Knobs Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: July 15, 2020
+*************************************************}
+
+on init
+
+	make_perfview
+	set_ui_height(8)
+
+	declare ui_knob $Test1 (0,99,1)
+	declare ui_knob $Test2 (0,99,1)
+	declare ui_knob $Test3 (0,99,1)
+	declare ui_knob $Test4 (0,99,1)
+	declare ui_knob $Test5 (0,99,1)
+	declare ui_knob $Test6 (0,99,1)
+	declare ui_knob $Test7 (0,99,1)
+	declare ui_knob $Test8 (0,99,1)
+	declare ui_knob $Test9 (0,99,1)
+	declare ui_knob $Test10 (0,99,1)
+	declare ui_knob $Test11 (0,99,1)
+	declare ui_knob $Test12 (0,99,1)
+	declare ui_knob $Test13 (0,99,1)
+	declare ui_knob $Test14 (0,99,1)
+	declare ui_knob $Test15 (0,99,1)
+	declare ui_knob $Test16 (0,99,1)
+	declare ui_knob $Test17 (0,99,1)
+	declare ui_knob $Test18 (0,99,1)
+	declare ui_knob $Test19 (0,99,1)
+	declare ui_knob $Test20 (0,99,1)
+	declare ui_knob $Test21 (0,99,1)
+	declare ui_knob $Test22 (0,99,1)
+	declare ui_knob $Test23 (0,99,1)
+	declare ui_knob $Test24 (0,99,1)
+	declare ui_knob $Test25 (0,99,1)
+	declare ui_knob $Test26 (0,99,1)
+	declare ui_knob $Test27 (0,99,1)
+	declare ui_knob $Test28 (0,99,1)
+	declare ui_knob $Test29 (0,99,1)
+	declare ui_knob $Test30 (0,99,1)
+	declare ui_knob $Test31 (0,99,1)
+	declare ui_knob $Test32 (0,99,1)
+	declare ui_knob $Test33 (0,99,1)
+	declare ui_knob $Test34 (0,99,1)
+	declare ui_knob $Test35 (0,99,1)
+	declare ui_knob $Test36 (0,99,1)
+	declare ui_knob $Test37 (0,99,1)
+	declare ui_knob $Test38 (0,99,1)
+	declare ui_knob $Test39 (0,99,1)
+	declare ui_knob $Test40 (0,99,1)
+
+	declare ui_switch $mode
+
+	declare $direction
+	declare $tick_counter
+	set_listener($NI_SIGNAL_TIMER_MS,10000)
+
+end on
+
+on listener
+	if ($NI_SIGNAL_TYPE = $NI_SIGNAL_TIMER_MS)
+		if ($mode=0)
+			if ($direction = 0)
+				inc($tick_counter)
+			else
+				dec($tick_counter)
+			end if
+			$Test1 := $tick_counter
+			$Test2 := $tick_counter
+			$Test3 := $tick_counter
+			$Test4 := $tick_counter
+			$Test5 := $tick_counter
+			$Test6 := $tick_counter
+			$Test7 := $tick_counter
+			$Test8 := $tick_counter
+			$Test9 := $tick_counter
+			$Test10 := $tick_counter
+			$Test11 := $tick_counter
+			$Test12 := $tick_counter
+			$Test13 := $tick_counter
+			$Test14 := $tick_counter
+			$Test15 := $tick_counter
+			$Test16 := $tick_counter
+			$Test17 := $tick_counter
+			$Test18 := $tick_counter
+			$Test19 := $tick_counter
+			$Test20 := $tick_counter
+			$Test21 := $tick_counter
+			$Test22 := $tick_counter
+			$Test23 := $tick_counter
+			$Test24 := $tick_counter
+			$Test25 := $tick_counter
+			$Test26 := $tick_counter
+			$Test27 := $tick_counter
+			$Test28 := $tick_counter
+			$Test29 := $tick_counter
+			$Test30 := $tick_counter
+			$Test31 := $tick_counter
+			$Test32 := $tick_counter
+			$Test33 := $tick_counter
+			$Test34 := $tick_counter
+			$Test35 := $tick_counter
+			$Test36 := $tick_counter
+			$Test37 := $tick_counter
+			$Test38 := $tick_counter
+			$Test39 := $tick_counter
+			$Test40 := $tick_counter
+			if ($tick_counter = 99)
+				$direction := 1
+			end if
+			if ($tick_counter = 0)
+				$direction := 0
+			end if
+		else
+			$Test1 := random(0,99)
+			$Test2 := random(0,99)
+			$Test3 := random(0,99)
+			$Test4 := random(0,99)
+			$Test5 := random(0,99)
+			$Test6 := random(0,99)
+			$Test7 := random(0,99)
+			$Test8 := random(0,99)
+			$Test9 := random(0,99)
+			$Test10 := random(0,99)
+			$Test11 := random(0,99)
+			$Test12 := random(0,99)
+			$Test13 := random(0,99)
+			$Test14 := random(0,99)
+			$Test15 := random(0,99)
+			$Test16 := random(0,99)
+			$Test17 := random(0,99)
+			$Test18 := random(0,99)
+			$Test19 := random(0,99)
+			$Test20 := random(0,99)
+			$Test21 := random(0,99)
+			$Test22 := random(0,99)
+			$Test23 := random(0,99)
+			$Test24 := random(0,99)
+			$Test25 := random(0,99)
+			$Test26 := random(0,99)
+			$Test27 := random(0,99)
+			$Test28 := random(0,99)
+			$Test29 := random(0,99)
+			$Test30 := random(0,99)
+			$Test31 := random(0,99)
+			$Test32 := random(0,99)
+			$Test33 := random(0,99)
+			$Test34 := random(0,99)
+			$Test35 := random(0,99)
+			$Test36 := random(0,99)
+			$Test37 := random(0,99)
+			$Test38 := random(0,99)
+			$Test39 := random(0,99)
+			$Test40 := random(0,99)
+		end if
+	end if
+end on 

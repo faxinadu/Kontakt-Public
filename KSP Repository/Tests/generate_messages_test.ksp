@@ -1,0 +1,14 @@
+{***********************************************
+Generate Messages Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: December 2, 2021
+*************************************************}
+
+on init
+	declare $i := 0
+	while ($i<1000)
+		message($i)
+		inc($i)
+	end while		
+end on

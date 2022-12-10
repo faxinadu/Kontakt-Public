@@ -1,0 +1,41 @@
+{***********************************************
+Flexible Envelope Slope Mod Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: October 29, 2022
+*************************************************}
+
+on init
+    message( "" )
+    set_listener($NI_SIGNAL_TIMER_MS, 1000000 )
+    make_perfview
+    declare ui_slider $amp_decay_slope_slider(0,1000000)
+    declare ui_label $amp_decay_slope_label(1,1)
+    make_persistent($amp_decay_slope_slider)
+    declare ui_button $play
+end on
+
+function set_amp_decay_slope_label
+    set_text($amp_decay_slope_label,"Slope: " & (1000000 - get_engine_par($ENGINE_PAR_MOD_TARGET_INTENSITY,0,18,-1))/10000 & "%")
+end function
+
+function set_amp_decay_slope_slider
+    set_engine_par($ENGINE_PAR_MOD_TARGET_INTENSITY,1000000 - $amp_decay_slope_slider,0,18,-1)
+    call set_amp_decay_slope_label
+end function
+
+on persistence_changed
+    call set_amp_decay_slope_label
+end on
+
+on ui_control($amp_decay_slope_slider)
+    call set_amp_decay_slope_slider
+end on
+
+on listener
+    if($play=1)
+        play_note(84,127,0,1000000)
+    end if
+end on
+
+

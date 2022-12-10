@@ -1,0 +1,20 @@
+{***********************************************
+Get Control Par Real Arr Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: October 26, 2022
+*************************************************}
+
+on init
+    message("")
+    make_perfview
+    set_ui_height(3)
+    declare ui_xy ?xy[2]
+    declare ui_label $label_x(4,1)
+    declare ui_label $label_y(4,1)
+end on
+
+on ui_control(?xy)
+    set_text($label_x, "X:" & ?xy[0] & " Y: " & ?xy[1])
+    set_text($label_y, "X:" & get_control_par_real_arr(get_ui_id(?xy),$CONTROL_PAR_VALUE,0) & " Y: " & get_control_par_real_arr(get_ui_id(?xy),$CONTROL_PAR_VALUE,1))
+end on

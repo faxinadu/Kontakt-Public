@@ -1,0 +1,26 @@
+{***********************************************
+Listener Callback Beat and MS Return Example
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: March 10, 2022
+*************************************************}
+
+on init
+    set_listener($NI_SIGNAL_TIMER_BEAT,2)
+    set_listener($NI_SIGNAL_TIMER_MS,100000)
+    declare ui_label $beat(1,1)
+    declare ui_label $ms(1,1)
+    declare $beat_count := 0
+    declare $ms_count := 0
+end on
+
+on listener
+    if ($NI_SIGNAL_TYPE = $NI_SIGNAL_TIMER_BEAT)
+        set_text($beat,$beat_count)
+        inc($beat_count)
+    end if
+    if ($NI_SIGNAL_TYPE = $NI_SIGNAL_TIMER_MS)
+        set_text($ms,$ms_count)
+        inc($ms_count)
+    end if
+end on

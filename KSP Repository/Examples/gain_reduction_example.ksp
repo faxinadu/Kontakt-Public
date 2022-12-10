@@ -1,0 +1,26 @@
+{***********************************************
+Gain Reduction Example
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: December 5, 2022
+*************************************************}
+
+on init
+    make_perfview
+    set_listener($NI_SIGNAL_TIMER_MS,1000000)
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_LIMITER,-1,0,2) {main}
+    declare ui_switch $switch
+    declare ui_level_meter $meter_main
+    attach_level_meter(get_ui_id($meter_main),-1,0,0,-2) {main}
+    declare $note
+end on
+
+function trigger_note
+    if($switch=1)
+        $note := play_note(36,127,0,10000)
+    end if
+end function
+
+on listener
+    call trigger_note
+end on

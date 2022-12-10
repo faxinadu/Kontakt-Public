@@ -1,0 +1,27 @@
+{***********************************************
+Bitwise XOR Test
+Author: Native Instruments
+Written by: Evil Dragon
+Modified: November 3, 2022
+*************************************************}
+
+on init
+    declare ui_button $1
+    declare ui_button $2
+end on
+
+on ui_control ($1)
+    if ($1 .xor. $2 = 1)
+        message("Only one of the buttons is active")
+    else
+        message("None or both buttons are active")
+    end if
+end on
+
+on ui_control ($2)
+    if ($1 .xor. $2 = 1)
+        message("Only one of the buttons is active")
+    else
+        message("None or both buttons are active")
+    end if
+end on

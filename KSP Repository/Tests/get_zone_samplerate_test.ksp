@@ -1,0 +1,20 @@
+{***********************************************
+Get Zone Samplerate Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: October 10, 2022
+*************************************************}
+
+on init
+    message("")
+    make_perfview
+    declare ui_label $label1(1,1)
+    declare ui_label $label2(1,1)
+    declare ui_label $label3(1,1)
+    declare ui_label $label4(1,1)
+    set_text($label1,get_zone_par(0,$ZONE_PAR_SAMPLE_RATE))
+    set_text($label2,get_zone_par(1,$ZONE_PAR_SAMPLE_RATE))
+    set_text($label3,get_zone_par(2,$ZONE_PAR_SAMPLE_RATE))
+    set_text($label4,get_zone_par(3,$ZONE_PAR_SAMPLE_RATE))
+end on
+

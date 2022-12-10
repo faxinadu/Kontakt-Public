@@ -1,0 +1,31 @@
+{***********************************************
+Mod Target Intesity Example
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: April 21, 2022
+*************************************************}
+
+on init
+    message("")
+    declare $i
+    declare ui_slider $slider(0,1000000)
+        make_persistent($slider)
+    declare ui_label $label(1,1)
+end on
+
+function set_controls
+    $i := 0
+    while($i<$NUM_GROUPS)
+        set_engine_par($ENGINE_PAR_MOD_TARGET_INTENSITY,$slider,$i,16,-1) {velocity on default new nki}
+        inc($i)
+    end while
+     set_text($label,"Velocity: " & $slider / 10000 & "%")
+end function
+
+on persistence_changed
+    call set_controls
+end on
+
+on ui_control($slider)
+    call set_controls
+end on

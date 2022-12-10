@@ -1,0 +1,36 @@
+{***********************************************
+Get Zone Status Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: October 10, 2022
+*************************************************}
+
+on init
+    message("")
+    make_perfview
+    declare $status
+    declare ui_switch $get_status
+    declare ui_label $label1(1,1)
+end on
+
+function status_check
+    $status := get_zone_status(0)
+    select($status)
+        case $NI_ZONE_STATUS_EMPTY
+           set_text($label1,"Empty")
+        case $NI_ZONE_STATUS_LOADED
+           set_text($label1,"Loaded")
+        case $NI_ZONE_STATUS_PURGED
+           set_text($label1,"Purged")
+        case $NI_ZONE_STATUS_IGNORED
+           set_text($label1,"Ignored")
+    end select
+end function
+
+on persistence_changed
+    call status_check
+end on
+
+on ui_control($get_status)
+    call status_check
+end on

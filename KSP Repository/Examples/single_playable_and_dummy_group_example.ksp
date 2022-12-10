@@ -1,0 +1,49 @@
+{***********************************************
+Single Playable and Dummy Group Example
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: November 13, 2022
+*************************************************}
+
+on init
+    message("")
+    make_perfview
+    set_snapshot_type(3)
+
+    declare $i
+    declare $current_selected_zone
+    declare ui_menu $zone_select
+    declare const $zone_count := 6
+        
+    declare !sample_names[$zone_count]
+        read_persistent_var(!sample_names)
+        load_array(!sample_names,2)
+
+    $i := 0
+    while($i<$zone_count)
+        add_menu_item($zone_select,!sample_names[$i],$i)
+        set_zone_par($i,$ZONE_PAR_GROUP,0)
+        inc($i)
+    end while
+
+    make_persistent($zone_select)
+end on
+
+function set_played_zone
+    set_zone_par($current_selected_zone,$ZONE_PAR_GROUP,0)
+    set_zone_par($zone_select,$ZONE_PAR_GROUP,1)
+    $current_selected_zone := $zone_select
+end function
+
+on persistence_changed
+    call set_played_zone
+end on
+
+on ui_control($zone_select)
+    call set_played_zone
+end on
+
+on note
+    disallow_group($ALL_GROUPS)
+    allow_group(1)
+end on

@@ -1,0 +1,10 @@
+{***********************************************
+Modulo Float Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: November 3, 2022
+*************************************************}
+
+on init
+    message(4.5 mod 2.0)
+end on

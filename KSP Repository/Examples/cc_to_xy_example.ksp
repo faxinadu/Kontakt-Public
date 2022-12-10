@@ -1,0 +1,25 @@
+{***********************************************
+CC to XY Example
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: August 05, 2022
+*************************************************}
+
+on init
+    declare ui_xy ?xypad[2]
+    declare $xyID
+    $xyID := get_ui_id(?xypad)
+    declare ui_value_edit $x_cc(0,127,1)
+    declare ui_value_edit $y_cc(0,127,1)
+    make_persistent($x_cc)
+    make_persistent($y_cc)
+end on
+
+on controller
+    if($CC_NUM=$x_cc)
+        set_control_par_arr($xyID,$CONTROL_PAR_VALUE,%CC[$CC_NUM],0)
+    end if
+    if($CC_NUM=$y_cc)
+        set_control_par_arr($xyID,$CONTROL_PAR_VALUE,%CC[$CC_NUM],1)
+    end if
+end on

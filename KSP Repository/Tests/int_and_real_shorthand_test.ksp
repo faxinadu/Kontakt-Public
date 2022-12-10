@@ -1,0 +1,10 @@
+{***********************************************
+Int and Real Shorthand Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: November 3, 2022
+*************************************************}
+
+on init
+    message(int(4.5) & " -- " & real(10)/20.0)
+end on

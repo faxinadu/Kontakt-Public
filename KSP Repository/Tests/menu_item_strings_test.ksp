@@ -1,0 +1,20 @@
+{***********************************************
+Menu Item Strings Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: November 13, 2022
+*************************************************}
+
+on init
+    declare ui_menu $menu
+    declare $i
+    declare !menu_item_strings[3]
+        !menu_item_strings[0] := "entry 1"
+        !menu_item_strings[1] := "entry 2"
+        !menu_item_strings[2] := "entry 3"
+
+    while($i<3)
+        add_menu_item($menu,!menu_item_strings[$i],$i)
+        inc($i)
+    end while
+end on

@@ -1,0 +1,13 @@
+{***********************************************
+Get Zone ID Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: November 30, 2022
+*************************************************}
+
+on init
+    declare $my_id
+    declare ui_label $id_label(1,1)
+    $my_id := get_zone_id(3) 
+    set_text($id_label,$my_id)
+end on

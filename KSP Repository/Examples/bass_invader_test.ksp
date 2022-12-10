@@ -1,0 +1,41 @@
+{***********************************************
+Bass Invader Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: January 31, 2022
+*************************************************}
+
+on init
+    make_perfview
+    declare ui_switch $change_params
+    declare ui_switch $play
+    set_listener($NI_SIGNAL_TIMER_BEAT,1)
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE, $EFFECT_TYPE_BASSINVADER, -1, 1, 1)
+end on
+
+on ui_control($change_params)
+    if($change_params=1)
+        set_engine_par($ENGINE_PAR_BASSINVADER_LO_CUT, random(0,1), -1, 1, 1)
+        set_engine_par($ENGINE_PAR_BASSINVADER_MID_CONTOUR, random(0,1), -1, 1, 1)
+        set_engine_par($ENGINE_PAR_BASSINVADER_HI_BOOST, random(0,1), -1, 1, 1)
+        set_engine_par($ENGINE_PAR_BASSINVADER_VOLUME, random(0,1000000), -1, 1, 1)
+        set_engine_par($ENGINE_PAR_BASSINVADER_BOOST, random(0,1000000), -1, 1, 1)
+        set_engine_par($ENGINE_PAR_BASSINVADER_MASTER, random(0,1000000), -1, 1, 1)
+        set_engine_par($ENGINE_PAR_BASSINVADER_BASS, random(0,1000000), -1, 1, 1)
+        set_engine_par($ENGINE_PAR_BASSINVADER_LO_MID, random(0,1000000), -1, 1, 1)
+        set_engine_par($ENGINE_PAR_BASSINVADER_HI_MID, random(0,1000000), -1, 1, 1)
+        set_engine_par($ENGINE_PAR_BASSINVADER_TREBLE, random(0,1000000), -1, 1, 1)
+        set_engine_par($ENGINE_PAR_INSERT_EFFECT_OUTPUT_GAIN, random(0,1000000), -1, 1, 1)
+        $change_params := 0
+    end if
+end on
+
+on listener
+   if($play=1)
+        play_note(48,127,0,1000)
+    else
+        note_off($ALL_EVENTS)
+    end if
+end on
+
+

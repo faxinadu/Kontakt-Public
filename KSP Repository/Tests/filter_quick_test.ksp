@@ -1,0 +1,188 @@
+{***********************************************
+Filter Quick Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: May 30, 2020
+*************************************************}
+
+on init
+	message("")
+
+	make_perfview
+	set_ui_height(1)
+
+	declare $noteGen 
+
+	declare ui_switch $noteSwitch
+
+	declare ui_knob $cut (0,1000000,1)
+	declare ui_knob $res (0,1000000,1)
+	declare ui_knob $env (0,1000000,1)
+	declare ui_knob $mod (0,1000000,1)
+	declare ui_knob $rate (0,1000000,1)
+
+	declare ui_menu $type
+		add_menu_item ($type, "LDR LP2",0)
+		add_menu_item ($type, "SVF LP2",1)
+		add_menu_item ($type, "LDR LP3",2)
+		add_menu_item ($type, "LDR LP4",3)
+		add_menu_item ($type, "SVF LP4",4)
+		add_menu_item ($type, "PRO 53",5)
+		add_menu_item ($type, "LP6",6)
+		add_menu_item ($type, "LDR HP2",7)
+		add_menu_item ($type, "SVF HP2",8)
+		add_menu_item ($type, "LDR HP4",9)
+		add_menu_item ($type, "SVF HP4",10)
+		add_menu_item ($type, "LDR BP2",11)
+		add_menu_item ($type, "SVF BP2",12)
+		add_menu_item ($type, "LDR BP4",13)
+		add_menu_item ($type, "SVF BP4",14)
+		add_menu_item ($type, "SVF NT4",15)
+		add_menu_item ($type, "Phaser",16)
+		add_menu_item ($type, "Vowel A",17)
+		add_menu_item ($type, "Vowel B",18)
+		add_menu_item ($type, "AR LP2",19)
+		add_menu_item ($type, "AR LP4",20)
+		add_menu_item ($type, "AR LP24",21)
+		add_menu_item ($type, "AR HP2",22)
+		add_menu_item ($type, "AR HP4",23)
+		add_menu_item ($type, "AR HP24",24)
+		add_menu_item ($type, "AR BP2",25)
+		add_menu_item ($type, "AR BP4",26)
+		add_menu_item ($type, "AR BP24",27)
+
+		set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_FILTER,0,0,-1)
+
+		make_persistent($type)
+		make_persistent($cut)
+		make_persistent($res)
+		make_persistent($env)
+		make_persistent($mod)
+		make_persistent($rate)
+
+		message($noteGen)
+end on
+
+function setFilterType
+	select ($type)	
+		case 0
+		set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE, $FILTER_TYPE_LDR_LP2,0,0,-1)
+		case 1
+		set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE, $FILTER_TYPE_SV_LP2,0,0,-1)
+		case 2
+		set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE, $FILTER_TYPE_LDR_LP3,0,0,-1)
+		case 3
+		set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE, $FILTER_TYPE_LDR_LP4,0,0,-1)
+		case 4
+		set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE, $FILTER_TYPE_SV_LP4,0,0,-1)
+		case 5
+		set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE, $FILTER_TYPE_PRO52,0,0,-1)
+		case 6
+		set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE, $FILTER_TYPE_LP6POLE,0,0,-1)
+		case 7
+		set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE, $FILTER_TYPE_LDR_HP2,0,0,-1)	
+		case 8
+		set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE, $FILTER_TYPE_SV_HP2,0,0,-1)	
+		case 9
+		set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE, $FILTER_TYPE_LDR_HP4,0,0,-1)
+		case 10
+		set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE, $FILTER_TYPE_SV_HP4,0,0,-1)	
+		case 11
+		set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE, $FILTER_TYPE_LDR_BP2,0,0,-1)	
+		case 12
+		set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE, $FILTER_TYPE_SV_BP2,0,0,-1)
+		case 13
+		set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE, $FILTER_TYPE_LDR_BP4,0,0,-1)	
+		case 14
+		set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE, $FILTER_TYPE_SV_BP4,0,0,-1)	
+		case 15
+		set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE, $FILTER_TYPE_SV_NOTCH4,0,0,-1)		
+		case 16
+		set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE, $FILTER_TYPE_PHASER,0,0,-1)		
+		case 17
+		set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE, $FILTER_TYPE_VOWELA,0,0,-1)	
+		case 18
+		set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE, $FILTER_TYPE_VOWELB,0,0,-1)	
+		case 19
+		set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE, $FILTER_TYPE_AR_LP2,0,0,-1)	
+		case 20
+		set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE, $FILTER_TYPE_AR_LP2,0,0,-1)	
+		case 21
+		set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE, $FILTER_TYPE_AR_LP24,0,0,-1)	
+		case 22
+		set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE, $FILTER_TYPE_AR_HP2,0,0,-1)	
+		case 23
+		set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE, $FILTER_TYPE_AR_HP4,0,0,-1)	
+		case 24
+		set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE, $FILTER_TYPE_AR_HP24,0,0,-1)	
+		case 25
+		set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE, $FILTER_TYPE_AR_BP2,0,0,-1)	
+		case 26
+		set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE, $FILTER_TYPE_AR_BP4,0,0,-1)	
+		case 27
+		set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE, $FILTER_TYPE_AR_BP24,0,0,-1)	
+	end select
+end function
+
+function setFilterCut
+	set_engine_par($ENGINE_PAR_CUTOFF,$cut,0,0,-1)
+end function
+
+function setFilterRes
+	set_engine_par($ENGINE_PAR_RESONANCE,$res,0,0,-1)
+end function
+
+function setFilterEnv
+	set_engine_par($ENGINE_PAR_MOD_TARGET_INTENSITY,$env,0,2,-1)
+end function
+
+function setFilterMod
+	set_engine_par($ENGINE_PAR_MOD_TARGET_INTENSITY,$mod,0,1,-1)
+end function
+
+function setLfoRate
+	set_engine_par($ENGINE_PAR_INTMOD_FREQUENCY,$rate,0,1,-1)
+end function
+
+function playNote
+	if($noteSwitch = 1)
+		if($noteGen = 0)
+			$noteGen := play_note(60,127,0,-1)
+		end if	
+    else
+    	note_off($noteGen)
+    	$noteGen := 0
+    end if
+end function
+
+on persistence_changed
+	call setFilterType
+end on 
+
+on ui_control($noteSwitch)
+	call playNote
+end on
+
+on ui_control($type)
+	call setFilterType
+end on
+
+on ui_control ($cut)
+	call setFilterCut
+end on
+
+on ui_control ($res)
+	call setFilterRes
+end on
+
+on ui_control ($env)
+	call setFilterEnv
+end on
+
+on ui_control ($mod)
+	call setFilterMod
+end on
+
+on ui_control ($rate)
+	call setLfoRate
+end on

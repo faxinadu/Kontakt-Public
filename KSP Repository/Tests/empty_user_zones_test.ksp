@@ -1,0 +1,17 @@
+{***********************************************
+Empty User Zones Test
+Author: Native Instruments
+Written by: Native Instruments
+Modified: December 7, 2022
+*************************************************}
+
+on init
+    declare $i
+    set_num_user_zones(10)
+    while($i<10)
+        set_zone_par(%NI_USER_ZONE_IDS[$i],$ZONE_PAR_HIGH_KEY,127)
+        set_zone_par(%NI_USER_ZONE_IDS[$i],$ZONE_PAR_HIGH_VELO,127)
+        inc($i)
+    end while
+end on
+

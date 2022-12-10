@@ -1,0 +1,35 @@
+{***********************************************
+ADSR Simplest Example 
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: October 26, 2022
+*************************************************}
+
+on init
+    message("")
+    make_perfview
+    declare ui_slider $attack_slider(0,1000000)
+    declare ui_slider $decay_slider(0,1000000)
+    declare ui_slider $sustain_slider(0,1000000)
+    declare ui_slider $release_slider(0,1000000)
+    make_persistent($attack_slider)
+    make_persistent($decay_slider)
+    make_persistent($sustain_slider)
+    make_persistent($release_slider)
+end on
+
+on ui_control($attack_slider)
+    set_engine_par($ENGINE_PAR_ATTACK,$attack_slider,0,0,-1)
+end on
+
+on ui_control($decay_slider)
+    set_engine_par($ENGINE_PAR_DECAY,$decay_slider,0,0,-1)
+end on
+
+on ui_control($sustain_slider)
+    set_engine_par($ENGINE_PAR_SUSTAIN,$sustain_slider,0,0,-1)
+end on
+
+on ui_control($release_slider)
+    set_engine_par($ENGINE_PAR_RELEASE,$release_slider,0,0,-1)
+end on

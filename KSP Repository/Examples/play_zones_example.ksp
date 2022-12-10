@@ -1,0 +1,60 @@
+{***********************************************
+Play Zones Example
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: October 26, 2022
+*************************************************}
+
+{Group 0 is the dummy group, group 1 is the played group. Zones are placed in the played group according to the switches}
+
+on init
+    message("")
+    make_perfview
+    set_script_title("Play Zones Example")
+    set_snapshot_type(3)
+    declare $i
+    declare $touched
+    declare ui_switch $layer_1
+    declare ui_switch $layer_2
+    declare ui_switch $layer_3
+    declare ui_switch $layer_4
+    make_persistent($layer_1)
+    make_persistent($layer_2)
+    make_persistent($layer_3)
+    make_persistent($layer_4)
+    declare %control_id[4]
+    $i := 0
+    while($i<$NUM_ZONES)
+        %control_id[$i] := get_ui_id($layer_1)+$i
+        inc($i)
+    end while
+end on
+
+function set_played_zones
+    set_zone_par($touched,$ZONE_PAR_GROUP,get_control_par(%control_id[$touched],$CONTROL_PAR_VALUE))
+end function
+
+on ui_control($layer_1)
+    $touched := 0
+    call set_played_zones
+end on
+
+on ui_control($layer_2)
+    $touched := 1
+    call set_played_zones
+end on
+
+on ui_control($layer_3)
+    $touched := 2
+    call set_played_zones
+end on
+
+on ui_control($layer_4)
+    $touched := 3
+    call set_played_zones
+end on
+
+on note
+    disallow_group(0)
+end on
+

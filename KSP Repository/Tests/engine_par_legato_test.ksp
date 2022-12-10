@@ -1,0 +1,16 @@
+{***********************************************
+Legato Engine Par Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: October 13, 2022
+*************************************************}
+
+on init
+    make_perfview
+    message("")
+    declare ui_switch $legato
+end on
+
+on ui_control($legato)
+    set_engine_par($ENGINE_PAR_TM_LEGATO,$legato,0,-1,-1)
+end on
