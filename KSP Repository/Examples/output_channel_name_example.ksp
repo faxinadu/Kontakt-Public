@@ -1,0 +1,22 @@
+{***********************************************
+Output Channel Name Example
+Author: Native Instruments
+Written by: Native Instruments
+Modified: December 23, 2022
+*************************************************}
+
+on init
+    declare $count
+    declare ui_menu $menu
+        add_menu_item($menu,"Default",-1)
+    $count := 0
+    while($count < $NUM_OUTPUT_CHANNELS)
+        add_menu_item($menu,output_channel_name($count),$count)
+        inc($count)
+    end while
+    $menu := get_engine_par($ENGINE_PAR_OUTPUT_CHANNEL,0,-1,-1)
+end on
+
+on ui_control ($menu)
+    set_engine_par($ENGINE_PAR_OUTPUT_CHANNEL,$menu,0,-1,-1)
+end on

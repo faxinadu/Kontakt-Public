@@ -1,0 +1,31 @@
+{***********************************************
+Mod Target Intensity Example
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: December 20, 2022
+*************************************************}
+
+on init
+    message("")
+    make_perfview
+    declare ui_slider $mod_depth_slider(0,1000000)
+    declare ui_label $mod_depth_label(1,1)
+    make_persistent($mod_depth_slider)
+end on
+
+function set_mod_depth_label
+    set_control_par_str(get_ui_id($mod_depth_label),$CONTROL_PAR_TEXT,"Mod: " & get_engine_par_disp($ENGINE_PAR_MOD_TARGET_INTENSITY,0,1,0) & "%")
+end function
+
+function set_mod_depth_slider
+    set_engine_par($ENGINE_PAR_MOD_TARGET_INTENSITY,$mod_depth_slider,0,1,0)
+    call set_mod_depth_label
+end function
+
+on persistence_changed
+    call set_mod_depth_label
+end on
+
+on ui_control($mod_depth_slider)
+    call set_mod_depth_slider
+end on

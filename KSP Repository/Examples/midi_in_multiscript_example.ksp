@@ -1,0 +1,33 @@
+{***********************************************
+MIDI In Multiscript Example
+Author: Native Instruments
+Written by: Native Instruments
+Modified: December 22, 2022
+*************************************************}
+
+on midi_in
+    if ($MIDI_COMMAND = $MIDI_COMMAND_NOTE_ON and $MIDI_BYTE_2 > 0)
+        message ("Note On")
+    end if
+    if ($MIDI_COMMAND = $MIDI_COMMAND_NOTE_ON and $MIDI_BYTE_2 = 0)
+        message ("Note Off")
+    end if
+    if ($MIDI_COMMAND = $MIDI_COMMAND_NOTE_OFF)
+        message ("Note Off")
+    end if
+    if ($MIDI_COMMAND = $MIDI_COMMAND_CC)
+        message ("Controller")
+    end if
+    if ($MIDI_COMMAND = $MIDI_COMMAND_PITCH_BEND)
+        message ("Pitch Bend")
+    end if
+    if ($MIDI_COMMAND = $MIDI_COMMAND_MONO_AT)
+        message ("Channel Pressure")
+    end if
+    if ($MIDI_COMMAND = $MIDI_COMMAND_POLY_AT)
+        message ("Poly Pressure")
+    end if
+    if ($MIDI_COMMAND = $MIDI_COMMAND_PROGRAM_CHANGE)
+        message ("Program Change")
+    end if
+end on
