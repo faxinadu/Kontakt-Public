@@ -1,0 +1,108 @@
+{***********************************************
+User Zone Missing Samples Example
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: December 27, 2022
+*************************************************}
+
+on init
+    message("")
+    make_perfview
+    set_ui_height_px(100)
+    declare ui_label $drop_label(1,1)
+        set_text($drop_label,"Drop")
+    declare ui_label $sample_path_label(1,1)
+    declare ui_label $sample_status_label(1,1)
+    declare ui_switch $sample_reload_button
+        set_text($sample_reload_button,"Reload")
+    declare ui_switch $sample_empty_button
+        set_text($sample_empty_button,"Empty")
+    declare ui_switch $sample_purge_button
+        set_text($sample_purge_button,"Purge")
+    declare ui_mouse_area $sample_drop_area
+        set_control_par(get_ui_id($sample_drop_area),$CONTROL_PAR_DND_ACCEPT_AUDIO,$NI_DND_ACCEPT_ONE)
+    declare @sample_path
+        make_persistent(@sample_path)
+    declare @sample_status
+    set_num_user_zones(1)
+        set_zone_par(%NI_USER_ZONE_IDS[0],$ZONE_PAR_HIGH_KEY,127)
+        set_zone_par(%NI_USER_ZONE_IDS[0],$ZONE_PAR_HIGH_VELO,127)
+    move_control_px($drop_label,75,25)
+    move_control_px($sample_drop_area,75,25)
+    move_control_px($sample_reload_button,75,45)
+    move_control_px($sample_empty_button,175,45)
+    move_control_px($sample_purge_button,275,45)
+    move_control_px($sample_status_label,375,45)
+    move_control_px($sample_path_label,75,65)
+    set_control_par(get_ui_id($drop_label),$CONTROL_PAR_WIDTH,500)
+    set_control_par(get_ui_id($sample_drop_area),$CONTROL_PAR_WIDTH,500)
+    set_control_par(get_ui_id($sample_path_label),$CONTROL_PAR_WIDTH,500)
+end on
+
+function set_sample_status_label
+    select(get_zone_status(%NI_USER_ZONE_IDS[0]))
+        case 0
+            @sample_status := "Empty"
+        case 1
+            @sample_status := "Loaded"
+        case 2
+            @sample_status := "Purged"
+        case 3
+            @sample_status := "Ignored"
+    end select
+    set_text($sample_status_label,@sample_status)
+end function
+
+function set_sample_path_label
+    set_text($sample_path_label,@sample_path)
+    call set_sample_status_label
+end function
+
+function set_sample_zone
+    wait_async(set_sample(%NI_USER_ZONE_IDS[0],@sample_path))
+end function
+
+on persistence_changed
+    if($sample_purge_button=1)
+        wait_async(purge_group(0,0))
+    else
+        wait_async(purge_group(0,1))
+    end if
+    call set_sample_status_label
+    call set_sample_path_label
+end on
+
+on ui_control($sample_drop_area)
+	if($NI_MOUSE_EVENT_TYPE = $NI_MOUSE_EVENT_TYPE_DROP)
+        @sample_path := !NI_DND_ITEMS_AUDIO[0]	
+        call set_sample_zone
+        call set_sample_path_label
+        $sample_purge_button := 0
+	end if
+end on
+
+on ui_control($sample_reload_button)
+    if($sample_reload_button=1)
+        call set_sample_zone
+        call set_sample_status_label
+        $sample_reload_button := 0
+    end if
+end on
+
+on ui_control($sample_empty_button)
+    if($sample_empty_button=1)
+        @sample_path := ""	
+        call set_sample_zone
+        call set_sample_path_label
+        $sample_empty_button := 0
+    end if
+end on
+
+on ui_control($sample_purge_button)
+    if($sample_purge_button=1)
+        wait_async(purge_group(0,0))
+    else
+        wait_async(purge_group(0,1))
+    end if
+    call set_sample_status_label
+end on

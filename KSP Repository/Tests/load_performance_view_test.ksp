@@ -6,5 +6,7 @@ Modified: July 03, 2022
 *************************************************}
 
 on init
+   message("")
+   make_perfview
    load_performance_view("instrtument")
 end on

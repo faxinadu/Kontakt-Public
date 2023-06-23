@@ -1,0 +1,730 @@
+{***********************************************
+Wave Mediation Shell
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: December 11, 2022
+*************************************************}
+
+{
+help tags
+automations
+}
+
+on init
+
+    message("")
+    set_snapshot_type(3)
+    make_perfview
+    set_ui_height(8)
+    set_ui_color(9000000h)
+
+    declare const $x_spacing := 100
+    declare const $y_spacing := 20
+    declare const $min_range := 0
+    declare const $max_range := 127
+
+    declare const $min_notes := 0
+    declare const $max_notes := 12
+    declare const $reset_to_note := 36
+
+    declare $i
+    declare $current_note
+
+    declare !note_names[128]
+        !note_names[0] := "C-2"
+        !note_names[1] := "C#-2"
+        !note_names[2] := "D-2"
+        !note_names[3] := "D#-2"
+        !note_names[4] := "E-2"
+        !note_names[5] := "F-2"
+        !note_names[6] := "F#-2"
+        !note_names[7] := "G-2"
+        !note_names[8] := "G#-2"
+        !note_names[9] := "A-2"
+        !note_names[10] := "A#-2"
+        !note_names[11] := "B-2"
+        !note_names[12] := "C-1"
+        !note_names[13] := "C#-1"
+        !note_names[14] := "D-1"
+        !note_names[15] := "D#-1"
+        !note_names[16] := "E-1"
+        !note_names[17] := "F-1"
+        !note_names[18] := "F#-1"
+        !note_names[19] := "G-1"
+        !note_names[20] := "G#-1"
+        !note_names[21] := "A-1"
+        !note_names[22] := "A#-1"
+        !note_names[23] := "B-1"
+        !note_names[24] := "C0"
+        !note_names[25] := "C#0"
+        !note_names[26] := "D0"
+        !note_names[27] := "D#0"
+        !note_names[28] := "E0"
+        !note_names[29] := "F0"
+        !note_names[30] := "F#0"
+        !note_names[31] := "G0"
+        !note_names[32] := "G#0"
+        !note_names[33] := "A0"
+        !note_names[34] := "A#0"
+        !note_names[35] := "B0"
+        !note_names[36] := "C1"
+        !note_names[37] := "C#1"
+        !note_names[38] := "D1"
+        !note_names[39] := "D#1"
+        !note_names[40] := "E1"
+        !note_names[41] := "F1"
+        !note_names[42] := "F#1"
+        !note_names[43] := "G1"
+        !note_names[44] := "G#1"
+        !note_names[45] := "A1"
+        !note_names[46] := "A#1"
+        !note_names[47] := "B1"
+        !note_names[48] := "C2"
+        !note_names[49] := "C#2"
+        !note_names[50] := "D2"
+        !note_names[51] := "D#2"
+        !note_names[52] := "E2"
+        !note_names[53] := "F2"
+        !note_names[54] := "F#2"
+        !note_names[55] := "G2"
+        !note_names[56] := "G#2"
+        !note_names[57] := "A2"
+        !note_names[58] := "A#2"
+        !note_names[59] := "B2"
+        !note_names[60] := "C3"
+        !note_names[61] := "C#3"
+        !note_names[62] := "D3"
+        !note_names[63] := "D#3"
+        !note_names[64] := "E3"
+        !note_names[65] := "F3"
+        !note_names[66] := "F#3"
+        !note_names[67] := "G3"
+        !note_names[68] := "G#3"
+        !note_names[69] := "A3"
+        !note_names[70] := "A#3"
+        !note_names[71] := "B3"
+        !note_names[72] := "C4"
+        !note_names[73] := "C#4"
+        !note_names[74] := "D4"
+        !note_names[75] := "D#4"
+        !note_names[76] := "E4"
+        !note_names[77] := "F4"
+        !note_names[78] := "F#4"
+        !note_names[79] := "G4"
+        !note_names[80] := "G#4"
+        !note_names[81] := "A4"
+        !note_names[82] := "A#4"
+        !note_names[83] := "B4"
+        !note_names[84] := "C5"
+        !note_names[85] := "C#5"
+        !note_names[86] := "D5"
+        !note_names[87] := "D#5"
+        !note_names[88] := "E5"
+        !note_names[89] := "F5"
+        !note_names[90] := "F#5"
+        !note_names[91] := "G5"
+        !note_names[92] := "G#5"
+        !note_names[93] := "A5"
+        !note_names[94] := "A#5"
+        !note_names[95] := "B5"
+        !note_names[96] := "C5"
+        !note_names[97] := "C#5"
+        !note_names[98] := "D5"
+        !note_names[99] := "D#5"
+        !note_names[100] := "E5"
+        !note_names[101] := "F5"
+        !note_names[102] := "F#5"
+        !note_names[103] := "G5"
+        !note_names[104] := "G#5"
+        !note_names[105] := "A5"
+        !note_names[106] := "A#5"
+        !note_names[107] := "B5"
+        !note_names[108] := "C6"
+        !note_names[109] := "C#6"
+        !note_names[110] := "D6"
+        !note_names[111] := "D#6"
+        !note_names[112] := "E6"
+        !note_names[113] := "F6"
+        !note_names[114] := "F#6"
+        !note_names[115] := "G6"
+        !note_names[116] := "G#6"
+        !note_names[117] := "A6"
+        !note_names[118] := "A#6"
+        !note_names[119] := "B6"
+        !note_names[120] := "C7"
+        !note_names[121] := "C#7"
+        !note_names[122] := "D7"
+        !note_names[123] := "D#7"
+        !note_names[124] := "E7"
+        !note_names[125] := "F7"
+        !note_names[126] := "F#7"
+        !note_names[127] := "G7"
+
+    declare ui_menu $zone_select
+    $i := 0
+    while($i<$NUM_ZONES)
+        add_menu_item($zone_select,"Wavetable " & $i+1,$i)
+        inc($i)
+    end while
+    
+    move_control_px($zone_select,525,25)
+
+    declare ui_switch $play_use
+        set_text($play_use,"Note Picker")
+
+    declare ui_value_edit $note_use($min_notes,$max_notes,1)
+        set_text($note_use,"Use")
+        set_control_par(get_ui_id($note_use),$CONTROL_PAR_WIDTH,$x_spacing-25)
+    declare ui_button $reset
+        set_text($reset,"Reset")
+    
+    declare ui_panel $note_panel
+    declare ui_value_edit $note_1($min_range,$max_range,1)
+    declare ui_value_edit $note_2($min_range,$max_range,1)
+    declare ui_value_edit $note_3($min_range,$max_range,1)
+    declare ui_value_edit $note_4($min_range,$max_range,1)
+    declare ui_value_edit $note_5($min_range,$max_range,1)
+    declare ui_value_edit $note_6($min_range,$max_range,1)
+    declare ui_value_edit $note_7($min_range,$max_range,1)
+    declare ui_value_edit $note_8($min_range,$max_range,1)
+    declare ui_value_edit $note_9($min_range,$max_range,1)
+    declare ui_value_edit $note_10($min_range,$max_range,1)
+    declare ui_value_edit $note_11($min_range,$max_range,1)
+    declare ui_value_edit $note_12($min_range,$max_range,1)
+
+    declare %note_id[$max_notes]
+    $i := 0
+    while($i<$max_notes)
+        %note_id[$i] := get_ui_id($note_1)+$i
+        set_control_par(%note_id[$i],$CONTROL_PAR_PARENT_PANEL,get_ui_id($note_panel))
+        set_control_par_str(%note_id[$i],$CONTROL_PAR_TEXT,"Note " & $i+1)
+        set_control_par(%note_id[$i],$CONTROL_PAR_WIDTH,$x_spacing-25)
+        set_control_par(%note_id[$i],$CONTROL_PAR_POS_Y,$y_spacing + ($y_spacing*$i))
+        inc($i)
+    end while
+
+
+    declare ui_label $note_label_1(1,1)
+    declare ui_label $note_label_2(1,1)
+    declare ui_label $note_label_3(1,1)
+    declare ui_label $note_label_4(1,1)
+    declare ui_label $note_label_5(1,1)
+    declare ui_label $note_label_6(1,1)
+    declare ui_label $note_label_7(1,1)
+    declare ui_label $note_label_8(1,1)
+    declare ui_label $note_label_9(1,1)
+    declare ui_label $note_label_10(1,1)
+    declare ui_label $note_label_11(1,1)
+    declare ui_label $note_label_12(1,1)
+
+    declare %note_label_id[$max_notes]
+
+    $i := 0
+    while($i<$max_notes)
+        %note_label_id[$i] := get_ui_id($note_label_1)+$i
+        set_control_par(%note_label_id[$i],$CONTROL_PAR_PARENT_PANEL,get_ui_id($note_panel))
+        set_control_par(%note_label_id[$i],$CONTROL_PAR_POS_Y,$y_spacing + ($y_spacing*$i))
+        set_control_par(%note_label_id[$i],$CONTROL_PAR_POS_X,$x_spacing-25)
+        set_control_par(%note_label_id[$i],$CONTROL_PAR_WIDTH,$x_spacing/3)
+        inc($i)
+    end while
+
+
+    set_control_par(get_ui_id($play_use),$CONTROL_PAR_POS_X,10)
+    set_control_par(get_ui_id($play_use),$CONTROL_PAR_POS_Y,25)
+
+    set_control_par(get_ui_id($note_use),$CONTROL_PAR_PARENT_PANEL,get_ui_id($note_panel))
+    set_control_par(get_ui_id($note_use),$CONTROL_PAR_POS_X,0)
+    set_control_par(get_ui_id($reset),$CONTROL_PAR_PARENT_PANEL,get_ui_id($note_panel))
+    set_control_par(get_ui_id($reset),$CONTROL_PAR_POS_X,$x_spacing-25)
+    set_control_par(get_ui_id($reset),$CONTROL_PAR_WIDTH,$x_spacing/3)
+
+    move_control_px($note_panel,10,50)
+
+    declare ui_panel $amp_envelope_panel
+    declare ui_slider $amp_attack_slider(0,1000000)
+    declare ui_slider $amp_decay_slider(0,1000000)
+    declare ui_slider $amp_sustain_slider(0,1000000)
+    declare ui_slider $amp_release_slider(0,1000000)
+    declare ui_slider $amp_decay_mod_slider(0,1000000)
+    declare ui_label $amp_attack_label(1,1)
+    declare ui_label $amp_decay_label(1,1)
+    declare ui_label $amp_sustain_label(1,1)
+    declare ui_label $amp_release_label(1,1)
+    declare ui_label $amp_decay_mod_label(1,1)
+
+    declare %amp_envelope_id[10]
+    $i := 0
+    while($i<10)
+        %amp_envelope_id[$i] := get_ui_id($amp_attack_slider)+$i
+        set_control_par(%amp_envelope_id[$i],$CONTROL_PAR_PARENT_PANEL,get_ui_id($amp_envelope_panel))
+        if($i<5)
+            set_control_par(%amp_envelope_id[$i],$CONTROL_PAR_POS_X,$x_spacing*$i)
+        else
+            set_control_par(%amp_envelope_id[$i],$CONTROL_PAR_POS_X,$x_spacing*($i-5))
+            set_control_par(%amp_envelope_id[$i],$CONTROL_PAR_POS_Y,$y_spacing)
+        end if
+        inc($i)
+    end while
+
+    move_control_px($amp_envelope_panel,125,180)
+
+    declare ui_wavetable $wavetable_view
+    set_control_par(get_ui_id($wavetable_view),$CONTROL_PAR_WIDTH,390)
+    set_control_par(get_ui_id($wavetable_view),$CONTROL_PAR_HEIGHT,100)
+    
+    move_control_px($wavetable_view,125,20)
+
+    declare ui_panel $wave_panel
+    declare ui_slider $wavetable_poistion_slider(0,1000000)
+    declare ui_slider $octave_slider(0,6)
+    declare ui_slider $glide_amount_slider(0,1000000)
+    declare ui_slider $glide_time_slider(0,1000000)
+    declare ui_slider $saturate_slider(0,1000000)
+    declare ui_label $wavetable_poistion_label(1,1)
+    declare ui_label $octave_label(1,1)
+    declare ui_label $glide_amount_label(1,1)
+    declare ui_label $glide_time_label(1,1)
+    declare ui_label $saturate_label(1,1)
+    
+    declare %wave_id[10]
+    $i := 0
+    while($i<10)
+        %wave_id[$i] := get_ui_id($wavetable_poistion_slider)+$i
+        set_control_par(%wave_id[$i],$CONTROL_PAR_PARENT_PANEL,get_ui_id($wave_panel))
+        if($i<5)
+            set_control_par(%wave_id[$i],$CONTROL_PAR_POS_X,$x_spacing*$i)
+        else
+            set_control_par(%wave_id[$i],$CONTROL_PAR_POS_X,$x_spacing*($i-5))
+            set_control_par(%wave_id[$i],$CONTROL_PAR_POS_Y,$y_spacing)
+        end if
+        inc($i)
+    end while
+
+    move_control_px($wave_panel,125,130)
+
+    declare ui_panel $filter_panel
+    declare ui_menu $filter_type_menu
+        add_menu_item($filter_type_menu,"LP2",$FILTER_TYPE_SV_LP2)
+        add_menu_item($filter_type_menu,"LP4",$FILTER_TYPE_SV_LP4)
+        add_menu_item($filter_type_menu,"LP6",$FILTER_TYPE_SV_LP6)
+        add_menu_item($filter_type_menu,"BP2",$FILTER_TYPE_SV_BP2)
+        add_menu_item($filter_type_menu,"BP4",$FILTER_TYPE_SV_BP4)
+        add_menu_item($filter_type_menu,"BP6",$FILTER_TYPE_SV_BP6)
+        add_menu_item($filter_type_menu,"HP2",$FILTER_TYPE_SV_LP2)
+        add_menu_item($filter_type_menu,"HP4",$FILTER_TYPE_SV_LP4)
+        add_menu_item($filter_type_menu,"HP6",$FILTER_TYPE_SV_LP6)
+    declare ui_slider $fliter_cut_slider(0,1000000)
+    declare ui_slider $fliter_res_slider(0,1000000)
+    declare ui_slider $fliter_env_slider(0,1000000)
+    declare ui_slider $filter_cut_random_slider(0,1000000)
+    declare ui_switch $low_kill_switch
+        set_text($low_kill_switch,"Kill Lows")
+    declare ui_label $filter_cut_label(1,1)
+    declare ui_label $filter_res_label(1,1)
+    declare ui_label $filter_env_label(1,1)
+    declare ui_label $filter_cut_random_label(1,1)
+
+    declare %filter_id[10]
+    $i := 0
+    while($i<10)
+        %filter_id[$i] := get_ui_id($filter_type_menu)+$i
+        set_control_par(%filter_id[$i],$CONTROL_PAR_PARENT_PANEL,get_ui_id($filter_panel))
+        if($i<5)
+            set_control_par(%filter_id[$i],$CONTROL_PAR_POS_X,$x_spacing*$i)
+        else
+            set_control_par(%filter_id[$i],$CONTROL_PAR_POS_X,$x_spacing*($i-5))
+            set_control_par(%filter_id[$i],$CONTROL_PAR_POS_Y,$y_spacing)
+        end if
+        inc($i)
+    end while
+
+    move_control_px($filter_panel,125,230)
+
+    make_persistent( $zone_select )
+    make_persistent($note_use)
+    make_persistent($note_1)
+    make_persistent($note_2)
+    make_persistent($note_3)
+    make_persistent($note_4)
+    make_persistent($note_5)
+    make_persistent($note_6)
+    make_persistent($note_7)
+    make_persistent($note_8)
+    make_persistent($note_9)
+    make_persistent($note_10)
+    make_persistent($note_11)
+    make_persistent($note_12)
+    make_persistent($wavetable_poistion_slider)
+    make_persistent($octave_slider)
+    make_persistent($glide_amount_slider)
+    make_persistent($glide_time_slider)
+    make_persistent($saturate_slider)
+    make_persistent($filter_type_menu)
+    make_persistent($fliter_cut_slider)
+    make_persistent($fliter_res_slider)
+    make_persistent($fliter_env_slider)
+    make_persistent($filter_cut_random_slider)
+    make_persistent($amp_attack_slider)
+    make_persistent($amp_decay_slider)
+    make_persistent($amp_sustain_slider)
+    make_persistent($amp_release_slider)
+    make_persistent($amp_decay_mod_slider)
+
+    declare %notes[$max_notes]
+end on
+
+function set_note_labels
+    $i := 0
+    while( $i<$max_notes )
+        set_control_par_str(%note_label_id[$i],$CONTROL_PAR_TEXT,!note_names[%notes[$i] ])
+        inc($i)
+    end while
+end function
+
+function set_notes
+    $i := 0
+    while( $i<$max_notes )
+        %notes[$i] := get_control_par(%note_id[$i],$CONTROL_PAR_VALUE)
+        inc($i)
+    end while
+    call set_note_labels
+end function
+
+function reset_notes
+    $i := 0
+    while( $i<$max_notes )
+        set_control_par(%note_id[$i],$CONTROL_PAR_VALUE,$reset_to_note+$i)
+        %notes[$i] := get_control_par(%note_id[$i],$CONTROL_PAR_VALUE)
+        inc($i)
+    end while
+    call set_note_labels
+end function
+
+function set_note_use
+    $i := 0
+    while($i<$max_notes)
+        set_control_par(%note_id[$i],$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+        set_control_par(%note_label_id[$i],$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+        if($i<$note_use)
+            set_control_par(%note_id[$i],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+            set_control_par(%note_label_id[$i],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+        end if
+        inc($i)
+    end while
+end function
+
+function set_wavetable_position_label
+    set_control_par_str(get_ui_id($wavetable_poistion_label),$CONTROL_PAR_TEXT,"WT Pos: " & get_engine_par_disp($ENGINE_PAR_WT_POSITION,0,-1,-1) & "%")
+end function
+
+function set_wavetable_position_slider
+    set_engine_par($ENGINE_PAR_WT_POSITION,$wavetable_poistion_slider,0,-1,-1)
+    call set_wavetable_position_label
+end function
+
+function set_octave_label
+    set_control_par_str(get_ui_id($octave_label),$CONTROL_PAR_TEXT,"Oct: " & get_engine_par_disp($ENGINE_PAR_TUNE,0,-1,-1))
+end function
+
+function set_octave_slider
+    set_engine_par($ENGINE_PAR_TUNE,$octave_slider*166667,0,-1,-1)
+    call set_octave_label
+end function
+
+function set_glide_amount_label
+    set_control_par_str(get_ui_id($glide_amount_label),$CONTROL_PAR_TEXT,"Glide A: " & get_engine_par_disp($ENGINE_PAR_MOD_TARGET_INTENSITY,0,1,0) & "st")
+end function
+
+function set_glide_amount_slider
+    set_engine_par($ENGINE_PAR_MOD_TARGET_INTENSITY,$glide_amount_slider,0,1,0)
+    call set_glide_amount_label
+end function
+
+function set_glide_time_label
+    set_control_par_str(get_ui_id($glide_time_label),$CONTROL_PAR_TEXT,"Glide T: " & get_engine_par_disp($ENGINE_PAR_GLIDE_COEF,0,1,0) & "ms")
+end function
+
+function set_glide_time_slider
+    set_engine_par($ENGINE_PAR_GLIDE_COEF,$glide_time_slider,0,1,-1)
+    call set_glide_time_label
+end function
+
+function set_filter_type_menu
+    set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE,$filter_type_menu,0,0,-1)
+end function
+
+function set_filter_cut_label
+    set_control_par_str(get_ui_id($filter_cut_label),$CONTROL_PAR_TEXT,"Cut: " & get_engine_par_disp($ENGINE_PAR_CUTOFF,0,0,-1) & "Hz")
+end function
+
+function set_filter_cut_slider
+    set_engine_par($ENGINE_PAR_CUTOFF,$fliter_cut_slider,0,0,-1)
+    call set_filter_cut_label
+end function
+
+function set_filter_res_label
+    set_control_par_str(get_ui_id($filter_res_label),$CONTROL_PAR_TEXT,"Res: " & get_engine_par_disp($ENGINE_PAR_RESONANCE,0,0,-1) & "%")
+end function
+
+function set_filter_res_slider
+    set_engine_par($ENGINE_PAR_RESONANCE,$fliter_res_slider,0,0,-1)
+    call set_filter_res_label
+end function
+
+function set_filter_env_label
+    set_control_par_str(get_ui_id($filter_env_label),$CONTROL_PAR_TEXT,"Env: " & get_engine_par_disp($ENGINE_PAR_MOD_TARGET_INTENSITY,0,0,1) & "%")
+end function
+
+function set_filter_env_slider
+    set_engine_par($ENGINE_PAR_MOD_TARGET_INTENSITY,$fliter_env_slider,0,0,1)
+    call set_filter_env_label
+end function
+
+function set_amp_attack_label
+    set_control_par_str(get_ui_id($amp_attack_label),$CONTROL_PAR_TEXT,"A " & get_engine_par_disp($ENGINE_PAR_ATTACK,0,0,-1) & "ms")
+end function
+
+function set_amp_attack_slider
+    set_engine_par($ENGINE_PAR_ATTACK,$amp_attack_slider,0,0,-1)
+    call set_amp_attack_label
+end function
+
+function set_amp_decay_label
+    set_control_par_str(get_ui_id($amp_decay_label),$CONTROL_PAR_TEXT,"D " & get_engine_par_disp($ENGINE_PAR_DECAY,0,0,-1) & "ms")
+end function
+
+function set_amp_decay_slider
+    set_engine_par($ENGINE_PAR_DECAY,$amp_decay_slider,0,0,-1)
+    call set_amp_decay_label
+end function
+
+function set_amp_sustain_label
+    set_control_par_str(get_ui_id($amp_sustain_label),$CONTROL_PAR_TEXT,"S " & get_engine_par_disp($ENGINE_PAR_SUSTAIN,0,0,-1) & "dB")
+end function
+
+function set_amp_sustain_slider
+    set_engine_par($ENGINE_PAR_SUSTAIN,$amp_sustain_slider,0,0,-1)
+    call set_amp_sustain_label
+end function
+
+function set_amp_release_label
+    set_control_par_str(get_ui_id($amp_release_label),$CONTROL_PAR_TEXT,"R " & get_engine_par_disp($ENGINE_PAR_RELEASE,0,0,-1) & "ms")
+end function
+
+function set_amp_release_slider
+    set_engine_par($ENGINE_PAR_RELEASE,$amp_release_slider,0,0,-1)
+    call set_amp_release_label
+end function
+
+function set_low_kill_switch
+    set_engine_par($ENGINE_PAR_EFFECT_BYPASS,1-$low_kill_switch,-1,0,1)
+end function
+
+function set_saturate_label
+    set_control_par_str(get_ui_id($saturate_label),$CONTROL_PAR_TEXT,"Tape: " & get_engine_par_disp($ENGINE_PAR_SHAPE,-1,1,1) & "%")
+end function
+
+function set_saturate_slider
+    set_engine_par($ENGINE_PAR_SHAPE,$saturate_slider,-1,1,1)
+    call set_saturate_label
+end function
+
+function set_filter_cut_random_label
+    set_control_par_str(get_ui_id($filter_cut_random_label),$CONTROL_PAR_TEXT,"Cut Rand: " & get_engine_par_disp($ENGINE_PAR_MOD_TARGET_INTENSITY,0,19,-1) & "%")
+end function
+
+function set_filter_cut_random_slider
+    set_engine_par($ENGINE_PAR_MOD_TARGET_INTENSITY,$filter_cut_random_slider,0,19,-1)
+    call set_filter_cut_random_label
+end function 
+
+function set_amp_decay_mod_label
+ set_control_par_str(get_ui_id($amp_decay_mod_label),$CONTROL_PAR_TEXT,"D Rand: " & get_engine_par_disp($ENGINE_PAR_MOD_TARGET_INTENSITY,0,18,-1) & "%")
+end function
+
+function set_amp_decay_mod_slider
+    set_engine_par($ENGINE_PAR_MOD_TARGET_INTENSITY,$amp_decay_mod_slider,0,18,-1)
+    call set_amp_decay_mod_label
+end function
+
+function set_zone_select
+    $i := 0
+    while( $i<$NUM_ZONES )
+        set_zone_par($i,$ZONE_PAR_GROUP,1)
+        inc($i)
+    end while
+    set_zone_par($zone_select,$ZONE_PAR_GROUP,0)
+    set_control_par(get_ui_id($wavetable_view),$CONTROL_PAR_WT_ZONE,$zone_select)
+end function
+
+on persistence_changed
+    call set_zone_select
+    call set_notes
+    call set_note_use
+    
+    call set_wavetable_position_label
+    call set_octave_label
+    call set_glide_amount_label
+    call set_glide_time_label
+
+    call set_filter_cut_label
+    call set_filter_res_label
+    call set_filter_env_label
+
+    call set_amp_attack_label
+    call set_amp_decay_label
+    call set_amp_sustain_label
+    call set_amp_release_label
+
+    call set_saturate_label
+    call set_filter_cut_random_label
+    call set_amp_decay_mod_label
+end on
+
+on note
+    disallow_group($ALL_GROUPS)
+    allow_group(0)
+    if($play_use=1)
+        ignore_event($EVENT_ID)
+        if($note_use>0)
+            $current_note := %notes[random(0,$note_use-1)]
+        else
+            $current_note := $EVENT_NOTE
+        end if
+        play_note($current_note,$EVENT_VELOCITY,0,-1)
+    end if
+end on
+
+on release
+    if($play_use=1)
+        note_off($current_note)
+    end if
+end on
+
+on ui_control($reset)
+    if($reset=1)
+        call reset_notes
+        $reset := 0
+    end if
+end on
+
+on ui_control($note_use)
+    call set_note_use
+end on
+
+on ui_control($note_1)
+    call set_notes
+end on
+
+on ui_control($note_2)
+    call set_notes
+end on
+
+on ui_control($note_3)
+    call set_notes
+end on
+
+on ui_control($note_4)
+    call set_notes
+end on
+
+on ui_control($note_5)
+    call set_notes
+end on
+
+on ui_control($note_6)
+    call set_notes
+end on
+
+on ui_control($note_7)
+    call set_notes
+end on
+
+on ui_control($note_8)
+    call set_notes
+end on
+
+on ui_control($note_9)
+    call set_notes
+end on
+
+on ui_control($note_10)
+    call set_notes
+end on
+
+on ui_control($note_11)
+    call set_notes
+end on
+
+on ui_control($note_12)
+    call set_notes
+end on
+
+on ui_control($wavetable_poistion_slider)
+    call set_wavetable_position_slider
+end on
+
+on ui_control($octave_slider)
+    call set_octave_slider
+end on
+
+on ui_control($glide_amount_slider)
+    call set_glide_amount_slider
+end on
+
+on ui_control($glide_time_slider)
+    call set_glide_time_slider
+end on
+
+on ui_control($amp_attack_slider)
+    call set_amp_attack_slider
+end on
+
+on ui_control($amp_decay_slider)
+    call set_amp_decay_slider
+end on
+
+on ui_control($amp_sustain_slider)
+    call set_amp_sustain_slider
+end on
+
+on ui_control($amp_release_slider)
+    call set_amp_release_slider
+end on
+
+on ui_control($filter_type_menu)
+    call set_filter_type_menu
+end on
+
+on ui_control($fliter_cut_slider)
+    call set_filter_cut_slider
+end on
+
+on ui_control($fliter_res_slider)
+    call set_filter_res_slider
+end on
+
+on ui_control($fliter_env_slider)
+    call set_filter_env_slider
+end on
+
+on ui_control($low_kill_switch)
+    call set_low_kill_switch
+end on
+
+on ui_control($saturate_slider)
+    call set_saturate_slider
+end on
+
+on ui_control($filter_cut_random_slider)
+    call set_filter_cut_random_slider
+end on
+
+on ui_control($amp_decay_mod_slider)
+    call set_amp_decay_mod_slider
+end on
+
+on ui_control($zone_select)
+    call set_zone_select
+end on
