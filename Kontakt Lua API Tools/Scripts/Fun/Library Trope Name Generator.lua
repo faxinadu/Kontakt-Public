@@ -1,0 +1,106 @@
+function library_trope_name_generator()
+    local words_group_1 = {
+        "Cinematic",
+        "Scape",
+        "Defiant",
+        "Refined",
+        "Intricite",
+        "Composite",
+        "Organic",
+        "Dramatic",
+        "Crafted",
+        "Industrial",
+        "Final",
+        "Evolved",
+        "Evocative",
+        "Creative",
+        "Mutated",
+        "Retro",
+        "Studio",
+        "Vintage",
+        "Action",
+        "Astral",
+        "Carbon",
+        "Emotional",
+        "Modern",
+        "Golden",
+        "Liquid",
+        "Pure",
+        "Super",
+        "The",
+        "Solar",
+        "Lunar",
+        "Raw",
+        "Sound",
+        "Lost",
+        "Bio",
+        "Standard",
+        "Pulsar",
+        "Illusive",
+        "Insulated"
+    }
+
+    local words_group_2 = {
+        "Flow",
+        "Drift",
+        "Gaze",
+        "Haze",
+        "Space",
+        "Front",
+        "Maze",
+        "Scoring",
+        "Colors",
+        "Lab",
+        "Factory",
+        "Flux",
+        "Fussion",
+        "Session",
+        "Glow",
+        "Texture",
+        "Motion",
+        "Tones",
+        "Glory",
+        "Formula",
+        "Mass",
+        "Lore",
+        "Alert",
+        "Machine"
+    }
+
+    local words_group_3 = {
+        "Prime",
+        "X",
+        "5000",
+        "XL",
+        "Max",
+        "Plus",
+        "Deluxe",
+        "Vibes",
+        "Definite",
+        "Collection",
+        "Selection",
+        "Series",
+        "Dreams",
+        "Dreamer",
+        "Commander",
+        "Base",
+        "Tools",
+        "Rack",
+        "Rig",
+        "Experiments",
+        "Pack",
+        "Wired",
+        "Edition",
+        "Selected",
+        "Collected",
+        "Box",
+        "Archive"
+    }
+
+    local trope_name = words_group_1[math.random(#words_group_1)] .. " " .. words_group_2[math.random(#words_group_2)] .. " " .. words_group_3[math.random(#words_group_3)]
+
+    return trope_name
+end
+
+print("Welcome to the Library Trope Name Generator! Your trope library name is: ")
+print(library_trope_name_generator())

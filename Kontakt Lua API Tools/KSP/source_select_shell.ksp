@@ -1,0 +1,105 @@
+{***********************************************
+Source Select Shell
+
+Modified: May 17 2021
+*************************************************}
+
+on init
+    
+    declare @instrumentFramework
+    declare @instrumentTitle
+    declare @instrumentName
+    @instrumentFramework := "Test Instrument" {Set the instrument title}
+    @instrumentTitle := "Instrument" {Set the instrument name}
+    @instrumentName := @instrumentFramework & " " & @instrumentTitle
+
+    declare const $mPlus := $NI_KONTAKT_IS_HEADLESS {Check if running on desktop or headless}
+    set_script_title(@instrumentFramework) {Set the sscript title}  
+    message("") {Reset the messages}
+    set_snapshot_type(1) {Don't init on snapshots}
+
+    declare ui_label $labelInstrumentName(8,1) {Label for the full instrument name}
+
+    if($mPlus=0) {Check if headless}
+        set_ui_height(2)
+        make_perfview {Make the performance view}
+        set_ui_color(000000h)
+        {Set the instrument name label parameters}
+        set_text($labelInstrumentName, @instrumentName)
+        set_control_par(get_ui_id($labelInstrumentName),$CONTROL_PAR_WIDTH,300)
+        set_control_par(get_ui_id($labelInstrumentName),$CONTROL_PAR_TEXT_ALIGNMENT,1)
+        move_control_px($labelInstrumentName,175,10)
+    else        
+        set_control_par(get_ui_id($labelInstrumentName),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL) {Hide the instrument name label}      
+    end if
+
+    declare $i {Variable for looping}
+    declare $touchedControl {Variable for keeping track of the last touched control}
+    declare $groupSelect {Variable for keeping track of the playable group}
+    declare const $numMacros := 1 {Number of NKS macros}
+    
+    declare ui_slider $macro1(0,$NUM_GROUPS-1) {1 NKS Macros}
+    declare ui_label $label1(1,1) {Labels for each macro}
+
+    {GUI main offsets}
+    declare $guiOffsetX := 125
+    declare $guiOffsetY := 30
+    {GUI element spacing}
+    declare $guiSpacingX := 100
+    declare $guiSpacingY := 20
+
+    make_persistent($macro1) {Make all macros persistent}
+
+    declare !macroText[$numMacros] {Macro Arrays}
+    !macroText[0] := "Source"
+
+    declare %macroID[$numMacros] {Arrays for the GUI IDs}
+    declare %labelID[$numMacros] {Arrays for the GUI IDs}
+
+    $i := 0
+    while($i<$numMacros) {Set the control parameters}
+        %macroID[$i] := get_ui_id($macro1)+$i {Put the controls in the GUI ID array}
+        %labelID[$i] := get_ui_id($label1)+$i {Put the labels in the GUI ID array}
+        set_control_par(%macroID[$i],$CONTROL_PAR_AUTOMATION_ID,$i) {Set the automation IDs}
+        set_control_par_str(%macroID[$i],$CONTROL_PAR_AUTOMATION_NAME,!macroText[$i]) {Set the automation names}
+        set_control_par(%macroID[$i],$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL) {Hide all the controls}
+        set_control_par(%labelID[$i],$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL) {Hide all the labels}
+        if($mPlus=0) {Check if running on headless}
+            if ($i<$numMacros)
+                set_control_par(%macroID[$i],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+                set_control_par(%labelID[$i],$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+                {Position the first row of four controls and labels}
+                set_control_par(%macroID[$i],$CONTROL_PAR_POS_X,$guiOffsetX+($i*$guiSpacingX))
+                set_control_par(%macroID[$i],$CONTROL_PAR_POS_Y,$guiOffsetY)
+                set_control_par(%labelID[$i],$CONTROL_PAR_POS_X,$guiOffsetX+($i*$guiSpacingX))
+                set_control_par(%labelID[$i],$CONTROL_PAR_POS_Y,$guiOffsetY+$guiSpacingY)
+            end if
+        end if
+        inc($i)
+    end while
+
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_LIMITER,-1,7,2) {Limiter in any case}
+
+end on
+
+function setGroupSelect {Set the selected group}
+    $groupSelect := $macro1
+    set_control_par_str(%macroID[$touchedControl],$CONTROL_PAR_LABEL,$groupSelect+1) {Update the internal slider label for host automation}
+    if($mPlus=0) {Update the GUI label}
+        set_control_par_str(%labelID[$touchedControl],$CONTROL_PAR_TEXT,!macroText[0] & ": " & $groupSelect+1)
+    end if
+end function
+
+on persistence_changed {executed after the init callback or whenever a snapshot has been loaded}
+    call setGroupSelect
+end on
+
+on note {Note logic}
+    disallow_group($ALL_GROUPS) {First disallow all groups}
+    allow_group($groupSelect) {Play only the selected group}
+end on
+
+on ui_control($macro1) {Group Select}
+    $touchedControl := 0
+    call setGroupSelect
+end on

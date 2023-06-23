@@ -1,0 +1,4 @@
+on init
+    make_perfview
+    declare ui_slider $slider(0,1000000)
+end on
