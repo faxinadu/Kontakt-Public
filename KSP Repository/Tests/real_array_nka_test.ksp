@@ -1,0 +1,66 @@
+{***********************************************
+Real Array NKA Test
+Author: Native Instruments
+Written by: Mario Kruselj
+Modified: January 12, 2023
+*************************************************}
+
+
+on init
+    declare ui_button $Load
+    declare ui_button $Reset
+    declare ui_button $Generate
+    declare ui_button $Save
+    declare ui_button $Print
+
+    declare $i
+    declare $gen
+    declare ?arr[10]
+end on
+
+on ui_control ($Reset)
+    $i := 0
+    while ($i < num_elements(?arr))
+        ?arr[$i] := 0.0
+        inc($i)
+    end while
+
+    message("Reset array!")
+
+    $Reset := 0
+end on
+
+on ui_control ($Generate)
+    message("Generated array:")
+
+    $i := 0
+    while ($i < num_elements(?arr))
+        ?arr[$i] := real(random(-10000000, 1000000)) / real(random(-123456, 123456))
+        message("[" & $i & "]: " & ?arr[$i])
+        inc($i)
+    end while
+
+    $Generate := 0
+end on
+
+on ui_control ($Print)
+    message("Printout:")
+
+    $i := 0
+    while ($i < num_elements(?arr))
+        message("[" & $i & "]: " & ?arr[$i])
+        inc($i)
+    end while
+
+    $Print := 0
+end on
+
+on ui_control ($Save)
+    wait_async(save_array(?arr, 0))
+    $Save := 0
+end on
+
+on ui_control ($Load)
+    wait_async(load_array(?arr, 0))
+    $Load := 0
+end on

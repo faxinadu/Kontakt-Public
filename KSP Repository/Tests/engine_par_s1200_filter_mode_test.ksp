@@ -1,0 +1,21 @@
+{***********************************************
+S1200 Filter Mode Engine Par Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: January 19, 2023
+*************************************************}
+
+on init
+    make_perfview
+    message("")
+    declare ui_menu $menu
+        add_menu_item($menu,"Off",$NI_S1200_FILTER_NONE)
+        add_menu_item($menu,"Low",$NI_S1200_FILTER_LOW)
+        add_menu_item($menu,"Low Mid",$NI_S1200_FILTER_LOW_MID)
+        add_menu_item($menu,"High Mid",$NI_S1200_FILTER_HIGH_MID)
+        add_menu_item($menu,"High",$NI_S1200_FILTER_HIGH)
+end on
+
+on ui_control($menu)
+    set_engine_par($ENGINE_PAR_S1200_FILTER_MODE,$menu,0,-1,-1)
+end on

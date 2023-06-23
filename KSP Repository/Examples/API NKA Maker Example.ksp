@@ -1,0 +1,56 @@
+on init
+    message("")
+    make_perfview
+    declare const $num_controls := 5
+    declare $i
+    declare ui_menu $sample_set
+        add_menu_item($sample_set,"Bass",1)
+        add_menu_item($sample_set,"Synth",2)
+        add_menu_item($sample_set,"SFX",3)
+    declare ui_menu $source_mode
+        add_menu_item($source_mode,"DFD",1)
+        add_menu_item($source_mode,"Sampler",2)
+        add_menu_item($source_mode,"Wavetable",3)
+    declare ui_knob $root_key(0,127,1)
+        set_text($root_key,"Root Key" )
+    declare ui_knob $low_key(0,127,1)
+        set_text($low_key,"Low Key" )
+    declare ui_knob $high_key(0,127,1)
+        set_text($high_key,"High Key" )
+    declare ui_button $save
+        set_text($save,"Save")
+    
+    make_persistent($sample_set)
+    make_persistent($source_mode)
+    make_persistent($root_key)
+    make_persistent($low_key)
+    make_persistent($high_key)
+
+    declare %control_id[$num_controls]
+
+    $i := 0
+    while($i<$num_controls)
+        %control_id[$i] := get_ui_id($sample_set)+$i
+        inc($i)
+    end while
+
+    declare %parameters[$num_controls]
+
+end on
+
+on ui_control($save)
+    if($save=1)
+        $i := 0
+        while($i<$num_controls)
+            if($i<2)
+                %parameters[$i] := get_control_par(%control_id[$i],$CONTROL_PAR_VALUE) + 1
+            else
+                %parameters[$i] := get_control_par(%control_id[$i],$CONTROL_PAR_VALUE)
+            end if
+            inc($i)
+        end while
+        save_array(%parameters,0)
+        $save := 0
+    end if
+end on
+

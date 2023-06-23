@@ -1,0 +1,26 @@
+{***********************************************
+Local Variables Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: February 11, 2023
+*************************************************}
+
+on init
+    declare ui_slider $slider_1(0,1000000)
+    declare ui_slider $slider_2(0,1000000)
+    declare ui_label $label(1,1)
+end on
+
+on ui_control($slider_1)
+    declare local $a
+    $a := $slider_1
+    set_text($label,$a)
+    message ($a)
+end on
+
+on ui_control($slider_2)
+    declare local $a
+    $a := $slider_2
+    set_text($label,$a)
+    message ($a)
+end on
