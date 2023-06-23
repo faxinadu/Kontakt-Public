@@ -1,0 +1,110 @@
+{***********************************************
+Chord - Multi Version
+Author: Native Instruments
+Written by: Nicki Marinic
+Modified: July 23, 2009
+*************************************************}
+
+on init
+	message("")
+	set_script_title("Chord")
+	set_ui_height(2)
+
+	declare !chord_names[20]
+	!chord_names[0] := "Octave"
+	!chord_names[1] := "Fifth"
+	!chord_names[2] := "Fourth"
+	!chord_names[3] := "Third"
+	!chord_names[4] := "Maj"
+	!chord_names[5] := "Maj 6"
+	!chord_names[6] := "sus2"
+	!chord_names[7] := "sus4"
+	!chord_names[8] := "Maj 7"
+	!chord_names[9] := "Min"
+	!chord_names[10] := "Mi 6"
+	!chord_names[11] := "Mi 7"
+	!chord_names[12] := "Mi 7b5"
+	!chord_names[13] := "Mi +7"
+	!chord_names[14] := "Dom 7"
+	!chord_names[15] := "7 su4"
+	!chord_names[16] := "Dom 9"
+	!chord_names[17] := "Dim"
+	!chord_names[18] := "Dim 7"
+	!chord_names[19] := "Aug"
+	
+	declare %chord_types[20*4] := (...
+	12, 0, 0, 0,...
+	7, 0, 0, 0,...
+	5, 0, 0, 0,...
+	4, 0, 0, 0,...
+	4, 7, 0, 0,...
+	4, 7, 9, 0,...
+	2, 7, 0, 0,...
+	5, 7, 0, 0,...
+	4, 7, 11, 0,...
+	3, 7, 0, 0,...
+	3, 7, 9, 0,...
+	3, 7, 10, 0,...
+	3, 6, 10, 0,...
+	3, 7, 11, 0,...
+	4, 7, 10, 0,...
+	5, 7, 10, 0,...
+	4, 7, 10, 14,...
+	3, 6, 0, 0,...
+	3, 6, 9, 0,...
+	4, 8, 0, 0)
+	
+	declare ui_knob $Chord_knob (0,19,1)
+	set_text($Chord_knob,"Chord")
+	set_knob_defval ($Chord_knob, 0)
+  	set_knob_unit ($Chord_knob, $KNOB_UNIT_NONE)
+  	$Chord_knob := 0
+  	set_knob_label ($Chord_knob,!chord_names[$Chord_knob])
+	make_persistent ($Chord_knob)
+	set_control_help($Chord_knob,"Chord: harmonizes incoming MIDI notes to the specified chord.") 
+	move_control ($Chord_knob,3,2)
+	
+	_read_persistent_var ($Chord_knob)
+	set_knob_label ($Chord_knob,!chord_names[$Chord_knob])
+
+	declare $new_note
+	declare $count
+	
+end on
+
+on midi_in
+	if ($MIDI_COMMAND = $MIDI_COMMAND_NOTE_ON and $MIDI_BYTE_2 > 0)
+		$new_note := $MIDI_BYTE_1
+		$count := 0
+		while($count < 4)
+			if (%chord_types[($chord_knob*4)+$count] > 0)
+				$new_note := $MIDI_BYTE_1 + %chord_types[($chord_knob*4)+$count]
+				if($new_note < 128)
+					set_midi($MIDI_CHANNEL,$MIDI_COMMAND_NOTE_ON,$new_note,$MIDI_BYTE_2)
+				end if
+			end if
+			inc($count)
+		end while
+	end if
+	
+	{NOTE OFF}
+	if ($MIDI_COMMAND = $MIDI_COMMAND_NOTE_OFF or ($MIDI_COMMAND = $MIDI_COMMAND_NOTE_ON and $MIDI_BYTE_2 = 0))
+		$new_note := $MIDI_BYTE_1
+		$count := 0
+		while($count < 4)
+			if (%chord_types[($chord_knob*4)+$count] > 0)
+				$new_note := $MIDI_BYTE_1 + %chord_types[($chord_knob*4)+$count]
+				if($new_note < 128)
+					set_midi($MIDI_CHANNEL,$MIDI_COMMAND_NOTE_OFF,$new_note,$MIDI_BYTE_2)
+				end if
+			end if
+			inc($count)
+		end while
+	end if
+	
+end on
+
+on ui_control ($Chord_knob)
+	set_knob_label ($Chord_knob,!chord_names[$Chord_knob])
+end on
+
