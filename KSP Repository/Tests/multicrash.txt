@@ -1,0 +1,778 @@
+-------------------------------------
+Translated Report (Full Report Below)
+-------------------------------------
+
+Process:               Kontakt 7 [18137]
+Path:                  /private/var/folders/*/Kontakt 7.app/Contents/MacOS/Kontakt 7
+Identifier:            com.native-instruments.Kontakt 7
+Version:               7.3.999-PullRequest3304.520+Branch.PR-3304.Source.30af479959.Target.8c87106fe8 (7.3.999 (Kontakt/Kontakt/PR-3304.520), Copyright © 2023 Native Instruments GmbH)
+Code Type:             ARM-64 (Native)
+Parent Process:        launchd [1]
+User ID:               501
+
+Date/Time:             2023-06-16 10:52:02.1852 +0200
+OS Version:            macOS 13.4 (22F66)
+Report Version:        12
+Anonymous UUID:        3DD72AF0-7122-A97A-D26A-351AF9506491
+
+Sleep/Wake UUID:       07BBF4A7-86F1-4295-BB35-C1C38ACE98F3
+
+Time Awake Since Boot: 70000 seconds
+Time Since Wake:       17324 seconds
+
+System Integrity Protection: enabled
+
+Crashed Thread:        0  Dispatch queue: com.apple.main-thread
+
+Exception Type:        EXC_BAD_ACCESS (SIGSEGV)
+Exception Codes:       KERN_INVALID_ADDRESS at 0x0000000000008590
+Exception Codes:       0x0000000000000001, 0x0000000000008590
+
+Termination Reason:    Namespace SIGNAL, Code 11 Segmentation fault: 11
+Terminating Process:   exc handler [18137]
+
+VM Region Info: 0x8590 is not in any region.  Bytes before following region: 4334369392
+      REGION TYPE                    START - END         [ VSIZE] PRT/MAX SHRMOD  REGION DETAIL
+      UNUSED SPACE AT START
+--->  
+      __TEXT                      10259c000-107a54000    [ 84.7M] r-x/r-x SM=COW  ...cOS/Kontakt 7
+
+Thread 0 Crashed::  Dispatch queue: com.apple.main-thread
+0   Kontakt 7                     	       0x1028100a8 BScriptParser::isUIControlValid(int, int) const + 284
+1   Kontakt 7                     	       0x10280fe80 BScriptParser::getUIControl(int, int) + 32
+2   Kontakt 7                     	       0x10297272c BEngine::fetchKSPControlModified(int, int, int, int) const + 104
+3   Kontakt 7                     	       0x102aea17c konnekt::ParameterItem::syncToAudioEngine(BEngine&) + 792
+4   Kontakt 7                     	       0x102ae84f8 konnekt::Parameters::onTimerEvent() + 64
+5   Kontakt 7                     	       0x1025af4f4 nod::signal_type<nod::multithread_policy, void ()>::operator()() const + 164
+6   Kontakt 7                     	       0x1028ec918 BEngineTimer::onEvent(unsigned int, NI::UIA::EventData*) + 24
+7   Kontakt 7                     	       0x103eb1734 NI::UIA::EventTimerManager::notifySubscribers() + 168
+8   Foundation                    	       0x1a248a448 __NSFireTimer + 104
+9   CoreFoundation                	       0x1a14f43c8 __CFRUNLOOP_IS_CALLING_OUT_TO_A_TIMER_CALLBACK_FUNCTION__ + 32
+10  CoreFoundation                	       0x1a14f4070 __CFRunLoopDoTimer + 940
+11  CoreFoundation                	       0x1a14f3bc8 __CFRunLoopDoTimers + 356
+12  CoreFoundation                	       0x1a14d9348 __CFRunLoopRun + 1852
+13  CoreFoundation                	       0x1a14d84b8 CFRunLoopRunSpecific + 612
+14  HIToolbox                     	       0x1aad22c40 RunCurrentEventLoopInMode + 292
+15  HIToolbox                     	       0x1aad22a7c ReceiveNextEventCommon + 648
+16  HIToolbox                     	       0x1aad227d4 _BlockUntilNextEventMatchingListInModeWithFilter + 76
+17  AppKit                        	       0x1a46f9d44 _DPSNextEvent + 636
+18  AppKit                        	       0x1a46f8ee0 -[NSApplication(NSEvent) _nextEventMatchingEventMask:untilDate:inMode:dequeue:] + 716
+19  AppKit                        	       0x1a46ed344 -[NSApplication run] + 464
+20  Foundation                    	       0x1a2441e28 -[NSObject(NSThreadPerformAdditions) performSelector:onThread:withObject:waitUntilDone:modes:] + 848
+21  Foundation                    	       0x1a2441930 -[NSObject(NSThreadPerformAdditions) performSelectorOnMainThread:withObject:waitUntilDone:] + 112
+22  Kontakt 7                     	       0x102cbfa40 main + 140
+23  dyld                          	       0x1a10a3f28 start + 2236
+
+Thread 1:: SC3 TaskScheduler Worker
+0   libsystem_kernel.dylib        	       0x1a13bf710 __psynch_cvwait + 8
+1   libsystem_pthread.dylib       	       0x1a13fc574 _pthread_cond_wait + 1232
+2   Kontakt 7                     	       0x104cefe24 boost::asio::detail::scheduler::do_run_one(boost::asio::detail::conditionally_enabled_mutex::scoped_lock&, boost::asio::detail::scheduler_thread_info&, boost::system::error_code const&) + 280
+3   Kontakt 7                     	       0x104ceae50 boost::asio::detail::scheduler::run(boost::system::error_code&) + 196
+4   Kontakt 7                     	       0x104cead60 boost::asio::io_context::run() + 32
+5   Kontakt 7                     	       0x104bd74dc NI::SC3::TaskScheduler::workerThread() + 136
+6   Kontakt 7                     	       0x104c26874 void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, std::__1::function<void ()>>>(void*) + 56
+7   libsystem_pthread.dylib       	       0x1a13fbfa8 _pthread_start + 148
+8   libsystem_pthread.dylib       	       0x1a13f6da0 thread_start + 8
+
+Thread 2:: SC3 TaskScheduler Worker
+0   libsystem_kernel.dylib        	       0x1a13bf710 __psynch_cvwait + 8
+1   libsystem_pthread.dylib       	       0x1a13fc574 _pthread_cond_wait + 1232
+2   Kontakt 7                     	       0x104cefe24 boost::asio::detail::scheduler::do_run_one(boost::asio::detail::conditionally_enabled_mutex::scoped_lock&, boost::asio::detail::scheduler_thread_info&, boost::system::error_code const&) + 280
+3   Kontakt 7                     	       0x104ceae50 boost::asio::detail::scheduler::run(boost::system::error_code&) + 196
+4   Kontakt 7                     	       0x104cead60 boost::asio::io_context::run() + 32
+5   Kontakt 7                     	       0x104bd74dc NI::SC3::TaskScheduler::workerThread() + 136
+6   Kontakt 7                     	       0x104c26874 void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, std::__1::function<void ()>>>(void*) + 56
+7   libsystem_pthread.dylib       	       0x1a13fbfa8 _pthread_start + 148
+8   libsystem_pthread.dylib       	       0x1a13f6da0 thread_start + 8
+
+Thread 3:: Link Main
+0   libsystem_kernel.dylib        	       0x1a13c2060 kevent + 8
+1   Kontakt 7                     	       0x104ced344 boost::asio::detail::kqueue_reactor::run(long, boost::asio::detail::op_queue<boost::asio::detail::scheduler_operation>&) + 280
+2   Kontakt 7                     	       0x104cefe98 boost::asio::detail::scheduler::do_run_one(boost::asio::detail::conditionally_enabled_mutex::scoped_lock&, boost::asio::detail::scheduler_thread_info&, boost::system::error_code const&) + 396
+3   Kontakt 7                     	       0x104ceae50 boost::asio::detail::scheduler::run(boost::system::error_code&) + 196
+4   Kontakt 7                     	       0x104cead60 boost::asio::io_context::run() + 32
+5   Kontakt 7                     	       0x1031e6018 ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>::Context<ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler>(ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler)::'lambda'(boost::asio::io_context&, ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler)::operator()(boost::asio::io_context&, ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler) const + 76
+6   Kontakt 7                     	       0x1031e5f10 void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, std::__1::thread ableton::platforms::darwin::ThreadFactory::makeThread<ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>::Context<ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler>(ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler)::'lambda'(boost::asio::io_context&, ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler), std::__1::reference_wrapper<boost::asio::io_context>, ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler>(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler&&, std::__1::reference_wrapper<boost::asio::io_context>&&, ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler&&)::'lambda'(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>::Context<ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler>(ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler)::'lambda'(boost::asio::io_context&, ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler)&&, std::__1::reference_wrapper<boost::asio::io_context>&&, ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler&&), std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>::Context<ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler>(ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler)::'lambda'(boost::asio::io_context&, ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler), std::__1::reference_wrapper<boost::asio::io_context>, ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler>>(void*) + 100
+7   libsystem_pthread.dylib       	       0x1a13fbfa8 _pthread_start + 148
+8   libsystem_pthread.dylib       	       0x1a13f6da0 thread_start + 8
+
+Thread 4:: Link Dispatcher
+0   libsystem_kernel.dylib        	       0x1a13bf710 __psynch_cvwait + 8
+1   libsystem_pthread.dylib       	       0x1a13fc574 _pthread_cond_wait + 1232
+2   libc++.1.dylib                	       0x1a1324f84 std::__1::condition_variable::__do_timed_wait(std::__1::unique_lock<std::__1::mutex>&, std::__1::chrono::time_point<std::__1::chrono::system_clock, std::__1::chrono::duration<long long, std::__1::ratio<1l, 1000000000l>>>) + 100
+3   Kontakt 7                     	       0x1031fb2a8 ableton::platforms::asio::LockFreeCallbackDispatcher<std::__1::function<void ()>, std::__1::chrono::duration<long long, std::__1::ratio<1l, 1000l>>, ableton::platforms::darwin::ThreadFactory>::run() + 304
+4   Kontakt 7                     	       0x1031fb0bc void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, std::__1::thread ableton::platforms::darwin::ThreadFactory::makeThread<ableton::platforms::asio::LockFreeCallbackDispatcher<std::__1::function<void ()>, std::__1::chrono::duration<long long, std::__1::ratio<1l, 1000l>>, ableton::platforms::darwin::ThreadFactory>::LockFreeCallbackDispatcher(std::__1::function<void ()>, std::__1::chrono::duration<long long, std::__1::ratio<1l, 1000l>>)::'lambda'()>(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, ableton::platforms::asio::LockFreeCallbackDispatcher<std::__1::function<void ()>, std::__1::chrono::duration<long long, std::__1::ratio<1l, 1000l>>, ableton::platforms::darwin::ThreadFactory>::LockFreeCallbackDispatcher(std::__1::function<void ()>, std::__1::chrono::duration<long long, std::__1::ratio<1l, 1000l>>)::'lambda'()&&)::'lambda'(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, ableton::platforms::asio::LockFreeCallbackDispatcher<std::__1::function<void ()>, std::__1::chrono::duration<long long, std::__1::ratio<1l, 1000l>>, ableton::platforms::darwin::ThreadFactory>::LockFreeCallbackDispatcher(std::__1::function<void ()>, std::__1::chrono::duration<long long, std::__1::ratio<1l, 1000l>>)::'lambda'()&&), std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, ableton::platforms::asio::LockFreeCallbackDispatcher<std::__1::function<void ()>, std::__1::chrono::duration<long long, std::__1::ratio<1l, 1000l>>, ableton::platforms::darwin::ThreadFactory>::LockFreeCallbackDispatcher(std::__1::function<void ()>, std::__1::chrono::duration<long long, std::__1::ratio<1l, 1000l>>)::'lambda'()>>(void*) + 96
+5   libsystem_pthread.dylib       	       0x1a13fbfa8 _pthread_start + 148
+6   libsystem_pthread.dylib       	       0x1a13f6da0 thread_start + 8
+
+Thread 5:: AuxProcess #1
+0   libsystem_kernel.dylib        	       0x1a13bbe90 semaphore_wait_trap + 8
+1   libdispatch.dylib             	       0x1a124c99c _dispatch_sema4_wait + 28
+2   libdispatch.dylib             	       0x1a124d050 _dispatch_semaphore_wait_slow + 132
+3   Kontakt 7                     	       0x10298f140 BEngine::AuxProcessThreadProc(int) + 352
+4   Kontakt 7                     	       0x10298efb4 BEngine::AuxProcessThread::run() + 84
+5   Kontakt 7                     	       0x102a23498 void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (BEngine::AuxProcessThread::*)(), BEngine::AuxProcessThread*>>(void*) + 64
+6   libsystem_pthread.dylib       	       0x1a13fbfa8 _pthread_start + 148
+7   libsystem_pthread.dylib       	       0x1a13f6da0 thread_start + 8
+
+Thread 6:: AuxProcess #2
+0   libsystem_kernel.dylib        	       0x1a13bbe90 semaphore_wait_trap + 8
+1   libdispatch.dylib             	       0x1a124c99c _dispatch_sema4_wait + 28
+2   libdispatch.dylib             	       0x1a124d050 _dispatch_semaphore_wait_slow + 132
+3   Kontakt 7                     	       0x10298f140 BEngine::AuxProcessThreadProc(int) + 352
+4   Kontakt 7                     	       0x10298efb4 BEngine::AuxProcessThread::run() + 84
+5   Kontakt 7                     	       0x102a23498 void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (BEngine::AuxProcessThread::*)(), BEngine::AuxProcessThread*>>(void*) + 64
+6   libsystem_pthread.dylib       	       0x1a13fbfa8 _pthread_start + 148
+7   libsystem_pthread.dylib       	       0x1a13f6da0 thread_start + 8
+
+Thread 7:: AuxProcess #3
+0   libsystem_kernel.dylib        	       0x1a13bbe90 semaphore_wait_trap + 8
+1   libdispatch.dylib             	       0x1a124c99c _dispatch_sema4_wait + 28
+2   libdispatch.dylib             	       0x1a124d050 _dispatch_semaphore_wait_slow + 132
+3   Kontakt 7                     	       0x10298f140 BEngine::AuxProcessThreadProc(int) + 352
+4   Kontakt 7                     	       0x10298efb4 BEngine::AuxProcessThread::run() + 84
+5   Kontakt 7                     	       0x102a23498 void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (BEngine::AuxProcessThread::*)(), BEngine::AuxProcessThread*>>(void*) + 64
+6   libsystem_pthread.dylib       	       0x1a13fbfa8 _pthread_start + 148
+7   libsystem_pthread.dylib       	       0x1a13f6da0 thread_start + 8
+
+Thread 8:: AuxProcess #4
+0   libsystem_kernel.dylib        	       0x1a13bbe90 semaphore_wait_trap + 8
+1   libdispatch.dylib             	       0x1a124c99c _dispatch_sema4_wait + 28
+2   libdispatch.dylib             	       0x1a124d050 _dispatch_semaphore_wait_slow + 132
+3   Kontakt 7                     	       0x10298f140 BEngine::AuxProcessThreadProc(int) + 352
+4   Kontakt 7                     	       0x10298efb4 BEngine::AuxProcessThread::run() + 84
+5   Kontakt 7                     	       0x102a23498 void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (BEngine::AuxProcessThread::*)(), BEngine::AuxProcessThread*>>(void*) + 64
+6   libsystem_pthread.dylib       	       0x1a13fbfa8 _pthread_start + 148
+7   libsystem_pthread.dylib       	       0x1a13f6da0 thread_start + 8
+
+Thread 9:: AuxProcess #5
+0   libsystem_kernel.dylib        	       0x1a13bbe90 semaphore_wait_trap + 8
+1   libdispatch.dylib             	       0x1a124c99c _dispatch_sema4_wait + 28
+2   libdispatch.dylib             	       0x1a124d050 _dispatch_semaphore_wait_slow + 132
+3   Kontakt 7                     	       0x10298f140 BEngine::AuxProcessThreadProc(int) + 352
+4   Kontakt 7                     	       0x10298efb4 BEngine::AuxProcessThread::run() + 84
+5   Kontakt 7                     	       0x102a23498 void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (BEngine::AuxProcessThread::*)(), BEngine::AuxProcessThread*>>(void*) + 64
+6   libsystem_pthread.dylib       	       0x1a13fbfa8 _pthread_start + 148
+7   libsystem_pthread.dylib       	       0x1a13f6da0 thread_start + 8
+
+Thread 10:: AuxProcess #6
+0   libsystem_kernel.dylib        	       0x1a13bbe90 semaphore_wait_trap + 8
+1   libdispatch.dylib             	       0x1a124c99c _dispatch_sema4_wait + 28
+2   libdispatch.dylib             	       0x1a124d050 _dispatch_semaphore_wait_slow + 132
+3   Kontakt 7                     	       0x10298f140 BEngine::AuxProcessThreadProc(int) + 352
+4   Kontakt 7                     	       0x10298efb4 BEngine::AuxProcessThread::run() + 84
+5   Kontakt 7                     	       0x102a23498 void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (BEngine::AuxProcessThread::*)(), BEngine::AuxProcessThread*>>(void*) + 64
+6   libsystem_pthread.dylib       	       0x1a13fbfa8 _pthread_start + 148
+7   libsystem_pthread.dylib       	       0x1a13f6da0 thread_start + 8
+
+Thread 11:: AuxProcess #7
+0   libsystem_kernel.dylib        	       0x1a13bbe90 semaphore_wait_trap + 8
+1   libdispatch.dylib             	       0x1a124c99c _dispatch_sema4_wait + 28
+2   libdispatch.dylib             	       0x1a124d050 _dispatch_semaphore_wait_slow + 132
+3   Kontakt 7                     	       0x10298f140 BEngine::AuxProcessThreadProc(int) + 352
+4   Kontakt 7                     	       0x10298efb4 BEngine::AuxProcessThread::run() + 84
+5   Kontakt 7                     	       0x102a23498 void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (BEngine::AuxProcessThread::*)(), BEngine::AuxProcessThread*>>(void*) + 64
+6   libsystem_pthread.dylib       	       0x1a13fbfa8 _pthread_start + 148
+7   libsystem_pthread.dylib       	       0x1a13f6da0 thread_start + 8
+
+Thread 12:: AuxProcess #8
+0   libsystem_kernel.dylib        	       0x1a13bbe90 semaphore_wait_trap + 8
+1   libdispatch.dylib             	       0x1a124c99c _dispatch_sema4_wait + 28
+2   libdispatch.dylib             	       0x1a124d050 _dispatch_semaphore_wait_slow + 132
+3   Kontakt 7                     	       0x10298f140 BEngine::AuxProcessThreadProc(int) + 352
+4   Kontakt 7                     	       0x10298efb4 BEngine::AuxProcessThread::run() + 84
+5   Kontakt 7                     	       0x102a23498 void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (BEngine::AuxProcessThread::*)(), BEngine::AuxProcessThread*>>(void*) + 64
+6   libsystem_pthread.dylib       	       0x1a13fbfa8 _pthread_start + 148
+7   libsystem_pthread.dylib       	       0x1a13f6da0 thread_start + 8
+
+Thread 13:: AuxProcess #9
+0   libsystem_kernel.dylib        	       0x1a13bbe90 semaphore_wait_trap + 8
+1   libdispatch.dylib             	       0x1a124c99c _dispatch_sema4_wait + 28
+2   libdispatch.dylib             	       0x1a124d050 _dispatch_semaphore_wait_slow + 132
+3   Kontakt 7                     	       0x10298f140 BEngine::AuxProcessThreadProc(int) + 352
+4   Kontakt 7                     	       0x10298efb4 BEngine::AuxProcessThread::run() + 84
+5   Kontakt 7                     	       0x102a23498 void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (BEngine::AuxProcessThread::*)(), BEngine::AuxProcessThread*>>(void*) + 64
+6   libsystem_pthread.dylib       	       0x1a13fbfa8 _pthread_start + 148
+7   libsystem_pthread.dylib       	       0x1a13f6da0 thread_start + 8
+
+Thread 14:: Disk
+0   libsystem_kernel.dylib        	       0x1a13bbe90 semaphore_wait_trap + 8
+1   libdispatch.dylib             	       0x1a124c99c _dispatch_sema4_wait + 28
+2   libdispatch.dylib             	       0x1a124d050 _dispatch_semaphore_wait_slow + 132
+3   Kontakt 7                     	       0x1028ebd2c BStreamingEngine::run() + 248
+4   Kontakt 7                     	       0x102a016ac void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (BStreamingEngine::*)(), BStreamingEngine*>>(void*) + 64
+5   libsystem_pthread.dylib       	       0x1a13fbfa8 _pthread_start + 148
+6   libsystem_pthread.dylib       	       0x1a13f6da0 thread_start + 8
+
+Thread 15:: BGLoading
+0   libsystem_kernel.dylib        	       0x1a13bbe90 semaphore_wait_trap + 8
+1   libdispatch.dylib             	       0x1a124c99c _dispatch_sema4_wait + 28
+2   libdispatch.dylib             	       0x1a124d050 _dispatch_semaphore_wait_slow + 132
+3   Kontakt 7                     	       0x1028a331c BBackgroundLoader::run() + 252
+4   Kontakt 7                     	       0x1029d3b10 void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (BBackgroundLoader::*)(), BBackgroundLoader*>>(void*) + 64
+5   libsystem_pthread.dylib       	       0x1a13fbfa8 _pthread_start + 148
+6   libsystem_pthread.dylib       	       0x1a13f6da0 thread_start + 8
+
+Thread 16:: ProcessMonitor
+0   libsystem_kernel.dylib        	       0x1a13bf50c __semwait_signal + 8
+1   libsystem_c.dylib             	       0x1a12a02d0 nanosleep + 220
+2   libc++.1.dylib                	       0x1a1332a18 std::__1::this_thread::sleep_for(std::__1::chrono::duration<long long, std::__1::ratio<1l, 1000000000l>> const&) + 84
+3   Kontakt 7                     	       0x1036745ec ni::kreator::process::ProcessMonitor::checkRunning() + 276
+4   Kontakt 7                     	       0x103674794 void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, ni::kreator::process::ProcessMonitor::ProcessMonitor(std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>>>, std::__1::chrono::duration<long long, std::__1::ratio<1l, 1000l>>)::$_0>>(void*) + 44
+5   libsystem_pthread.dylib       	       0x1a13fbfa8 _pthread_start + 148
+6   libsystem_pthread.dylib       	       0x1a13f6da0 thread_start + 8
+
+Thread 17:: caulk.messenger.shared:17
+0   libsystem_kernel.dylib        	       0x1a13bbe90 semaphore_wait_trap + 8
+1   caulk                         	       0x1aaa2f024 caulk::semaphore::timed_wait(double) + 212
+2   caulk                         	       0x1aaa2eed8 caulk::concurrent::details::worker_thread::run() + 36
+3   caulk                         	       0x1aaa2ebc8 void* caulk::thread_proxy<std::__1::tuple<caulk::thread::attributes, void (caulk::concurrent::details::worker_thread::*)(), std::__1::tuple<caulk::concurrent::details::worker_thread*>>>(void*) + 96
+4   libsystem_pthread.dylib       	       0x1a13fbfa8 _pthread_start + 148
+5   libsystem_pthread.dylib       	       0x1a13f6da0 thread_start + 8
+
+Thread 18:
+0   libsystem_kernel.dylib        	       0x1a13bbf14 mach_msg2_trap + 8
+1   libsystem_kernel.dylib        	       0x1a13ce240 mach_msg2_internal + 80
+2   libsystem_kernel.dylib        	       0x1a13c4b78 mach_msg_overwrite + 604
+3   libsystem_kernel.dylib        	       0x1a13bc290 mach_msg + 24
+4   CoreMIDI                      	       0x1b98a9708 XServerMachPort::ReceiveMessage(int&, void*, int&) + 104
+5   CoreMIDI                      	       0x1b98ddce8 MIDIProcess::MIDIInPortThread::Run() + 164
+6   CoreMIDI                      	       0x1b98c52e4 CADeprecated::XThread::RunHelper(void*) + 48
+7   CoreMIDI                      	       0x1b98c6610 CADeprecated::CAPThread::Entry(CADeprecated::CAPThread*) + 92
+8   libsystem_pthread.dylib       	       0x1a13fbfa8 _pthread_start + 148
+9   libsystem_pthread.dylib       	       0x1a13f6da0 thread_start + 8
+
+Thread 19:: IPCClient
+0   libsystem_kernel.dylib        	       0x1a13c4834 poll + 8
+1   Kontakt 7                     	       0x104cf2db8 boost::asio::detail::socket_ops::poll_write(int, unsigned char, int, boost::system::error_code&) + 84
+2   Kontakt 7                     	       0x104cf3044 boost::asio::detail::socket_ops::sync_send1(int, unsigned char, void const*, unsigned long, int, boost::system::error_code&) + 260
+3   Kontakt 7                     	       0x102d258c8 ni::msgpack_rpc::unix_domain_sockets::socket_helper::send(ni::msgpack_support::size_prefixed_buffer const&) + 116
+4   Kontakt 7                     	       0x102d20adc void ni::msgpack_support::msgpack_reusable_pack_buffer<ni::msgpack_support::size_prefixed_buffer, 1048576ul>::with_buffer<void ni::msgpack_rpc::rpc_client_core::notify_rpc_impl<std::__1::basic_string_view<char, std::__1::char_traits<char>>, std::__1::basic_string_view<char, std::__1::char_traits<char>>, std::__1::basic_string_view<char, std::__1::char_traits<char>>&, ni::odr::models::nks2_page_viewmodel_data<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, strong::type<strong::type<std::__1::array<std::byte, 32ul>, ni::odr::utils::sha256_tag, strong::range, strong::indexed<unsigned long>, strong::ordered, strong::default_constructible, strong::equality>, ni::odr::models::asset_handle_tag, strong::range, strong::indexed<unsigned long>, strong::ordered, strong::default_constructible, strong::equality>> const&>(std::__1::basic_string_view<char, std::__1::char_traits<char>>, std::__1::basic_string_view<char, std::__1::char_traits<char>>&&, std::__1::basic_string_view<char, std::__1::char_traits<char>>&, ni::odr::models::nks2_page_viewmodel_data<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, strong::type<strong::type<std::__1::array<std::byte, 32ul>, ni::odr::utils::sha256_tag, strong::range, strong::indexed<unsigned long>, strong::ordered, strong::default_constructible, strong::equality>, ni::odr::models::asset_handle_tag, strong::range, strong::indexed<unsigned long>, strong::ordered, strong::default_constructible, strong::equality>> const&)::'lambda'(ni::msgpack_support::size_prefixed_buffer&)>(std::__1::basic_string_view<char, std::__1::char_traits<char>>&&) + 204
+5   Kontakt 7                     	       0x102d14d0c ni::odr::ipc::kks::ipc_client_core::nks2_page_set_data(std::__1::basic_string_view<char, std::__1::char_traits<char>>, ni::odr::models::nks2_page_viewmodel_data<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, strong::type<strong::type<std::__1::array<std::byte, 32ul>, ni::odr::utils::sha256_tag, strong::range, strong::indexed<unsigned long>, strong::ordered, strong::default_constructible, strong::equality>, ni::odr::models::asset_handle_tag, strong::range, strong::indexed<unsigned long>, strong::ordered, strong::default_constructible, strong::equality>> const&) + 352
+6   Kontakt 7                     	       0x102d10cd4 boost::asio::detail::executor_op<boost::asio::detail::binder0<ni::odr::ipc::kks::ipc_client::nks2_page_set_data(std::__1::shared_ptr<ni::odr::ipc::kks::odr_device>, ni::odr::models::nks2_page_viewmodel_data<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, strong::type<strong::type<std::__1::array<std::byte, 32ul>, ni::odr::utils::sha256_tag, strong::range, strong::indexed<unsigned long>, strong::ordered, strong::default_constructible, strong::equality>, ni::odr::models::asset_handle_tag, strong::range, strong::indexed<unsigned long>, strong::ordered, strong::default_constructible, strong::equality>>)::$_25>, std::__1::allocator<void>, boost::asio::detail::scheduler_operation>::do_complete(void*, boost::asio::detail::scheduler_operation*, boost::system::error_code const&, unsigned long) + 204
+7   Kontakt 7                     	       0x104ceff7c boost::asio::detail::scheduler::do_run_one(boost::asio::detail::conditionally_enabled_mutex::scoped_lock&, boost::asio::detail::scheduler_thread_info&, boost::system::error_code const&) + 624
+8   Kontakt 7                     	       0x104ceae50 boost::asio::detail::scheduler::run(boost::system::error_code&) + 196
+9   Kontakt 7                     	       0x104cead60 boost::asio::io_context::run() + 32
+10  Kontakt 7                     	       0x102d05afc void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, ni::odr::ipc::kks::ipc_client::ipc_client(ni::odr::instance_info, std::__1::shared_ptr<ni::odr::ipc::kks::abstract_ipc_client_observer>, std::__1::shared_ptr<ni::odr::ipc::abstract_main_thread_dispatcher>, std::__1::basic_string_view<char, std::__1::char_traits<char>>)::$_6>>(void*) + 152
+11  libsystem_pthread.dylib       	       0x1a13fbfa8 _pthread_start + 148
+12  libsystem_pthread.dylib       	       0x1a13f6da0 thread_start + 8
+
+Thread 20:: bg jobs
+0   libsystem_kernel.dylib        	       0x1a13bbe90 semaphore_wait_trap + 8
+1   libdispatch.dylib             	       0x1a124c99c _dispatch_sema4_wait + 28
+2   libdispatch.dylib             	       0x1a124d050 _dispatch_semaphore_wait_slow + 132
+3   Kontakt 7                     	       0x10283ce30 SerialJobBGThread::run() + 164
+4   Kontakt 7                     	       0x10283eed8 void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (SerialJobBGThread::*)(), SerialJobBGThread*>>(void*) + 64
+5   libsystem_pthread.dylib       	       0x1a13fbfa8 _pthread_start + 148
+6   libsystem_pthread.dylib       	       0x1a13f6da0 thread_start + 8
+
+Thread 21:: QQmlThread
+0   libsystem_kernel.dylib        	       0x1a13c4834 poll + 8
+1   Kontakt 7                     	       0x10512ee9c NI_6_3_2_R4::qt_safe_poll(pollfd*, unsigned int, timespec const*) + 436
+2   Kontakt 7                     	       0x1051301a8 NI_6_3_2_R4::QEventDispatcherUNIX::processEvents(NI_6_3_2_R4::QFlags<NI_6_3_2_R4::QEventLoop::ProcessEventsFlag>) + 868
+3   Kontakt 7                     	       0x1050267f4 NI_6_3_2_R4::QEventLoop::exec(NI_6_3_2_R4::QFlags<NI_6_3_2_R4::QEventLoop::ProcessEventsFlag>) + 544
+4   Kontakt 7                     	       0x1050d4768 NI_6_3_2_R4::QThread::exec() + 176
+5   Kontakt 7                     	       0x1042c8c60 NI_6_3_2_R4::QQmlThreadPrivate::run() + 104
+6   Kontakt 7                     	       0x105133f18 NI_6_3_2_R4::QThreadPrivate::start(void*) + 332
+7   libsystem_pthread.dylib       	       0x1a13fbfa8 _pthread_start + 148
+8   libsystem_pthread.dylib       	       0x1a13f6da0 thread_start + 8
+
+Thread 22:: DB3ScanThread
+0   libsystem_kernel.dylib        	       0x1a13bf710 __psynch_cvwait + 8
+1   libsystem_pthread.dylib       	       0x1a13fc574 _pthread_cond_wait + 1232
+2   libc++.1.dylib                	       0x1a1324ef0 std::__1::condition_variable::wait(std::__1::unique_lock<std::__1::mutex>&) + 28
+3   Kontakt 7                     	       0x103eac89c void std::__1::condition_variable_any::wait<std::__1::unique_lock<std::__1::recursive_mutex>>(std::__1::unique_lock<std::__1::recursive_mutex>&) + 100
+4   Kontakt 7                     	       0x103dc4598 NI::DB3::ScanWorker::threadFn() + 196
+5   Kontakt 7                     	       0x103eabdbc void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, NI::DB3::ScanWorker::ScanWorker(std::__1::shared_ptr<NI::DB3::IScanTaskNotification>)::$_79>>(void*) + 44
+6   libsystem_pthread.dylib       	       0x1a13fbfa8 _pthread_start + 148
+7   libsystem_pthread.dylib       	       0x1a13f6da0 thread_start + 8
+
+Thread 23:: QQuickPixmapReader
+0   libsystem_kernel.dylib        	       0x1a13c4834 poll + 8
+1   Kontakt 7                     	       0x10512ee9c NI_6_3_2_R4::qt_safe_poll(pollfd*, unsigned int, timespec const*) + 436
+2   Kontakt 7                     	       0x1051301a8 NI_6_3_2_R4::QEventDispatcherUNIX::processEvents(NI_6_3_2_R4::QFlags<NI_6_3_2_R4::QEventLoop::ProcessEventsFlag>) + 868
+3   Kontakt 7                     	       0x1050267f4 NI_6_3_2_R4::QEventLoop::exec(NI_6_3_2_R4::QFlags<NI_6_3_2_R4::QEventLoop::ProcessEventsFlag>) + 544
+4   Kontakt 7                     	       0x1050d4768 NI_6_3_2_R4::QThread::exec() + 176
+5   Kontakt 7                     	       0x104032b58 NI_6_3_2_R4::QQuickPixmapReader::run() + 316
+6   Kontakt 7                     	       0x105133f18 NI_6_3_2_R4::QThreadPrivate::start(void*) + 332
+7   libsystem_pthread.dylib       	       0x1a13fbfa8 _pthread_start + 148
+8   libsystem_pthread.dylib       	       0x1a13f6da0 thread_start + 8
+
+Thread 24:
+0   libsystem_kernel.dylib        	       0x1a13c2060 kevent + 8
+1   Kontakt 7                     	       0x1033910e0 zmq::kqueue_t::loop() + 228
+2   Kontakt 7                     	       0x1033acab4 thread_routine(void*) + 56
+3   libsystem_pthread.dylib       	       0x1a13fbfa8 _pthread_start + 148
+4   libsystem_pthread.dylib       	       0x1a13f6da0 thread_start + 8
+
+Thread 25:
+0   libsystem_kernel.dylib        	       0x1a13c2060 kevent + 8
+1   Kontakt 7                     	       0x1033910e0 zmq::kqueue_t::loop() + 228
+2   Kontakt 7                     	       0x1033acab4 thread_routine(void*) + 56
+3   libsystem_pthread.dylib       	       0x1a13fbfa8 _pthread_start + 148
+4   libsystem_pthread.dylib       	       0x1a13f6da0 thread_start + 8
+
+Thread 26:
+0   libsystem_kernel.dylib        	       0x1a13c4834 poll + 8
+1   Kontakt 7                     	       0x10339af54 zmq_poll + 452
+2   Kontakt 7                     	       0x10337dc40 ni::cloud::native_access_rpc::RpcSubscriber::receiveBlocking() + 60
+3   Kontakt 7                     	       0x10337dac4 ni::cloud::native_access_rpc::RpcClientImpl::receiveAndProcessMessages() + 32
+4   Kontakt 7                     	       0x10337e2dc void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, ni::cloud::native_access_rpc::RpcClientImpl::listen()::$_0>>(void*) + 64
+5   libsystem_pthread.dylib       	       0x1a13fbfa8 _pthread_start + 148
+6   libsystem_pthread.dylib       	       0x1a13f6da0 thread_start + 8
+
+Thread 27:: com.apple.audio.IOThread.client
+0   libsystem_kernel.dylib        	       0x1a13bbf14 mach_msg2_trap + 8
+1   libsystem_kernel.dylib        	       0x1a13ce240 mach_msg2_internal + 80
+2   libsystem_kernel.dylib        	       0x1a13c4b78 mach_msg_overwrite + 604
+3   libsystem_kernel.dylib        	       0x1a13bc290 mach_msg + 24
+4   CoreAudio                     	       0x1a37e7624 HALB_MachPort::SendSimpleMessageWithSimpleReply(unsigned int, unsigned int, int, int&, bool, unsigned int) + 104
+5   CoreAudio                     	       0x1a36d4d14 HALC_ProxyIOContext::IOWorkLoop() + 3516
+6   CoreAudio                     	       0x1a36d387c invocation function for block in HALC_ProxyIOContext::HALC_ProxyIOContext(unsigned int, unsigned int) + 116
+7   CoreAudio                     	       0x1a3836564 HALB_IOThread::Entry(void*) + 88
+8   libsystem_pthread.dylib       	       0x1a13fbfa8 _pthread_start + 148
+9   libsystem_pthread.dylib       	       0x1a13f6da0 thread_start + 8
+
+Thread 28:
+0   libsystem_kernel.dylib        	       0x1a13c2060 kevent + 8
+1   Kontakt 7                     	       0x104ced344 boost::asio::detail::kqueue_reactor::run(long, boost::asio::detail::op_queue<boost::asio::detail::scheduler_operation>&) + 280
+2   Kontakt 7                     	       0x104cefe98 boost::asio::detail::scheduler::do_run_one(boost::asio::detail::conditionally_enabled_mutex::scoped_lock&, boost::asio::detail::scheduler_thread_info&, boost::system::error_code const&) + 396
+3   Kontakt 7                     	       0x104ceae50 boost::asio::detail::scheduler::run(boost::system::error_code&) + 196
+4   Kontakt 7                     	       0x104cead60 boost::asio::io_context::run() + 32
+5   Kontakt 7                     	       0x104cb57a0 boost::asio::detail::posix_thread::func<(anonymous namespace)::threadpool_impl::add_thread()::'lambda'()>::run() + 20
+6   Kontakt 7                     	       0x104cedab0 boost_asio_detail_posix_thread_function + 28
+7   libsystem_pthread.dylib       	       0x1a13fbfa8 _pthread_start + 148
+8   libsystem_pthread.dylib       	       0x1a13f6da0 thread_start + 8
+
+Thread 29:
+0   libsystem_kernel.dylib        	       0x1a13bf710 __psynch_cvwait + 8
+1   libsystem_pthread.dylib       	       0x1a13fc574 _pthread_cond_wait + 1232
+2   Kontakt 7                     	       0x104cefe24 boost::asio::detail::scheduler::do_run_one(boost::asio::detail::conditionally_enabled_mutex::scoped_lock&, boost::asio::detail::scheduler_thread_info&, boost::system::error_code const&) + 280
+3   Kontakt 7                     	       0x104ceae50 boost::asio::detail::scheduler::run(boost::system::error_code&) + 196
+4   Kontakt 7                     	       0x104cf8898 boost::asio::detail::posix_thread::func<boost::asio::detail::resolver_service_base::work_scheduler_runner>::run() + 32
+5   Kontakt 7                     	       0x104cedab0 boost_asio_detail_posix_thread_function + 28
+6   libsystem_pthread.dylib       	       0x1a13fbfa8 _pthread_start + 148
+7   libsystem_pthread.dylib       	       0x1a13f6da0 thread_start + 8
+
+Thread 30:: com.apple.NSEventThread
+0   libsystem_kernel.dylib        	       0x1a13bbf14 mach_msg2_trap + 8
+1   libsystem_kernel.dylib        	       0x1a13ce240 mach_msg2_internal + 80
+2   libsystem_kernel.dylib        	       0x1a13c4b78 mach_msg_overwrite + 604
+3   libsystem_kernel.dylib        	       0x1a13bc290 mach_msg + 24
+4   CoreFoundation                	       0x1a14da7e4 __CFRunLoopServiceMachPort + 160
+5   CoreFoundation                	       0x1a14d90c4 __CFRunLoopRun + 1208
+6   CoreFoundation                	       0x1a14d84b8 CFRunLoopRunSpecific + 612
+7   AppKit                        	       0x1a4824334 _NSEventThread + 172
+8   libsystem_pthread.dylib       	       0x1a13fbfa8 _pthread_start + 148
+9   libsystem_pthread.dylib       	       0x1a13f6da0 thread_start + 8
+
+Thread 31:: URET_Worker
+0   libsystem_kernel.dylib        	       0x1a13bf710 __psynch_cvwait + 8
+1   libsystem_pthread.dylib       	       0x1a13fc574 _pthread_cond_wait + 1232
+2   libc++.1.dylib                	       0x1a1324ef0 std::__1::condition_variable::wait(std::__1::unique_lock<std::__1::mutex>&) + 28
+3   Kontakt 7                     	       0x10334be90 ni::uret::WorkerThread::main() + 184
+4   Kontakt 7                     	       0x10337a0a0 void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, ni::uret::WorkerThread::start()::$_4>>(void*) + 44
+5   libsystem_pthread.dylib       	       0x1a13fbfa8 _pthread_start + 148
+6   libsystem_pthread.dylib       	       0x1a13f6da0 thread_start + 8
+
+Thread 32:
+0   libsystem_pthread.dylib       	       0x1a13f6d8c start_wqthread + 0
+
+Thread 33:
+0   libsystem_pthread.dylib       	       0x1a13f6d8c start_wqthread + 0
+
+Thread 34:
+0   libsystem_pthread.dylib       	       0x1a13f6d8c start_wqthread + 0
+
+
+Thread 0 crashed with ARM Thread State (64-bit):
+    x0: 0x0000000000000000   x1: 0x0000000000000009   x2: 0x0000000000000009   x3: 0x0000000000000009
+    x4: 0x0000000000000009   x5: 0x0000000000001880   x6: 0x000060001e479880   x7: 0x0000000119120280
+    x8: 0x0000000000000009   x9: 0x0000000000008450  x10: 0x0000000000000008  x11: 0x00000001055bc3f4
+   x12: 0x00000001028100a8  x13: 0x000000000000003a  x14: 0x00000000000007fb  x15: 0x00000000b4419039
+   x16: 0x00000001a13f6ab0  x17: 0x00000000b4419039  x18: 0x0000000000000000  x19: 0x0000000000000009
+   x20: 0x0000000000000000  x21: 0x0000000000000009  x22: 0x0000000000000001  x23: 0x00006000003204b0
+   x24: 0x0000600003776220  x25: 0x0000600000beeae0  x26: 0x00000000141300c9  x27: 0x0000600003976350
+   x28: 0x00000001a248a3e0   fp: 0x000000016d860ed0   lr: 0x000000010280fe80
+    sp: 0x000000016d860eb0   pc: 0x00000001028100a8 cpsr: 0x80001000
+   far: 0x0000000000008590  esr: 0x92000006 (Data Abort) byte read Translation fault
+
+Binary Images:
+       0x10259c000 -        0x107a53fff com.native-instruments.Kontakt 7 (7.3.999-PullRequest3304.520+Branch.PR-3304.Source.30af479959.Target.8c87106fe8) <9c38f6d8-307e-37bf-888a-78fd556c779a> /private/var/folders/*/Kontakt 7.app/Contents/MacOS/Kontakt 7
+       0x10e980000 -        0x10e983fff com.apple.textencoding.unicode (7.1) <7209129a-a98c-3643-b6f6-b205987a4478> /System/Library/TextEncodings/Unicode Encodings.bundle/Contents/MacOS/Unicode Encodings
+       0x10fb2c000 -        0x10fb73fff se.propellerheads.rex.library (*) <ddfec8a2-ead4-3fab-9674-1be6f6e189c9> /Library/Application Support/Native Instruments/*/REX Shared Library.framework/Versions/A/REX Shared Library
+       0x11ebd8000 -        0x11ebe3fff libobjc-trampolines.dylib (*) <570c31f7-94c6-3b86-ae44-1694db0a4bcd> /usr/lib/libobjc-trampolines.dylib
+       0x12b154000 -        0x12b1bffff com.apple.AppleMetalOpenGLRenderer (1.0) <01596a35-894c-3104-8314-40d3c08f18ca> /System/Library/Extensions/AppleMetalOpenGLRenderer.bundle/Contents/MacOS/AppleMetalOpenGLRenderer
+       0x1a23f5000 -        0x1a2dbafff com.apple.Foundation (6.9) <d5337cc6-a075-3ca0-b5bf-b49da8878337> /System/Library/Frameworks/Foundation.framework/Versions/C/Foundation
+       0x1a145b000 -        0x1a1934fff com.apple.CoreFoundation (6.9) <203e4401-8c2e-3157-a24b-92f52551d43e> /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation
+       0x1aacf2000 -        0x1ab025fff com.apple.HIToolbox (2.1.1) <d800278b-4e6c-3032-b56f-027a938a51d6> /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/HIToolbox
+       0x1a46c1000 -        0x1a55cffff com.apple.AppKit (6.9) <041c7d21-21cc-3eea-ae53-d39f5ca6a24e> /System/Library/Frameworks/AppKit.framework/Versions/C/AppKit
+       0x1a109e000 -        0x1a112c553 dyld (*) <bd993f39-c902-37d6-8bd8-6d827c7f121e> /usr/lib/dyld
+       0x1a13bb000 -        0x1a13f4fe7 libsystem_kernel.dylib (*) <42f503e2-9273-360a-a086-c1b19bbd3962> /usr/lib/system/libsystem_kernel.dylib
+       0x1a13f5000 -        0x1a1401fff libsystem_pthread.dylib (*) <46d35233-a051-3f4f-bba4-ba56dddc4d1a> /usr/lib/system/libsystem_pthread.dylib
+       0x1a1312000 -        0x1a139eff7 libc++.1.dylib (*) <54e8fbe1-df0d-33a2-b8fa-356565c12929> /usr/lib/libc++.1.dylib
+       0x1a1248000 -        0x1a128ffff libdispatch.dylib (*) <c2fd3094-b465-39a4-b774-16583ff53c4b> /usr/lib/system/libdispatch.dylib
+       0x1a1293000 -        0x1a1311ff7 libsystem_c.dylib (*) <95a70e20-1df3-3ddf-900c-315ed0b2c067> /usr/lib/system/libsystem_c.dylib
+       0x1aaa2d000 -        0x1aaa55fff com.apple.audio.caulk (1.0) <d793971d-25be-323d-83a4-cc72fadafe8d> /System/Library/PrivateFrameworks/caulk.framework/Versions/A/caulk
+       0x1b9897000 -        0x1b9909fff com.apple.audio.midi.CoreMIDI (2.0) <73c9204e-07ef-3e4d-8401-3516bfc38586> /System/Library/Frameworks/CoreMIDI.framework/Versions/A/CoreMIDI
+       0x1a34f8000 -        0x1a3b8bfff com.apple.audio.CoreAudio (5.0) <4c6d842e-31f6-30ca-984e-6281d387fe72> /System/Library/Frameworks/CoreAudio.framework/Versions/A/CoreAudio
+               0x0 - 0xffffffffffffffff ??? (*) <00000000-0000-0000-0000-000000000000> ???
+
+External Modification Summary:
+  Calls made by other processes targeting this process:
+    task_for_pid: 0
+    thread_create: 0
+    thread_set_state: 0
+  Calls made by this process:
+    task_for_pid: 0
+    thread_create: 0
+    thread_set_state: 0
+  Calls made by all processes on this machine:
+    task_for_pid: 0
+    thread_create: 0
+    thread_set_state: 0
+
+VM Region Summary:
+ReadOnly portion of Libraries: Total=1.2G resident=0K(0%) swapped_out_or_unallocated=1.2G(100%)
+Writable regions: Total=4.2G written=0K(0%) resident=0K(0%) swapped_out=0K(0%) unallocated=4.2G(100%)
+
+                                VIRTUAL   REGION 
+REGION TYPE                        SIZE    COUNT (non-coalesced) 
+===========                     =======  ======= 
+Accelerate framework               128K        1 
+Activity Tracing                   256K        1 
+CG backing stores                 4032K        4 
+CG image                            96K        5 
+ColorSync                          512K       26 
+CoreAnimation                      192K       12 
+CoreGraphics                        32K        2 
+CoreServices                      8816K        8 
+CoreUI image data                 1328K        9 
+Foundation                          16K        1 
+JS VM Gigacage                    4096K        1 
+JS VM Isolated Heap               6400K        6 
+Kernel Alloc Once                   32K        1 
+MALLOC                             2.8G     3549 
+MALLOC guard page                  192K       10 
+MALLOC_LARGE (reserved)          256.0M        2         reserved VM address space (unallocated)
+MALLOC_MEDIUM (reserved)         736.0M        9         reserved VM address space (unallocated)
+MALLOC_NANO (reserved)           384.0M        1         reserved VM address space (unallocated)
+STACK GUARD                       56.5M       35 
+Stack                             33.6M       57 
+VM_ALLOCATE                        512K       20 
+__AUTH                             711K      189 
+__AUTH_CONST                      14.0M      360 
+__CTF                               824        1 
+__DATA                            5758K      349 
+__DATA_CONST                      18.5M      366 
+__DATA_DIRTY                       801K      117 
+__FONT_DATA                        2352        1 
+__GLSLBUILTINS                    5174K        1 
+__LINKEDIT                       848.9M        6 
+__OBJC_RO                         66.3M        1 
+__OBJC_RW                         2011K        1 
+__TEXT                           352.1M      382 
+dyld private memory                272K        2 
+mapped file                      104.4M      200 
+shared memory                      928K       17 
+===========                     =======  ======= 
+TOTAL                              5.7G     5753 
+TOTAL, minus reserved VM space     4.3G     5753 
+
+
+
+-----------
+Full Report
+-----------
+
+{"app_name":"Kontakt 7","timestamp":"2023-06-16 10:52:02.00 +0200","app_version":"7.3.999-PullRequest3304.520+Branch.PR-3304.Source.30af479959.Target.8c87106fe8","slice_uuid":"9c38f6d8-307e-37bf-888a-78fd556c779a","build_version":"7.3.999 (Kontakt\/Kontakt\/PR-3304.520), Copyright © 2023 Native Instruments GmbH","platform":1,"bundleID":"com.native-instruments.Kontakt 7","share_with_app_devs":0,"is_first_party":0,"bug_type":"309","os_version":"macOS 13.4 (22F66)","roots_installed":0,"name":"Kontakt 7","incident_id":"0C9EE08C-5FB1-40E3-B031-FE17560FEAFE"}
+{
+  "uptime" : 70000,
+  "procRole" : "Foreground",
+  "version" : 2,
+  "userID" : 501,
+  "deployVersion" : 210,
+  "modelCode" : "MacBookPro18,2",
+  "coalitionID" : 9743,
+  "osVersion" : {
+    "train" : "macOS 13.4",
+    "build" : "22F66",
+    "releaseType" : "User"
+  },
+  "captureTime" : "2023-06-16 10:52:02.1852 +0200",
+  "incident" : "0C9EE08C-5FB1-40E3-B031-FE17560FEAFE",
+  "pid" : 18137,
+  "translated" : false,
+  "cpuType" : "ARM-64",
+  "roots_installed" : 0,
+  "bug_type" : "309",
+  "procLaunch" : "2023-06-16 10:47:00.6332 +0200",
+  "procStartAbsTime" : 1690731809406,
+  "procExitAbsTime" : 1697968330364,
+  "procName" : "Kontakt 7",
+  "procPath" : "\/private\/var\/folders\/*\/Kontakt 7.app\/Contents\/MacOS\/Kontakt 7",
+  "bundleInfo" : {"CFBundleShortVersionString":"7.3.999-PullRequest3304.520+Branch.PR-3304.Source.30af479959.Target.8c87106fe8","CFBundleVersion":"7.3.999 (Kontakt\/Kontakt\/PR-3304.520), Copyright © 2023 Native Instruments GmbH","CFBundleIdentifier":"com.native-instruments.Kontakt 7"},
+  "storeInfo" : {"deviceIdentifierForVendor":"B829FEBD-6A4A-5F7B-9DE8-3A169D401EEF","thirdParty":true},
+  "parentProc" : "launchd",
+  "parentPid" : 1,
+  "coalitionName" : "com.native-instruments.Kontakt 7",
+  "crashReporterKey" : "3DD72AF0-7122-A97A-D26A-351AF9506491",
+  "codeSigningID" : "com.native-instruments.Kontakt 7",
+  "codeSigningTeamID" : "83K5EG6Z9V",
+  "codeSigningFlags" : 570495745,
+  "codeSigningValidationCategory" : 6,
+  "codeSigningTrustLevel" : 0,
+  "wakeTime" : 17324,
+  "sleepWakeUUID" : "07BBF4A7-86F1-4295-BB35-C1C38ACE98F3",
+  "sip" : "enabled",
+  "vmRegionInfo" : "0x8590 is not in any region.  Bytes before following region: 4334369392\n      REGION TYPE                    START - END         [ VSIZE] PRT\/MAX SHRMOD  REGION DETAIL\n      UNUSED SPACE AT START\n--->  \n      __TEXT                      10259c000-107a54000    [ 84.7M] r-x\/r-x SM=COW  ...cOS\/Kontakt 7",
+  "exception" : {"codes":"0x0000000000000001, 0x0000000000008590","rawCodes":[1,34192],"type":"EXC_BAD_ACCESS","signal":"SIGSEGV","subtype":"KERN_INVALID_ADDRESS at 0x0000000000008590"},
+  "termination" : {"flags":0,"code":11,"namespace":"SIGNAL","indicator":"Segmentation fault: 11","byProc":"exc handler","byPid":18137},
+  "vmregioninfo" : "0x8590 is not in any region.  Bytes before following region: 4334369392\n      REGION TYPE                    START - END         [ VSIZE] PRT\/MAX SHRMOD  REGION DETAIL\n      UNUSED SPACE AT START\n--->  \n      __TEXT                      10259c000-107a54000    [ 84.7M] r-x\/r-x SM=COW  ...cOS\/Kontakt 7",
+  "extMods" : {"caller":{"thread_create":0,"thread_set_state":0,"task_for_pid":0},"system":{"thread_create":0,"thread_set_state":0,"task_for_pid":0},"targeted":{"thread_create":0,"thread_set_state":0,"task_for_pid":0},"warnings":0},
+  "faultingThread" : 0,
+  "threads" : [{"triggered":true,"id":549009,"threadState":{"x":[{"value":0},{"value":9},{"value":9},{"value":9},{"value":9},{"value":6272},{"value":105553624275072},{"value":4715577984},{"value":9},{"value":33872},{"value":8},{"value":4384867316,"symbolLocation":5501,"symbol":"std::__1::piecewise_construct"},{"value":4336976040,"symbolLocation":284,"symbol":"BScriptParser::isUIControlValid(int, int) const"},{"value":58},{"value":2043},{"value":3024195641},{"value":7000255152,"symbolLocation":0,"symbol":"pthread_mutex_unlock"},{"value":3024195641},{"value":0},{"value":9},{"value":0},{"value":9},{"value":1},{"value":105553119544496},{"value":105553174422048},{"value":105553128778464},{"value":336789705},{"value":105553176519504},{"value":7017636832,"symbolLocation":0,"symbol":"__NSFireTimer"}],"flavor":"ARM_THREAD_STATE64","lr":{"value":4336975488},"cpsr":{"value":2147487744},"fp":{"value":6132469456},"sp":{"value":6132469424},"esr":{"value":2449473542,"description":"(Data Abort) byte read Translation fault"},"pc":{"value":4336976040,"matchesCrashFrame":1},"far":{"value":34192}},"queue":"com.apple.main-thread","frames":[{"imageOffset":2572456,"symbol":"BScriptParser::isUIControlValid(int, int) const","symbolLocation":284,"imageIndex":0},{"imageOffset":2571904,"symbol":"BScriptParser::getUIControl(int, int)","symbolLocation":32,"imageIndex":0},{"imageOffset":4024108,"symbol":"BEngine::fetchKSPControlModified(int, int, int, int) const","symbolLocation":104,"imageIndex":0},{"imageOffset":5562748,"symbol":"konnekt::ParameterItem::syncToAudioEngine(BEngine&)","symbolLocation":792,"imageIndex":0},{"imageOffset":5555448,"symbol":"konnekt::Parameters::onTimerEvent()","symbolLocation":64,"imageIndex":0},{"imageOffset":79092,"symbol":"nod::signal_type<nod::multithread_policy, void ()>::operator()() const","symbolLocation":164,"imageIndex":0},{"imageOffset":3475736,"symbol":"BEngineTimer::onEvent(unsigned int, NI::UIA::EventData*)","symbolLocation":24,"imageIndex":0},{"imageOffset":26302260,"symbol":"NI::UIA::EventTimerManager::notifySubscribers()","symbolLocation":168,"imageIndex":0},{"imageOffset":611400,"symbol":"__NSFireTimer","symbolLocation":104,"imageIndex":5},{"imageOffset":627656,"symbol":"__CFRUNLOOP_IS_CALLING_OUT_TO_A_TIMER_CALLBACK_FUNCTION__","symbolLocation":32,"imageIndex":6},{"imageOffset":626800,"symbol":"__CFRunLoopDoTimer","symbolLocation":940,"imageIndex":6},{"imageOffset":625608,"symbol":"__CFRunLoopDoTimers","symbolLocation":356,"imageIndex":6},{"imageOffset":516936,"symbol":"__CFRunLoopRun","symbolLocation":1852,"imageIndex":6},{"imageOffset":513208,"symbol":"CFRunLoopRunSpecific","symbolLocation":612,"imageIndex":6},{"imageOffset":199744,"symbol":"RunCurrentEventLoopInMode","symbolLocation":292,"imageIndex":7},{"imageOffset":199292,"symbol":"ReceiveNextEventCommon","symbolLocation":648,"imageIndex":7},{"imageOffset":198612,"symbol":"_BlockUntilNextEventMatchingListInModeWithFilter","symbolLocation":76,"imageIndex":7},{"imageOffset":232772,"symbol":"_DPSNextEvent","symbolLocation":636,"imageIndex":8},{"imageOffset":229088,"symbol":"-[NSApplication(NSEvent) _nextEventMatchingEventMask:untilDate:inMode:dequeue:]","symbolLocation":716,"imageIndex":8},{"imageOffset":181060,"symbol":"-[NSApplication run]","symbolLocation":464,"imageIndex":8},{"imageOffset":314920,"symbol":"-[NSObject(NSThreadPerformAdditions) performSelector:onThread:withObject:waitUntilDone:modes:]","symbolLocation":848,"imageIndex":5},{"imageOffset":313648,"symbol":"-[NSObject(NSThreadPerformAdditions) performSelectorOnMainThread:withObject:waitUntilDone:]","symbolLocation":112,"imageIndex":5},{"imageOffset":7486016,"symbol":"main","symbolLocation":140,"imageIndex":0},{"imageOffset":24360,"symbol":"start","symbolLocation":2236,"imageIndex":9}]},{"id":549051,"name":"SC3 TaskScheduler Worker","frames":[{"imageOffset":18192,"symbol":"__psynch_cvwait","symbolLocation":8,"imageIndex":10},{"imageOffset":30068,"symbol":"_pthread_cond_wait","symbolLocation":1232,"imageIndex":11},{"imageOffset":41238052,"symbol":"boost::asio::detail::scheduler::do_run_one(boost::asio::detail::conditionally_enabled_mutex::scoped_lock&, boost::asio::detail::scheduler_thread_info&, boost::system::error_code const&)","symbolLocation":280,"imageIndex":0},{"imageOffset":41217616,"symbol":"boost::asio::detail::scheduler::run(boost::system::error_code&)","symbolLocation":196,"imageIndex":0},{"imageOffset":41217376,"symbol":"boost::asio::io_context::run()","symbolLocation":32,"imageIndex":0},{"imageOffset":40088796,"symbol":"NI::SC3::TaskScheduler::workerThread()","symbolLocation":136,"imageIndex":0},{"imageOffset":40413300,"symbol":"void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, std::__1::function<void ()>>>(void*)","symbolLocation":56,"imageIndex":0},{"imageOffset":28584,"symbol":"_pthread_start","symbolLocation":148,"imageIndex":11},{"imageOffset":7584,"symbol":"thread_start","symbolLocation":8,"imageIndex":11}]},{"id":549058,"name":"SC3 TaskScheduler Worker","frames":[{"imageOffset":18192,"symbol":"__psynch_cvwait","symbolLocation":8,"imageIndex":10},{"imageOffset":30068,"symbol":"_pthread_cond_wait","symbolLocation":1232,"imageIndex":11},{"imageOffset":41238052,"symbol":"boost::asio::detail::scheduler::do_run_one(boost::asio::detail::conditionally_enabled_mutex::scoped_lock&, boost::asio::detail::scheduler_thread_info&, boost::system::error_code const&)","symbolLocation":280,"imageIndex":0},{"imageOffset":41217616,"symbol":"boost::asio::detail::scheduler::run(boost::system::error_code&)","symbolLocation":196,"imageIndex":0},{"imageOffset":41217376,"symbol":"boost::asio::io_context::run()","symbolLocation":32,"imageIndex":0},{"imageOffset":40088796,"symbol":"NI::SC3::TaskScheduler::workerThread()","symbolLocation":136,"imageIndex":0},{"imageOffset":40413300,"symbol":"void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, std::__1::function<void ()>>>(void*)","symbolLocation":56,"imageIndex":0},{"imageOffset":28584,"symbol":"_pthread_start","symbolLocation":148,"imageIndex":11},{"imageOffset":7584,"symbol":"thread_start","symbolLocation":8,"imageIndex":11}]},{"id":549059,"name":"Link Main","frames":[{"imageOffset":28768,"symbol":"kevent","symbolLocation":8,"imageIndex":10},{"imageOffset":41227076,"symbol":"boost::asio::detail::kqueue_reactor::run(long, boost::asio::detail::op_queue<boost::asio::detail::scheduler_operation>&)","symbolLocation":280,"imageIndex":0},{"imageOffset":41238168,"symbol":"boost::asio::detail::scheduler::do_run_one(boost::asio::detail::conditionally_enabled_mutex::scoped_lock&, boost::asio::detail::scheduler_thread_info&, boost::system::error_code const&)","symbolLocation":396,"imageIndex":0},{"imageOffset":41217616,"symbol":"boost::asio::detail::scheduler::run(boost::system::error_code&)","symbolLocation":196,"imageIndex":0},{"imageOffset":41217376,"symbol":"boost::asio::io_context::run()","symbolLocation":32,"imageIndex":0},{"imageOffset":12886040,"symbol":"ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>::Context<ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler>(ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler)::'lambda'(boost::asio::io_context&, ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler)::operator()(boost::asio::io_context&, ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler) const","symbolLocation":76,"imageIndex":0},{"imageOffset":12885776,"symbol":"void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, std::__1::thread ableton::platforms::darwin::ThreadFactory::makeThread<ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>::Context<ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler>(ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler)::'lambda'(boost::asio::io_context&, ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler), std::__1::reference_wrapper<boost::asio::io_context>, ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler>(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler&&, std::__1::reference_wrapper<boost::asio::io_context>&&, ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler&&)::'lambda'(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>::Context<ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler>(ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler)::'lambda'(boost::asio::io_context&, ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler)&&, std::__1::reference_wrapper<boost::asio::io_context>&&, ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler&&), std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>::Context<ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler>(ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler)::'lambda'(boost::asio::io_context&, ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler), std::__1::reference_wrapper<boost::asio::io_context>, ableton::link::Controller<std::__1::function<void (unsigned long)>, std::__1::function<void (ableton::link::Tempo)>, std::__1::function<void (bool)>, ableton::platforms::darwin::Clock, ableton::platforms::stl::Random, ableton::platforms::asio::Context<ableton::platforms::posix::ScanIpIfAddrs, ableton::util::NullLog, ableton::platforms::darwin::ThreadFactory>>::UdpSendExceptionHandler>>(void*)","symbolLocation":100,"imageIndex":0},{"imageOffset":28584,"symbol":"_pthread_start","symbolLocation":148,"imageIndex":11},{"imageOffset":7584,"symbol":"thread_start","symbolLocation":8,"imageIndex":11}]},{"id":549060,"name":"Link Dispatcher","frames":[{"imageOffset":18192,"symbol":"__psynch_cvwait","symbolLocation":8,"imageIndex":10},{"imageOffset":30068,"symbol":"_pthread_cond_wait","symbolLocation":1232,"imageIndex":11},{"imageOffset":77700,"symbol":"std::__1::condition_variable::__do_timed_wait(std::__1::unique_lock<std::__1::mutex>&, std::__1::chrono::time_point<std::__1::chrono::system_clock, std::__1::chrono::duration<long long, std::__1::ratio<1l, 1000000000l>>>)","symbolLocation":100,"imageIndex":12},{"imageOffset":12972712,"symbol":"ableton::platforms::asio::LockFreeCallbackDispatcher<std::__1::function<void ()>, std::__1::chrono::duration<long long, std::__1::ratio<1l, 1000l>>, ableton::platforms::darwin::ThreadFactory>::run()","symbolLocation":304,"imageIndex":0},{"imageOffset":12972220,"symbol":"void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, std::__1::thread ableton::platforms::darwin::ThreadFactory::makeThread<ableton::platforms::asio::LockFreeCallbackDispatcher<std::__1::function<void ()>, std::__1::chrono::duration<long long, std::__1::ratio<1l, 1000l>>, ableton::platforms::darwin::ThreadFactory>::LockFreeCallbackDispatcher(std::__1::function<void ()>, std::__1::chrono::duration<long long, std::__1::ratio<1l, 1000l>>)::'lambda'()>(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, ableton::platforms::asio::LockFreeCallbackDispatcher<std::__1::function<void ()>, std::__1::chrono::duration<long long, std::__1::ratio<1l, 1000l>>, ableton::platforms::darwin::ThreadFactory>::LockFreeCallbackDispatcher(std::__1::function<void ()>, std::__1::chrono::duration<long long, std::__1::ratio<1l, 1000l>>)::'lambda'()&&)::'lambda'(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, ableton::platforms::asio::LockFreeCallbackDispatcher<std::__1::function<void ()>, std::__1::chrono::duration<long long, std::__1::ratio<1l, 1000l>>, ableton::platforms::darwin::ThreadFactory>::LockFreeCallbackDispatcher(std::__1::function<void ()>, std::__1::chrono::duration<long long, std::__1::ratio<1l, 1000l>>)::'lambda'()&&), std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, ableton::platforms::asio::LockFreeCallbackDispatcher<std::__1::function<void ()>, std::__1::chrono::duration<long long, std::__1::ratio<1l, 1000l>>, ableton::platforms::darwin::ThreadFactory>::LockFreeCallbackDispatcher(std::__1::function<void ()>, std::__1::chrono::duration<long long, std::__1::ratio<1l, 1000l>>)::'lambda'()>>(void*)","symbolLocation":96,"imageIndex":0},{"imageOffset":28584,"symbol":"_pthread_start","symbolLocation":148,"imageIndex":11},{"imageOffset":7584,"symbol":"thread_start","symbolLocation":8,"imageIndex":11}]},{"id":549062,"name":"AuxProcess #1","frames":[{"imageOffset":3728,"symbol":"semaphore_wait_trap","symbolLocation":8,"imageIndex":10},{"imageOffset":18844,"symbol":"_dispatch_sema4_wait","symbolLocation":28,"imageIndex":13},{"imageOffset":20560,"symbol":"_dispatch_semaphore_wait_slow","symbolLocation":132,"imageIndex":13},{"imageOffset":4141376,"symbol":"BEngine::AuxProcessThreadProc(int)","symbolLocation":352,"imageIndex":0},{"imageOffset":4140980,"symbol":"BEngine::AuxProcessThread::run()","symbolLocation":84,"imageIndex":0},{"imageOffset":4748440,"symbol":"void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (BEngine::AuxProcessThread::*)(), BEngine::AuxProcessThread*>>(void*)","symbolLocation":64,"imageIndex":0},{"imageOffset":28584,"symbol":"_pthread_start","symbolLocation":148,"imageIndex":11},{"imageOffset":7584,"symbol":"thread_start","symbolLocation":8,"imageIndex":11}]},{"id":549063,"name":"AuxProcess #2","frames":[{"imageOffset":3728,"symbol":"semaphore_wait_trap","symbolLocation":8,"imageIndex":10},{"imageOffset":18844,"symbol":"_dispatch_sema4_wait","symbolLocation":28,"imageIndex":13},{"imageOffset":20560,"symbol":"_dispatch_semaphore_wait_slow","symbolLocation":132,"imageIndex":13},{"imageOffset":4141376,"symbol":"BEngine::AuxProcessThreadProc(int)","symbolLocation":352,"imageIndex":0},{"imageOffset":4140980,"symbol":"BEngine::AuxProcessThread::run()","symbolLocation":84,"imageIndex":0},{"imageOffset":4748440,"symbol":"void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (BEngine::AuxProcessThread::*)(), BEngine::AuxProcessThread*>>(void*)","symbolLocation":64,"imageIndex":0},{"imageOffset":28584,"symbol":"_pthread_start","symbolLocation":148,"imageIndex":11},{"imageOffset":7584,"symbol":"thread_start","symbolLocation":8,"imageIndex":11}]},{"id":549064,"name":"AuxProcess #3","frames":[{"imageOffset":3728,"symbol":"semaphore_wait_trap","symbolLocation":8,"imageIndex":10},{"imageOffset":18844,"symbol":"_dispatch_sema4_wait","symbolLocation":28,"imageIndex":13},{"imageOffset":20560,"symbol":"_dispatch_semaphore_wait_slow","symbolLocation":132,"imageIndex":13},{"imageOffset":4141376,"symbol":"BEngine::AuxProcessThreadProc(int)","symbolLocation":352,"imageIndex":0},{"imageOffset":4140980,"symbol":"BEngine::AuxProcessThread::run()","symbolLocation":84,"imageIndex":0},{"imageOffset":4748440,"symbol":"void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (BEngine::AuxProcessThread::*)(), BEngine::AuxProcessThread*>>(void*)","symbolLocation":64,"imageIndex":0},{"imageOffset":28584,"symbol":"_pthread_start","symbolLocation":148,"imageIndex":11},{"imageOffset":7584,"symbol":"thread_start","symbolLocation":8,"imageIndex":11}]},{"id":549065,"name":"AuxProcess #4","frames":[{"imageOffset":3728,"symbol":"semaphore_wait_trap","symbolLocation":8,"imageIndex":10},{"imageOffset":18844,"symbol":"_dispatch_sema4_wait","symbolLocation":28,"imageIndex":13},{"imageOffset":20560,"symbol":"_dispatch_semaphore_wait_slow","symbolLocation":132,"imageIndex":13},{"imageOffset":4141376,"symbol":"BEngine::AuxProcessThreadProc(int)","symbolLocation":352,"imageIndex":0},{"imageOffset":4140980,"symbol":"BEngine::AuxProcessThread::run()","symbolLocation":84,"imageIndex":0},{"imageOffset":4748440,"symbol":"void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (BEngine::AuxProcessThread::*)(), BEngine::AuxProcessThread*>>(void*)","symbolLocation":64,"imageIndex":0},{"imageOffset":28584,"symbol":"_pthread_start","symbolLocation":148,"imageIndex":11},{"imageOffset":7584,"symbol":"thread_start","symbolLocation":8,"imageIndex":11}]},{"id":549066,"name":"AuxProcess #5","frames":[{"imageOffset":3728,"symbol":"semaphore_wait_trap","symbolLocation":8,"imageIndex":10},{"imageOffset":18844,"symbol":"_dispatch_sema4_wait","symbolLocation":28,"imageIndex":13},{"imageOffset":20560,"symbol":"_dispatch_semaphore_wait_slow","symbolLocation":132,"imageIndex":13},{"imageOffset":4141376,"symbol":"BEngine::AuxProcessThreadProc(int)","symbolLocation":352,"imageIndex":0},{"imageOffset":4140980,"symbol":"BEngine::AuxProcessThread::run()","symbolLocation":84,"imageIndex":0},{"imageOffset":4748440,"symbol":"void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (BEngine::AuxProcessThread::*)(), BEngine::AuxProcessThread*>>(void*)","symbolLocation":64,"imageIndex":0},{"imageOffset":28584,"symbol":"_pthread_start","symbolLocation":148,"imageIndex":11},{"imageOffset":7584,"symbol":"thread_start","symbolLocation":8,"imageIndex":11}]},{"id":549067,"name":"AuxProcess #6","frames":[{"imageOffset":3728,"symbol":"semaphore_wait_trap","symbolLocation":8,"imageIndex":10},{"imageOffset":18844,"symbol":"_dispatch_sema4_wait","symbolLocation":28,"imageIndex":13},{"imageOffset":20560,"symbol":"_dispatch_semaphore_wait_slow","symbolLocation":132,"imageIndex":13},{"imageOffset":4141376,"symbol":"BEngine::AuxProcessThreadProc(int)","symbolLocation":352,"imageIndex":0},{"imageOffset":4140980,"symbol":"BEngine::AuxProcessThread::run()","symbolLocation":84,"imageIndex":0},{"imageOffset":4748440,"symbol":"void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (BEngine::AuxProcessThread::*)(), BEngine::AuxProcessThread*>>(void*)","symbolLocation":64,"imageIndex":0},{"imageOffset":28584,"symbol":"_pthread_start","symbolLocation":148,"imageIndex":11},{"imageOffset":7584,"symbol":"thread_start","symbolLocation":8,"imageIndex":11}]},{"id":549068,"name":"AuxProcess #7","frames":[{"imageOffset":3728,"symbol":"semaphore_wait_trap","symbolLocation":8,"imageIndex":10},{"imageOffset":18844,"symbol":"_dispatch_sema4_wait","symbolLocation":28,"imageIndex":13},{"imageOffset":20560,"symbol":"_dispatch_semaphore_wait_slow","symbolLocation":132,"imageIndex":13},{"imageOffset":4141376,"symbol":"BEngine::AuxProcessThreadProc(int)","symbolLocation":352,"imageIndex":0},{"imageOffset":4140980,"symbol":"BEngine::AuxProcessThread::run()","symbolLocation":84,"imageIndex":0},{"imageOffset":4748440,"symbol":"void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (BEngine::AuxProcessThread::*)(), BEngine::AuxProcessThread*>>(void*)","symbolLocation":64,"imageIndex":0},{"imageOffset":28584,"symbol":"_pthread_start","symbolLocation":148,"imageIndex":11},{"imageOffset":7584,"symbol":"thread_start","symbolLocation":8,"imageIndex":11}]},{"id":549069,"name":"AuxProcess #8","frames":[{"imageOffset":3728,"symbol":"semaphore_wait_trap","symbolLocation":8,"imageIndex":10},{"imageOffset":18844,"symbol":"_dispatch_sema4_wait","symbolLocation":28,"imageIndex":13},{"imageOffset":20560,"symbol":"_dispatch_semaphore_wait_slow","symbolLocation":132,"imageIndex":13},{"imageOffset":4141376,"symbol":"BEngine::AuxProcessThreadProc(int)","symbolLocation":352,"imageIndex":0},{"imageOffset":4140980,"symbol":"BEngine::AuxProcessThread::run()","symbolLocation":84,"imageIndex":0},{"imageOffset":4748440,"symbol":"void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (BEngine::AuxProcessThread::*)(), BEngine::AuxProcessThread*>>(void*)","symbolLocation":64,"imageIndex":0},{"imageOffset":28584,"symbol":"_pthread_start","symbolLocation":148,"imageIndex":11},{"imageOffset":7584,"symbol":"thread_start","symbolLocation":8,"imageIndex":11}]},{"id":549070,"name":"AuxProcess #9","frames":[{"imageOffset":3728,"symbol":"semaphore_wait_trap","symbolLocation":8,"imageIndex":10},{"imageOffset":18844,"symbol":"_dispatch_sema4_wait","symbolLocation":28,"imageIndex":13},{"imageOffset":20560,"symbol":"_dispatch_semaphore_wait_slow","symbolLocation":132,"imageIndex":13},{"imageOffset":4141376,"symbol":"BEngine::AuxProcessThreadProc(int)","symbolLocation":352,"imageIndex":0},{"imageOffset":4140980,"symbol":"BEngine::AuxProcessThread::run()","symbolLocation":84,"imageIndex":0},{"imageOffset":4748440,"symbol":"void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (BEngine::AuxProcessThread::*)(), BEngine::AuxProcessThread*>>(void*)","symbolLocation":64,"imageIndex":0},{"imageOffset":28584,"symbol":"_pthread_start","symbolLocation":148,"imageIndex":11},{"imageOffset":7584,"symbol":"thread_start","symbolLocation":8,"imageIndex":11}]},{"id":549071,"name":"Disk","frames":[{"imageOffset":3728,"symbol":"semaphore_wait_trap","symbolLocation":8,"imageIndex":10},{"imageOffset":18844,"symbol":"_dispatch_sema4_wait","symbolLocation":28,"imageIndex":13},{"imageOffset":20560,"symbol":"_dispatch_semaphore_wait_slow","symbolLocation":132,"imageIndex":13},{"imageOffset":3472684,"symbol":"BStreamingEngine::run()","symbolLocation":248,"imageIndex":0},{"imageOffset":4609708,"symbol":"void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (BStreamingEngine::*)(), BStreamingEngine*>>(void*)","symbolLocation":64,"imageIndex":0},{"imageOffset":28584,"symbol":"_pthread_start","symbolLocation":148,"imageIndex":11},{"imageOffset":7584,"symbol":"thread_start","symbolLocation":8,"imageIndex":11}]},{"id":549072,"name":"BGLoading","frames":[{"imageOffset":3728,"symbol":"semaphore_wait_trap","symbolLocation":8,"imageIndex":10},{"imageOffset":18844,"symbol":"_dispatch_sema4_wait","symbolLocation":28,"imageIndex":13},{"imageOffset":20560,"symbol":"_dispatch_semaphore_wait_slow","symbolLocation":132,"imageIndex":13},{"imageOffset":3175196,"symbol":"BBackgroundLoader::run()","symbolLocation":252,"imageIndex":0},{"imageOffset":4422416,"symbol":"void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (BBackgroundLoader::*)(), BBackgroundLoader*>>(void*)","symbolLocation":64,"imageIndex":0},{"imageOffset":28584,"symbol":"_pthread_start","symbolLocation":148,"imageIndex":11},{"imageOffset":7584,"symbol":"thread_start","symbolLocation":8,"imageIndex":11}]},{"id":549073,"name":"ProcessMonitor","frames":[{"imageOffset":17676,"symbol":"__semwait_signal","symbolLocation":8,"imageIndex":10},{"imageOffset":53968,"symbol":"nanosleep","symbolLocation":220,"imageIndex":14},{"imageOffset":133656,"symbol":"std::__1::this_thread::sleep_for(std::__1::chrono::duration<long long, std::__1::ratio<1l, 1000000000l>> const&)","symbolLocation":84,"imageIndex":12},{"imageOffset":17663468,"symbol":"ni::kreator::process::ProcessMonitor::checkRunning()","symbolLocation":276,"imageIndex":0},{"imageOffset":17663892,"symbol":"void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, ni::kreator::process::ProcessMonitor::ProcessMonitor(std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>>>, std::__1::chrono::duration<long long, std::__1::ratio<1l, 1000l>>)::$_0>>(void*)","symbolLocation":44,"imageIndex":0},{"imageOffset":28584,"symbol":"_pthread_start","symbolLocation":148,"imageIndex":11},{"imageOffset":7584,"symbol":"thread_start","symbolLocation":8,"imageIndex":11}]},{"id":549074,"name":"caulk.messenger.shared:17","frames":[{"imageOffset":3728,"symbol":"semaphore_wait_trap","symbolLocation":8,"imageIndex":10},{"imageOffset":8228,"symbol":"caulk::semaphore::timed_wait(double)","symbolLocation":212,"imageIndex":15},{"imageOffset":7896,"symbol":"caulk::concurrent::details::worker_thread::run()","symbolLocation":36,"imageIndex":15},{"imageOffset":7112,"symbol":"void* caulk::thread_proxy<std::__1::tuple<caulk::thread::attributes, void (caulk::concurrent::details::worker_thread::*)(), std::__1::tuple<caulk::concurrent::details::worker_thread*>>>(void*)","symbolLocation":96,"imageIndex":15},{"imageOffset":28584,"symbol":"_pthread_start","symbolLocation":148,"imageIndex":11},{"imageOffset":7584,"symbol":"thread_start","symbolLocation":8,"imageIndex":11}]},{"id":549125,"frames":[{"imageOffset":3860,"symbol":"mach_msg2_trap","symbolLocation":8,"imageIndex":10},{"imageOffset":78400,"symbol":"mach_msg2_internal","symbolLocation":80,"imageIndex":10},{"imageOffset":39800,"symbol":"mach_msg_overwrite","symbolLocation":604,"imageIndex":10},{"imageOffset":4752,"symbol":"mach_msg","symbolLocation":24,"imageIndex":10},{"imageOffset":75528,"symbol":"XServerMachPort::ReceiveMessage(int&, void*, int&)","symbolLocation":104,"imageIndex":16},{"imageOffset":290024,"symbol":"MIDIProcess::MIDIInPortThread::Run()","symbolLocation":164,"imageIndex":16},{"imageOffset":189156,"symbol":"CADeprecated::XThread::RunHelper(void*)","symbolLocation":48,"imageIndex":16},{"imageOffset":194064,"symbol":"CADeprecated::CAPThread::Entry(CADeprecated::CAPThread*)","symbolLocation":92,"imageIndex":16},{"imageOffset":28584,"symbol":"_pthread_start","symbolLocation":148,"imageIndex":11},{"imageOffset":7584,"symbol":"thread_start","symbolLocation":8,"imageIndex":11}]},{"id":549126,"name":"IPCClient","frames":[{"imageOffset":38964,"symbol":"poll","symbolLocation":8,"imageIndex":10},{"imageOffset":41250232,"symbol":"boost::asio::detail::socket_ops::poll_write(int, unsigned char, int, boost::system::error_code&)","symbolLocation":84,"imageIndex":0},{"imageOffset":41250884,"symbol":"boost::asio::detail::socket_ops::sync_send1(int, unsigned char, void const*, unsigned long, int, boost::system::error_code&)","symbolLocation":260,"imageIndex":0},{"imageOffset":7903432,"symbol":"ni::msgpack_rpc::unix_domain_sockets::socket_helper::send(ni::msgpack_support::size_prefixed_buffer const&)","symbolLocation":116,"imageIndex":0},{"imageOffset":7883484,"symbol":"void ni::msgpack_support::msgpack_reusable_pack_buffer<ni::msgpack_support::size_prefixed_buffer, 1048576ul>::with_buffer<void ni::msgpack_rpc::rpc_client_core::notify_rpc_impl<std::__1::basic_string_view<char, std::__1::char_traits<char>>, std::__1::basic_string_view<char, std::__1::char_traits<char>>, std::__1::basic_string_view<char, std::__1::char_traits<char>>&, ni::odr::models::nks2_page_viewmodel_data<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, strong::type<strong::type<std::__1::array<std::byte, 32ul>, ni::odr::utils::sha256_tag, strong::range, strong::indexed<unsigned long>, strong::ordered, strong::default_constructible, strong::equality>, ni::odr::models::asset_handle_tag, strong::range, strong::indexed<unsigned long>, strong::ordered, strong::default_constructible, strong::equality>> const&>(std::__1::basic_string_view<char, std::__1::char_traits<char>>, std::__1::basic_string_view<char, std::__1::char_traits<char>>&&, std::__1::basic_string_view<char, std::__1::char_traits<char>>&, ni::odr::models::nks2_page_viewmodel_data<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, strong::type<strong::type<std::__1::array<std::byte, 32ul>, ni::odr::utils::sha256_tag, strong::range, strong::indexed<unsigned long>, strong::ordered, strong::default_constructible, strong::equality>, ni::odr::models::asset_handle_tag, strong::range, strong::indexed<unsigned long>, strong::ordered, strong::default_constructible, strong::equality>> const&)::'lambda'(ni::msgpack_support::size_prefixed_buffer&)>(std::__1::basic_string_view<char, std::__1::char_traits<char>>&&)","symbolLocation":204,"imageIndex":0},{"imageOffset":7834892,"symbol":"ni::odr::ipc::kks::ipc_client_core::nks2_page_set_data(std::__1::basic_string_view<char, std::__1::char_traits<char>>, ni::odr::models::nks2_page_viewmodel_data<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, strong::type<strong::type<std::__1::array<std::byte, 32ul>, ni::odr::utils::sha256_tag, strong::range, strong::indexed<unsigned long>, strong::ordered, strong::default_constructible, strong::equality>, ni::odr::models::asset_handle_tag, strong::range, strong::indexed<unsigned long>, strong::ordered, strong::default_constructible, strong::equality>> const&)","symbolLocation":352,"imageIndex":0},{"imageOffset":7818452,"symbol":"boost::asio::detail::executor_op<boost::asio::detail::binder0<ni::odr::ipc::kks::ipc_client::nks2_page_set_data(std::__1::shared_ptr<ni::odr::ipc::kks::odr_device>, ni::odr::models::nks2_page_viewmodel_data<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, strong::type<strong::type<std::__1::array<std::byte, 32ul>, ni::odr::utils::sha256_tag, strong::range, strong::indexed<unsigned long>, strong::ordered, strong::default_constructible, strong::equality>, ni::odr::models::asset_handle_tag, strong::range, strong::indexed<unsigned long>, strong::ordered, strong::default_constructible, strong::equality>>)::$_25>, std::__1::allocator<void>, boost::asio::detail::scheduler_operation>::do_complete(void*, boost::asio::detail::scheduler_operation*, boost::system::error_code const&, unsigned long)","symbolLocation":204,"imageIndex":0},{"imageOffset":41238396,"symbol":"boost::asio::detail::scheduler::do_run_one(boost::asio::detail::conditionally_enabled_mutex::scoped_lock&, boost::asio::detail::scheduler_thread_info&, boost::system::error_code const&)","symbolLocation":624,"imageIndex":0},{"imageOffset":41217616,"symbol":"boost::asio::detail::scheduler::run(boost::system::error_code&)","symbolLocation":196,"imageIndex":0},{"imageOffset":41217376,"symbol":"boost::asio::io_context::run()","symbolLocation":32,"imageIndex":0},{"imageOffset":7772924,"symbol":"void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, ni::odr::ipc::kks::ipc_client::ipc_client(ni::odr::instance_info, std::__1::shared_ptr<ni::odr::ipc::kks::abstract_ipc_client_observer>, std::__1::shared_ptr<ni::odr::ipc::abstract_main_thread_dispatcher>, std::__1::basic_string_view<char, std::__1::char_traits<char>>)::$_6>>(void*)","symbolLocation":152,"imageIndex":0},{"imageOffset":28584,"symbol":"_pthread_start","symbolLocation":148,"imageIndex":11},{"imageOffset":7584,"symbol":"thread_start","symbolLocation":8,"imageIndex":11}]},{"id":549127,"name":"bg jobs","frames":[{"imageOffset":3728,"symbol":"semaphore_wait_trap","symbolLocation":8,"imageIndex":10},{"imageOffset":18844,"symbol":"_dispatch_sema4_wait","symbolLocation":28,"imageIndex":13},{"imageOffset":20560,"symbol":"_dispatch_semaphore_wait_slow","symbolLocation":132,"imageIndex":13},{"imageOffset":2756144,"symbol":"SerialJobBGThread::run()","symbolLocation":164,"imageIndex":0},{"imageOffset":2764504,"symbol":"void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (SerialJobBGThread::*)(), SerialJobBGThread*>>(void*)","symbolLocation":64,"imageIndex":0},{"imageOffset":28584,"symbol":"_pthread_start","symbolLocation":148,"imageIndex":11},{"imageOffset":7584,"symbol":"thread_start","symbolLocation":8,"imageIndex":11}]},{"id":549128,"name":"QQmlThread","frames":[{"imageOffset":38964,"symbol":"poll","symbolLocation":8,"imageIndex":10},{"imageOffset":45690524,"symbol":"NI_6_3_2_R4::qt_safe_poll(pollfd*, unsigned int, timespec const*)","symbolLocation":436,"imageIndex":0},{"imageOffset":45695400,"symbol":"NI_6_3_2_R4::QEventDispatcherUNIX::processEvents(NI_6_3_2_R4::QFlags<NI_6_3_2_R4::QEventLoop::ProcessEventsFlag>)","symbolLocation":868,"imageIndex":0},{"imageOffset":44607476,"symbol":"NI_6_3_2_R4::QEventLoop::exec(NI_6_3_2_R4::QFlags<NI_6_3_2_R4::QEventLoop::ProcessEventsFlag>)","symbolLocation":544,"imageIndex":0},{"imageOffset":45320040,"symbol":"NI_6_3_2_R4::QThread::exec()","symbolLocation":176,"imageIndex":0},{"imageOffset":30592096,"symbol":"NI_6_3_2_R4::QQmlThreadPrivate::run()","symbolLocation":104,"imageIndex":0},{"imageOffset":45711128,"symbol":"NI_6_3_2_R4::QThreadPrivate::start(void*)","symbolLocation":332,"imageIndex":0},{"imageOffset":28584,"symbol":"_pthread_start","symbolLocation":148,"imageIndex":11},{"imageOffset":7584,"symbol":"thread_start","symbolLocation":8,"imageIndex":11}]},{"id":549129,"name":"DB3ScanThread","frames":[{"imageOffset":18192,"symbol":"__psynch_cvwait","symbolLocation":8,"imageIndex":10},{"imageOffset":30068,"symbol":"_pthread_cond_wait","symbolLocation":1232,"imageIndex":11},{"imageOffset":77552,"symbol":"std::__1::condition_variable::wait(std::__1::unique_lock<std::__1::mutex>&)","symbolLocation":28,"imageIndex":12},{"imageOffset":26282140,"symbol":"void std::__1::condition_variable_any::wait<std::__1::unique_lock<std::__1::recursive_mutex>>(std::__1::unique_lock<std::__1::recursive_mutex>&)","symbolLocation":100,"imageIndex":0},{"imageOffset":25331096,"symbol":"NI::DB3::ScanWorker::threadFn()","symbolLocation":196,"imageIndex":0},{"imageOffset":26279356,"symbol":"void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, NI::DB3::ScanWorker::ScanWorker(std::__1::shared_ptr<NI::DB3::IScanTaskNotification>)::$_79>>(void*)","symbolLocation":44,"imageIndex":0},{"imageOffset":28584,"symbol":"_pthread_start","symbolLocation":148,"imageIndex":11},{"imageOffset":7584,"symbol":"thread_start","symbolLocation":8,"imageIndex":11}]},{"id":549135,"name":"QQuickPixmapReader","frames":[{"imageOffset":38964,"symbol":"poll","symbolLocation":8,"imageIndex":10},{"imageOffset":45690524,"symbol":"NI_6_3_2_R4::qt_safe_poll(pollfd*, unsigned int, timespec const*)","symbolLocation":436,"imageIndex":0},{"imageOffset":45695400,"symbol":"NI_6_3_2_R4::QEventDispatcherUNIX::processEvents(NI_6_3_2_R4::QFlags<NI_6_3_2_R4::QEventLoop::ProcessEventsFlag>)","symbolLocation":868,"imageIndex":0},{"imageOffset":44607476,"symbol":"NI_6_3_2_R4::QEventLoop::exec(NI_6_3_2_R4::QFlags<NI_6_3_2_R4::QEventLoop::ProcessEventsFlag>)","symbolLocation":544,"imageIndex":0},{"imageOffset":45320040,"symbol":"NI_6_3_2_R4::QThread::exec()","symbolLocation":176,"imageIndex":0},{"imageOffset":27880280,"symbol":"NI_6_3_2_R4::QQuickPixmapReader::run()","symbolLocation":316,"imageIndex":0},{"imageOffset":45711128,"symbol":"NI_6_3_2_R4::QThreadPrivate::start(void*)","symbolLocation":332,"imageIndex":0},{"imageOffset":28584,"symbol":"_pthread_start","symbolLocation":148,"imageIndex":11},{"imageOffset":7584,"symbol":"thread_start","symbolLocation":8,"imageIndex":11}]},{"id":549136,"frames":[{"imageOffset":28768,"symbol":"kevent","symbolLocation":8,"imageIndex":10},{"imageOffset":14635232,"symbol":"zmq::kqueue_t::loop()","symbolLocation":228,"imageIndex":0},{"imageOffset":14748340,"symbol":"thread_routine(void*)","symbolLocation":56,"imageIndex":0},{"imageOffset":28584,"symbol":"_pthread_start","symbolLocation":148,"imageIndex":11},{"imageOffset":7584,"symbol":"thread_start","symbolLocation":8,"imageIndex":11}]},{"id":549137,"frames":[{"imageOffset":28768,"symbol":"kevent","symbolLocation":8,"imageIndex":10},{"imageOffset":14635232,"symbol":"zmq::kqueue_t::loop()","symbolLocation":228,"imageIndex":0},{"imageOffset":14748340,"symbol":"thread_routine(void*)","symbolLocation":56,"imageIndex":0},{"imageOffset":28584,"symbol":"_pthread_start","symbolLocation":148,"imageIndex":11},{"imageOffset":7584,"symbol":"thread_start","symbolLocation":8,"imageIndex":11}]},{"id":549138,"frames":[{"imageOffset":38964,"symbol":"poll","symbolLocation":8,"imageIndex":10},{"imageOffset":14675796,"symbol":"zmq_poll","symbolLocation":452,"imageIndex":0},{"imageOffset":14556224,"symbol":"ni::cloud::native_access_rpc::RpcSubscriber::receiveBlocking()","symbolLocation":60,"imageIndex":0},{"imageOffset":14555844,"symbol":"ni::cloud::native_access_rpc::RpcClientImpl::receiveAndProcessMessages()","symbolLocation":32,"imageIndex":0},{"imageOffset":14557916,"symbol":"void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, ni::cloud::native_access_rpc::RpcClientImpl::listen()::$_0>>(void*)","symbolLocation":64,"imageIndex":0},{"imageOffset":28584,"symbol":"_pthread_start","symbolLocation":148,"imageIndex":11},{"imageOffset":7584,"symbol":"thread_start","symbolLocation":8,"imageIndex":11}]},{"id":549139,"name":"com.apple.audio.IOThread.client","frames":[{"imageOffset":3860,"symbol":"mach_msg2_trap","symbolLocation":8,"imageIndex":10},{"imageOffset":78400,"symbol":"mach_msg2_internal","symbolLocation":80,"imageIndex":10},{"imageOffset":39800,"symbol":"mach_msg_overwrite","symbolLocation":604,"imageIndex":10},{"imageOffset":4752,"symbol":"mach_msg","symbolLocation":24,"imageIndex":10},{"imageOffset":3077668,"symbol":"HALB_MachPort::SendSimpleMessageWithSimpleReply(unsigned int, unsigned int, int, int&, bool, unsigned int)","symbolLocation":104,"imageIndex":17},{"imageOffset":1953044,"symbol":"HALC_ProxyIOContext::IOWorkLoop()","symbolLocation":3516,"imageIndex":17},{"imageOffset":1947772,"symbol":"invocation function for block in HALC_ProxyIOContext::HALC_ProxyIOContext(unsigned int, unsigned int)","symbolLocation":116,"imageIndex":17},{"imageOffset":3401060,"symbol":"HALB_IOThread::Entry(void*)","symbolLocation":88,"imageIndex":17},{"imageOffset":28584,"symbol":"_pthread_start","symbolLocation":148,"imageIndex":11},{"imageOffset":7584,"symbol":"thread_start","symbolLocation":8,"imageIndex":11}]},{"id":549146,"frames":[{"imageOffset":28768,"symbol":"kevent","symbolLocation":8,"imageIndex":10},{"imageOffset":41227076,"symbol":"boost::asio::detail::kqueue_reactor::run(long, boost::asio::detail::op_queue<boost::asio::detail::scheduler_operation>&)","symbolLocation":280,"imageIndex":0},{"imageOffset":41238168,"symbol":"boost::asio::detail::scheduler::do_run_one(boost::asio::detail::conditionally_enabled_mutex::scoped_lock&, boost::asio::detail::scheduler_thread_info&, boost::system::error_code const&)","symbolLocation":396,"imageIndex":0},{"imageOffset":41217616,"symbol":"boost::asio::detail::scheduler::run(boost::system::error_code&)","symbolLocation":196,"imageIndex":0},{"imageOffset":41217376,"symbol":"boost::asio::io_context::run()","symbolLocation":32,"imageIndex":0},{"imageOffset":40998816,"symbol":"boost::asio::detail::posix_thread::func<(anonymous namespace)::threadpool_impl::add_thread()::'lambda'()>::run()","symbolLocation":20,"imageIndex":0},{"imageOffset":41228976,"symbol":"boost_asio_detail_posix_thread_function","symbolLocation":28,"imageIndex":0},{"imageOffset":28584,"symbol":"_pthread_start","symbolLocation":148,"imageIndex":11},{"imageOffset":7584,"symbol":"thread_start","symbolLocation":8,"imageIndex":11}]},{"id":549147,"frames":[{"imageOffset":18192,"symbol":"__psynch_cvwait","symbolLocation":8,"imageIndex":10},{"imageOffset":30068,"symbol":"_pthread_cond_wait","symbolLocation":1232,"imageIndex":11},{"imageOffset":41238052,"symbol":"boost::asio::detail::scheduler::do_run_one(boost::asio::detail::conditionally_enabled_mutex::scoped_lock&, boost::asio::detail::scheduler_thread_info&, boost::system::error_code const&)","symbolLocation":280,"imageIndex":0},{"imageOffset":41217616,"symbol":"boost::asio::detail::scheduler::run(boost::system::error_code&)","symbolLocation":196,"imageIndex":0},{"imageOffset":41273496,"symbol":"boost::asio::detail::posix_thread::func<boost::asio::detail::resolver_service_base::work_scheduler_runner>::run()","symbolLocation":32,"imageIndex":0},{"imageOffset":41228976,"symbol":"boost_asio_detail_posix_thread_function","symbolLocation":28,"imageIndex":0},{"imageOffset":28584,"symbol":"_pthread_start","symbolLocation":148,"imageIndex":11},{"imageOffset":7584,"symbol":"thread_start","symbolLocation":8,"imageIndex":11}]},{"id":549157,"name":"com.apple.NSEventThread","frames":[{"imageOffset":3860,"symbol":"mach_msg2_trap","symbolLocation":8,"imageIndex":10},{"imageOffset":78400,"symbol":"mach_msg2_internal","symbolLocation":80,"imageIndex":10},{"imageOffset":39800,"symbol":"mach_msg_overwrite","symbolLocation":604,"imageIndex":10},{"imageOffset":4752,"symbol":"mach_msg","symbolLocation":24,"imageIndex":10},{"imageOffset":522212,"symbol":"__CFRunLoopServiceMachPort","symbolLocation":160,"imageIndex":6},{"imageOffset":516292,"symbol":"__CFRunLoopRun","symbolLocation":1208,"imageIndex":6},{"imageOffset":513208,"symbol":"CFRunLoopRunSpecific","symbolLocation":612,"imageIndex":6},{"imageOffset":1454900,"symbol":"_NSEventThread","symbolLocation":172,"imageIndex":8},{"imageOffset":28584,"symbol":"_pthread_start","symbolLocation":148,"imageIndex":11},{"imageOffset":7584,"symbol":"thread_start","symbolLocation":8,"imageIndex":11}]},{"id":549160,"name":"URET_Worker","frames":[{"imageOffset":18192,"symbol":"__psynch_cvwait","symbolLocation":8,"imageIndex":10},{"imageOffset":30068,"symbol":"_pthread_cond_wait","symbolLocation":1232,"imageIndex":11},{"imageOffset":77552,"symbol":"std::__1::condition_variable::wait(std::__1::unique_lock<std::__1::mutex>&)","symbolLocation":28,"imageIndex":12},{"imageOffset":14352016,"symbol":"ni::uret::WorkerThread::main()","symbolLocation":184,"imageIndex":0},{"imageOffset":14540960,"symbol":"void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, ni::uret::WorkerThread::start()::$_4>>(void*)","symbolLocation":44,"imageIndex":0},{"imageOffset":28584,"symbol":"_pthread_start","symbolLocation":148,"imageIndex":11},{"imageOffset":7584,"symbol":"thread_start","symbolLocation":8,"imageIndex":11}]},{"id":550517,"frames":[{"imageOffset":7564,"symbol":"start_wqthread","symbolLocation":0,"imageIndex":11}]},{"id":551106,"frames":[{"imageOffset":7564,"symbol":"start_wqthread","symbolLocation":0,"imageIndex":11}]},{"id":551395,"frames":[{"imageOffset":7564,"symbol":"start_wqthread","symbolLocation":0,"imageIndex":11}]}],
+  "usedImages" : [
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4334403584,
+    "CFBundleShortVersionString" : "7.3.999-PullRequest3304.520+Branch.PR-3304.Source.30af479959.Target.8c87106fe8",
+    "CFBundleIdentifier" : "com.native-instruments.Kontakt 7",
+    "size" : 88834048,
+    "uuid" : "9c38f6d8-307e-37bf-888a-78fd556c779a",
+    "path" : "\/private\/var\/folders\/*\/Kontakt 7.app\/Contents\/MacOS\/Kontakt 7",
+    "name" : "Kontakt 7",
+    "CFBundleVersion" : "7.3.999 (Kontakt\/Kontakt\/PR-3304.520), Copyright © 2023 Native Instruments GmbH"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64e",
+    "base" : 4539809792,
+    "CFBundleShortVersionString" : "7.1",
+    "CFBundleIdentifier" : "com.apple.textencoding.unicode",
+    "size" : 16384,
+    "uuid" : "7209129a-a98c-3643-b6f6-b205987a4478",
+    "path" : "\/System\/Library\/TextEncodings\/Unicode Encodings.bundle\/Contents\/MacOS\/Unicode Encodings",
+    "name" : "Unicode Encodings",
+    "CFBundleVersion" : "7.1"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64",
+    "base" : 4558340096,
+    "CFBundleIdentifier" : "se.propellerheads.rex.library",
+    "size" : 294912,
+    "uuid" : "ddfec8a2-ead4-3fab-9674-1be6f6e189c9",
+    "path" : "\/Library\/Application Support\/Native Instruments\/*\/REX Shared Library.framework\/Versions\/A\/REX Shared Library",
+    "name" : "REX Shared Library",
+    "CFBundleVersion" : "1.9.1"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64e",
+    "base" : 4810702848,
+    "size" : 49152,
+    "uuid" : "570c31f7-94c6-3b86-ae44-1694db0a4bcd",
+    "path" : "\/usr\/lib\/libobjc-trampolines.dylib",
+    "name" : "libobjc-trampolines.dylib"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64e",
+    "base" : 5017780224,
+    "CFBundleShortVersionString" : "1.0",
+    "CFBundleIdentifier" : "com.apple.AppleMetalOpenGLRenderer",
+    "size" : 442368,
+    "uuid" : "01596a35-894c-3104-8314-40d3c08f18ca",
+    "path" : "\/System\/Library\/Extensions\/AppleMetalOpenGLRenderer.bundle\/Contents\/MacOS\/AppleMetalOpenGLRenderer",
+    "name" : "AppleMetalOpenGLRenderer",
+    "CFBundleVersion" : "1"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64e",
+    "base" : 7017025536,
+    "CFBundleShortVersionString" : "6.9",
+    "CFBundleIdentifier" : "com.apple.Foundation",
+    "size" : 10248192,
+    "uuid" : "d5337cc6-a075-3ca0-b5bf-b49da8878337",
+    "path" : "\/System\/Library\/Frameworks\/Foundation.framework\/Versions\/C\/Foundation",
+    "name" : "Foundation",
+    "CFBundleVersion" : "1977"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64e",
+    "base" : 7000666112,
+    "CFBundleShortVersionString" : "6.9",
+    "CFBundleIdentifier" : "com.apple.CoreFoundation",
+    "size" : 5087232,
+    "uuid" : "203e4401-8c2e-3157-a24b-92f52551d43e",
+    "path" : "\/System\/Library\/Frameworks\/CoreFoundation.framework\/Versions\/A\/CoreFoundation",
+    "name" : "CoreFoundation",
+    "CFBundleVersion" : "1977"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64e",
+    "base" : 7160668160,
+    "CFBundleShortVersionString" : "2.1.1",
+    "CFBundleIdentifier" : "com.apple.HIToolbox",
+    "size" : 3358720,
+    "uuid" : "d800278b-4e6c-3032-b56f-027a938a51d6",
+    "path" : "\/System\/Library\/Frameworks\/Carbon.framework\/Versions\/A\/Frameworks\/HIToolbox.framework\/Versions\/A\/HIToolbox",
+    "name" : "HIToolbox"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64e",
+    "base" : 7053512704,
+    "CFBundleShortVersionString" : "6.9",
+    "CFBundleIdentifier" : "com.apple.AppKit",
+    "size" : 15790080,
+    "uuid" : "041c7d21-21cc-3eea-ae53-d39f5ca6a24e",
+    "path" : "\/System\/Library\/Frameworks\/AppKit.framework\/Versions\/C\/AppKit",
+    "name" : "AppKit",
+    "CFBundleVersion" : "2299.60.124"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64e",
+    "base" : 6996746240,
+    "size" : 582996,
+    "uuid" : "bd993f39-c902-37d6-8bd8-6d827c7f121e",
+    "path" : "\/usr\/lib\/dyld",
+    "name" : "dyld"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64e",
+    "base" : 7000010752,
+    "size" : 237544,
+    "uuid" : "42f503e2-9273-360a-a086-c1b19bbd3962",
+    "path" : "\/usr\/lib\/system\/libsystem_kernel.dylib",
+    "name" : "libsystem_kernel.dylib"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64e",
+    "base" : 7000248320,
+    "size" : 53248,
+    "uuid" : "46d35233-a051-3f4f-bba4-ba56dddc4d1a",
+    "path" : "\/usr\/lib\/system\/libsystem_pthread.dylib",
+    "name" : "libsystem_pthread.dylib"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64e",
+    "base" : 6999318528,
+    "size" : 577528,
+    "uuid" : "54e8fbe1-df0d-33a2-b8fa-356565c12929",
+    "path" : "\/usr\/lib\/libc++.1.dylib",
+    "name" : "libc++.1.dylib"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64e",
+    "base" : 6998491136,
+    "size" : 294912,
+    "uuid" : "c2fd3094-b465-39a4-b774-16583ff53c4b",
+    "path" : "\/usr\/lib\/system\/libdispatch.dylib",
+    "name" : "libdispatch.dylib"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64e",
+    "base" : 6998798336,
+    "size" : 520184,
+    "uuid" : "95a70e20-1df3-3ddf-900c-315ed0b2c067",
+    "path" : "\/usr\/lib\/system\/libsystem_c.dylib",
+    "name" : "libsystem_c.dylib"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64e",
+    "base" : 7157764096,
+    "CFBundleShortVersionString" : "1.0",
+    "CFBundleIdentifier" : "com.apple.audio.caulk",
+    "size" : 167936,
+    "uuid" : "d793971d-25be-323d-83a4-cc72fadafe8d",
+    "path" : "\/System\/Library\/PrivateFrameworks\/caulk.framework\/Versions\/A\/caulk",
+    "name" : "caulk"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64e",
+    "base" : 7407759360,
+    "CFBundleShortVersionString" : "2.0",
+    "CFBundleIdentifier" : "com.apple.audio.midi.CoreMIDI",
+    "size" : 471040,
+    "uuid" : "73c9204e-07ef-3e4d-8401-3516bfc38586",
+    "path" : "\/System\/Library\/Frameworks\/CoreMIDI.framework\/Versions\/A\/CoreMIDI",
+    "name" : "CoreMIDI",
+    "CFBundleVersion" : "88"
+  },
+  {
+    "source" : "P",
+    "arch" : "arm64e",
+    "base" : 7034863616,
+    "CFBundleShortVersionString" : "5.0",
+    "CFBundleIdentifier" : "com.apple.audio.CoreAudio",
+    "size" : 6897664,
+    "uuid" : "4c6d842e-31f6-30ca-984e-6281d387fe72",
+    "path" : "\/System\/Library\/Frameworks\/CoreAudio.framework\/Versions\/A\/CoreAudio",
+    "name" : "CoreAudio",
+    "CFBundleVersion" : "5.0"
+  },
+  {
+    "size" : 0,
+    "source" : "A",
+    "base" : 0,
+    "uuid" : "00000000-0000-0000-0000-000000000000"
+  }
+],
+  "sharedCache" : {
+  "base" : 6996082688,
+  "size" : 3551805440,
+  "uuid" : "7d9faa84-5c6b-3ef4-9379-faba64346673"
+},
+  "vmSummary" : "ReadOnly portion of Libraries: Total=1.2G resident=0K(0%) swapped_out_or_unallocated=1.2G(100%)\nWritable regions: Total=4.2G written=0K(0%) resident=0K(0%) swapped_out=0K(0%) unallocated=4.2G(100%)\n\n                                VIRTUAL   REGION \nREGION TYPE                        SIZE    COUNT (non-coalesced) \n===========                     =======  ======= \nAccelerate framework               128K        1 \nActivity Tracing                   256K        1 \nCG backing stores                 4032K        4 \nCG image                            96K        5 \nColorSync                          512K       26 \nCoreAnimation                      192K       12 \nCoreGraphics                        32K        2 \nCoreServices                      8816K        8 \nCoreUI image data                 1328K        9 \nFoundation                          16K        1 \nJS VM Gigacage                    4096K        1 \nJS VM Isolated Heap               6400K        6 \nKernel Alloc Once                   32K        1 \nMALLOC                             2.8G     3549 \nMALLOC guard page                  192K       10 \nMALLOC_LARGE (reserved)          256.0M        2         reserved VM address space (unallocated)\nMALLOC_MEDIUM (reserved)         736.0M        9         reserved VM address space (unallocated)\nMALLOC_NANO (reserved)           384.0M        1         reserved VM address space (unallocated)\nSTACK GUARD                       56.5M       35 \nStack                             33.6M       57 \nVM_ALLOCATE                        512K       20 \n__AUTH                             711K      189 \n__AUTH_CONST                      14.0M      360 \n__CTF                               824        1 \n__DATA                            5758K      349 \n__DATA_CONST                      18.5M      366 \n__DATA_DIRTY                       801K      117 \n__FONT_DATA                        2352        1 \n__GLSLBUILTINS                    5174K        1 \n__LINKEDIT                       848.9M        6 \n__OBJC_RO                         66.3M        1 \n__OBJC_RW                         2011K        1 \n__TEXT                           352.1M      382 \ndyld private memory                272K        2 \nmapped file                      104.4M      200 \nshared memory                      928K       17 \n===========                     =======  ======= \nTOTAL                              5.7G     5753 \nTOTAL, minus reserved VM space     4.3G     5753 \n",
+  "legacyInfo" : {
+  "threadTriggered" : {
+    "queue" : "com.apple.main-thread"
+  }
+},
+  "logWritingSignature" : "8d53ef5cdb28a7e5ebaafeaee960297f1dc63d35",
+  "trialInfo" : {
+  "rollouts" : [
+    {
+      "rolloutId" : "6297d96be2c9387df974efa4",
+      "factorPackIds" : {
+
+      },
+      "deploymentId" : 240000008
+    },
+    {
+      "rolloutId" : "639124e81d92412bfb4880b3",
+      "factorPackIds" : {
+
+      },
+      "deploymentId" : 240000004
+    }
+  ],
+  "experiments" : [
+    {
+      "treatmentId" : "c28e4ee6-1b08-4f90-8e05-2809e78310a3",
+      "experimentId" : "6317d2003d24842ff850182a",
+      "deploymentId" : 400000013
+    },
+    {
+      "treatmentId" : "6dd670af-0633-45e4-ae5f-122ae4df02be",
+      "experimentId" : "64406ba83deb637ac8a04419",
+      "deploymentId" : 900000005
+    }
+  ]
+}
+}
+

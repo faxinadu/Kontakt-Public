@@ -1,0 +1,16 @@
+{***********************************************
+Keyboard Tracking Engine Par Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: January 19, 2023
+*************************************************}
+
+on init
+    make_perfview
+    message("")
+    declare ui_switch $switch
+end on
+
+on ui_control($switch)
+    set_engine_par($ENGINE_PAR_TRACKING,$switch,0,-1,-1)
+end on

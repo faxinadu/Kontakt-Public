@@ -1,0 +1,19 @@
+{***********************************************
+HQI Mode Engine Par Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: January 19, 2023
+*************************************************}
+
+on init
+    make_perfview
+    message("")
+    declare ui_menu $menu
+        add_menu_item($menu,"Standard",$NI_HQI_MODE_STANDARD)
+        add_menu_item($menu,"High",$NI_HQI_MODE_HIGH)
+        add_menu_item($menu,"Perfect",$NI_HQI_MODE_PERFECT)
+end on
+
+on ui_control($menu)
+    set_engine_par($ENGINE_PAR_HQI_MODE,$menu,0,-1,-1)
+end on

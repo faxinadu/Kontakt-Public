@@ -1,0 +1,403 @@
+{***********************************************
+NKS Lightguide Lightshow Example
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: May 6, 2023
+*************************************************}
+
+on init
+    message("")
+    make_perfview
+    set_ui_height(3)
+    set_control_par_str($INST_WALLPAPER_ID,$CONTROL_PAR_PICTURE,"kk")
+    set_listener($NI_SIGNAL_TIMER_MS,500000)
+    declare const $Mode_count := 15
+    declare $i {looper} 
+    declare $x
+    declare $y
+    declare $z {global starts at 0}
+    $z := 0  
+    declare ui_switch $Power
+        set_control_par(get_ui_id($Power),$CONTROL_PAR_TEXT_ALIGNMENT,1)
+    declare ui_knob $Mode(1,$Mode_count,1)
+    declare ui_knob $Speed(1,1000,1)    
+        set_knob_unit($Speed,$KNOB_UNIT_PERCENT)
+
+    move_control_px($Power,500,50)
+    move_control_px($Mode,435,5)
+    move_control_px($Speed,525,5)
+
+    set_control_par_str(get_ui_id($Power),$CONTROL_PAR_HELP,"Turns the light show off and on.")
+    set_control_par_str(get_ui_id($Mode),$CONTROL_PAR_HELP,"Selects from the various available lightshow modes. The last mode randomly cycles between all the other modes.")
+    set_control_par_str(get_ui_id($Speed),$CONTROL_PAR_HELP,"Sets the speed at which the lightshow will progress.")
+
+    set_control_par(get_ui_id($Power),$CONTROL_PAR_AUTOMATION_ID,0)
+    set_control_par(get_ui_id($Mode),$CONTROL_PAR_AUTOMATION_ID,1)
+    set_control_par(get_ui_id($Speed),$CONTROL_PAR_AUTOMATION_ID,2)
+
+    make_persistent($Speed)
+    make_persistent($Mode)
+
+    declare $color
+
+    declare !modes[$Mode_count]
+        !modes[0] := "Rand"
+        !modes[1] := "USA"
+        !modes[2] := "ISR"
+        !modes[3] := "UKR 1"
+        !modes[4] := "UKR 2"
+        !modes[5] := "1 Color"
+        !modes[6] := "1 Note 1"
+        !modes[7] := "1 Oct"
+        !modes[8] := "1 Check"
+        !modes[9] := "DE BE"
+        !modes[10] := "B Run"
+        !modes[11] := "R Run"
+        !modes[12] := "Xmas"
+        !modes[13] := "Swirl"
+        !modes[14] := "Cycle"
+
+    declare %usa_colors[3]
+        %usa_colors[0] := $KEY_COLOR_RED
+        %usa_colors[1] := $KEY_COLOR_WHITE
+        %usa_colors[2] := $KEY_COLOR_BLUE
+
+    declare %ukraine_colors[2]
+        %ukraine_colors[0] := $KEY_COLOR_YELLOW
+        %ukraine_colors[1] := $KEY_COLOR_BLUE
+
+    declare %germany_colors[3]
+        %germany_colors[0] := $KEY_COLOR_BLACK
+        %germany_colors[1] := $KEY_COLOR_RED
+        %germany_colors[2] := $KEY_COLOR_YELLOW
+
+end on
+
+function mode_1
+    $i := 0 { Variable for the notes }
+    $x := 0 { Variable for the colors }
+    while ($i<127) { Loop through all notes }
+        set_key_color($i,random(0,20)) { Set the color for each note }
+        inc($i) { Next note }
+        inc($x) { Next color }
+        if ($x=20) { Reset the color counter once looped through all colors }
+            $x := 0
+        end if
+    end while
+end function
+
+function mode_2
+    $i := 0 { Variable for the notes }
+    $x := random(0,1)
+    while ($i<127) { Loop through all notes }
+        if($x=0)
+            select ($i)
+                case 0
+                    $color := %usa_colors[random(0,2)]
+                case 12
+                    $color := %usa_colors[random(0,2)]
+                case 24
+                    $color := %usa_colors[random(0,2)]
+                case 36
+                    $color := %usa_colors[random(0,2)]
+                case 48
+                    $color := %usa_colors[random(0,2)]
+                case 60
+                    $color := %usa_colors[random(0,2)]
+                case 72
+                    $color := %usa_colors[random(0,2)]
+                case 84
+                    $color := %usa_colors[random(0,2)]
+                case 96
+                    $color := %usa_colors[random(0,2)]
+                case 108
+                    $color := %usa_colors[random(0,2)]
+                case 120
+                    $color := %usa_colors[random(0,2)]
+            end select
+            set_key_color($i,$color)
+        else
+            set_key_color($i,$KEY_COLOR_BLACK) { Set the color for each note }
+        end if
+        inc($i) { Next note }
+    end while
+end function
+
+function mode_3
+    $i := 0 { Variable for the notes }
+    $x := random(0,1)
+    while ($i<127) { Loop through all notes }
+        if($x=0)
+            select ($i)
+                case 0
+                    $color := %usa_colors[random(1,2)]
+                case 12
+                    $color := %usa_colors[random(1,2)]
+                case 24
+                    $color := %usa_colors[random(1,2)]
+                case 36
+                    $color := %usa_colors[random(1,2)]
+                case 48
+                    $color := %usa_colors[random(1,2)]
+                case 60
+                    $color := %usa_colors[random(1,2)]
+                case 72
+                    $color := %usa_colors[random(1,2)]
+                case 84
+                    $color := %usa_colors[random(1,2)]
+                case 96
+                    $color := %usa_colors[random(1,2)]
+                case 108
+                    $color := %usa_colors[random(1,2)]
+                case 120
+                    $color := %usa_colors[random(1,2)]
+            end select
+            set_key_color($i,$color)
+        else
+            set_key_color($i,$KEY_COLOR_WHITE) { Set the color for each note }
+        end if
+        inc($i) { Next note }
+    end while
+end function
+
+function mode_4
+    $i := 0 { Variable for the notes }
+    while ($i<127) { Loop through all notes }
+        set_key_color($i,%ukraine_colors[random(0,1)]) { Set the color for each note }
+        inc($i) { Next note }
+    end while
+end function
+
+function mode_5
+    $i := 0 { Variable for the notes }
+    $color := %ukraine_colors[random(0,1)]
+    while ($i<127) { Loop through all notes }
+        set_key_color($i,$color) { Set the color for each note }
+        inc($i) { Next note }
+    end while
+end function
+
+function mode_6
+    $i := 0 { Variable for the notes }
+    $color := random(0,20)
+    while ($i<127) { Loop through all notes }
+        set_key_color($i,$color) { Set the color for each note }
+        inc($i) { Next note }
+    end while
+end function
+
+function mode_7
+    $i := 0 { Variable for the notes }
+    $color := random(0,20)
+    while ($i<127) { Loop through all notes }
+        set_key_color($i,$KEY_COLOR_NONE) { Set the color for each note }
+        inc($i) { Next note }
+    end while
+    set_key_color(random(0,127),$color) { Set the color for each note }
+end function
+
+function mode_8
+    $i := 0 
+    $color := random(0,20)
+    while ($i<127) { Loop through all notes }
+        set_key_color($i,$KEY_COLOR_NONE) { Set the color for each note }
+        inc($i) { Next note }
+    end while
+    $x := random(0,96)
+    $y := $x +12
+    while ($x<$y)
+        set_key_color($x,$color)
+        inc($x)
+    end while
+end function
+
+function mode_9
+    $i := 0
+    $x := 0
+    $color := random(0,20)
+    while ($i<127)
+        if($x=0)
+            set_key_color($i,$KEY_COLOR_NONE)
+            $x := 1
+        else
+            set_key_color($i,$color)
+            $x := 0
+        end if
+        inc($i)
+    end while
+end function
+
+function mode_10
+    $i := 0
+    while ($i<127)
+        set_key_color($i,%germany_colors[random(0,2)])
+        inc($i)
+    end while
+end function
+
+function mode_11
+    $i := 0
+    while ($i<127)
+        set_key_color($i,$KEY_COLOR_NONE)
+        inc($i)
+    end while
+    set_key_color($z+48,$KEY_COLOR_BLUE)
+    inc($z)
+    if($z=12)
+        $z := 0
+    end if
+end function
+
+function mode_12
+    $i := 0
+    while ($i<127)
+        set_key_color($i,$KEY_COLOR_NONE)
+        inc($i)
+    end while
+    set_key_color($z+48,random(0,20))
+    inc($z)
+    if($z=12)
+        $z := 0
+    end if
+end function
+
+function mode_13
+    $i := 0
+    while ($i<127)
+        set_key_color($i,$KEY_COLOR_NONE)
+        inc($i)
+    end while
+    set_key_color($z+12,$KEY_COLOR_RED)
+    set_key_color($z+24,$KEY_COLOR_GREEN)
+    set_key_color($z+36,$KEY_COLOR_RED)
+    set_key_color($z+48,$KEY_COLOR_GREEN)
+    set_key_color($z+60,$KEY_COLOR_RED)
+    set_key_color($z+72,$KEY_COLOR_GREEN)
+    set_key_color($z+84,$KEY_COLOR_RED)
+    inc($z)
+    if($z=12)
+        $z := 0
+    end if
+end function
+
+function mode_14
+    $i := 0
+    while ($i<127)
+        set_key_color($i,$KEY_COLOR_NONE)
+        inc($i)
+    end while
+    $color := $KEY_COLOR_MINT
+    set_key_color($z,$color)
+    set_key_color($z+24,$color)
+    set_key_color(24-$z,$color)
+    set_key_color($z+48,$color)
+    set_key_color(48-$z,$color)
+    set_key_color($z+72,$color)
+    set_key_color(72-$z,$color)
+    set_key_color($z+96,$color)
+    set_key_color(96-$z,$color)
+    set_key_color(120-$z,$color)
+    inc($z)
+    if($z=12)
+        $z := 0
+    end if
+end function
+
+function mode_select
+    select($Mode)
+        case 1
+            call mode_1
+        case 2
+            call mode_2
+        case 3
+            call mode_3
+        case 4
+            call mode_4
+        case 5
+            call mode_5
+        case 6
+            call mode_6
+        case 7
+            call mode_7
+        case 8
+            call mode_8
+        case 9
+            call mode_9
+        case 10
+            call mode_10
+        case 11
+            call mode_11
+        case 12
+            call mode_12
+        case 13
+            call mode_13
+        case 14
+            call mode_14
+        case 15
+            $x := random(1,$Mode_count)
+            select($x)
+                    case 1
+                        call mode_1
+                    case 2
+                        call mode_2
+                    case 3
+                        call mode_3
+                    case 4
+                        call mode_4
+                    case 5
+                        call mode_5
+                    case 6
+                        call mode_6
+                    case 7
+                        call mode_7
+                    case 8
+                        call mode_8
+                    case 9
+                        call mode_9
+                    case 10
+                        call mode_10
+                    case 11
+                        call mode_11
+                    case 12
+                        call mode_12
+                    case 13
+                        call mode_13
+                    case 14
+                        call mode_14
+            end select
+    end select
+end function
+
+function set_mode_label
+    set_knob_label($Mode,!modes[$Mode-1])
+end function
+
+function set_tempo
+    change_listener_par($NI_SIGNAL_TIMER_MS,60000000/$Speed)
+    set_knob_label($Speed,int(real($Speed)/10.0))
+    {set_control_par(get_ui_id($Speed),$CONTROL_PAR_LABEL,)}
+end function
+
+on persistence_changed
+    call set_mode_label
+    call set_tempo
+end on
+   
+on listener
+    if($Power=1)
+        call mode_select
+    end if
+end on
+
+on ui_control($Speed)
+    call set_tempo
+end on
+
+on ui_control($Mode)
+    call set_mode_label
+end on
+
+on note
+    call mode_select
+end on
+

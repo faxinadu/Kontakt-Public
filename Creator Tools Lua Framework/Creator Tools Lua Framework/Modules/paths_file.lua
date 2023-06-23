@@ -8,7 +8,7 @@
 local sox_path_win = filesystem.preferred("\"".. "sox" .. "\"")
 local flac_path_win = filesystem.preferred("\"".. "flac" .. "\"")
 
-local sox_path_mac = filesystem.preferred("\"".. "/opt/homebrew/bin/sox" .. "\"")
+local sox_path_mac = filesystem.preferred("\"".. "/Users/yaron.eshkar/Faxi/Repositories/Kontakt Lua API Framework/Tools/sox-14.4.2/sox" .. "\"")
 local flac_path_mac = filesystem.preferred("\"".. "/opt/homebrew/bin/flac" .. "\"")
 --------------------------------------------
 

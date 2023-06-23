@@ -446,6 +446,10 @@ wav = {
 			-- Return audio handler
 			local obj
 			obj = {
+				close_file = function()
+					file:close()
+					file = nil
+				end,
 				get_filename = function()
 					return filename
 				end,

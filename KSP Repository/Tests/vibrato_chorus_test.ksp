@@ -1,0 +1,80 @@
+{***********************************************
+Vibrato/Chorus Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: June 15, 2023
+*************************************************}
+
+on init
+    message("")
+    make_perfview
+    declare $i
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_VIBRATO_CHORUS,-1,0,1)
+    declare ui_menu $depth
+        add_menu_item($depth,"Depth: 1",$NI_VC_DEPTH_1)
+        add_menu_item($depth,"Depth: 2",$NI_VC_DEPTH_2)
+        add_menu_item($depth,"Depth: 3",$NI_VC_DEPTH_3)
+        add_menu_item($depth,"Depth: 4",$NI_VC_DEPTH_4)
+        add_menu_item($depth,"Depth: 5",$NI_VC_DEPTH_5)
+        add_menu_item($depth,"Depth: 6",$NI_VC_DEPTH_6)
+    declare ui_menu $color
+        add_menu_item($color,"Color: Type A",$NI_VC_COLOR_TYPE_A)
+        add_menu_item($color,"Color: Type B",$NI_VC_COLOR_TYPE_B)
+        add_menu_item($color,"Color: Type C",$NI_VC_COLOR_TYPE_C)
+    declare ui_knob $rate(0,1000000,1)        
+    declare ui_knob $blend(0,1000000,1)
+    declare ui_knob $width(0,1000000,1)
+    declare ui_knob $mix(0,1000000,1)
+
+    make_persistent($depth)
+    make_persistent($color)
+    make_persistent($rate)
+    make_persistent($blend)
+    make_persistent($width)
+    make_persistent($mix)
+
+end on
+
+on ui_control($depth)
+    set_engine_par($ENGINE_PAR_VC_DEPTH,$depth,-1,0,1)
+end on
+
+on ui_control($color)
+    set_engine_par($ENGINE_PAR_VC_COLOR,$color,-1,0,1)
+end on
+
+on ui_control($rate)
+    set_engine_par($ENGINE_PAR_VC_RATE,$rate,-1,0,1)
+end on
+
+on ui_control($blend)
+    set_engine_par($ENGINE_PAR_VC_BLEND,$blend,-1,0,1)
+end on
+
+on ui_control($width)
+    set_engine_par($ENGINE_PAR_VC_WIDTH,$width,-1,0,1)
+end on
+
+on ui_control($mix)
+    set_engine_par($ENGINE_PAR_VC_MIX,$mix,-1,0,1)
+end on
+
+{
+$EFFECT_TYPE_VIBRATO_CHORUS
+
+$ENGINE_PAR_VC_BLEND
+$ENGINE_PAR_VC_RATE
+$ENGINE_PAR_VC_WIDTH
+$ENGINE_PAR_VC_MIX
+$ENGINE_PAR_VC_DEPTH
+  $NI_VC_DEPTH_1
+  $NI_VC_DEPTH_2
+  $NI_VC_DEPTH_3
+  $NI_VC_DEPTH_4
+  $NI_VC_DEPTH_5
+  $NI_VC_DEPTH_6
+$ENGINE_PAR_VC_COLOR
+  $NI_VC_COLOR_TYPE_A
+  $NI_VC_COLOR_TYPE_B
+  $NI_VC_COLOR_TYPE_C
+  }

@@ -1,0 +1,255 @@
+{***********************************************
+Raum Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: Apr 10, 2023
+*************************************************}
+
+on init
+
+    message("")
+    set_script_title("Raum Test")
+    set_ui_height(5)
+    make_perfview
+
+    declare const $spacing_x := 100
+    declare const $spacing_y := 20
+
+    declare const $num_controls := 27
+
+    declare const $group := -1
+    declare const $slot := 0
+    declare const $generic := 1
+
+    declare $i
+
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_RAUM,$group,$slot,$generic)
+
+    declare ui_panel $controls
+
+    declare ui_slider $predelay(0,1000000)
+    declare ui_slider $feedback(0,1000000)
+    declare ui_slider $lowcut(0,1000000)
+    declare ui_slider $highcut(0,1000000)
+    declare ui_slider $decay(0,1000000)
+    declare ui_slider $mod(0,1000000)
+
+    declare ui_label $predelay_label(1,1)
+    declare ui_label $feedback_label(1,1)
+    declare ui_label $lowcut_label(1,1)
+    declare ui_label $highcut_label(1,1)
+    declare ui_label $decay_label(1,1)
+    declare ui_label $mod_label(1,1)
+
+    declare ui_slider $diffusion(0,1000000)
+    declare ui_slider $size(0,1000000)
+    declare ui_slider $mix(0,1000000)
+    declare ui_slider $damping(0,1000000)
+    declare ui_slider $rate(0,1000000)
+
+    declare ui_label $diffusion_label(1,1)
+    declare ui_label $size_label(1,1)
+    declare ui_label $mix_label(1,1)
+    declare ui_label $damping_label(1,1)
+    declare ui_label $rate_label(1,1)
+    
+    declare ui_switch $freeze
+        set_text($freeze,"Freeze")
+    declare ui_switch $sparse
+        set_text($sparse,"Sparse")
+
+    declare ui_slider $group_select(0,$NUM_GROUPS-1)
+    declare ui_label $group_select_label(1,1)
+
+    declare ui_menu $type
+        add_menu_item($type,"Grounded",$NI_RAUM_TYPE_GROUNDED)
+        add_menu_item($type,"Airy",$NI_RAUM_TYPE_AIRY)
+        add_menu_item($type,"Cosmic",$NI_RAUM_TYPE_COSMIC)
+
+    make_persistent($predelay)
+    make_persistent($feedback)
+    make_persistent($lowcut)
+    make_persistent($highcut)
+    make_persistent($decay)
+    make_persistent($mod)
+    make_persistent($diffusion)
+    make_persistent($size)
+    make_persistent($damping)
+    make_persistent($rate)
+
+    make_persistent($type)
+    make_persistent($freeze)
+    make_persistent($sparse)
+
+    make_persistent($group_select)
+
+    declare %controlID[$num_controls]
+
+    $i := 0
+    while($i<$num_controls)
+        %controlID[$i] := get_ui_id($predelay)+$i
+        set_control_par(%controlID[$i],$CONTROL_PAR_PARENT_PANEL,get_ui_id($controls))
+        select ($i)
+            case 0 to 5
+                set_control_par(%controlID[$i],$CONTROL_PAR_POS_X,$spacing_x * $i)
+                set_control_par(%controlID[$i],$CONTROL_PAR_AUTOMATION_ID,$i)
+            case 6 to 11
+                set_control_par(%controlID[$i],$CONTROL_PAR_POS_X,$spacing_x * ($i-6))
+                set_control_par(%controlID[$i],$CONTROL_PAR_POS_Y,$spacing_y)
+            case 12 to 16
+                set_control_par(%controlID[$i],$CONTROL_PAR_POS_X,$spacing_x * ($i-12))
+                set_control_par(%controlID[$i],$CONTROL_PAR_POS_Y,$spacing_y*2)
+                set_control_par(%controlID[$i],$CONTROL_PAR_AUTOMATION_ID,$i-6)
+            case 17 to 21
+                set_control_par(%controlID[$i],$CONTROL_PAR_POS_X,$spacing_x * ($i-17))
+                set_control_par(%controlID[$i],$CONTROL_PAR_POS_Y,$spacing_y*3)
+            case 22 to 23  
+                set_control_par(%controlID[$i],$CONTROL_PAR_POS_X,$spacing_x * ($i-22))
+                set_control_par(%controlID[$i],$CONTROL_PAR_POS_Y,$spacing_y*4)
+                set_control_par(%controlID[$i],$CONTROL_PAR_AUTOMATION_ID,$i-11)
+            case 24 to 24
+                set_control_par(%controlID[$i],$CONTROL_PAR_POS_X,$spacing_x * ($i-20))
+                set_control_par(%controlID[$i],$CONTROL_PAR_POS_Y,$spacing_y*6)
+            case 25 to 25
+                set_control_par(%controlID[$i],$CONTROL_PAR_POS_X,$spacing_x * ($i-21))
+                set_control_par(%controlID[$i],$CONTROL_PAR_POS_Y,$spacing_y*7)
+            case 26 to $num_controls
+                set_control_par(%controlID[$i],$CONTROL_PAR_POS_X,$spacing_x * ($i-26))
+                set_control_par(%controlID[$i],$CONTROL_PAR_POS_Y,$spacing_y*6)
+        end select
+        inc($i)
+    end while
+
+    set_control_par(get_ui_id($controls),$CONTROL_PAR_POS_X,25)
+    set_control_par(get_ui_id($controls),$CONTROL_PAR_POS_Y,50)
+
+    set_control_par(get_ui_id($mix),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+    set_control_par(get_ui_id($mix_label),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+
+end on
+
+function set_raum_type
+    select($type)
+        case 0
+            set_control_par(get_ui_id($damping),$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+            set_control_par(get_ui_id($damping_label),$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+            set_control_par(get_ui_id($diffusion),$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+            set_control_par(get_ui_id($diffusion_label),$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+            set_control_par(get_ui_id($decay),$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+            set_control_par(get_ui_id($decay_label),$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+            set_control_par(get_ui_id($freeze),$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+            set_control_par(get_ui_id($rate),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+            set_control_par(get_ui_id($rate_label),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+        case 1
+            set_control_par(get_ui_id($damping),$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+            set_control_par(get_ui_id($damping_label),$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+            set_control_par(get_ui_id($diffusion),$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+            set_control_par(get_ui_id($diffusion_label),$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+            set_control_par(get_ui_id($decay),$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+            set_control_par(get_ui_id($decay_label),$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+            set_control_par(get_ui_id($freeze),$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+            set_control_par(get_ui_id($rate),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+            set_control_par(get_ui_id($rate_label),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+        case 2
+            set_control_par(get_ui_id($damping),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+            set_control_par(get_ui_id($damping_label),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+            set_control_par(get_ui_id($diffusion),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+            set_control_par(get_ui_id($diffusion_label),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+            set_control_par(get_ui_id($decay),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+            set_control_par(get_ui_id($decay_label),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+            set_control_par(get_ui_id($freeze),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+            set_control_par(get_ui_id($rate),$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+            set_control_par(get_ui_id($rate_label),$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+    end select
+end function
+
+function set_labels
+    set_text($predelay_label,"Pre " & get_engine_par_disp($ENGINE_PAR_RAUM_PREDELAY,$group,$slot,$generic) & "ms")
+    set_text($feedback_label,"FB " & get_engine_par_disp($ENGINE_PAR_RAUM_FEEDBACK,$group,$slot,$generic) & "%")
+    set_text($lowcut_label,"LCut " & get_engine_par_disp($ENGINE_PAR_RAUM_LOWSHELF,$group,$slot,$generic) & "dB")
+    set_text($highcut_label,"HCut " & get_engine_par_disp($ENGINE_PAR_RAUM_HIGHCUT,$group,$slot,$generic) & "Hz")
+    set_text($decay_label,"Dec " & get_engine_par_disp($ENGINE_PAR_RAUM_DECAY,$group,$slot,$generic) & "ms")
+    set_text($mod_label,"Mod " & get_engine_par_disp($ENGINE_PAR_RAUM_MOD,$group,$slot,$generic) & "%")
+    set_text($diffusion_label,"Dif " & get_engine_par_disp($ENGINE_PAR_RAUM_DIFFUSION,$group,$slot,$generic) & "%")
+    set_text($size_label,"Size " & get_engine_par_disp($ENGINE_PAR_RAUM_SIZE,$group,$slot,$generic) & "%")
+    set_text($damping_label,"Damp " & get_engine_par_disp($ENGINE_PAR_RAUM_DAMPING,$group,$slot,$generic) & "%")
+    set_text($rate_label,"Rate " & get_engine_par_disp($ENGINE_PAR_RAUM_RATE,$group,$slot,$generic) & "Hz")
+    set_text($group_select_label,"Group " & $group_select)
+end function
+
+on persistence_changed
+    call set_raum_type
+    call set_labels
+end on
+
+on ui_control($group_select)
+    set_text($group_select_label,"Group " & $group_select)
+end on
+
+on ui_control($predelay)
+    set_engine_par($ENGINE_PAR_RAUM_PREDELAY,$predelay,$group,$slot,$generic)
+    set_text($predelay_label,"Pre " & get_engine_par_disp($ENGINE_PAR_RAUM_PREDELAY,$group,$slot,$generic) & "ms")
+end on
+
+on ui_control($feedback)
+    set_engine_par($ENGINE_PAR_RAUM_FEEDBACK,$feedback,$group,$slot,$generic)
+    set_text($feedback_label,"FB " & get_engine_par_disp($ENGINE_PAR_RAUM_FEEDBACK,$group,$slot,$generic) & "%")
+end on
+
+on ui_control($lowcut)
+    set_engine_par($ENGINE_PAR_RAUM_LOWSHELF,$lowcut,$group,$slot,$generic)
+    set_text($lowcut_label,"LCut " & get_engine_par_disp($ENGINE_PAR_RAUM_LOWSHELF,$group,$slot,$generic) & "dB")
+end on
+
+on ui_control($highcut)
+    set_engine_par($ENGINE_PAR_RAUM_HIGHCUT,$highcut,$group,$slot,$generic)
+    set_text($highcut_label,"HCut " & get_engine_par_disp($ENGINE_PAR_RAUM_HIGHCUT,$group,$slot,$generic) & "Hz")
+end on
+
+on ui_control($decay)
+    set_engine_par($ENGINE_PAR_RAUM_DECAY,$decay,$group,$slot,$generic)
+    set_text($decay_label,"Dec " & get_engine_par_disp($ENGINE_PAR_RAUM_DECAY,$group,$slot,$generic) & "ms")
+end on
+
+on ui_control($mod)
+    set_engine_par($ENGINE_PAR_RAUM_MOD,$mod,$group,$slot,$generic)
+    set_text($mod_label,"Mod " & get_engine_par_disp($ENGINE_PAR_RAUM_MOD,$group,$slot,$generic) & "%")
+end on
+
+on ui_control($diffusion)
+    set_engine_par($ENGINE_PAR_RAUM_DIFFUSION,$diffusion,$group,$slot,$generic)
+    set_text($diffusion_label,"Dif " & get_engine_par_disp($ENGINE_PAR_RAUM_DIFFUSION,$group,$slot,$generic) & "%")
+end on
+
+on ui_control($size)
+    set_engine_par($ENGINE_PAR_RAUM_SIZE,$size,$group,$slot,$generic)
+    set_text($size_label,"Size " & get_engine_par_disp($ENGINE_PAR_RAUM_SIZE,$group,$slot,$generic) & "%")
+end on
+
+on ui_control($damping)
+    set_engine_par($ENGINE_PAR_RAUM_DAMPING,$damping,$group,$slot,$generic)
+    set_text($damping_label,"Damp " & get_engine_par_disp($ENGINE_PAR_RAUM_DAMPING,$group,$slot,$generic) & "%")
+end on
+
+on ui_control($rate)
+    set_engine_par($ENGINE_PAR_RAUM_RATE,$rate,$group,$slot,$generic)
+    set_text($rate_label,"Rate " & get_engine_par_disp($ENGINE_PAR_RAUM_RATE,$group,$slot,$generic) & "Hz")
+end on
+
+on ui_control($type)
+    call set_raum_type
+    set_engine_par($ENGINE_PAR_RAUM_TYPE,$type,$group,$slot,$generic)
+end on
+
+on ui_control($freeze)
+    set_engine_par($ENGINE_PAR_RAUM_FREEZE,$freeze,$group,$slot,$generic)
+end on
+
+on ui_control($sparse)
+    set_engine_par($ENGINE_PAR_RAUM_SPARSE,$sparse,$group,$slot,$generic)
+end on
+
+on note
+    disallow_group($ALL_GROUPS)
+    allow_group($group_select)
+end on

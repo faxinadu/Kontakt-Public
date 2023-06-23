@@ -1,0 +1,35 @@
+{***********************************************
+Solid EQ Lowpass Highpass Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: February 10, 2023
+*************************************************}
+
+on init 
+    message( "" )
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_SOLID_GEQ,0,0,-1)
+    declare ui_slider $hp_freq_slider(0,1000000)
+    declare ui_slider $lp_freq_slider(0,1000000)
+    declare ui_label $hp_freq_label(1,1)
+    declare ui_label $lp_freq_label(1,1)
+    declare ui_switch $hp_freq_switch
+    declare ui_switch $lp_freq_switch
+end on
+
+on ui_control($hp_freq_slider)
+    set_engine_par($ENGINE_PAR_SEQ_HP_FREQ,$hp_freq_slider,0,0,-1)
+    set_text($hp_freq_label,get_engine_par_disp($ENGINE_PAR_SEQ_HP_FREQ,0,0,-1))
+end on
+
+on ui_control($lp_freq_slider)
+    set_engine_par($ENGINE_PAR_SEQ_LP_FREQ,$lp_freq_slider,0,0,-1)
+    set_text($lp_freq_label,get_engine_par_disp($ENGINE_PAR_SEQ_LP_FREQ,0,0,-1))
+end on
+
+on ui_control($hp_freq_switch)
+    set_engine_par($ENGINE_PAR_SEQ_HP,$hp_freq_switch,0,0,-1)
+end on
+
+on ui_control($lp_freq_switch)
+    set_engine_par($ENGINE_PAR_SEQ_LP,$lp_freq_switch,0,0,-1)
+end on

@@ -1,0 +1,11 @@
+{***********************************************
+Is Standalone Test
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: March 15, 2023
+*************************************************}
+
+on init
+    declare ui_label $label(1,1)
+    set_text($label,$NI_KONTAKT_IS_STANDALONE)
+end on
