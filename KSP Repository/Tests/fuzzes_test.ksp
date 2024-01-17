@@ -1,0 +1,92 @@
+{***********************************************
+Fuzzes Test
+Author: Native Instruments
+Written by: Mario Kruselj
+Modified: January 16, 2024
+*************************************************}
+
+on init
+    declare const $FUZZ_SLOT := 0
+    declare const $BIG_FUZZ_SLOT := 1
+
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE, $EFFECT_TYPE_FUZZ, -1, $FUZZ_SLOT, $NI_INSERT_BUS)
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE, $EFFECT_TYPE_BIGFUZZ, -1, $BIG_FUZZ_SLOT, $NI_INSERT_BUS)
+
+    declare ui_button $Mono
+    declare ui_knob $Amount (0, 1000000, 1)
+    declare ui_knob $Bass (0, 1000000, 1)
+    declare ui_knob $Treble (0, 1000000, 1)
+
+    declare ui_button $BMono
+    declare ui_knob $BSustain (0, 1000000, 1)
+    declare ui_knob $BTone (0, 1000000, 1)
+    declare ui_knob $BBass (0, 1000000, 1)
+    declare ui_knob $BTreble (0, 1000000, 1)
+end on
+
+on persistence_changed
+    $Mono := get_engine_par($ENGINE_PAR_FUZZ_MONO, -1, $FUZZ_SLOT, $NI_INSERT_BUS)
+    $Amount := get_engine_par($ENGINE_PAR_FUZZ_AMOUNT, -1, $FUZZ_SLOT, $NI_INSERT_BUS)
+    $Bass := get_engine_par($ENGINE_PAR_FUZZ_BASS, -1, $FUZZ_SLOT, $NI_INSERT_BUS)
+    $Treble := get_engine_par($ENGINE_PAR_FUZZ_TREBLE, -1, $FUZZ_SLOT, $NI_INSERT_BUS)
+
+    set_knob_label($Amount, get_engine_par_disp($ENGINE_PAR_FUZZ_AMOUNT, -1, $FUZZ_SLOT, $NI_INSERT_BUS))
+    set_knob_label($Bass, get_engine_par_disp($ENGINE_PAR_FUZZ_BASS, -1, $FUZZ_SLOT, $NI_INSERT_BUS))
+    set_knob_label($Treble, get_engine_par_disp($ENGINE_PAR_FUZZ_TREBLE, -1, $FUZZ_SLOT, $NI_INSERT_BUS))
+
+    $BMono := get_engine_par($ENGINE_PAR_BIGFUZZ_MONO, -1, $BIG_FUZZ_SLOT, $NI_INSERT_BUS)
+    $BSustain := get_engine_par($ENGINE_PAR_BIGFUZZ_SUSTAIN, -1, $BIG_FUZZ_SLOT, $NI_INSERT_BUS)
+    $BTone := get_engine_par($ENGINE_PAR_BIGFUZZ_TONE, -1, $BIG_FUZZ_SLOT, $NI_INSERT_BUS)
+    $BBass := get_engine_par($ENGINE_PAR_BIGFUZZ_BASS, -1, $BIG_FUZZ_SLOT, $NI_INSERT_BUS)
+    $BTreble := get_engine_par($ENGINE_PAR_BIGFUZZ_TREBLE, -1, $BIG_FUZZ_SLOT, $NI_INSERT_BUS)
+
+    set_knob_label($BSustain, get_engine_par_disp($ENGINE_PAR_BIGFUZZ_SUSTAIN, -1, $BIG_FUZZ_SLOT, $NI_INSERT_BUS))
+    set_knob_label($BTone, get_engine_par_disp($ENGINE_PAR_BIGFUZZ_TONE, -1, $BIG_FUZZ_SLOT, $NI_INSERT_BUS))
+    set_knob_label($BBass, get_engine_par_disp($ENGINE_PAR_BIGFUZZ_BASS, -1, $BIG_FUZZ_SLOT, $NI_INSERT_BUS))
+    set_knob_label($BTreble, get_engine_par_disp($ENGINE_PAR_BIGFUZZ_TREBLE, -1, $BIG_FUZZ_SLOT, $NI_INSERT_BUS))
+end on
+
+on ui_control ($Mono)
+    set_engine_par($ENGINE_PAR_FUZZ_MONO, $Mono, -1, $FUZZ_SLOT, $NI_INSERT_BUS)
+end on
+
+on ui_control ($Amount)
+    set_engine_par($ENGINE_PAR_FUZZ_AMOUNT, $Amount, -1, $FUZZ_SLOT, $NI_INSERT_BUS)
+    set_knob_label($Amount, get_engine_par_disp($ENGINE_PAR_FUZZ_AMOUNT, -1, $FUZZ_SLOT, $NI_INSERT_BUS))
+end on
+
+on ui_control ($Bass)
+    set_engine_par($ENGINE_PAR_FUZZ_BASS, $Bass, -1, $FUZZ_SLOT, $NI_INSERT_BUS)
+    set_knob_label($Bass, get_engine_par_disp($ENGINE_PAR_FUZZ_BASS, -1, $FUZZ_SLOT, $NI_INSERT_BUS))
+end on
+
+on ui_control ($Treble)
+    set_engine_par($ENGINE_PAR_FUZZ_TREBLE, $Treble, -1, $FUZZ_SLOT, $NI_INSERT_BUS)
+    set_knob_label($Treble, get_engine_par_disp($ENGINE_PAR_FUZZ_TREBLE, -1, $FUZZ_SLOT, $NI_INSERT_BUS))
+end on
+
+
+on ui_control ($BMono)
+    set_engine_par($ENGINE_PAR_BIGFUZZ_MONO, $BMono, -1, $BIG_FUZZ_SLOT, $NI_INSERT_BUS)
+end on
+
+on ui_control ($BSustain)
+    set_engine_par($ENGINE_PAR_BIGFUZZ_SUSTAIN, $BSustain, -1, $BIG_FUZZ_SLOT, $NI_INSERT_BUS)
+    set_knob_label($BSustain, get_engine_par_disp($ENGINE_PAR_BIGFUZZ_SUSTAIN, -1, $BIG_FUZZ_SLOT, $NI_INSERT_BUS))
+end on
+
+on ui_control ($BTone)
+    set_engine_par($ENGINE_PAR_BIGFUZZ_TONE, $BTone, -1, $BIG_FUZZ_SLOT, $NI_INSERT_BUS)
+    set_knob_label($BTone, get_engine_par_disp($ENGINE_PAR_BIGFUZZ_TONE, -1, $BIG_FUZZ_SLOT, $NI_INSERT_BUS))
+end on
+
+on ui_control ($BBass)
+    set_engine_par($ENGINE_PAR_BIGFUZZ_BASS, $BBass, -1, $BIG_FUZZ_SLOT, $NI_INSERT_BUS)
+    set_knob_label($BBass, get_engine_par_disp($ENGINE_PAR_BIGFUZZ_BASS, -1, $BIG_FUZZ_SLOT, $NI_INSERT_BUS))
+end on
+
+on ui_control ($BTreble)
+    set_engine_par($ENGINE_PAR_BIGFUZZ_TREBLE, $BTreble, -1, $BIG_FUZZ_SLOT, $NI_INSERT_BUS)
+    set_knob_label($BTreble, get_engine_par_disp($ENGINE_PAR_BIGFUZZ_TREBLE, -1, $BIG_FUZZ_SLOT, $NI_INSERT_BUS))
+end on
+

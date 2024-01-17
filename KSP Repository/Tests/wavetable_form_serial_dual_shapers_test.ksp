@@ -1,0 +1,154 @@
+{***********************************************
+Wavetable Form Serial Dual Shapers Test
+Author: Native Instruments
+Written by: Mario Kruselj and Yaron Eshkar
+Modified: January 16, 2024
+*************************************************}
+
+{ Replace engine pars for second shaper with $ENGINE_PAR_WT_FORM_MODE2 and $ENGINE_PAR_WT_FORM2 }
+
+on init
+    message("")
+    set_script_title("Wavetable Form Serial Dual Shapers Test")
+
+    make_perfview
+    set_ui_height(6)
+
+    declare ui_wavetable $WT
+    declare ui_menu $WarpMode1
+    declare ui_knob $Warp1 (0, 1000, 10)
+    declare ui_knob $Morph(0, 1000, 10)
+
+    declare ui_menu $WarpMode2
+    declare ui_knob $Warp2 (0, 1000, 10)
+
+    set_knob_unit($Warp1, $KNOB_UNIT_PERCENT)
+    set_knob_unit($Morph, $KNOB_UNIT_PERCENT)
+
+    set_knob_unit($Warp2, $KNOB_UNIT_PERCENT)
+
+    move_control_px($WT, 250, 44)
+    move_control_px($WarpMode1, 25, 44)
+    move_control_px($Warp1, 25, 65)
+    move_control_px($Morph, 25, 107)
+    move_control_px($WarpMode2, 120, 44)
+    move_control_px($Warp2, 120, 65)
+
+
+    set_control_par(get_ui_id($WT), $CONTROL_PAR_WT_ZONE, 0)
+    set_control_par(get_ui_id($WT), $CONTROL_PAR_WIDTH, 300)
+    set_control_par(get_ui_id($WT), $CONTROL_PAR_HEIGHT, 200)
+
+    add_menu_item($WarpMode1, "Linear", $NI_WT_FORM_LINEAR)
+    add_menu_item($WarpMode1, "Sync 1", $NI_WT_FORM_SYNC1)
+    add_menu_item($WarpMode1, "Sync 2", $NI_WT_FORM_SYNC2)
+    add_menu_item($WarpMode1, "Sync 3", $NI_WT_FORM_SYNC3)
+    add_menu_item($WarpMode1, "Sync 4", $NI_WT_FORM_SYNC4)
+    add_menu_item($WarpMode1, "Sync 5", $NI_WT_FORM_SYNC5)
+    add_menu_item($WarpMode1, "Sync 6", $NI_WT_FORM_SYNC6)
+    add_menu_item($WarpMode1, "Bend 1 +", $NI_WT_FORM_BENDP)
+    add_menu_item($WarpMode1, "Bend 1 -", $NI_WT_FORM_BENDM)
+    add_menu_item($WarpMode1, "Bend 1 -+", $NI_WT_FORM_BENDMP)
+    add_menu_item($WarpMode1, "Bend 2 +", $NI_WT_FORM_BEND2P)
+    add_menu_item($WarpMode1, "Bend 2 -", $NI_WT_FORM_BEND2M)
+    add_menu_item($WarpMode1, "Bend 2 -+", $NI_WT_FORM_BEND2MP)
+    add_menu_item($WarpMode1, "Exp", $NI_WT_FORM_EXP)
+    add_menu_item($WarpMode1, "Log", $NI_WT_FORM_LOG)
+    add_menu_item($WarpMode1, "Log-Exp", $NI_WT_FORM_LOGEXP)
+    add_menu_item($WarpMode1, "PWM", $NI_WT_FORM_PWM)
+    add_menu_item($WarpMode1, "Asym 1 +", $NI_WT_FORM_ASYMP)
+    add_menu_item($WarpMode1, "Asym 1 -", $NI_WT_FORM_ASYMM)
+    add_menu_item($WarpMode1, "Asym 1 -+", $NI_WT_FORM_ASYMMP)
+    add_menu_item($WarpMode1, "Asym 2 +", $NI_WT_FORM_ASYM2P)
+    add_menu_item($WarpMode1, "Asym 2 -", $NI_WT_FORM_ASYM2M)
+    add_menu_item($WarpMode1, "Asym 2 -+", $NI_WT_FORM_ASYM2MP)
+    add_menu_item($WarpMode1, "2 Blinds", $NI_WT_FORM_2BLINDS)
+    add_menu_item($WarpMode1, "4 Blinds", $NI_WT_FORM_4BLINDS)
+    add_menu_item($WarpMode1, "6 Blinds", $NI_WT_FORM_6BLINDS)
+    add_menu_item($WarpMode1, "8 Blinds", $NI_WT_FORM_8BLINDS)
+    add_menu_item($WarpMode1, "Flip", $NI_WT_FORM_FLIP)
+    add_menu_item($WarpMode1, "Fold", $NI_WT_FORM_FOLD)
+    add_menu_item($WarpMode1, "Mirror", $NI_WT_FORM_MIRROR)
+    add_menu_item($WarpMode1, "Saturate", $NI_WT_FORM_SATURATE)
+    add_menu_item($WarpMode1, "Seesaw", $NI_WT_FORM_SEESAW)
+    add_menu_item($WarpMode1, "Quantize", $NI_WT_FORM_QUANTIZE)
+    add_menu_item($WarpMode1, "Wrap", $NI_WT_FORM_WRAP)
+
+    add_menu_item($WarpMode2, "Linear", $NI_WT_FORM_LINEAR)
+    add_menu_item($WarpMode2, "Sync 1", $NI_WT_FORM_SYNC1)
+    add_menu_item($WarpMode2, "Sync 2", $NI_WT_FORM_SYNC2)
+    add_menu_item($WarpMode2, "Sync 3", $NI_WT_FORM_SYNC3)
+    add_menu_item($WarpMode2, "Sync 4", $NI_WT_FORM_SYNC4)
+    add_menu_item($WarpMode2, "Sync 5", $NI_WT_FORM_SYNC5)
+    add_menu_item($WarpMode2, "Sync 6", $NI_WT_FORM_SYNC6)
+    add_menu_item($WarpMode2, "Bend 1 +", $NI_WT_FORM_BENDP)
+    add_menu_item($WarpMode2, "Bend 1 -", $NI_WT_FORM_BENDM)
+    add_menu_item($WarpMode2, "Bend 1 -+", $NI_WT_FORM_BENDMP)
+    add_menu_item($WarpMode2, "Bend 2 +", $NI_WT_FORM_BEND2P)
+    add_menu_item($WarpMode2, "Bend 2 -", $NI_WT_FORM_BEND2M)
+    add_menu_item($WarpMode2, "Bend 2 -+", $NI_WT_FORM_BEND2MP)
+    add_menu_item($WarpMode2, "Exp", $NI_WT_FORM_EXP)
+    add_menu_item($WarpMode2, "Log", $NI_WT_FORM_LOG)
+    add_menu_item($WarpMode2, "Log-Exp", $NI_WT_FORM_LOGEXP)
+    add_menu_item($WarpMode2, "PWM", $NI_WT_FORM_PWM)
+    add_menu_item($WarpMode2, "Asym 1 +", $NI_WT_FORM_ASYMP)
+    add_menu_item($WarpMode2, "Asym 1 -", $NI_WT_FORM_ASYMM)
+    add_menu_item($WarpMode2, "Asym 1 -+", $NI_WT_FORM_ASYMMP)
+    add_menu_item($WarpMode2, "Asym 2 +", $NI_WT_FORM_ASYM2P)
+    add_menu_item($WarpMode2, "Asym 2 -", $NI_WT_FORM_ASYM2M)
+    add_menu_item($WarpMode2, "Asym 2 -+", $NI_WT_FORM_ASYM2MP)
+    add_menu_item($WarpMode2, "2 Blinds", $NI_WT_FORM_2BLINDS)
+    add_menu_item($WarpMode2, "4 Blinds", $NI_WT_FORM_4BLINDS)
+    add_menu_item($WarpMode2, "6 Blinds", $NI_WT_FORM_6BLINDS)
+    add_menu_item($WarpMode2, "8 Blinds", $NI_WT_FORM_8BLINDS)
+    add_menu_item($WarpMode2, "Flip", $NI_WT_FORM_FLIP)
+    add_menu_item($WarpMode2, "Fold", $NI_WT_FORM_FOLD)
+    add_menu_item($WarpMode2, "Mirror", $NI_WT_FORM_MIRROR)
+    add_menu_item($WarpMode2, "Saturate", $NI_WT_FORM_SATURATE)
+    add_menu_item($WarpMode2, "Seesaw", $NI_WT_FORM_SEESAW)
+    add_menu_item($WarpMode2, "Quantize", $NI_WT_FORM_QUANTIZE)
+    add_menu_item($WarpMode2, "Wrap", $NI_WT_FORM_WRAP)
+
+    $WarpMode1 := get_engine_par($ENGINE_PAR_WT_FORM_MODE, 0, -1, -1)
+    $Warp1 := get_engine_par($ENGINE_PAR_WT_FORM, 0, -1, -1) / 1000
+    $Morph := get_engine_par($ENGINE_PAR_WT_POSITION, 0, -1, -1) / 1000
+
+    { Replace engine pars with $ENGINE_PAR_WT_FORM_MODE2 and $ENGINE_PAR_WT_FORM2 }
+
+    $WarpMode2 := get_engine_par($ENGINE_PAR_WT_FORM_MODE, 0, -1, -1)
+    $Warp2 := get_engine_par($ENGINE_PAR_WT_FORM, 0, -1, -1) / 1000
+
+end on
+
+on ui_control ($WarpMode1)
+    set_engine_par($ENGINE_PAR_WT_FORM_MODE, $WarpMode1, 0, -1, -1)
+end on
+
+on ui_control ($Warp1)
+    if (get_control_par(get_ui_id($Warp1), $CONTROL_PAR_KEY_ALT) = 1)
+        $Warp1 := 500
+    end if
+
+    set_engine_par($ENGINE_PAR_WT_FORM, $Warp1 * 1000, 0, -1, -1)
+end on
+
+on ui_control ($Morph)
+    set_engine_par($ENGINE_PAR_WT_POSITION, $Morph* 1000, 0, -1, -1)
+end on
+
+
+{ Replace engine pars with $ENGINE_PAR_WT_FORM_MODE2 and $ENGINE_PAR_WT_FORM2 }
+
+on ui_control ($WarpMode2)
+    set_engine_par($ENGINE_PAR_WT_FORM_MODE, $WarpMode2, 0, -1, -1)
+end on
+
+on ui_control ($Warp2)
+    if (get_control_par(get_ui_id($Warp2), $CONTROL_PAR_KEY_ALT) = 1)
+        $Warp1 := 500
+    end if
+
+    set_engine_par($ENGINE_PAR_WT_FORM, $Warp2 * 1000, 0, -1, -1)
+end on
+
+

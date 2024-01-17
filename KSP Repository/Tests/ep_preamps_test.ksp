@@ -1,0 +1,159 @@
+{***********************************************
+EP Preamps Test
+Author: Native Instruments
+Written by: Mario Kruselj
+Modified: January 16, 2024
+*************************************************}
+
+on init
+    declare const $PREAMP_SLOT := 0
+
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE, $EFFECT_TYPE_EP_PREAMPS, -1, $PREAMP_SLOT, $NI_INSERT_BUS)
+
+    declare ui_knob $Drive (0, 1000000, 1)
+    declare ui_knob $Bass (0, 1000000, 1)
+    declare ui_knob $Treble (0, 1000000, 1)
+    declare ui_knob $Rate (0, 1000000, 1)
+    declare ui_knob $Amount (0, 1000000, 1)
+    declare ui_knob $Width (0, 1000000, 1)
+    declare ui_button $Mono
+
+    declare ui_menu $RateSync
+    add_menu_item($RateSync, "Absolute", $NI_SYNC_UNIT_ABS)
+    add_menu_item($RateSync, "1/1", $NI_SYNC_UNIT_WHOLE)
+    add_menu_item($RateSync, "1/1 T", $NI_SYNC_UNIT_WHOLE_TRIPLET)
+    add_menu_item($RateSync, "1/2", $NI_SYNC_UNIT_HALF)
+    add_menu_item($RateSync, "1/2 T", $NI_SYNC_UNIT_HALF_TRIPLET)
+    add_menu_item($RateSync, "1/4", $NI_SYNC_UNIT_QUARTER)
+    add_menu_item($RateSync, "1/4 T", $NI_SYNC_UNIT_QUARTER_TRIPLET)
+    add_menu_item($RateSync, "1/8", $NI_SYNC_UNIT_8TH)
+    add_menu_item($RateSync, "1/8 T", $NI_SYNC_UNIT_8TH_TRIPLET)
+    add_menu_item($RateSync, "1/16", $NI_SYNC_UNIT_16TH)
+    add_menu_item($RateSync, "1/16 T", $NI_SYNC_UNIT_16TH_TRIPLET)
+    add_menu_item($RateSync, "1/32", $NI_SYNC_UNIT_32ND)
+    add_menu_item($RateSync, "1/32 T", $NI_SYNC_UNIT_32ND_TRIPLET)
+    add_menu_item($RateSync, "1/64", $NI_SYNC_UNIT_64TH)
+    add_menu_item($RateSync, "1/64 T", $NI_SYNC_UNIT_64TH_TRIPLET)
+
+    declare ui_menu $Preamp
+    add_menu_item($Preamp, "Bypass", $NI_EPP_DRIVE_MODE_BYPASS)
+    add_menu_item($Preamp, "DE Tube", $NI_EPP_DRIVE_MODE_DE_TUBE)
+    add_menu_item($Preamp, "US Tube", $NI_EPP_DRIVE_MODE_US_TUBE)
+    add_menu_item($Preamp, "Transistor", $NI_EPP_DRIVE_MODE_TRANSISTOR)
+    add_menu_item($Preamp, "Tape", $NI_EPP_DRIVE_MODE_TAPE)
+    declare ui_menu $EQ
+    add_menu_item($EQ, "Bypass", $NI_EPP_EQ_MODE_BYPASS)
+    add_menu_item($EQ, "Passive", $NI_EPP_EQ_MODE_PASSIVE)
+    add_menu_item($EQ, "70s", $NI_EPP_EQ_MODE_70S)
+    add_menu_item($EQ, "80s", $NI_EPP_EQ_MODE_80S)
+    declare ui_menu $Tremolo
+    add_menu_item($Tremolo, "Bypass", $NI_EPP_TREMOLO_MODE_BYPASS)
+    add_menu_item($Tremolo, "70s", $NI_EPP_TREMOLO_MODE_70S)
+    add_menu_item($Tremolo, "80s", $NI_EPP_TREMOLO_MODE_80S)
+    add_menu_item($Tremolo, "Synth", $NI_EPP_TREMOLO_MODE_SYNTH)
+    add_menu_item($Tremolo, "Guitar", $NI_EPP_TREMOLO_MODE_GUITAR)
+    declare ui_menu $Wave
+    add_menu_item($Wave, "Sine", $NI_EPP_TREMOLO_WAVE_SINE)
+    add_menu_item($Wave, "Triangle", $NI_EPP_TREMOLO_WAVE_TRIANGLE)
+    add_menu_item($Wave, "Square", $NI_EPP_TREMOLO_WAVE_SQUARE)
+    add_menu_item($Wave, "Saw Down", $NI_EPP_TREMOLO_WAVE_SAW_DOWN)
+    add_menu_item($Wave, "Saw Up", $NI_EPP_TREMOLO_WAVE_SAW_UP)
+end on
+
+on persistence_changed
+    $Mono := get_engine_par($ENGINE_PAR_EPP_MONO, -1, $PREAMP_SLOT, $NI_INSERT_BUS)
+    $Preamp := get_engine_par($ENGINE_PAR_EPP_DRIVE_MODE, -1, $PREAMP_SLOT, $NI_INSERT_BUS)
+    $EQ := get_engine_par($ENGINE_PAR_EPP_EQ_MODE, -1, $PREAMP_SLOT, $NI_INSERT_BUS)
+    $Tremolo := get_engine_par($ENGINE_PAR_EPP_TREMOLO_MODE, -1, $PREAMP_SLOT, $NI_INSERT_BUS)
+    $Wave := get_engine_par($ENGINE_PAR_EPP_TREMOLO_WAVE, -1, $PREAMP_SLOT, $NI_INSERT_BUS)
+    $Drive := get_engine_par($ENGINE_PAR_EPP_DRIVE, -1, $PREAMP_SLOT, $NI_INSERT_BUS)
+    $Bass := get_engine_par($ENGINE_PAR_EPP_EQ_BASS, -1, $PREAMP_SLOT, $NI_INSERT_BUS)
+    $Treble := get_engine_par($ENGINE_PAR_EPP_EQ_TREBLE, -1, $PREAMP_SLOT, $NI_INSERT_BUS)
+    $Rate := get_engine_par($ENGINE_PAR_EPP_TREMOLO_RATE, -1, $PREAMP_SLOT, $NI_INSERT_BUS)
+    $RateSync := get_engine_par($ENGINE_PAR_EPP_TREMOLO_RATE_UNIT, -1, $PREAMP_SLOT, $NI_INSERT_BUS)
+    $Amount := get_engine_par($ENGINE_PAR_EPP_TREMOLO_AMOUNT, -1, $PREAMP_SLOT, $NI_INSERT_BUS)
+    $Width := get_engine_par($ENGINE_PAR_EPP_TREMOLO_WIDTH, -1, $PREAMP_SLOT, $NI_INSERT_BUS)
+
+    set_knob_label($Drive, get_engine_par_disp($ENGINE_PAR_EPP_DRIVE, -1, $PREAMP_SLOT, $NI_INSERT_BUS))
+    if ($EQ = $NI_EPP_EQ_MODE_PASSIVE)
+        set_knob_label($Bass, get_engine_par_disp($ENGINE_PAR_EPP_PASSIVE_BASS, -1, $PREAMP_SLOT, $NI_INSERT_BUS))
+    else
+        set_knob_label($Bass, get_engine_par_disp($ENGINE_PAR_EPP_EQ_BASS, -1, $PREAMP_SLOT, $NI_INSERT_BUS))
+    end if
+    set_knob_label($Treble, get_engine_par_disp($ENGINE_PAR_EPP_EQ_TREBLE, -1, $PREAMP_SLOT, $NI_INSERT_BUS))
+    set_knob_label($Rate, get_engine_par_disp($ENGINE_PAR_EPP_TREMOLO_RATE, -1, $PREAMP_SLOT, $NI_INSERT_BUS))
+    set_knob_label($Amount, get_engine_par_disp($ENGINE_PAR_EPP_TREMOLO_AMOUNT, -1, $PREAMP_SLOT, $NI_INSERT_BUS))
+    set_knob_label($Width, get_engine_par_disp($ENGINE_PAR_EPP_TREMOLO_WIDTH, -1, $PREAMP_SLOT, $NI_INSERT_BUS))
+end on
+
+on ui_control ($Mono)
+    set_engine_par($ENGINE_PAR_EPP_MONO, $Mono, -1, $PREAMP_SLOT, $NI_INSERT_BUS)
+end on
+on ui_control ($Preamp)
+    set_engine_par($ENGINE_PAR_EPP_DRIVE_MODE, $Preamp, -1, $PREAMP_SLOT, $NI_INSERT_BUS)
+end on
+
+on ui_control ($Drive)
+    set_engine_par($ENGINE_PAR_EPP_DRIVE, $Drive, -1, $PREAMP_SLOT, $NI_INSERT_BUS)
+    set_knob_label($Drive, get_engine_par_disp($ENGINE_PAR_EPP_DRIVE, -1, $PREAMP_SLOT, $NI_INSERT_BUS))
+end on
+
+on ui_control ($EQ)
+    set_engine_par($ENGINE_PAR_EPP_EQ_MODE, $EQ, -1, $PREAMP_SLOT, $NI_INSERT_BUS)
+
+    if ($EQ = $NI_EPP_EQ_MODE_PASSIVE)
+        set_knob_label($Bass, get_engine_par_disp($ENGINE_PAR_EPP_PASSIVE_BASS, -1, $PREAMP_SLOT, $NI_INSERT_BUS))
+    else
+        set_knob_label($Bass, get_engine_par_disp($ENGINE_PAR_EPP_EQ_BASS, -1, $PREAMP_SLOT, $NI_INSERT_BUS))
+    end if
+
+    set_engine_par($ENGINE_PAR_EPP_EQ_BASS, $Bass, -1, $PREAMP_SLOT, $NI_INSERT_BUS)
+    set_engine_par($ENGINE_PAR_EPP_PASSIVE_BASS, $Bass, -1, $PREAMP_SLOT, $NI_INSERT_BUS)
+    set_engine_par($ENGINE_PAR_EPP_EQ_TREBLE, $Treble, -1, $PREAMP_SLOT, $NI_INSERT_BUS)
+end on
+
+on ui_control ($Bass)
+    set_engine_par($ENGINE_PAR_EPP_EQ_BASS, $Bass, -1, $PREAMP_SLOT, $NI_INSERT_BUS)
+    set_engine_par($ENGINE_PAR_EPP_PASSIVE_BASS, $Bass, -1, $PREAMP_SLOT, $NI_INSERT_BUS)
+
+    if ($EQ = $NI_EPP_EQ_MODE_PASSIVE)
+        set_knob_label($Bass, get_engine_par_disp($ENGINE_PAR_EPP_PASSIVE_BASS, -1, $PREAMP_SLOT, $NI_INSERT_BUS))
+    else
+        set_knob_label($Bass, get_engine_par_disp($ENGINE_PAR_EPP_EQ_BASS, -1, $PREAMP_SLOT, $NI_INSERT_BUS))
+    end if
+end on
+
+on ui_control ($Treble)
+    set_engine_par($ENGINE_PAR_EPP_EQ_TREBLE, $Treble, -1, $PREAMP_SLOT, $NI_INSERT_BUS)
+    set_knob_label($Treble, get_engine_par_disp($ENGINE_PAR_EPP_EQ_TREBLE, -1, $PREAMP_SLOT, $NI_INSERT_BUS))
+end on
+
+on ui_control ($Tremolo)
+    set_engine_par($ENGINE_PAR_EPP_TREMOLO_MODE, $Tremolo, -1, $PREAMP_SLOT, $NI_INSERT_BUS)
+end on
+
+on ui_control ($Wave)
+    set_engine_par($ENGINE_PAR_EPP_TREMOLO_WAVE, $Wave, -1, $PREAMP_SLOT, $NI_INSERT_BUS)
+end on
+
+on ui_control ($RateSync)
+    set_engine_par($ENGINE_PAR_EPP_TREMOLO_RATE_UNIT, $RateSync, -1, $PREAMP_SLOT, $NI_INSERT_BUS)
+
+    set_knob_label($Rate, get_engine_par_disp($ENGINE_PAR_EPP_TREMOLO_RATE, -1, $PREAMP_SLOT, $NI_INSERT_BUS))
+end on
+
+on ui_control ($Rate)
+    set_engine_par($ENGINE_PAR_EPP_TREMOLO_RATE, $Rate, -1, $PREAMP_SLOT, $NI_INSERT_BUS)
+    set_knob_label($Rate, get_engine_par_disp($ENGINE_PAR_EPP_TREMOLO_RATE, -1, $PREAMP_SLOT, $NI_INSERT_BUS))
+end on
+
+on ui_control ($Amount)
+    set_engine_par($ENGINE_PAR_EPP_TREMOLO_AMOUNT, $Amount, -1, $PREAMP_SLOT, $NI_INSERT_BUS)
+    set_knob_label($Amount, get_engine_par_disp($ENGINE_PAR_EPP_TREMOLO_AMOUNT, -1, $PREAMP_SLOT, $NI_INSERT_BUS))
+end on
+
+on ui_control ($Width)
+    set_engine_par($ENGINE_PAR_EPP_TREMOLO_WIDTH, $Width, -1, $PREAMP_SLOT, $NI_INSERT_BUS)
+    set_knob_label($Width, get_engine_par_disp($ENGINE_PAR_EPP_TREMOLO_WIDTH, -1, $PREAMP_SLOT, $NI_INSERT_BUS))
+end on
+

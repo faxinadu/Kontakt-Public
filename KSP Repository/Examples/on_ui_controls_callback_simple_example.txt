@@ -1,0 +1,86 @@
+{***********************************************
+On UI Controls Callback Simple Example
+Author: Native Instruments
+Written by: Mario Kruselj
+Modified: August 15, 2023
+*************************************************}
+
+on init
+    message("")
+    set_snapshot_type(3)
+
+    declare const $NUM_PARAMS := 2
+    declare const $FILT_SLOT  := 0
+
+    declare $i
+    declare $uiid
+    declare $param_id
+    declare @str
+
+    { this array actually holds our parameter values, not the widgets }
+    declare %params[$NUM_PARAMS] := (1000000, 0, 630000, 500000) { default values, optionally }
+
+    make_persistent(%params)
+
+    declare const $FILT_CUT := 0
+    declare const $FILT_RES := 1
+
+    declare ui_slider $Cut (0, 1000000)
+    declare ui_slider $Res (0, 1000000)
+
+    { link between parameter IDs and UI IDs }
+    declare %pid_to_uid[$NUM_PARAMS]
+    %pid_to_uid[$FILT_CUT] := get_ui_id($Cut)
+    %pid_to_uid[$FILT_RES] := get_ui_id($Res)
+
+    { this is a quick example of course, but you can easily see how this can be used
+      to scale up to larger instruments, since UI IDs can get out of order, but this
+      doesn't matter when $CONTROL_PAR_CUSTOM_ID holds the pointer to the parameter }
+    $i := 0
+    while ($i < $NUM_PARAMS)
+        set_control_par(%pid_to_uid[$i], $CONTROL_PAR_CUSTOM_ID, $i)
+        inc($i)
+    end while
+
+    { set up a filter in group 1 so that we have something to work with }
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE, $EFFECT_TYPE_FILTER, 0, $FILT_SLOT, -1)
+end on
+
+function SetParam
+    select ($param_id)
+        case $FILT_CUT
+            set_engine_par($ENGINE_PAR_CUTOFF, %params[$param_id], 0, $FILT_SLOT, -1)
+        case $FILT_RES
+            set_engine_par($ENGINE_PAR_RESONANCE, %params[$param_id], 0, $FILT_SLOT, -1)
+    end select
+end function
+
+function SetLabel
+    select ($param_id)
+        case $FILT_CUT
+            @str := get_engine_par_disp($ENGINE_PAR_CUTOFF, 0, $FILT_SLOT, -1) & " Hz"
+        case $FILT_RES
+            @str := get_engine_par_disp($ENGINE_PAR_RESONANCE, 0, $FILT_SLOT, -1) & " %"
+    end select
+    set_control_par_str(%pid_to_uid[$param_id], $CONTROL_PAR_LABEL, @str)
+end function
+
+on persistence_changed
+    { easy refreshing of parameter values and automation labels! }
+    $i := 0
+    while ($i < $NUM_PARAMS)
+        $param_id := $i
+        call SetParam
+        call SetLabel
+        set_control_par(%pid_to_uid[$i], $CONTROL_PAR_VALUE, %params[$i])
+        inc($i)
+    end while
+end on
+
+{ that's all you need, no need to write individual callbacks anymore! }
+on ui_controls
+    $param_id := get_control_par($NI_UI_ID, $CONTROL_PAR_CUSTOM_ID)
+    %params[$param_id] := get_control_par($NI_UI_ID, $CONTROL_PAR_VALUE)
+    call SetParam
+    call SetLabel
+end on
