@@ -12,7 +12,8 @@ local KUser = {
 	player_content_path = Filesystem.preferred("/Users/Shared/"),
 	user_content_path = Filesystem.preferred("/Users/yaron.eshkar/Faxi/Yaron QA Docs/Kontakt Instruments/"),
 	user_samples_path = Filesystem.preferred("/Users/yaron.eshkar/Faxi/API Samples/"),
-	framework_samples_path = "/Users/yaron.eshkar/Faxi/Repositories/Kontakt-Public/Kontakt Lua API Tools/Samples",
+	framework_samples_path = Filesystem.preferred("/Users/yaron.eshkar/Faxi/Repositories/Kontakt-Public/Kontakt Lua API Tools/Samples"),
+	framework_samples_path_win = Filesystem.preferred("C:/Faxi/Repositories/Kontakt-Public/Kontakt Lua API Tools/Samples"),
 	framework_ksp_path = Filesystem.preferred(Filesystem.parent_path(Filesystem.parent_path(Kontakt.script_path)) .. "/KSP/"),
 	framework_nki_path = Filesystem.preferred(Filesystem.parent_path(Filesystem.parent_path(Kontakt.script_path)) .. "/NKI/"),
 	user_name = os.getenv("USER") or "Kontakt User",
@@ -20,7 +21,8 @@ local KUser = {
 	default_nkm_name = os.getenv("USER") or "Kontakt User",
 	sox_path = "sox",
 	signet_path = "'" .. "/Users/yaron.eshkar/Faxi/Repositories/Kontakt-Public/Kontakt Lua API Tools/Tools/signet/signet" .. "'",
-	flac_path = "flac"
+	flac_path = "flac",
+	okwt_path = "okwt"
 }
 
 -- return the object.
