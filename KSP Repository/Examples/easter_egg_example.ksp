@@ -1,0 +1,134 @@
+{***********************************************
+Easter Egg Example
+Author: Faxi Nadu
+Written by: Yaron Eshkar
+Modified: April 5, 2024
+*************************************************}
+
+on init
+    message("")
+    make_perfview
+	set_listener($NI_SIGNAL_TIMER_MS,1000000)
+
+    declare ui_label $L (2, 1)
+
+    declare ui_label $easter_egg( 1, 1 )
+    declare $easter_check
+	declare @h
+	declare @m
+	declare @s
+
+    declare const $num_years := 20
+
+    declare $i
+
+	declare %easter_year[$num_years]
+		%easter_year[0] := 2025
+		%easter_year[1] := 2026
+		%easter_year[2] := 2027
+		%easter_year[3] := 2028
+		%easter_year[4] := 2029
+		%easter_year[5] := 2030
+		%easter_year[6] := 2031
+		%easter_year[7] := 2032
+		%easter_year[8] := 2033
+		%easter_year[9] := 2034
+		%easter_year[10] := 2035
+		%easter_year[11] := 2036
+		%easter_year[12] := 2037
+		%easter_year[13] := 2038
+		%easter_year[14] := 2039
+		%easter_year[15] := 2040
+		%easter_year[16] := 2041
+		%easter_year[17] := 2042
+		%easter_year[18] := 2043
+		%easter_year[19] := 2044
+
+	declare %easter_month[$num_years]
+		%easter_month[0] := 4
+		%easter_month[1] := 4
+		%easter_month[2] := 3
+		%easter_month[3] := 4
+		%easter_month[4] := 4
+		%easter_month[5] := 4
+		%easter_month[6] := 4
+		%easter_month[7] := 3
+		%easter_month[8] := 4
+		%easter_month[9] := 4
+		%easter_month[10] := 3
+		%easter_month[11] := 4
+		%easter_month[12] := 4
+		%easter_month[13] := 4
+		%easter_month[14] := 4
+		%easter_month[15] := 4
+		%easter_month[16] := 4
+		%easter_month[17] := 4
+		%easter_month[18] := 3
+		%easter_month[19] := 4
+
+	declare %easter_day[$num_years]
+		%easter_day[0] := 20
+		%easter_day[1] := 5
+		%easter_day[2] := 28
+		%easter_day[3] := 16
+		%easter_day[4] := 1
+		%easter_day[5] := 21
+		%easter_day[6] := 13
+		%easter_day[7] := 28
+		%easter_day[8] := 17
+		%easter_day[9] := 9
+		%easter_day[10] := 25
+		%easter_day[11] := 13
+		%easter_day[12] := 5
+		%easter_day[13] := 25
+		%easter_day[14] := 10
+		%easter_day[15] := 1
+		%easter_day[16] := 21
+		%easter_day[17] := 6
+		%easter_day[18] := 19
+		%easter_day[19] := 17
+
+end on
+
+function set_easter_egg
+    $easter_check := 0
+    $i := 0
+    while($i<$num_years)
+        if((%easter_year[0]=$NI_DATE_YEAR) and (%easter_month[0]=$NI_DATE_MONTH) and (%easter_day[0]=$NI_DATE_DAY))
+        $easter_check := 1
+        end if
+        inc($i)
+    end while
+end function
+
+on persistence_changed
+    call set_easter_egg
+    if($easter_check=1)
+        set_text($easter_egg,"EASTER")
+    else
+        set_text($easter_egg,"NOPE")
+    end if
+end on
+
+on listener
+	if ($NI_TIME_HOUR < 10)
+		@h := "0" & $NI_TIME_HOUR
+	else
+		@h := $NI_TIME_HOUR
+	end if
+
+	if ($NI_TIME_MINUTE < 10)
+		@m := "0" & $NI_TIME_MINUTE
+	else
+		@m := $NI_TIME_MINUTE
+	end if
+
+	if ($NI_TIME_SECOND < 10)
+		@s := "0" & $NI_TIME_SECOND
+	else
+		@s := $NI_TIME_SECOND
+	end if
+
+    set_text($L, $NI_DATE_YEAR & "-" & $NI_DATE_MONTH & "-" & $NI_DATE_DAY & ", " & ...
+                 @h & ":" & @m & ":" & @s)
+end on

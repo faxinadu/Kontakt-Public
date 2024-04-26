@@ -1,0 +1,20 @@
+{***********************************************
+Equal Power Crossfade Example
+Author: Native Instruments
+Written by: Mario Kruselj
+Modified: February 28, 2024
+*************************************************}
+
+on init
+    declare ui_value_edit $Mix (0, 1000000, 1)
+    declare ~t1
+    declare ~t2
+end on
+
+on ui_control ($Mix)
+	~t1 := cbrt(sin(real($Mix) * 0.0000015708) * .25) * 1000000.0
+	~t2 := cbrt(cos(real($Mix) * 0.0000015708) * .25) * 1000000.0
+
+	set_engine_par($ENGINE_PAR_VOLUME, int(~t1), 0, -1, -1)
+	set_engine_par($ENGINE_PAR_VOLUME, int(~t2), 1, -1, -1)
+end on

@@ -1,0 +1,63 @@
+{***********************************************
+Voyager Example
+Author: Faxi Nadu
+Written by: Yaron Eshkar
+Modified: April 5, 2024
+*************************************************}
+
+on init
+    make_perfview
+	set_ui_color(0000000H)
+	set_listener($NI_SIGNAL_TIMER_MS, 1000000)
+
+    declare ui_label $current_time (2, 1)
+	declare @h
+	declare @m
+	declare @s
+
+	declare ui_label $voyager_launch(2,1)
+		set_text($voyager_launch,"Voyager 1 Launch: 1977-5-9, 12:56:00")
+	declare ui_label $voyager_distance_km (3, 1)
+	declare ui_label $voyager_distance_au (3, 1)
+
+
+	declare const ~voyager_speed := 16.9
+	declare const ~voyager_start_distance := 24391528744.0
+	declare const ~astronomical_unit := 149597871.0
+
+	declare ~voyager_current_distance
+	~voyager_current_distance := ~voyager_start_distance
+
+	move_control($voyager_launch,1,1)
+	move_control($current_time,1,2)
+
+	move_control($voyager_distance_km,3,1)
+	move_control($voyager_distance_au,3,2)
+end on
+
+on listener
+	if ($NI_TIME_HOUR < 10)
+		@h := "0" & $NI_TIME_HOUR
+	else
+		@h := $NI_TIME_HOUR
+	end if
+
+	if ($NI_TIME_MINUTE < 10)
+		@m := "0" & $NI_TIME_MINUTE
+	else
+		@m := $NI_TIME_MINUTE
+	end if
+
+	if ($NI_TIME_SECOND < 10)
+		@s := "0" & $NI_TIME_SECOND
+	else
+		@s := $NI_TIME_SECOND
+	end if
+
+    set_text($current_time, "Current Time: " & $NI_DATE_YEAR & "-" & $NI_DATE_MONTH & "-" & $NI_DATE_DAY & ", " & ...
+                 @h & ":" & @m & ":" & @s)
+
+	~voyager_current_distance := ~voyager_current_distance + ~voyager_speed
+	set_text($voyager_distance_km,"Voyager 1 Distance Km :" & ~voyager_current_distance)
+	set_text($voyager_distance_au,"Voyager 1 Distance AU :" & ~voyager_current_distance / ~astronomical_unit)
+end on

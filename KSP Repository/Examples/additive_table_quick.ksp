@@ -1,0 +1,76 @@
+{***********************************************
+Additive Table Quick
+Author: Faxi Nadu
+Written by: Yaron Eshkar
+Modified: March 16, 2024
+*************************************************}
+
+on init
+    message("")
+
+    set_ui_height_px(200)
+    set_ui_width_px(600)
+    make_perfview
+
+
+    declare const $num_partials := 16
+
+    declare $i
+    declare ui_table %volumes[$num_partials](300,200,500000)
+        set_control_par(get_ui_id(%volumes),$CONTROL_PAR_WIDTH,400)
+        set_control_par(get_ui_id(%volumes),$CONTROL_PAR_HEIGHT,150)
+        move_control_px(%volumes,125,20)
+        
+    make_persistent(%volumes)
+
+    declare ui_button $random
+        set_text($random,"Random")
+    declare ui_button $reset
+        set_text($reset,"Reset")
+end on
+
+function set_volumes
+    $i := 0
+    while($i<$num_partials)
+        set_engine_par($ENGINE_PAR_VOLUME,%volumes[$i],$i,-1,-1)
+        inc($i)
+    end while
+end function
+
+function random_volumes
+    $i := 0
+    while($i<$num_partials)
+        if($i=0)
+            set_control_par_arr(get_ui_id(%volumes),$CONTROL_PAR_VALUE,500000,$i)
+        else
+            if(0=random(0,1))
+                set_control_par_arr(get_ui_id(%volumes),$CONTROL_PAR_VALUE,random(500000 - random(0,100000) - ($i*random(0,50000)),500000 - ($i*25000)),$i)
+            else
+                set_control_par_arr(get_ui_id(%volumes),$CONTROL_PAR_VALUE,0,$i)
+            end if
+        end if
+        inc($i)
+    end while
+    call set_volumes
+end function
+
+function reset_volumes
+    $i := 0
+    while($i<$num_partials)
+        set_control_par_arr(get_ui_id(%volumes),$CONTROL_PAR_VALUE,0,$i)
+        inc($i)
+    end while
+    call set_volumes
+end function
+
+on ui_control(%volumes)
+    call set_volumes
+end on
+
+on ui_control($random)
+    call random_volumes
+end on
+
+on ui_control($reset)
+    call reset_volumes
+end on

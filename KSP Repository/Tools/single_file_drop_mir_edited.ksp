@@ -1,0 +1,423 @@
+{***********************************************
+Single Sample Drop - MIR Edited
+Author: Native Instruments
+Written by: Yaron Eshkar and Francesco Sabatini
+Created: September 10 2020
+Modified: March 23 2024
+*************************************************}
+ 
+on init
+    message("")
+    set_script_title( "Single Sample Drop" )
+    set_ui_height(6)
+    make_perfview 
+
+    declare $i
+    declare $touchedControl
+    declare @samplePath
+    declare ~mirPitchResult
+    declare %ampEnvelopEnginePar[4] := ($ENGINE_PAR_ATTACK, $ENGINE_PAR_DECAY, $ENGINE_PAR_SUSTAIN, $ENGINE_PAR_RELEASE)
+
+    declare !note[12]
+    !note[0] := "C"
+    !note[1] := "C#"
+    !note[2] := "D"
+    !note[3] := "D#"
+    !note[4] := "E"
+    !note[5] := "F"
+    !note[6] := "F#"
+    !note[7] := "G"
+    !note[8] := "G#"
+    !note[9] := "A"
+    !note[10] := "Bb"
+    !note[11] := "B"
+    declare !noteName [128]
+    declare !settingLabelText[3]
+    !settingLabelText[0] := "Low: "
+    !settingLabelText[1] := "High: "
+    !settingLabelText[2] := "Root: "
+    declare !ampEnvelopeLabelText[4]
+    !ampEnvelopeLabelText[0] := "Attack "
+    !ampEnvelopeLabelText[1] := "Decay "
+    !ampEnvelopeLabelText[2] := "Sustain "
+    !ampEnvelopeLabelText[3] := "Release "
+    declare !ampEnvelopeUnit[4]
+    !ampEnvelopeUnit[0] := " ms"
+    !ampEnvelopeUnit[1] := " ms"
+    !ampEnvelopeUnit[2] := " dB"
+    !ampEnvelopeUnit[3] := " ms"
+
+    $i := 0
+    while ($i < 128)
+        !noteName[$i] := !note[$i mod 12] & (($i / 12) - 2)
+
+        inc($i)
+    end while
+
+    set_num_user_zones(1)
+    set_zone_par(%NI_USER_ZONE_IDS[0], $ZONE_PAR_HIGH_VELO, 128)
+
+    declare ui_panel $singleDropPanel
+    declare ui_menu $loopMode
+    declare ui_menu $rootMode
+    declare ui_slider $lowValue (0, 127)
+    declare ui_slider $highValue (0, 127)
+    declare ui_slider $rootValue (0, 127)
+    declare ui_label $loopModeLabel (1, 1)
+    declare ui_label $rootModeLabel (1, 1)
+    declare ui_label $lowValueLabel (1, 1)
+    declare ui_label $highValueLabel (1, 1)
+    declare ui_label $rootValueLabel (1, 1)
+    declare ui_label $zoneInfo (1, 1)
+    declare ui_button $clearSample
+    declare ui_label $titleBar (1, 1)
+    declare ui_slider $ampAttack (100000, 1000000)
+    declare ui_slider $ampDecay (100000, 1000000)
+    declare ui_slider $ampSustain (0, 1000000)
+    declare ui_slider $ampRelease (100000, 1000000)
+    declare ui_label $ampAttackLabel (1, 1)
+    declare ui_label $ampDecayLabel (1, 1)
+    declare ui_label $ampSustainLabel (1, 1)
+    declare ui_label $ampReleaseLabel (1, 1)
+
+    $highValue := 127
+    $rootValue := 60
+
+    move_control_px($singleDropPanel, 100, 10)
+
+    add_menu_item($loopMode, "Oneshot", 0)
+    add_menu_item($loopMode, "Loop", 1)
+
+    add_menu_item($rootMode, "Automatic", 0)
+    add_menu_item($rootMode, "Manual", 1)
+
+    set_text($loopModeLabel, "Playback Mode")
+    set_text($rootModeLabel, "Root Key")
+    set_text($clearSample, "X")
+    set_text($titleBar, "Single Sample Drop")
+
+    make_persistent($loopMode)
+    make_persistent($rootMode)
+    make_persistent($lowValue)
+    make_persistent($highValue)
+    make_persistent($rootValue)
+
+    make_persistent(@samplePath)
+
+    declare %settingID[13]
+
+    $i := 0
+    while ($i < num_elements(%settingID))
+        %settingID[$i] := get_ui_id($loopMode) + $i
+
+        inc($i)
+    end while
+
+    $i := 0
+    while($i < num_elements(%settingID))
+        set_control_par(%settingID[$i], $CONTROL_PAR_PARENT_PANEL, get_ui_id($singleDropPanel))
+
+        if ($i < 5)
+            set_control_par(%settingID[$i], $CONTROL_PAR_DEFAULT_VALUE, 60)
+            set_control_par(%settingID[$i], $CONTROL_PAR_POS_X, ($i * 92) - 1)
+
+            if ($i < 2)
+                set_control_par(%settingID[$i], $CONTROL_PAR_POS_Y, 44)
+            else
+                set_control_par(%settingID[$i], $CONTROL_PAR_POS_Y, 45)
+            end if
+        else
+            if ($i < 10)
+                set_control_par(%settingID[$i], $CONTROL_PAR_POS_X, (($i - 5) * 92) - 1)
+                set_control_par(%settingID[$i], $CONTROL_PAR_POS_Y, 23)
+            else
+                if ($i < 11)
+                    set_control_par(%settingID[$i], $CONTROL_PAR_WIDTH, 455)
+                    set_control_par(%settingID[$i], $CONTROL_PAR_POS_X, 0)
+                    set_control_par(%settingID[$i], $CONTROL_PAR_POS_Y, 170)
+                else
+
+                    if ($i < 12)
+                        set_control_par(%settingID[$i], $CONTROL_PAR_WIDTH, 20)
+                        set_control_par(%settingID[$i], $CONTROL_PAR_POS_X, 434)
+                        set_control_par(%settingID[$i], $CONTROL_PAR_POS_Y, 65)
+                    else
+                        set_control_par(%settingID[$i], $CONTROL_PAR_POS_X, 0)
+                        set_control_par(%settingID[$i], $CONTROL_PAR_POS_Y, 2)
+                        set_control_par(%settingID[$i], $CONTROL_PAR_WIDTH, 454)
+                    end if
+                end if
+
+                set_control_par(%settingID[$i], $CONTROL_PAR_TEXT_ALIGNMENT, 1)
+            end if
+        end if
+
+        inc($i)
+    end while
+
+    declare ui_panel $waveArea
+    declare ui_mouse_area $dropArea
+    declare ui_waveform $waveView (1, 1)
+
+    set_control_par(get_ui_id($waveArea), $CONTROL_PAR_PARENT_PANEL, get_ui_id($singleDropPanel))
+    set_control_par(get_ui_id($dropArea), $CONTROL_PAR_DND_ACCEPT_AUDIO, $NI_DND_ACCEPT_ONE)
+
+    move_control_px($waveArea, 1, 65)
+
+    attach_zone($waveView, %NI_USER_ZONE_IDS[0], 0)
+
+    declare %areaID[2]
+    %areaID[0] := get_ui_id($dropArea)
+    %areaID[1] := get_ui_id($waveView)
+
+    $i := 0
+    while ($i < num_elements(%areaID))
+        set_control_par(%areaID[$i], $CONTROL_PAR_PARENT_PANEL, get_ui_id($waveArea))
+
+        set_control_par(%areaID[$i], $CONTROL_PAR_WIDTH, 455)
+        set_control_par(%areaID[$i], $CONTROL_PAR_HEIGHT, 102)
+
+        inc($i)
+    end while
+
+    declare %ampEnvelopeID[8]
+
+    $i := 0
+    while($i < num_elements(%ampEnvelopeID))
+        %ampEnvelopeID[$i] := get_ui_id($ampAttack) + $i
+
+        inc($i)
+    end while
+
+    $i := 0
+    while ($i < num_elements(%ampEnvelopeID))
+        set_control_par(%ampEnvelopeID[$i], $CONTROL_PAR_PARENT_PANEL, get_ui_id($singleDropPanel))
+
+        if ($i < 4)
+            set_control_par(%ampEnvelopeID[$i], $CONTROL_PAR_POS_X, ($i * 92) + 45)
+            set_control_par(%ampEnvelopeID[$i], $CONTROL_PAR_POS_Y, 213)
+
+            set_control_par_str(%ampEnvelopeID[$i], $CONTROL_PAR_AUTOMATION_NAME, !ampEnvelopeLabelText[$i])
+        else
+            set_control_par(%ampEnvelopeID[$i], $CONTROL_PAR_POS_X, (($i - 4) * 92) + 45)
+            set_control_par(%ampEnvelopeID[$i], $CONTROL_PAR_POS_Y, 191)
+
+            set_control_par_str(%ampEnvelopeID[$i], $CONTROL_PAR_TEXT, !ampEnvelopeLabelText[$i - 4])
+        end if
+
+        inc($i)
+    end while
+
+    set_control_help($loopMode, "Switch between one shot or looping mode.")
+    set_control_help($rootMode, "Switch between MIR pitch detection or manual setting of the root note.")
+    set_control_help($lowValue, "Sets the lowest playable key.")
+    set_control_help($highValue, "Sets the highest playable key.")
+    set_control_help($rootValue, "Set the root note when root mode is set to manual")
+    set_control_help($ampAttack, "Set the amplitude evenelope attack time.")
+    set_control_help($ampDecay, "Set the amplitude evenelope decay time.")
+    set_control_help($ampSustain, "Set the amplitude evenelope sustain level.")
+    set_control_help($ampRelease, "Set the amplitude evenelope release time.")
+    set_control_help($dropArea, "Drag and drop an audio sample here.")
+    set_control_help($zoneInfo, "Display the sample name.")
+    set_control_help($clearSample, "Clear and remove the loaded sample.")
+    set_control_help($titleBar, "Drag and drop an audio file and manipulate the zone parameters to quickly play a sample in Kontakt.")
+
+    declare ui_button $tune_correct
+        set_text($tune_correct,"Fix Tune")
+        set_control_par(get_ui_id($tune_correct),$CONTROL_PAR_WIDTH,60)
+        move_control_px($tune_correct,40,120)
+    
+    declare ui_knob $lpcut(0,1000000,1)
+        set_text($lpcut,"LP Cut")
+        move_control_px($lpcut,10,50)
+
+    make_persistent($tune_correct)
+    make_persistent($lpcut)
+
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_FILTER,-1,0,1)
+    set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE,$FILTER_TYPE_SV_LP6,-1,0,1)
+
+    set_control_help($tune_correct, "Use MIR to correct the fine tuning when in automatic pitch detection mode.")
+    set_control_help($lpcut, "Set the cutoff point on a 6pole lowpass filter.")
+
+end on
+
+
+function setZoneParams()
+    wait_async(set_zone_par(%NI_USER_ZONE_IDS[0], $ZONE_PAR_LOW_KEY, $lowValue))
+    wait_async(set_zone_par(%NI_USER_ZONE_IDS[0], $ZONE_PAR_HIGH_KEY, $highValue))
+
+        wait_async(detect_pitch(%NI_USER_ZONE_IDS[0], ~mirPitchResult))
+    if ($rootMode = 0)
+        wait_async(set_zone_par(%NI_USER_ZONE_IDS[0], $ZONE_PAR_ROOT_KEY, real_to_int(round(~mirPitchResult))))
+        if($tune_correct=0)
+            wait_async(set_zone_par(%NI_USER_ZONE_IDS[0], $ZONE_PAR_TUNE, 0))
+        else
+            wait_async(set_zone_par(%NI_USER_ZONE_IDS[0], $ZONE_PAR_TUNE, int(round(100.0 * (round(~mirPitchResult) - ~mirPitchResult))) ))
+        end if
+    else
+        wait_async(set_zone_par(%NI_USER_ZONE_IDS[0], $ZONE_PAR_ROOT_KEY, $rootValue))
+    end if
+
+    set_loop_par(%NI_USER_ZONE_IDS[0], 0, $LOOP_PAR_MODE, $loopMode)
+end function
+
+function setRootMode()
+    if ($rootMode = 0)
+        set_control_par(%settingID[4], $CONTROL_PAR_HIDE, $HIDE_WHOLE_CONTROL)
+        set_control_par(%settingID[9], $CONTROL_PAR_HIDE, $HIDE_WHOLE_CONTROL)
+        set_control_par(get_ui_id($tune_correct),$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+    else
+        set_control_par(%settingID[4], $CONTROL_PAR_HIDE, $HIDE_PART_NOTHING)
+        set_control_par(%settingID[9], $CONTROL_PAR_HIDE, $HIDE_PART_NOTHING)
+        set_control_par(get_ui_id($tune_correct),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+    end if
+end function
+
+function updateValues()
+    $i := 7
+    while ($i < 10)
+        set_control_par_str(%settingID[$i], ...
+                            $CONTROL_PAR_TEXT, ...
+                            !settingLabelText[$i - 7] & ...
+                                !noteName[get_control_par(%settingID[$i - 5],$CONTROL_PAR_VALUE)] & " (" & ...
+                                get_control_par(%settingID[$i - 5], $CONTROL_PAR_VALUE) & ")" ...
+                            )
+        inc($i)
+    end while
+end function
+
+function setLowHigh()
+    if ($lowValue > $highValue)
+        $lowValue := $highValue
+    end if
+end function
+
+function setZoneInfo()
+    if (is_zone_empty(%NI_USER_ZONE_IDS[0]) = 1)
+        set_control_par_str(%settingID[10], $CONTROL_PAR_TEXT, "^^^ Drop Sample ^^^")
+        set_control_par(%settingID[11], $CONTROL_PAR_HIDE, $HIDE_WHOLE_CONTROL)
+    else
+        set_control_par_str(%settingID[10], ...
+                            $CONTROL_PAR_TEXT, ...
+                            "Sample: " & ...
+                                get_sample(%NI_USER_ZONE_IDS[0], $NI_FILE_NAME) & ...
+                                " Pitch: " & ~mirPitchResult & ...
+                                " Fix: " & real_to_int(round(~mirPitchResult)) & ...
+                                " Tune: " & round(~mirPitchResult) - ~mirPitchResult) 
+                                
+        set_control_par(%settingID[11], $CONTROL_PAR_HIDE, $HIDE_PART_BG)
+    end if
+end function
+
+function setAmp()
+    set_engine_par(%ampEnvelopEnginePar[$touchedControl], ...
+                   get_control_par(%ampEnvelopeID[$touchedControl], $CONTROL_PAR_VALUE), 0, get_mod_idx(0, "ENV_AHDSR"), -1)
+    set_control_par_str(%ampEnvelopeID[$touchedControl], ...
+                        $CONTROL_PAR_LABEL, ...
+                        get_engine_par_disp(%ampEnvelopEnginePar[$touchedControl], 0, get_mod_idx(0, "ENV_AHDSR"), -1) & ...
+                            !ampEnvelopeUnit[$touchedControl])
+    set_control_par_str(%ampEnvelopeID[$touchedControl + 4], ...
+                        $CONTROL_PAR_TEXT, ...
+                        !ampEnvelopeLabelText[$touchedControl] & ...
+                            get_control_par_str(%ampEnvelopeID[$touchedControl], $CONTROL_PAR_LABEL))
+end function
+
+function setClearSample()
+    wait_async(set_sample(%NI_USER_ZONE_IDS[0], ""))
+end function
+
+on persistence_changed
+    call setRootMode()
+    call updateValues()
+    call setZoneParams()
+    call setZoneInfo()
+
+    $touchedControl := 0
+    while ($touchedControl < 4)
+        set_control_par(%ampEnvelopeID[$touchedControl], ...
+                        $CONTROL_PAR_VALUE, ...
+                        get_engine_par(%ampEnvelopEnginePar[$touchedControl], 0, get_mod_idx(0, "ENV_AHDSR"), -1))
+        call setAmp()
+
+        inc($touchedControl)
+    end while
+
+    set_control_par_str(get_ui_id($lpcut),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_CUTOFF,-1,0,1) & "hz")
+end on
+
+on ui_control ($dropArea)
+    if ($NI_MOUSE_EVENT_TYPE = $NI_MOUSE_EVENT_TYPE_DROP)
+        @samplePath := !NI_DND_ITEMS_AUDIO[0]
+
+        wait_async(set_sample(%NI_USER_ZONE_IDS[0], @samplePath))
+
+        call setZoneParams()
+        call setZoneInfo()
+    end if
+end on
+
+on ui_control ($loopMode)
+    call setZoneParams()
+end on
+
+on ui_control ($rootMode)
+    call setRootMode()
+    call setZoneParams()
+end on
+
+on ui_control ($rootValue)
+    call updateValues()
+    call setZoneParams()
+end on
+
+on ui_control ($lowValue)
+    call setLowHigh()
+    call updateValues()
+    call setZoneParams()
+end on
+
+on ui_control ($highValue)
+    call setLowHigh()
+    call updateValues()
+    call setZoneParams()
+end on
+
+on ui_control ($ampAttack)
+    $touchedControl := 0
+    call setAmp()
+end on
+
+on ui_control ($ampDecay)
+    $touchedControl := 1
+    call setAmp()
+end on
+
+on ui_control ($ampSustain)
+    $touchedControl := 2
+    call setAmp()
+end on
+
+on ui_control ($ampRelease)
+    $touchedControl := 3
+    call setAmp()
+end on
+
+on ui_control ($clearSample)
+    if ($clearSample = 1)
+        call setClearSample()
+        call setZoneInfo()
+    end if
+
+    $clearSample := 0
+end on
+
+
+on ui_control( $tune_correct )
+    call setZoneParams
+end on
+
+on ui_control($lpcut)
+    set_engine_par($ENGINE_PAR_CUTOFF,$lpcut,-1,0,1)
+    set_control_par_str(get_ui_id($lpcut),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_CUTOFF,-1,0,1) & "hz")
+end on

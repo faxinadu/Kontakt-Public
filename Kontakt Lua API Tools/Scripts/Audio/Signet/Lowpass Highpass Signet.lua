@@ -8,8 +8,8 @@ local kUser = require("Modules.KUser")
 Kontakt.colored_output = kUser.terminal_colored_output
 
 local current_path = kUser.framework_samples_path .. "/convert/"
-local lp_cutoff = "8000"
-local hp_cutoff = "200"
+local lp_cutoff = "1500"
+local hp_cutoff = "20"
 local sample_paths_table = {}
 
 sample_paths_table = kUtil.paths_to_table(current_path,".wav")

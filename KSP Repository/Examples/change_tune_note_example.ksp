@@ -1,0 +1,78 @@
+{***********************************************
+Change Tune Note
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: April 16, 2024
+*************************************************}
+
+on init
+    declare ui_knob $Detune(-100000,100000,1)
+    declare ui_label $note(1,1)
+    set_control_par_str(get_ui_id($Detune),$CONTROL_PAR_LABEL,$Detune / 1000)
+    make_persistent($Detune)
+    declare const $start_note_1 := 4
+    declare const $start_note_2 := 11
+end on
+
+function set_detune_label
+    set_control_par_str(get_ui_id($Detune),$CONTROL_PAR_LABEL,$Detune / 1000)
+end function
+
+on persistence_changed
+    call set_detune_label
+    set_text($note,"Note")
+end on
+
+on ui_control($Detune)
+    call set_detune_label
+end on
+
+on note
+    set_text($note,"Note: " & $EVENT_NOTE)
+    select($EVENT_NOTE)
+        case $start_note_1 
+            change_tune($EVENT_ID,$Detune,1)
+        case $start_note_1 + 12
+            change_tune($EVENT_ID,$Detune,1)
+        case $start_note_1 + 24
+            change_tune($EVENT_ID,$Detune,1)
+        case $start_note_1 + 36
+            change_tune($EVENT_ID,$Detune,1)
+        case $start_note_1 + 48
+            change_tune($EVENT_ID,$Detune,1)
+        case $start_note_1 + 60
+            change_tune($EVENT_ID,$Detune,1)
+        case $start_note_1 + 72
+            change_tune($EVENT_ID,$Detune,1)
+        case $start_note_1 + 84
+            change_tune($EVENT_ID,$Detune,1)
+        case $start_note_1 + 96
+            change_tune($EVENT_ID,$Detune,1)
+        case $start_note_1 + 108
+            change_tune($EVENT_ID,$Detune,1)
+        case $start_note_1 + 120
+            change_tune($EVENT_ID,$Detune,1)
+        case $start_note_2
+            change_tune($EVENT_ID,$Detune,1)
+        case $start_note_2 + 12
+            change_tune($EVENT_ID,$Detune,1)
+        case $start_note_2 + 24
+            change_tune($EVENT_ID,$Detune,1)
+        case $start_note_2 + 36
+            change_tune($EVENT_ID,$Detune,1)
+        case $start_note_2 + 48
+            change_tune($EVENT_ID,$Detune,1)
+        case $start_note_2 + 60
+            change_tune($EVENT_ID,$Detune,1)
+        case $start_note_2 + 72
+            change_tune($EVENT_ID,$Detune,1)
+        case $start_note_2 + 84
+            change_tune($EVENT_ID,$Detune,1)
+        case $start_note_2 + 96
+            change_tune($EVENT_ID,$Detune,1)
+        case $start_note_2 + 108
+            change_tune($EVENT_ID,$Detune,1)
+        case $start_note_2 + 120
+            change_tune($EVENT_ID,$Detune,1)
+    end select
+end on

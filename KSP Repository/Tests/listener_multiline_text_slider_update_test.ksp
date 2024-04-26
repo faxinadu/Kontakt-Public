@@ -1,0 +1,21 @@
+on init
+    message("")
+    make_perfview
+    set_listener($NI_SIGNAL_TIMER_MS,40000) {~25fps}
+    declare const $entries := 500
+    declare ui_label $label(1,2)
+    declare $i
+    while($i<$entries)
+        add_text_line( $label,$i)
+        inc($i)
+    end while
+    declare ui_slider $slider( 0, 100 )
+end on
+
+on listener
+    if($slider = get_control_par(get_ui_id($slider),$CONTROL_PAR_MAX_VALUE))
+        $slider := 0
+    else
+        $slider := $slider + 1
+    end if
+end on

@@ -1,0 +1,68 @@
+{***********************************************
+Get Wow Flutter Insert Effect Preset
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: March 14, 2024
+*************************************************}
+
+on init
+    make_perfview
+    declare const $parameter_value_count := 10
+    declare $load_id := -1
+    declare $save_id := -1
+    declare ui_switch $get_params_switch
+        set_text($get_params_switch,"Save Params")
+    declare %parameter_values[$parameter_value_count]
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_WOWFLUTTER,-1,0,1)
+    declare ui_switch $set_params_switch
+        set_text($set_params_switch,"Load Params")
+end on
+
+function get_parameters
+    %parameter_values[0] := get_engine_par($ENGINE_PAR_EFFECT_TYPE,-1,0,1)
+    %parameter_values[1] := get_engine_par($ENGINE_PAR_WOWFLUTTER_WOW,-1,0,1)
+    %parameter_values[2] := get_engine_par($ENGINE_PAR_WOWFLUTTER_FLUTTER,-1,0,1)
+    %parameter_values[3] := get_engine_par($ENGINE_PAR_WOWFLUTTER_SCRAPE,-1,0,1)
+    %parameter_values[4] := get_engine_par($ENGINE_PAR_WOWFLUTTER_SPEED,-1,0,1)
+    %parameter_values[5] := get_engine_par($ENGINE_PAR_WOWFLUTTER_STEREO,-1,0,1)
+    %parameter_values[6] := get_engine_par($ENGINE_PAR_WOWFLUTTER_AGE,-1,0,1)
+    %parameter_values[7] := get_engine_par($ENGINE_PAR_WOWFLUTTER_SATURATION,-1,0,1)
+    %parameter_values[8] := get_engine_par($ENGINE_PAR_WOWFLUTTER_MIX,-1,0,1)
+    %parameter_values[9] := get_engine_par($ENGINE_PAR_WOWFLUTTER_GATE,-1,0,1)
+end function
+
+function set_parameters
+    wait_async(set_engine_par($ENGINE_PAR_EFFECT_TYPE,%parameter_values[0],-1,0,1))
+    set_engine_par($ENGINE_PAR_WOWFLUTTER_WOW,%parameter_values[1],-1,0,1)
+    set_engine_par($ENGINE_PAR_WOWFLUTTER_FLUTTER,%parameter_values[2],-1,0,1)
+    set_engine_par($ENGINE_PAR_WOWFLUTTER_SCRAPE,%parameter_values[3],-1,0,1)
+    set_engine_par($ENGINE_PAR_WOWFLUTTER_SPEED,%parameter_values[4],-1,0,1)
+    set_engine_par($ENGINE_PAR_WOWFLUTTER_STEREO,%parameter_values[5],-1,0,1)
+    set_engine_par($ENGINE_PAR_WOWFLUTTER_AGE,%parameter_values[6],-1,0,1)
+    set_engine_par($ENGINE_PAR_WOWFLUTTER_SATURATION,%parameter_values[7],-1,0,1)
+    set_engine_par($ENGINE_PAR_WOWFLUTTER_MIX,%parameter_values[8],-1,0,1)
+    set_engine_par($ENGINE_PAR_WOWFLUTTER_GATE,%parameter_values[9],-1,0,1)
+end function
+
+on ui_control($get_params_switch)
+    call get_parameters
+    $save_id := save_array(%parameter_values,0)
+end on
+
+on ui_control($set_params_switch)
+    $load_id := load_array(%parameter_values,0)
+end on
+
+on async_complete
+    if ($NI_ASYNC_ID = $load_id)
+        $load_id := -1
+        $set_params_switch := 0
+        if ($NI_ASYNC_EXIT_STATUS = 1)
+            call set_parameters
+        end if
+    end if
+    if ($NI_ASYNC_ID = $save_id)
+        $save_id := -1
+        $get_params_switch := 0
+    end if
+end on

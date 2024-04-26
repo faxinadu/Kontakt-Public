@@ -1,0 +1,138 @@
+{***********************************************
+ADSR Complex Example
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: October 26, 2022
+*************************************************}
+
+on init
+    message("")
+    make_perfview
+    set_ui_height(2)
+
+    declare const $num_controls := 8
+    declare const $start_group := 0
+    declare $end_group
+    $end_group := $NUM_GROUPS
+    declare const $slot_index := 0
+    declare const $generic_index := -1
+
+    declare const $x_spacing := 100
+    declare const $y_spacing := 20
+
+    declare $i
+    declare $touched
+    declare $engine_par
+
+    declare ~env_val
+
+    declare ui_slider $attack_slider(0,1000000)
+    declare ui_slider $decay_slider(0,1000000)
+    declare ui_slider $sustain_slider(0,1000000)
+    declare ui_slider $release_slider(0,1000000)
+
+    declare ui_label $attack_label(1,1)
+    declare ui_label $decay_label(1,1)
+    declare ui_label $sustain_label(1,1)
+    declare ui_label $release_label(1,1)
+
+    declare %control_id[$num_controls]
+
+    declare ui_panel $envelope_panel
+
+    declare %engine_par[$num_controls/2]
+        %engine_par[0] := $ENGINE_PAR_FLEXENV_STAGE_TIME
+        %engine_par[1] := $ENGINE_PAR_FLEXENV_STAGE_TIME
+        %engine_par[2] := $ENGINE_PAR_FLEXENV_STAGE_LEVEL
+        %engine_par[3] := $ENGINE_PAR_FLEXENV_STAGE_TIME
+
+    declare !label_string[$num_controls/2]
+        !label_string[0] := "ms"
+        !label_string[1] := "ms"
+        !label_string[2] := "dB"
+        !label_string[3] := "ms"
+
+    declare !name_string[$num_controls/2]
+        !name_string[0] := "Attack"
+        !name_string[1] := "Decay"
+        !name_string[2] := "Sustain"
+        !name_string[3] := "Release"
+
+    make_persistent($attack_slider)
+    make_persistent($decay_slider)
+    make_persistent($sustain_slider)
+    make_persistent($release_slider)
+
+    $i := 0
+    while($i<$num_controls)
+        %control_id[$i] := get_ui_id($attack_slider)+$i
+        set_control_par(%control_id[$i],$CONTROL_PAR_PARENT_PANEL,get_ui_id($envelope_panel))
+        if($i<$num_controls/2)
+            set_control_par(%control_id[$i],$CONTROL_PAR_POS_X,$x_spacing*$i)
+            set_control_par(%control_id[$i],$CONTROL_PAR_AUTOMATION_ID,$i)
+            set_control_par_str(%control_id[$i],$CONTROL_PAR_AUTOMATION_NAME,!name_string[$i])
+        else
+            set_control_par(%control_id[$i],$CONTROL_PAR_POS_X,$x_spacing*($i-($num_controls/2)))
+            set_control_par(%control_id[$i],$CONTROL_PAR_POS_Y,$y_spacing)
+        end if
+        inc($i)
+    end while
+
+    move_control_px($envelope_panel,$x_spacing,$y_spacing)
+end on
+
+function set_envelope_labels
+    set_control_par_str(%control_id[$touched+($num_controls/2)],$CONTROL_PAR_TEXT,get_engine_par_disp(%engine_par[$touched],0,$slot_index,$generic_index) & !label_string[$touched])
+    set_control_par_str(%control_id[$touched],$CONTROL_PAR_LABEL,get_engine_par_disp(%engine_par[$touched],0,$slot_index,$generic_index) & !label_string[$touched])
+end function
+
+function set_envelope_controls
+    $i := $start_group
+    while($i<$end_group)
+        select($touched)
+            case 0
+
+                set_engine_par($ENGINE_PAR_FLEXENV_STAGE_TIME,int(~env_val),$i,$slot_index,0)
+            case 1
+                ~env_val := (real(get_control_par(%control_id[$touched],$CONTROL_PAR_VALUE)) * 0.000001)
+                ~env_val := ~env_val * ~env_val * ~env_val * 2.5e7
+                set_engine_par($ENGINE_PAR_FLEXENV_STAGE_TIME,int(~env_val),$i,$slot_index,1)
+            case 2
+                set_engine_par($ENGINE_PAR_FLEXENV_STAGE_LEVEL,get_control_par(%control_id[$touched],$CONTROL_PAR_VALUE),$i,$slot_index,1)
+            case 3
+                ~env_val := (real(get_control_par(%control_id[$touched],$CONTROL_PAR_VALUE)) * 0.000001)
+                ~env_val := ~env_val * ~env_val * ~env_val * 2.5e7
+                set_engine_par($ENGINE_PAR_FLEXENV_STAGE_TIME,int(~env_val),$i,$slot_index,2)
+        end select
+        inc($i)
+    end while
+    call set_envelope_labels
+end function
+
+on persistence_changed
+    $touched := 0
+    while ($touched<$num_controls/2)
+        call set_envelope_labels
+        inc($touched)
+    end while
+end on
+
+on ui_control($attack_slider)
+    $touched := 0
+    call set_envelope_controls
+end on
+
+on ui_control($decay_slider)
+    $touched := 1
+    call set_envelope_controls
+end on
+
+on ui_control($sustain_slider)
+    $touched := 2
+    call set_envelope_controls
+end on
+
+on ui_control($release_slider)
+    $touched := 3
+    call set_envelope_controls
+end on

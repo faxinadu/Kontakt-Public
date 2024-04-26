@@ -1,0 +1,450 @@
+{***********************************************
+Sample Tester
+Author: Faxi Nadu
+Written by: Yaron Eshkar
+Modified: March 28, 2024
+*************************************************}
+
+on init
+    message("")
+    set_script_title("OS Sample Tester")
+    make_perfview
+    set_ui_height_px(240)
+
+    declare const $gui_spacing_x := 90
+    declare const $gui_offset_x := 20
+
+    declare @sample_path
+        make_persistent(@sample_path)
+
+    declare ~mir_result
+    declare $sample_type
+
+    declare $i
+
+    set_num_user_zones(1)
+    set_zone_par(%NI_USER_ZONE_IDS[0],$ZONE_PAR_HIGH_VELO,128)
+
+    declare !drum_types[10]
+        !drum_types[0] := "Kick"
+        !drum_types[1] := "Snare"
+        !drum_types[2] := "C Hat"
+        !drum_types[3] := "O Hat"
+        !drum_types[4] := "Tom"
+        !drum_types[5] := "Cymbal"
+        !drum_types[6] := "Clap"
+        !drum_types[7] := "Shaker"
+        !drum_types[8] := "Drum"
+        !drum_types[9] := "Other"
+
+    declare !instument_types[12]
+        !instument_types[0] := "Bass"
+        !instument_types[1] := "Bowed"
+        !instument_types[2] := "Brass"
+        !instument_types[3] := "Flute"
+        !instument_types[4] := "Guitar"
+        !instument_types[5] := "Keyboard"
+        !instument_types[6] := "Mallet"
+        !instument_types[7] := "Organ"
+        !instument_types[8] := "Plucked"
+        !instument_types[9] := "Reed"
+        !instument_types[10] := "Synth"
+        !instument_types[11] := "Vocal"
+
+    declare !note[12]
+        !note[0] := "C"
+        !note[1] := "C#"
+        !note[2] := "D"
+        !note[3] := "D#"
+        !note[4] := "E"
+        !note[5] := "F"
+        !note[6] := "F#"
+        !note[7] := "G"
+        !note[8] := "G#"
+        !note[9] := "A"
+        !note[10] := "A#"
+        !note[11] := "B"
+    declare !note_name [128]
+    
+    $i := 0
+    while ($i<128)
+        !note_name[$i] := !note[$i mod 12] & (($i / 12) - 2)
+        inc($i)
+    end while
+
+    declare ui_label $instrument_name(1,1)
+        set_text($instrument_name,"Single Sample Drop")
+        set_control_par(get_ui_id($instrument_name),$CONTROL_PAR_WIDTH,595)
+        set_control_par(get_ui_id($instrument_name),$CONTROL_PAR_TEXT_ALIGNMENT,1)
+        
+    declare ui_panel $main_panel
+    declare ui_panel $amp_env_panel
+        set_control_par(get_ui_id($amp_env_panel),$CONTROL_PAR_PARENT_PANEL,get_ui_id($main_panel))
+    declare ui_panel $zone_panel
+        set_control_par(get_ui_id($zone_panel),$CONTROL_PAR_PARENT_PANEL,get_ui_id($main_panel))
+    declare ui_panel $wave_panel
+        set_control_par(get_ui_id($wave_panel),$CONTROL_PAR_PARENT_PANEL,get_ui_id($main_panel))
+    declare ui_panel $mir_panel
+        set_control_par(get_ui_id($mir_panel),$CONTROL_PAR_PARENT_PANEL,get_ui_id($main_panel))
+
+
+    declare ui_menu $hqi_mode
+        set_control_par(get_ui_id($hqi_mode),$CONTROL_PAR_PARENT_PANEL,get_ui_id($main_panel))
+        set_control_par(get_ui_id($hqi_mode),$CONTROL_PAR_WIDTH,145)
+        add_menu_item($hqi_mode,"Playback Quality: Standard",$NI_HQI_MODE_STANDARD)
+        add_menu_item($hqi_mode,"Playback Quality: High",$NI_HQI_MODE_HIGH)
+        add_menu_item($hqi_mode,"Playback Quality: Perfect",$NI_HQI_MODE_PERFECT)
+
+    declare ui_knob $amp_attack(100000,1000000,1)
+        set_control_par(get_ui_id($amp_attack),$CONTROL_PAR_PARENT_PANEL,get_ui_id($amp_env_panel))
+        set_text($amp_attack,"Attack")
+        set_knob_unit( $amp_attack,$KNOB_UNIT_MS)
+    declare ui_knob $amp_decay(100000,1000000,1)
+        set_control_par(get_ui_id($amp_decay),$CONTROL_PAR_PARENT_PANEL,get_ui_id($amp_env_panel))
+        set_text($amp_decay,"Decay")
+        set_knob_unit( $amp_decay,$KNOB_UNIT_MS)
+    declare ui_knob $amp_sustain(0,1000000,1)
+        set_control_par(get_ui_id($amp_sustain),$CONTROL_PAR_PARENT_PANEL,get_ui_id($amp_env_panel))
+        set_text($amp_sustain,"Sustain")
+        set_knob_unit( $amp_sustain,$KNOB_UNIT_DB)
+    declare ui_knob $amp_release(100000,1000000,1)
+        set_control_par(get_ui_id($amp_release),$CONTROL_PAR_PARENT_PANEL,get_ui_id($amp_env_panel))
+        set_text($amp_release,"Release")
+        set_knob_unit($amp_release,$KNOB_UNIT_MS)
+
+    declare ui_switch $zone_playback_mode
+        set_control_par(get_ui_id($zone_playback_mode),$CONTROL_PAR_PARENT_PANEL,get_ui_id($zone_panel))
+        set_control_par(get_ui_id($zone_playback_mode),$CONTROL_PAR_TEXT_ALIGNMENT,1)
+        set_text($zone_playback_mode,"Mode: Shot")
+    declare ui_switch $zone_root_mode
+        set_control_par(get_ui_id($zone_root_mode),$CONTROL_PAR_PARENT_PANEL,get_ui_id($zone_panel))
+        set_control_par(get_ui_id($zone_root_mode),$CONTROL_PAR_TEXT_ALIGNMENT,1)
+        set_text($zone_root_mode,"Root: Auto")
+    declare ui_knob $zone_low_key(0,127,1)
+        set_control_par(get_ui_id($zone_low_key),$CONTROL_PAR_PARENT_PANEL,get_ui_id($zone_panel))
+        set_text($zone_low_key,"Low Key")
+    declare ui_knob $zone_high_key(0,127,1)
+        set_control_par(get_ui_id($zone_high_key),$CONTROL_PAR_PARENT_PANEL,get_ui_id($zone_panel))
+        set_text($zone_high_key,"Hi Key")
+    declare ui_knob $zone_root_key(0,127,1)
+        set_control_par(get_ui_id($zone_root_key),$CONTROL_PAR_PARENT_PANEL,get_ui_id($zone_panel))
+        set_text($zone_root_key,"Root")
+    declare ui_switch $zone_fix_tune
+        set_control_par(get_ui_id($zone_fix_tune),$CONTROL_PAR_PARENT_PANEL,get_ui_id($zone_panel))
+        set_control_par(get_ui_id($zone_fix_tune),$CONTROL_PAR_TEXT_ALIGNMENT,1)
+        set_text($zone_fix_tune,"Fix Tune")
+    declare ui_switch $note_letters_numbers
+        set_control_par(get_ui_id($note_letters_numbers),$CONTROL_PAR_PARENT_PANEL,get_ui_id($zone_panel))
+        set_control_par(get_ui_id($note_letters_numbers),$CONTROL_PAR_TEXT_ALIGNMENT,1)
+        set_text($note_letters_numbers,"Letters")
+
+    declare ui_waveform $waveform(1,1)
+        set_control_par(get_ui_id($waveform),$CONTROL_PAR_PARENT_PANEL,get_ui_id($wave_panel))
+        attach_zone($waveform,%NI_USER_ZONE_IDS[0],0)
+        set_control_par(get_ui_id($waveform),$CONTROL_PAR_WIDTH,450)
+        set_control_par(get_ui_id($waveform),$CONTROL_PAR_HEIGHT,100)
+
+    declare ui_mouse_area $drop_area
+        set_control_par(get_ui_id($drop_area),$CONTROL_PAR_PARENT_PANEL,get_ui_id($wave_panel))
+        set_control_par(get_ui_id($drop_area),$CONTROL_PAR_WIDTH,450)
+        set_control_par(get_ui_id($drop_area),$CONTROL_PAR_HEIGHT,100)
+        set_control_par(get_ui_id($drop_area),$CONTROL_PAR_DND_ACCEPT_AUDIO,$NI_DND_ACCEPT_ONE)
+
+    declare ui_button $clear_sample
+        set_control_par(get_ui_id($clear_sample),$CONTROL_PAR_PARENT_PANEL,get_ui_id($wave_panel))
+        set_text($clear_sample,"X")
+        set_control_par(get_ui_id($clear_sample),$CONTROL_PAR_WIDTH,20)
+
+    declare ui_label $sample_name(1,1)
+        set_control_par(get_ui_id($sample_name),$CONTROL_PAR_PARENT_PANEL,get_ui_id($wave_panel))
+        set_control_par(get_ui_id($sample_name),$CONTROL_PAR_WIDTH,450)
+        set_text($sample_name,"^^^ Drop Sample ^^^")
+        set_control_par(get_ui_id($sample_name),$CONTROL_PAR_TEXT_ALIGNMENT,1)
+
+    declare ui_knob $filter_lp_cut(0,1000000,1)
+        set_control_par(get_ui_id($filter_lp_cut),$CONTROL_PAR_PARENT_PANEL,get_ui_id($amp_env_panel))
+        set_text($filter_lp_cut,"Cut")
+        set_knob_unit( $filter_lp_cut,$KNOB_UNIT_HZ)
+
+    declare ui_label $mir_title(1,2)
+        set_control_par(get_ui_id($mir_title),$CONTROL_PAR_PARENT_PANEL,get_ui_id($mir_panel))
+        set_control_par(get_ui_id($mir_title),$CONTROL_PAR_WIDTH,145)
+        set_control_par(get_ui_id($mir_title),$CONTROL_PAR_HEIGHT,160)
+
+    move_control_px($instrument_name,$gui_offset_x,0)
+
+    move_control_px($hqi_mode,450,0)
+
+    move_control_px($zone_playback_mode,0,0)
+    move_control_px($zone_root_mode,0,20)
+    move_control_px($zone_low_key,$gui_spacing_x,0)
+    move_control_px($zone_high_key,$gui_spacing_x*2,0)
+    move_control_px($zone_root_key,$gui_spacing_x*3,0)
+    move_control_px($zone_fix_tune,$gui_spacing_x*4,0)
+    move_control_px($note_letters_numbers,$gui_spacing_x*4,20)
+    move_control_px($zone_panel,0,0)
+    
+    move_control_px($amp_attack,0,0)
+    move_control_px($amp_decay,$gui_spacing_x,0)
+    move_control_px($amp_sustain,$gui_spacing_x*2,0)
+    move_control_px($amp_release,$gui_spacing_x*3,0)
+    move_control_px($filter_lp_cut,($gui_spacing_x*4),0)
+    move_control_px($amp_env_panel,0,160)
+
+    move_control_px($clear_sample,430,0)
+    move_control_px($sample_name,0,100)
+    move_control_px($wave_panel,0,40)
+
+    move_control_px($mir_title,0,0)
+
+    move_control_px($mir_panel,450,40)
+
+    move_control_px($main_panel,$gui_offset_x,20)
+
+    make_persistent($hqi_mode)
+
+    make_persistent($amp_attack)
+    make_persistent($amp_decay)
+    make_persistent($amp_sustain)
+    make_persistent($amp_release)
+
+    make_persistent($filter_lp_cut)
+
+    make_persistent($zone_playback_mode)
+    make_persistent($zone_root_mode)
+    make_persistent($zone_low_key)
+    make_persistent($zone_high_key)
+    make_persistent($zone_root_key)
+    make_persistent($zone_fix_tune)
+    make_persistent($note_letters_numbers)
+
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_FILTER,-1,0,1)
+    set_engine_par($ENGINE_PAR_EFFECT_SUBTYPE,$FILTER_TYPE_SV_LP6,-1,0,1)
+
+    set_control_par(get_ui_id($amp_sustain),$CONTROL_PAR_DEFAULT_VALUE,1000000)
+    set_control_par(get_ui_id($zone_root_key),$CONTROL_PAR_DEFAULT_VALUE,60)
+
+end on
+
+function set_hqi_mode
+    set_engine_par($ENGINE_PAR_HQI_MODE,get_menu_item_value(get_ui_id($hqi_mode),$hqi_mode),0,-1,-1)
+end function
+
+function set_zone_mir_results
+    set_text($mir_title,"")
+    add_text_line($mir_title,"MIR Info")
+    add_text_line($mir_title, "")
+    wait_async(detect_sample_type(%NI_USER_ZONE_IDS[0],$sample_type))
+    if($sample_type = $NI_DETECT_SAMPLE_TYPE_DRUM)
+        wait_async(detect_drum_type(%NI_USER_ZONE_IDS[0],$sample_type))
+        add_text_line($mir_title, "Type: " & !drum_types[$sample_type])    
+	else
+        wait_async(detect_instrument_type(%NI_USER_ZONE_IDS[0],$sample_type))
+	    add_text_line($mir_title, "Type: " & !instument_types[$sample_type])
+	end if    
+    wait_async(detect_pitch(%NI_USER_ZONE_IDS[0],~mir_result))
+        add_text_line($mir_title,"Pitch: " & ~mir_result)
+        add_text_line($mir_title,"Pitch Fix: " & !note_name[real_to_int(round(~mir_result))] & " " & real_to_int(round(~mir_result)))
+        add_text_line($mir_title,"Tune Fix: " & int(round(100.0 * (round(~mir_result) - ~mir_result))) & " ct")
+    wait_async(detect_peak(%NI_USER_ZONE_IDS[0],~mir_result))
+        add_text_line($mir_title,"Peak: " & ~mir_result)    
+    wait_async(detect_rms(%NI_USER_ZONE_IDS[0],~mir_result))
+        add_text_line($mir_title,"RMS: " & ~mir_result)    
+    wait_async(detect_loudness(%NI_USER_ZONE_IDS[0],~mir_result))
+        add_text_line($mir_title,"Loudness: " & ~mir_result)    
+end function
+
+function set_zone_low_key
+    wait_async(set_zone_par(%NI_USER_ZONE_IDS[0],$ZONE_PAR_LOW_KEY,$zone_low_key))
+end function
+
+function set_zone_high_key
+    wait_async(set_zone_par(%NI_USER_ZONE_IDS[0],$ZONE_PAR_HIGH_KEY,$zone_high_key))
+end function
+
+function set_zone_low_high_key
+    if ($zone_low_key > $zone_high_key)
+        $zone_low_key := $zone_high_key
+    end if
+end function
+
+function set_zone_playback_mode
+    if($zone_playback_mode=1)
+        set_text($zone_playback_mode,"Mode: Shot")
+    else
+        set_text($zone_playback_mode,"Mode: Loop")
+    end if
+    set_loop_par(%NI_USER_ZONE_IDS[0],0,1-$LOOP_PAR_MODE,$zone_playback_mode)
+end function
+
+function set_zone_root_key
+    if ($zone_root_mode = 0)
+        set_control_par( get_ui_id($zone_root_key),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+        wait_async(detect_pitch(%NI_USER_ZONE_IDS[0],~mir_result))
+        wait_async(set_zone_par(%NI_USER_ZONE_IDS[0],$ZONE_PAR_ROOT_KEY,real_to_int(round(~mir_result))))
+        set_text($zone_root_mode,"Root: Auto")
+    else
+        set_control_par( get_ui_id($zone_root_key),$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
+        wait_async(set_zone_par(%NI_USER_ZONE_IDS[0],$ZONE_PAR_ROOT_KEY,$zone_root_key))
+        set_text($zone_root_mode,"Root: Manual")
+    end if
+end function
+
+function set_zone_tune
+    if($zone_fix_tune=0)
+        wait_async(set_zone_par(%NI_USER_ZONE_IDS[0],$ZONE_PAR_TUNE,0))
+    else
+        wait_async(detect_pitch(%NI_USER_ZONE_IDS[0],~mir_result))
+        wait_async(set_zone_par(%NI_USER_ZONE_IDS[0],$ZONE_PAR_TUNE,int(round(100.0 * (round(~mir_result) - ~mir_result))) ))
+    end if
+end function
+
+function set_zone_low_key_label
+    if($note_letters_numbers=0)
+        set_control_par_str(get_ui_id($zone_low_key),$CONTROL_PAR_LABEL,!note_name[$zone_low_key])
+    else
+        set_control_par_str(get_ui_id($zone_low_key),$CONTROL_PAR_LABEL,$zone_low_key)
+    end if
+end function
+
+function set_zone_high_key_label
+    if($note_letters_numbers=0)
+        set_control_par_str(get_ui_id($zone_high_key),$CONTROL_PAR_LABEL,!note_name[$zone_high_key])
+    else
+        set_control_par_str(get_ui_id($zone_high_key),$CONTROL_PAR_LABEL,$zone_high_key)
+    end if
+end function
+
+function set_zone_root_key_label
+    if($note_letters_numbers=0)
+        set_control_par_str(get_ui_id($zone_root_key),$CONTROL_PAR_LABEL,!note_name[$zone_root_key])
+    else
+        set_control_par_str(get_ui_id($zone_root_key),$CONTROL_PAR_LABEL,$zone_root_key)
+    end if
+end function
+
+function set_note_letters_numbers
+    if($note_letters_numbers=0)
+        set_text($note_letters_numbers,"Names")
+    else
+        set_text($note_letters_numbers,"Numbers")
+    end if
+    call set_zone_low_key_label
+    call set_zone_high_key_label
+    call set_zone_root_key_label
+end function
+
+function set_zone_info
+    if(is_zone_empty(%NI_USER_ZONE_IDS[0]) = 1)
+        set_text($sample_name,"^^^ Drop Sample ^^^")
+        set_control_par(get_ui_id($clear_sample),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
+    else
+        set_control_par_str(get_ui_id($sample_name),$CONTROL_PAR_TEXT,"Sample: " & get_sample(%NI_USER_ZONE_IDS[0],$NI_FILE_NAME))                 
+        set_control_par(get_ui_id($clear_sample),$CONTROL_PAR_HIDE,$HIDE_PART_BG)
+    end if
+end function
+
+function set_clear_sample
+    wait_async(set_sample(%NI_USER_ZONE_IDS[0],""))
+end function
+
+on persistence_changed
+    set_control_par_str(get_ui_id($amp_attack),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_ATTACK,0,0,-1))
+    set_control_par_str(get_ui_id($amp_decay),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_DECAY,0,0,-1))
+    set_control_par_str(get_ui_id($amp_sustain),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_SUSTAIN,0,0,-1))
+    set_control_par_str(get_ui_id($amp_release),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_RELEASE,0,0,-1))
+    set_control_par_str(get_ui_id($filter_lp_cut),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_CUTOFF,-1,0,1))
+
+    call set_zone_root_key
+    call set_zone_tune
+    call set_zone_playback_mode
+    call set_zone_mir_results
+    call set_note_letters_numbers
+    call set_zone_info
+    call set_hqi_mode
+end on
+
+on ui_control($amp_attack)
+    set_engine_par($ENGINE_PAR_ATTACK,$amp_attack,0,0,-1)
+    set_control_par_str(get_ui_id($amp_attack),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_ATTACK,0,0,-1))
+end on
+
+on ui_control($amp_decay)
+    set_engine_par($ENGINE_PAR_DECAY,$amp_decay,0,0,-1)
+    set_control_par_str(get_ui_id($amp_decay),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_DECAY,0,0,-1))
+end on
+
+on ui_control($amp_sustain)
+    set_engine_par($ENGINE_PAR_SUSTAIN,$amp_sustain,0,0,-1)
+    set_control_par_str(get_ui_id($amp_sustain),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_SUSTAIN,0,0,-1))
+end on
+
+on ui_control($amp_release)
+    set_engine_par($ENGINE_PAR_RELEASE,$amp_release,0,0,-1)
+    set_control_par_str(get_ui_id($amp_release),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_RELEASE,0,0,-1))
+end on
+
+on ui_control($filter_lp_cut)
+    set_engine_par($ENGINE_PAR_CUTOFF,$filter_lp_cut,-1,0,1)
+    set_control_par_str(get_ui_id($filter_lp_cut),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_CUTOFF,-1,0,1))
+end on
+
+on ui_control($note_letters_numbers)
+    call set_note_letters_numbers
+end on
+
+on ui_control($zone_playback_mode)
+    call set_zone_playback_mode
+end on
+
+on ui_control($zone_low_key)
+    call set_zone_low_high_key
+    call set_zone_low_key
+    call set_zone_low_key_label
+end on
+
+on ui_control($zone_high_key)
+    call set_zone_low_high_key
+    call set_zone_high_key
+    call set_zone_high_key_label
+end on
+
+on ui_control($zone_root_key)
+    call set_zone_root_key
+    call set_zone_root_key_label
+end on
+
+on ui_control($zone_root_mode)
+    call set_zone_root_key
+end on
+
+on ui_control($zone_fix_tune)
+    call set_zone_tune
+end on
+
+on ui_control($hqi_mode)
+    call set_hqi_mode
+end on
+
+on ui_control ($clear_sample)
+    if ($clear_sample = 1)
+        call set_clear_sample
+        call set_zone_info
+        set_text($mir_title,"")
+        add_text_line($mir_title,"MIR Info")
+    end if
+    $clear_sample := 0
+end on
+
+on ui_control($drop_area)
+    if ($NI_MOUSE_EVENT_TYPE = $NI_MOUSE_EVENT_TYPE_DROP)
+        @sample_path := !NI_DND_ITEMS_AUDIO[0]
+        wait_async(set_sample(%NI_USER_ZONE_IDS[0],@sample_path))
+    end if
+    call set_zone_mir_results
+    call set_zone_root_key
+    call set_zone_tune
+    call set_zone_playback_mode
+    call set_zone_info
+end on
+

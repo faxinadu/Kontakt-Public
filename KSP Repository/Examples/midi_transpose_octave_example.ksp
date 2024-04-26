@@ -1,0 +1,36 @@
+{***********************************************
+Midi Transpose Octave
+Author: Native Instruments
+Written by: Nicki Marinic
+Created: July 30, 2009
+Modified: April 11, 2024
+*************************************************}
+
+on init
+	set_script_title("Transpose Octave")
+	set_ui_height(2)
+	message("")
+    declare const $transpose_octave_min := -3
+    declare const $transpose_octave_max := 3
+	declare polyphonic $transposition {transposition interval in Semitones}
+	declare polyphonic $transposed_note {note number of transposed note}
+	declare ui_knob $transpose_octave($transpose_octave_min,$transpose_octave_max,1)
+	    set_knob_defval($transpose_octave,0)
+	    move_control($transpose_octave,4,2)
+        set_text($transpose_octave,"Octave")
+	$transpose_octave := 0
+	make_persistent($transpose_octave)
+end on
+
+on note
+	ignore_event($EVENT_ID)
+	$transposition := ($transpose_octave * 12) {delivers the actual transposition value}
+	$transposed_note := $EVENT_NOTE + $transposition {note number of transposed note}
+	if ($transposed_note < 0)
+		$transposed_note := 0
+	end if
+	if ($transposed_note > 127)
+		$transposed_note := 127
+	end if
+	play_note($transposed_note,$EVENT_VELOCITY,0,-1)
+end on

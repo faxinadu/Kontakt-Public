@@ -8,7 +8,7 @@ local kUser = require("Modules.KUser")
 Kontakt.colored_output = kUser.terminal_colored_output
 
 local current_path = kUser.framework_samples_path .. "/convert/"
-local crossfade_percent = "1"
+local crossfade_percent = "25"
 local sample_paths_table = {}
 
 sample_paths_table = kUtil.paths_to_table(current_path,".wav")

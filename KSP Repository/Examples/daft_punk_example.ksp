@@ -1,0 +1,74 @@
+{***********************************************
+Daft Punk Example
+Author: Faxi Nadu
+Written by: Yaron Eshkar
+Modified: April 6, 2024
+*************************************************}
+
+on init
+    make_perfview
+    declare ui_menu $filter_types
+        add_menu_item($filter_types,"LP2",0)
+        add_menu_item($filter_types,"PRO53",1)
+        add_menu_item($filter_types,"Daft",2)
+
+    declare ui_menu $sources
+        add_menu_item($sources,"Trash",0)
+        add_menu_item($sources,"Death",1)
+        add_menu_item($sources,"Punk",2)
+
+    declare $note
+    declare const $daft_timer := 250000
+end on
+
+function check_daft_punk
+    if(($sources=2) and ($filter_types=2))
+        $note := play_note( 64, 127, 0, 100000 )
+        wait( $daft_timer)
+        $note := play_note( 62, 127, 0, 100000 )
+        wait( $daft_timer )
+        $note := play_note( 59, 127, 0, 100000 )
+        wait( $daft_timer )
+        $note := play_note( 57, 127, 0, 100000 )
+        wait( $daft_timer )
+        wait( $daft_timer )
+        $note := play_note( 57, 127, 0, 100000 )
+        wait( $daft_timer )
+        wait( $daft_timer )
+        $note := play_note( 57, 127, 0, 100000 )
+        wait( $daft_timer - ($daft_timer /2) )
+        $note := play_note( 55, 127, 0, 100000 )
+    end if
+end function
+
+function set_filter_type
+    select($filter_types)
+        case 0
+        { set engine par bla bla }
+        case 1
+        { set engine par bla bla }
+        case 2
+        { set engine par bla bla }
+        call check_daft_punk
+    end select
+end function
+
+function set_source
+    select($sources)
+        case 0
+           { set_sample bla bla }
+        case 1
+            { set_sample bla bla }
+        case 2
+            { set_sample bla bla }
+        call check_daft_punk
+    end select
+end function
+
+on ui_control($filter_types)
+    call set_filter_type
+end on
+
+on ui_control($sources)
+    call set_source
+end on

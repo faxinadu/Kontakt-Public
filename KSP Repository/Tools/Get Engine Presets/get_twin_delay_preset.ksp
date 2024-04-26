@@ -1,0 +1,78 @@
+{***********************************************
+Get Twin Delay Insert Effect Preset
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: March 1, 2024
+*************************************************}
+
+on init
+    make_perfview
+    declare const $parameter_value_count := 15
+    declare $load_id := -1
+    declare $save_id := -1
+    declare ui_switch $get_params_switch
+        set_text($get_params_switch,"Get Params")
+    declare %parameter_values[$parameter_value_count]
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_TWINDELAY,-1,0,1)
+    declare ui_switch $set_params_switch
+        set_text($set_params_switch,"Set Params")
+end on
+
+function get_parameters
+    %parameter_values[0] := get_engine_par($ENGINE_PAR_EFFECT_TYPE,-1,0,1)
+    %parameter_values[1] := get_engine_par($ENGINE_PAR_TDL_PREDELAY_L,-1,0,1)
+    %parameter_values[2] := get_engine_par($ENGINE_PAR_TDL_PREDELAY_L_UNIT,-1,0,1)
+    %parameter_values[3] := get_engine_par($ENGINE_PAR_TDL_TIME_L,-1,0,1)
+    %parameter_values[4] := get_engine_par($ENGINE_PAR_TDL_TIME_L_UNIT,-1,0,1)
+    %parameter_values[5] := get_engine_par($ENGINE_PAR_TDL_FEEDBACK_L,-1,0,1)
+    %parameter_values[6] := get_engine_par($ENGINE_PAR_TDL_LEVEL_L,-1,0,1)
+    %parameter_values[7] := get_engine_par($ENGINE_PAR_TDL_PREDELAY_R,-1,0,1)
+    %parameter_values[8] := get_engine_par($ENGINE_PAR_TDL_PREDELAY_R_UNIT,-1,0,1)
+    %parameter_values[9] := get_engine_par($ENGINE_PAR_TDL_TIME_R,-1,0,1)
+    %parameter_values[10] := get_engine_par($ENGINE_PAR_TDL_TIME_R_UNIT,-1,0,1)
+    %parameter_values[11] := get_engine_par($ENGINE_PAR_TDL_FEEDBACK_R,-1,0,1)
+    %parameter_values[12] := get_engine_par($ENGINE_PAR_TDL_LEVEL_R,-1,0,1)
+    %parameter_values[13] := get_engine_par($ENGINE_PAR_TDL_CROSS_FEEDBACK,-1,0,1)
+    %parameter_values[14] := get_engine_par($ENGINE_PAR_TDL_WIDTH,-1,0,1)
+end function
+
+function set_parameters
+    wait_async(set_engine_par($ENGINE_PAR_EFFECT_TYPE,%parameter_values[0],-1,0,1))
+    set_engine_par($ENGINE_PAR_TDL_PREDELAY_L,%parameter_values[1],-1,0,1)
+    set_engine_par($ENGINE_PAR_TDL_PREDELAY_L_UNIT,%parameter_values[2],-1,0,1)
+    set_engine_par($ENGINE_PAR_TDL_TIME_L,%parameter_values[3],-1,0,1)
+    set_engine_par($ENGINE_PAR_TDL_TIME_L_UNIT,%parameter_values[4],-1,0,1)
+    set_engine_par($ENGINE_PAR_TDL_FEEDBACK_L,%parameter_values[5],-1,0,1)
+    set_engine_par($ENGINE_PAR_TDL_LEVEL_L,%parameter_values[6],-1,0,1)
+    set_engine_par($ENGINE_PAR_TDL_PREDELAY_R,%parameter_values[7],-1,0,1)
+    set_engine_par($ENGINE_PAR_TDL_PREDELAY_R_UNIT,%parameter_values[8],-1,0,1)
+    set_engine_par($ENGINE_PAR_TDL_TIME_R,%parameter_values[9],-1,0,1)
+    set_engine_par($ENGINE_PAR_TDL_TIME_R_UNIT,%parameter_values[10],-1,0,1)
+    set_engine_par($ENGINE_PAR_TDL_FEEDBACK_R,%parameter_values[11],-1,0,1)
+    set_engine_par($ENGINE_PAR_TDL_LEVEL_R,%parameter_values[12],-1,0,1)
+    set_engine_par($ENGINE_PAR_TDL_CROSS_FEEDBACK,%parameter_values[13],-1,0,1)
+    set_engine_par($ENGINE_PAR_TDL_WIDTH,%parameter_values[14],-1,0,1)
+end function
+
+on ui_control($get_params_switch)
+    call get_parameters
+    $save_id := save_array(%parameter_values,0)
+end on
+
+on ui_control($set_params_switch)
+    $load_id := load_array(%parameter_values,0)
+end on
+
+on async_complete
+    if ($NI_ASYNC_ID = $load_id)
+        $load_id := -1
+        $set_params_switch := 0
+        if ($NI_ASYNC_EXIT_STATUS = 1)
+            call set_parameters
+        end if
+    end if
+    if ($NI_ASYNC_ID = $save_id)
+        $save_id := -1
+        $get_params_switch := 0
+    end if
+end on

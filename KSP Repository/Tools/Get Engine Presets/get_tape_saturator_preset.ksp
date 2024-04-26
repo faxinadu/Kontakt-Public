@@ -1,0 +1,58 @@
+{***********************************************
+Get Tape Saturator Insert Effect Preset
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: April 18, 2024
+*************************************************}
+
+on init
+    make_perfview
+    declare const $parameter_value_count := 5
+    declare $load_id := -1
+    declare $save_id := -1
+    declare ui_switch $get_params_switch
+        set_text($get_params_switch,"Get Params")
+    declare %parameter_values[$parameter_value_count]
+    set_engine_par($ENGINE_PAR_EFFECT_TYPE,$EFFECT_TYPE_TAPE_SAT,-1,0,1)
+    declare ui_switch $set_params_switch
+        set_text($set_params_switch,"Set Params")
+end on
+
+function get_parameters
+    %parameter_values[0] := get_engine_par($ENGINE_PAR_EFFECT_TYPE,-1,0,1)
+    %parameter_values[1] := get_engine_par($ENGINE_PAR_TP_GAIN,-1,0,1)
+    %parameter_values[2] := get_engine_par($ENGINE_PAR_TP_WARMTH,-1,0,1)
+    %parameter_values[3] := get_engine_par($ENGINE_PAR_TP_HF_ROLLOFF,-1,0,1)
+    %parameter_values[4] := get_engine_par($ENGINE_PAR_TP_QUALITY,-1,0,1)
+end function
+
+function set_parameters
+    wait_async(set_engine_par($ENGINE_PAR_EFFECT_TYPE,%parameter_values[0],-1,0,1))
+    set_engine_par($ENGINE_PAR_TP_GAIN,%parameter_values[1],-1,0,1)
+    set_engine_par($ENGINE_PAR_TP_WARMTH,%parameter_values[2],-1,0,1)
+    set_engine_par($ENGINE_PAR_TP_HF_ROLLOFF,%parameter_values[3],-1,0,1)
+    set_engine_par($ENGINE_PAR_TP_QUALITY,%parameter_values[4],-1,0,1)
+end function
+
+on ui_control($get_params_switch)
+    call get_parameters
+    $save_id := save_array(%parameter_values,0)
+end on
+
+on ui_control($set_params_switch)
+    $load_id := load_array(%parameter_values,0)
+end on
+
+on async_complete
+    if ($NI_ASYNC_ID = $load_id)
+        $load_id := -1
+        $set_params_switch := 0
+        if ($NI_ASYNC_EXIT_STATUS = 1)
+            call set_parameters
+        end if
+    end if
+    if ($NI_ASYNC_ID = $save_id)
+        $save_id := -1
+        $get_params_switch := 0
+    end if
+end on

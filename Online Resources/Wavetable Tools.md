@@ -12,6 +12,10 @@ Harvey Ormston Osc Gen (Python)
 
 https://github.com/harveyormston/osc_gen
 
+OK WT (Python / Command line)
+
+https://github.com/drzhnn/okwt
+
 Novation Wavetable Editor
 
 https://novationmusic.com/en/news/wavetable-editor-peak-summit

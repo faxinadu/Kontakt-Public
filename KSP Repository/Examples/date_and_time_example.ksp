@@ -1,0 +1,39 @@
+{***********************************************
+Date And Time Example
+Author: Native Instruments
+Written by: Mario Kruselj
+Modified: March 26, 2024
+*************************************************}
+
+on init
+    make_perfview
+    set_listener($NI_SIGNAL_TIMER_MS, 1000000)
+
+    declare ui_label $L (2, 1)
+    declare @h
+    declare @m
+    declare @s
+end on
+
+on listener
+    if ($NI_TIME_HOUR < 10)
+        @h := "0" & $NI_TIME_HOUR
+    else
+        @h := $NI_TIME_HOUR
+    end if
+
+    if ($NI_TIME_MINUTE < 10)
+        @m := "0" & $NI_TIME_MINUTE
+    else
+        @m := $NI_TIME_MINUTE
+    end if
+
+    if ($NI_TIME_SECOND < 10)
+        @s := "0" & $NI_TIME_SECOND
+    else
+        @s := $NI_TIME_SECOND
+    end if
+
+    set_text($L, $NI_DATE_YEAR & "-" & $NI_DATE_MONTH & "-" & $NI_DATE_DAY & ", " & ...
+                 @h & ":" & @m & ":" & @s)
+end on

@@ -1,0 +1,33 @@
+{***********************************************
+Slider Alias Example
+Author: Native Instruments
+Written by: Yaron Eshkar
+Modified: March 4, 2024
+*************************************************}
+
+on init
+    declare ui_menu $menu
+        add_menu_item($menu,"Hello",0)
+        add_menu_item($menu,"World",1)
+        add_menu_item($menu,"Wassup",2)
+        add_menu_item($menu,"Today",3)
+
+    declare ui_slider $slider(0,3)
+        set_control_par(get_ui_id($slider),$CONTROL_PAR_AUTOMATION_ID,0)
+        set_control_par_str( get_ui_id($slider),$CONTROL_PAR_AUTOMATION_NAME,"Alias")
+
+    set_nks_nav_par(0,0,0)
+end on
+
+on ui_control($menu)
+    $slider := $menu
+    set_control_par_str(get_ui_id($slider),$CONTROL_PAR_LABEL,get_menu_item_str(get_ui_id($menu),$menu))
+end on
+
+on ui_control($slider)
+    if($slider#$menu)
+        $menu := $slider
+    end if
+    set_control_par_str(get_ui_id($slider),$CONTROL_PAR_LABEL,get_menu_item_str(get_ui_id($menu),$menu))
+end on
+

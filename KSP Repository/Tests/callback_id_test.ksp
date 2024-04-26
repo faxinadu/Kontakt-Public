@@ -1,0 +1,15 @@
+{***********************************************
+Callback ID Test
+Author: Faxi Nadu / Ocean Swift
+Written by: Yaron Eshkar
+Modified: April 18, 2024
+*************************************************}
+
+on init
+    declare ui_slider $slider( 0, 1000000 )
+    declare ui_label $label( 1, 1 )
+end on
+
+on ui_control($slider)
+    set_text($label,$NI_CALLBACK_ID)
+end on
