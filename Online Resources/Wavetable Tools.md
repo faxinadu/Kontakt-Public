@@ -41,6 +41,7 @@ Plaits Editor
 https://pichenettes.github.io/plaits-editor/wavetable.html
 
 Hardcore / Softcore single cycles
+
 https://www.elektronauts.com/t/hard-softcore-single-cycle-waveform-tools-for-digitakt-et-al/98213
 
 Quilcom Wavemaker 4
@@ -48,4 +49,13 @@ Quilcom Wavemaker 4
 http://flowstoners.com/quilcom
 
 Kurumi-X single cycles
+
 https://www.smwcentral.net/?p=viewthread&t=125057
+
+Phaseplant wavetable editor built in
+
+https://kilohearts.com/products/phase_plant
+
+Vital wavetable editor built in
+
+https://vital.audio/
