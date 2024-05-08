@@ -13,7 +13,7 @@ local old_frame_size = "256"
 local new_frame_size = "2048"
 local sample_paths_table = {}
 
-sample_paths_table = kUtil.paths_to_table(current_path,".WAV")
+sample_paths_table = kUtil.paths_to_table(current_path,".wav")
 table.sort(sample_paths_table)
 
 for index,file in pairs(sample_paths_table) do
