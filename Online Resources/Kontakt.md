@@ -9,7 +9,12 @@ Native Instruments Kontakt scripting forum:
 
 https://www.native-instruments.com/forum/forums/scripting-workshop.205/
 
+Yaron Eshkar / Faxi Nadu Kontakt Scripting Course:
+
+https://youtube.com/playlist?list=PLlcfBjDN_ijt0W5B2q7JJyX94KlO3FQoi&si=YAgrCzEcAjsx5wDY
+
 Discord:
+
 https://discord.gg/rTpCcpg
 
 VI Control Kontakt scripting forum:
