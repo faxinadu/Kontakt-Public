@@ -409,6 +409,18 @@ end
 -- @treturn int returns rounded integer.
 function KUtil.round_num(float_num) return math.floor(float_num + 0.5) end
 
+--- unbiased banker’s rounding (ties to even)
+-- @tparam float float_num the float number to round.
+-- @treturn int returns rounded integer.
+function KUtil.round_even(float_num)
+  local i = math.floor(float_num)
+  local f = float_num - i
+  if f > 0.5 then return i + 1 end
+  if f < 0.5 then return i end
+  -- exactly at .5: tie to even
+  return (i % 2 == 0) and i or i + 1
+end
+
 --- Scale a value from an old range to a new range.
 -- @tparam old_val number the value to be scaled.
 -- @tparam old_min number the old minimum range of the value.
