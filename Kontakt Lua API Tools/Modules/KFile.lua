@@ -78,6 +78,44 @@ function KFile.copy_file(source,destination)
     return true
 end
 
+--- Moves a file to a new location.
+-- Creates the destination directory if it does not exist.
+-- @tparam string source The full path of the file to move.
+-- @tparam string destination The full destination path (directory or file).
+-- @treturn bool
+function KFile.move_file(source, destination)
+    -- 1. Get the destination directory from the full destination path.
+    -- This matches everything up to the last file separator (\ or /).
+    local dest_dir = destination:match("(.*[/\\])")
+
+    -- 2. If a directory path was found, create it.
+    if dest_dir then
+        local create_dir_cmd
+        if KFile.get_os() then -- Windows
+            -- On Windows, 'if not exist' prevents an error if the directory already exists.
+            -- The trailing \\ is needed for 'exist' to correctly identify a directory.
+            create_dir_cmd = string.format('if not exist "%s\\" mkdir "%s"', dest_dir, dest_dir)
+        else -- Linux/macOS
+            -- 'mkdir -p' creates parent directories as needed and doesn't error if it exists.
+            create_dir_cmd = string.format('mkdir -p "%s"', dest_dir)
+        end
+        KFile.run_shell_command(create_dir_cmd, false)
+    end
+
+    -- 3. Construct the appropriate move command for the OS.
+    local move_cmd
+    if KFile.get_os() then -- Windows
+        -- Using 'move'. The /Y suppresses prompting to overwrite an existing file.
+        move_cmd = string.format('move /Y "%s" "%s"', source, destination)
+    else -- Linux/macOS
+        move_cmd = string.format('mv "%s" "%s"', source, destination)
+    end
+
+    -- 4. Execute the command and return true.
+    KFile.run_shell_command(move_cmd, false)
+    return true
+end
+
 --- Create a directory.
 -- Creates a directory with the specified path name.
 -- @tparam string directory the directory path to create.
