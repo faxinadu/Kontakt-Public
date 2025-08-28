@@ -2,14 +2,14 @@
 Sample Tester
 Author: Faxi Nadu
 Written by: Yaron Eshkar
-Modified: March 28, 2024
+Modified: August 28, 2025
 *************************************************}
 
 on init
     message("")
     set_script_title("OS Sample Tester")
     make_perfview
-    set_ui_height_px(240)
+    set_ui_height_px(250)
 
     declare const $gui_spacing_x := 90
     declare const $gui_offset_x := 20
@@ -129,6 +129,10 @@ on init
     declare ui_knob $zone_root_key(0,127,1)
         set_control_par(get_ui_id($zone_root_key),$CONTROL_PAR_PARENT_PANEL,get_ui_id($zone_panel))
         set_text($zone_root_key,"Root")
+    declare ui_knob $root_octave_offset(-3,3,1)
+        set_control_par(get_ui_id($root_octave_offset),$CONTROL_PAR_PARENT_PANEL,get_ui_id($zone_panel))
+        set_control_par(get_ui_id($root_octave_offset),$CONTROL_PAR_DEFAULT_VALUE,0)
+        set_text($root_octave_offset,"Octave")
     declare ui_switch $zone_fix_tune
         set_control_par(get_ui_id($zone_fix_tune),$CONTROL_PAR_PARENT_PANEL,get_ui_id($zone_panel))
         set_control_par(get_ui_id($zone_fix_tune),$CONTROL_PAR_TEXT_ALIGNMENT,1)
@@ -152,6 +156,7 @@ on init
 
     declare ui_button $clear_sample
         set_control_par(get_ui_id($clear_sample),$CONTROL_PAR_PARENT_PANEL,get_ui_id($wave_panel))
+        set_control_par(get_ui_id($clear_sample),$CONTROL_PAR_HIDE,$HIDE_PART_BG)
         set_text($clear_sample,"X")
         set_control_par(get_ui_id($clear_sample),$CONTROL_PAR_WIDTH,20)
 
@@ -171,6 +176,30 @@ on init
         set_control_par(get_ui_id($mir_title),$CONTROL_PAR_WIDTH,145)
         set_control_par(get_ui_id($mir_title),$CONTROL_PAR_HEIGHT,160)
 
+    declare ui_switch $perc_env
+        set_control_par(get_ui_id($perc_env),$CONTROL_PAR_PARENT_PANEL,get_ui_id($amp_env_panel))
+        set_control_par(get_ui_id($perc_env),$CONTROL_PAR_TEXT_ALIGNMENT,1)
+        set_text($perc_env,"Perc")
+        move_control_px($perc_env,0,40)
+
+    declare ui_switch $bell_env
+        set_control_par(get_ui_id($bell_env),$CONTROL_PAR_PARENT_PANEL,get_ui_id($amp_env_panel))
+        set_control_par(get_ui_id($bell_env),$CONTROL_PAR_TEXT_ALIGNMENT,1)
+        set_text($bell_env,"Bell")
+        move_control_px($bell_env,$gui_spacing_x,40)
+
+    declare ui_switch $lead_env
+        set_control_par(get_ui_id($lead_env),$CONTROL_PAR_PARENT_PANEL,get_ui_id($amp_env_panel))
+        set_control_par(get_ui_id($lead_env),$CONTROL_PAR_TEXT_ALIGNMENT,1)
+        set_text($lead_env,"Lead")
+        move_control_px($lead_env,$gui_spacing_x*2,40)
+
+    declare ui_switch $pad_env
+        set_control_par(get_ui_id($pad_env),$CONTROL_PAR_PARENT_PANEL,get_ui_id($amp_env_panel))
+        set_control_par(get_ui_id($pad_env),$CONTROL_PAR_TEXT_ALIGNMENT,1)
+        set_text($pad_env,"Pad")
+        move_control_px($pad_env,$gui_spacing_x*3,40)
+
     move_control_px($instrument_name,$gui_offset_x,0)
 
     move_control_px($hqi_mode,450,0)
@@ -179,7 +208,10 @@ on init
     move_control_px($zone_root_mode,0,20)
     move_control_px($zone_low_key,$gui_spacing_x,0)
     move_control_px($zone_high_key,$gui_spacing_x*2,0)
+    
     move_control_px($zone_root_key,$gui_spacing_x*3,0)
+    move_control_px($root_octave_offset,$gui_spacing_x*3,0)
+
     move_control_px($zone_fix_tune,$gui_spacing_x*4,0)
     move_control_px($note_letters_numbers,$gui_spacing_x*4,20)
     move_control_px($zone_panel,0,0)
@@ -215,6 +247,7 @@ on init
     make_persistent($zone_low_key)
     make_persistent($zone_high_key)
     make_persistent($zone_root_key)
+    make_persistent($root_octave_offset)
     make_persistent($zone_fix_tune)
     make_persistent($note_letters_numbers)
 
@@ -279,11 +312,13 @@ end function
 
 function set_zone_root_key
     if ($zone_root_mode = 0)
+        set_control_par( get_ui_id($root_octave_offset),$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
         set_control_par( get_ui_id($zone_root_key),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
         wait_async(detect_pitch(%NI_USER_ZONE_IDS[0],~mir_result))
-        wait_async(set_zone_par(%NI_USER_ZONE_IDS[0],$ZONE_PAR_ROOT_KEY,real_to_int(round(~mir_result))))
+        wait_async(set_zone_par(%NI_USER_ZONE_IDS[0],$ZONE_PAR_ROOT_KEY,real_to_int(round(~mir_result)) + ($root_octave_offset * 12 * -1)))
         set_text($zone_root_mode,"Root: Auto")
     else
+        set_control_par( get_ui_id($root_octave_offset),$CONTROL_PAR_HIDE,$HIDE_WHOLE_CONTROL)
         set_control_par( get_ui_id($zone_root_key),$CONTROL_PAR_HIDE,$HIDE_PART_NOTHING)
         wait_async(set_zone_par(%NI_USER_ZONE_IDS[0],$ZONE_PAR_ROOT_KEY,$zone_root_key))
         set_text($zone_root_mode,"Root: Manual")
@@ -364,24 +399,83 @@ on persistence_changed
     call set_hqi_mode
 end on
 
-on ui_control($amp_attack)
+function set_amp_attack
     set_engine_par($ENGINE_PAR_ATTACK,$amp_attack,0,0,-1)
     set_control_par_str(get_ui_id($amp_attack),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_ATTACK,0,0,-1))
+end function
+
+function set_amp_decay
+    set_engine_par($ENGINE_PAR_DECAY,$amp_decay,0,0,-1)
+    set_control_par_str(get_ui_id($amp_decay),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_DECAY,0,0,-1))
+end function
+
+function set_amp_sustain
+    set_engine_par($ENGINE_PAR_SUSTAIN,$amp_sustain,0,0,-1)
+    set_control_par_str(get_ui_id($amp_sustain),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_SUSTAIN,0,0,-1))
+end function
+
+function set_amp_release
+    set_engine_par($ENGINE_PAR_RELEASE,$amp_release,0,0,-1)
+    set_control_par_str(get_ui_id($amp_release),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_RELEASE,0,0,-1))
+end function
+
+function set_amp_values
+    call set_amp_attack
+    call set_amp_decay
+    call set_amp_sustain
+    call set_amp_release
+end function
+
+on ui_control($amp_attack)
+    call set_amp_attack
 end on
 
 on ui_control($amp_decay)
-    set_engine_par($ENGINE_PAR_DECAY,$amp_decay,0,0,-1)
-    set_control_par_str(get_ui_id($amp_decay),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_DECAY,0,0,-1))
+    call set_amp_decay
 end on
 
 on ui_control($amp_sustain)
-    set_engine_par($ENGINE_PAR_SUSTAIN,$amp_sustain,0,0,-1)
-    set_control_par_str(get_ui_id($amp_sustain),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_SUSTAIN,0,0,-1))
+    call set_amp_sustain
 end on
 
 on ui_control($amp_release)
-    set_engine_par($ENGINE_PAR_RELEASE,$amp_release,0,0,-1)
-    set_control_par_str(get_ui_id($amp_release),$CONTROL_PAR_LABEL,get_engine_par_disp($ENGINE_PAR_RELEASE,0,0,-1))
+    call set_amp_release
+end on
+
+on ui_control($perc_env)
+    $amp_attack := 100000
+    $amp_decay := 500000
+    $amp_sustain := 0
+    $amp_release := 100000
+    $perc_env := 0
+    call set_amp_values
+end on
+
+on ui_control($bell_env)
+    $amp_attack := 100000
+    $amp_decay := 650000
+    $amp_sustain := 0
+    $amp_release := 300000
+    $bell_env := 0
+    call set_amp_values
+end on
+
+on ui_control($lead_env)
+    $amp_attack := 100000
+    $amp_decay := 500000
+    $amp_sustain := 1000000
+    $amp_release := 100000
+    $lead_env := 0
+    call set_amp_values
+end on
+
+on ui_control($pad_env)
+    $amp_attack := 850000
+    $amp_decay := 850000
+    $amp_sustain := 750000
+    $amp_release := 850000
+    $pad_env := 0
+    call set_amp_values
 end on
 
 on ui_control($filter_lp_cut)
@@ -412,6 +506,10 @@ end on
 on ui_control($zone_root_key)
     call set_zone_root_key
     call set_zone_root_key_label
+end on
+
+on ui_control($root_octave_offset)
+    call set_zone_root_key
 end on
 
 on ui_control($zone_root_mode)
